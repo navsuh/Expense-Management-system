@@ -2,8 +2,8 @@
 import { authenticate } from '@feathersjs/authentication'
 import { dailyExpenseSchema } from './daily-expenses.models.js'
 import validate from 'feathers-validate-joi'
-import {households} from "../../hooks/findhouseholds.js"
 import {expenseTypesfunc} from "../../hooks/findexpensetypes.js"
+import { households } from '../../hooks/findhouseholds.js'
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   dailyExpensesDataValidator,

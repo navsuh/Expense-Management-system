@@ -50,6 +50,7 @@ export const households = (app) => {
         schemaHooks.resolveData(householdsDataResolver)
       ],
       patch: [
+        validate.form(householdSchema,{abortEarly:false}),
         schemaHooks.validateData(householdsPatchValidator),
         schemaHooks.resolveData(householdsPatchResolver)
       ],
