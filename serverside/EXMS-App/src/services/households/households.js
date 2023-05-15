@@ -1,6 +1,7 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
-
+import { householdSchema } from './households.models.js'
+import validate from 'feathers-validate-joi'
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   householdsDataValidator,
@@ -44,6 +45,7 @@ export const households = (app) => {
       find: [],
       get: [],
       create: [
+        validate.form(householdSchema,{abortEarly:false}),
         schemaHooks.validateData(householdsDataValidator),
         schemaHooks.resolveData(householdsDataResolver)
       ],
