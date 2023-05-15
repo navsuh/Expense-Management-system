@@ -8,10 +8,16 @@ export const householdsSchema = {
   $id: 'Households',
   type: 'object',
   additionalProperties: false,
-  required: ['_id', 'text'],
+  required: ['_id', 'name',"addressLine1","addressLine2","area","city","state","zipcode"],
   properties: {
     _id: ObjectIdSchema(),
-    text: { type: 'string' }
+    name: { type: 'string' },
+    addressLine1: {type:"string"},
+    addressLine2: {type:"string"},
+    area: {type:"string"},
+    city: {type:"string"},
+    state: {type:"string"},
+    zipcode: {type:"number"},
   }
 }
 export const householdsValidator = getValidator(householdsSchema, dataValidator)
@@ -24,7 +30,7 @@ export const householdsDataSchema = {
   $id: 'HouseholdsData',
   type: 'object',
   additionalProperties: false,
-  required: ['text'],
+  required: [ 'name',"addressLine1","addressLine2","area","city","state","zipcode"],
   properties: {
     ...householdsSchema.properties
   }
