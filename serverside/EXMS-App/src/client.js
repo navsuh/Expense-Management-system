@@ -1,6 +1,8 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/client.html
 import { feathers } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
+import { householdsClient } from './services/households/households.shared.js'
+
 import { expenseTypesClient } from './services/expensetypes/expensetypes.shared.js'
 
 import { usersClient } from './services/users/users.shared.js'
@@ -23,6 +25,8 @@ export const createClient = (connection, authenticationOptions = {}) => {
   client.configure(usersClient)
 
   client.configure(expenseTypesClient)
+
+  client.configure(householdsClient)
 
   return client
 }
