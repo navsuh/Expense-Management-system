@@ -31,7 +31,7 @@ export const householdsMembers = (app) => {
   app.service(householdsMembersPath).hooks({
     around: {
       all: [
-        authenticate('jwt'),
+        // authenticate('jwt'),
         schemaHooks.resolveExternal(householdsMembersExternalResolver),
         schemaHooks.resolveResult(householdsMembersResolver)
       ]

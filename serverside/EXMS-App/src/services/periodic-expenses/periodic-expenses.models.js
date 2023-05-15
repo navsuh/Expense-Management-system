@@ -10,6 +10,7 @@ const attr = {
         month: Joi.number().required(),
         year: Joi.number().required()
       }).required(),
+    expensetypesId:JoiObjectId().required(),
     description:Joi.string().min(5).max(100).required(),
     paidThrough:Joi.string().min(3).max(50).required(),
     paidBy:Joi.string().min(3).max(50).required(),
