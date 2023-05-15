@@ -34,7 +34,7 @@ export const expenseTypes = (app) => {
   app.service(expenseTypesPath).hooks({
     around: {
       all: [
-        authenticate('jwt'),
+        // authenticate('jwt'),
         schemaHooks.resolveExternal(expenseTypesExternalResolver),
         schemaHooks.resolveResult(expenseTypesResolver)
       ]

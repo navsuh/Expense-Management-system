@@ -32,7 +32,7 @@ export const households = (app) => {
   app.service(householdsPath).hooks({
     around: {
       all: [
-        authenticate('jwt'),
+        // authenticate('jwt'),
         schemaHooks.resolveExternal(householdsExternalResolver),
         schemaHooks.resolveResult(householdsResolver)
       ]

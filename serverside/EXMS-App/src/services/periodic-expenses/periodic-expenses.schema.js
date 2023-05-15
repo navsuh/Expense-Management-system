@@ -8,12 +8,13 @@ export const periodicExpensesSchema = {
   $id: 'PeriodicExpenses',
   type: 'object',
   additionalProperties: false,
-  required: ['_id','households',"frequency","amount","dueDate","paymentdetails","description","paidThrough","paidBy",],  // expensetypesid 
+  required: ['_id','households',"frequency","amount","dueDate","expensetypes","paymentdetails","description","paidThrough","paidBy",],   
   properties: {
     _id: ObjectIdSchema(),
     households:{type:"object"},
     frequency: { type: 'string' },
     dueDate:{type :"object"},
+    expensetypes:{type:"object"},
     amount:{type:"number"},
     description:{type:"string"},
     paidThrough:{type:"string"},
@@ -39,7 +40,7 @@ export const periodicExpensesDataSchema = {
   $id: 'PeriodicExpensesData',
   type: 'object',
   additionalProperties: false,
-  required: ['households',"frequency","amount","dueDate", "paymentDetails","description","paidThrough","paidBy"],
+  required: ['households',"frequency","amount","dueDate","expensetypes", "paymentDetails","description","paidThrough","paidBy"],
   properties: {
     ...periodicExpensesSchema.properties
   }

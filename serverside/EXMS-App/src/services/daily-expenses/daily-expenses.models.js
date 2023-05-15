@@ -3,6 +3,7 @@ import ObjectId  from 'joi-objectid';
 const JoiObjectId = ObjectId(Joi);
 const attr = {
     householdsId:JoiObjectId().required(),
+    expensetypesId:JoiObjectId().required(),
     description:Joi.string().min(5).max(100).required(),
     paidThrough:Joi.string().min(3).max(50).required(),
     paidBy:Joi.string().min(3).max(50).required(),

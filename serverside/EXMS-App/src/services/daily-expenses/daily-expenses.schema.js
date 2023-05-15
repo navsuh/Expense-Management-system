@@ -8,10 +8,11 @@ export const dailyExpensesSchema = {
   $id: 'DailyExpenses',
   type: 'object',
   additionalProperties: false,
-  required: ['_id','households',"paymentDetails","description","paidThrough","paidBy"], //expensetypes
+  required: ['_id','households',"expensetypes","paymentDetails","description","paidThrough","paidBy"], //expensetypes
   properties: {
     _id: ObjectIdSchema(),
     households:{type:"object"},
+    expensetypes:{type:"object"},
     description:{type:"string"},
     paidThrough:{type:"string"},
     paidBy:{type:"string"},
@@ -35,7 +36,7 @@ export const dailyExpensesDataSchema = {
   $id: 'DailyExpensesData',
   type: 'object',
   additionalProperties: false,
-  required: ['households',"paymentDetails","description","paidThrough","paidBy"],
+  required: ['households',"expensetypes","paymentDetails","description","paidThrough","paidBy"],
   properties: {
     ...dailyExpensesSchema.properties
   }

@@ -3,6 +3,7 @@ import { authenticate } from '@feathersjs/authentication'
 import { periodicExpenseSchema } from './periodic-expenses.models.js'
 import validate from 'feathers-validate-joi'
 import {households} from "../../hooks/findhouseholds.js"
+import {expenseTypesfunc} from "../../hooks/findexpensetypes.js"
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   periodicExpensesDataValidator,
@@ -33,7 +34,7 @@ export const periodicExpenses = (app) => {
   app.service(periodicExpensesPath).hooks({
     around: {
       all: [
-        authenticate('jwt'),
+        // authenticate('jwt'),
         schemaHooks.resolveExternal(periodicExpensesExternalResolver),
         schemaHooks.resolveResult(periodicExpensesResolver)
       ]
@@ -48,6 +49,7 @@ export const periodicExpenses = (app) => {
       create: [
         validate.form(periodicExpenseSchema,{abortEarly:false}),
         households(),
+        expenseTypesfunc(),
         schemaHooks.validateData(periodicExpensesDataValidator),
         schemaHooks.resolveData(periodicExpensesDataResolver)
       ],
