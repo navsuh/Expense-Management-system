@@ -1,6 +1,9 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/client.html
 import { feathers } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
+import { expenseTypesClient } from './services/expensetypes/expensetypes.shared.js'
+
+import { usersClient } from './services/users/users.shared.js'
 
 /**
  * Returns a  client for the EXMS-App app.
@@ -16,6 +19,10 @@ export const createClient = (connection, authenticationOptions = {}) => {
   client.configure(connection)
   client.configure(authenticationClient(authenticationOptions))
   client.set('connection', connection)
+
+  client.configure(usersClient)
+
+  client.configure(expenseTypesClient)
 
   return client
 }
