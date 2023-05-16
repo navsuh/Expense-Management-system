@@ -4,6 +4,7 @@ import { ObjectIdSchema } from '@feathersjs/schema'
 import { passwordHash } from '@feathersjs/authentication-local'
 import { dataValidator, queryValidator } from '../../validators.js'
 
+
 // Main data model schema
 export const usersSchema = {
   $id: 'Users',
@@ -89,3 +90,5 @@ export const usersQueryResolver = resolve({
     return value
   }
 })
+
+
