@@ -2,7 +2,6 @@
 import { resolve, getValidator, querySyntax } from '@feathersjs/schema'
 import { ObjectIdSchema } from '@feathersjs/schema'
 import { dataValidator, queryValidator } from '../../validators.js'
-import { householdsSchema } from '../households/households.schema.js'
 // Main data model schema
 export const periodicExpensesSchema = {
   $id: 'PeriodicExpenses',
