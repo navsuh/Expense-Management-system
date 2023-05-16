@@ -9,7 +9,7 @@ const attr = {
     paidBy:Joi.string().min(3).max(50).required(),
     paymentDetails: Joi.object({
         amount: Joi.number().min(0).required(),
-        // date: Joi.date().required(),
+        date: Joi.string().required(),
         method: Joi.string().required()
       }).required()
 }

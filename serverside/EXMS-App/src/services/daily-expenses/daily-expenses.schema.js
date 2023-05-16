@@ -20,7 +20,7 @@ export const dailyExpensesSchema = {
       type: 'object',
       properties: {
         amount: { type: 'number' },
-        // date: { type: 'string', format: 'date' },
+        date: { type: 'string', format: 'date' },
         method: { type: 'string' }
       }
     }
