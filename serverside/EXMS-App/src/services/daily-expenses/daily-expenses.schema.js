@@ -11,8 +11,8 @@ export const dailyExpensesSchema = {
   required: ['_id','households',"expensetypes","paymentDetails","description","paidThrough","paidBy"], //expensetypes
   properties: {
     _id: ObjectIdSchema(),
-    households:{type:"object"},
-    expensetypes:{type:"object"},
+    households:ObjectIdSchema(),
+    expensetypes:ObjectIdSchema(),
     description:{type:"string"},
     paidThrough:{type:"string"},
     paidBy:{type:"string"},
@@ -20,7 +20,7 @@ export const dailyExpensesSchema = {
       type: 'object',
       properties: {
         amount: { type: 'number' },
-        // date: { type: 'string', format: 'date' },
+        date: { type: 'string', format: 'date' },
         method: { type: 'string' }
       }
     }

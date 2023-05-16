@@ -2,8 +2,7 @@
 import { authenticate } from '@feathersjs/authentication'
 import { dailyExpenseSchema } from './daily-expenses.models.js'
 import validate from 'feathers-validate-joi'
-import {households} from "../../hooks/findhouseholds.js"
-import {expenseTypesfunc} from "../../hooks/findexpensetypes.js"
+import { dailyexpense } from './hooks/createdailyexpense.js'
 import { hooks as schemaHooks } from '@feathersjs/schema'
 
 import {
@@ -49,8 +48,9 @@ export const dailyExpenses = (app) => {
       get: [],
       create: [
         validate.form(dailyExpenseSchema,{abortEarly:false}),
-        households(),
-        expenseTypesfunc(),
+        // households(),
+        // expenseTypesfunc(),
+        dailyexpense(),
         schemaHooks.validateData(dailyExpensesDataValidator),
         schemaHooks.resolveData(dailyExpensesDataResolver)
       ],
