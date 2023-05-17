@@ -1,7 +1,9 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
 import validate from 'feathers-validate-joi'
-import { userSchema } from './users.model.js'
+import { userSchema,userSchemaPatch } from './users.model.js'
+import { Admin} from './hooks/Admin.js'
+import {Primaryuser } from './hooks/primaryuser.js'
 
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
