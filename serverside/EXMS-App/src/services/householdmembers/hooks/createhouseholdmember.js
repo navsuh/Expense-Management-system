@@ -2,8 +2,9 @@ export const createhouseholdmember =()=>{
     return async(context)=>{
         console.log(context.data);
 
-        const {firstName,lastName,email,phone,userName,password,households}=context.data
-        const userService=context.app.service("users")
+        const {firstName,lastName,email,phone,userName,password,role,households}=context.data
+        if(role==='member'){
+          const userService=context.app.service("users")
         const finduser = await userService.find( { query: {$or: [{ email:email }, { userName: userName }]} });
         // console.log(finduser);
         if (finduser.total) throw new Error ("user with given email or username already exist");
@@ -22,6 +23,9 @@ export const createhouseholdmember =()=>{
      delete context.data.households
      context.data.household=household.data[0]._id
      context.data.user=createMember._id
+
+        }
+        
     
      return context; 
     }
