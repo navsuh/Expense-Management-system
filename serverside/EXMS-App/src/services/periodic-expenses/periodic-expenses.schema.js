@@ -2,29 +2,40 @@
 import { resolve, getValidator, querySyntax } from '@feathersjs/schema'
 import { ObjectIdSchema } from '@feathersjs/schema'
 import { dataValidator, queryValidator } from '../../validators.js'
-
+import { householdsSchema } from '../households/households.schema.js'
 // Main data model schema
 export const periodicExpensesSchema = {
   $id: 'PeriodicExpenses',
   type: 'object',
   additionalProperties: false,
-  required: ['_id','households',"frequency","amount","dueDate","expensetypes","paymentdetails","description","paidThrough","paidBy",],   
+  required: [
+    '_id',
+    'households',
+    'frequency',
+    'amount',
+    'dueDate',
+    'expensetypes',
+    'paymentdetails',
+    'description',
+    'paidThrough',
+    'paidBy'
+  ],
   properties: {
     _id: ObjectIdSchema(),
-    households:{type:"object"},
+    households: {type:"object"},
     frequency: { type: 'string' },
-    dueDate:{type :"object"},
-    expensetypes:{type:"object"},
-    amount:{type:"number"},
-    description:{type:"string"},
-    paidThrough:{type:"string"},
-    paidBy:{type:"string"},
+    dueDate: { type: 'object' },
+    expensetypes: {type:"object"},
+    amount: { type: 'number' },
+    description: { type: 'string' },
+    paidThrough: { type: 'string' },
+    paidBy: { type: 'string' },
 
     paymentDetails: {
       type: 'object',
       properties: {
         amount: { type: 'number' },
-        // date: { type: 'string', format: 'date' },
+        date: { type: 'string' ,  format:"date"},
         method: { type: 'string' }
       }
     }
@@ -40,7 +51,17 @@ export const periodicExpensesDataSchema = {
   $id: 'PeriodicExpensesData',
   type: 'object',
   additionalProperties: false,
-  required: ['households',"frequency","amount","dueDate","expensetypes", "paymentDetails","description","paidThrough","paidBy"],
+  required: [
+    'households',
+    'frequency',
+    'amount',
+    'dueDate',
+    'expensetypes',
+    'paymentDetails',
+    'description',
+    'paidThrough',
+    'paidBy'
+  ],
   properties: {
     ...periodicExpensesSchema.properties
   }

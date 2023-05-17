@@ -48,8 +48,6 @@ export const dailyExpenses = (app) => {
       get: [],
       create: [
         validate.form(dailyExpenseSchema,{abortEarly:false}),
-        // households(),
-        // expenseTypesfunc(),
         dailyexpense(),
         schemaHooks.validateData(dailyExpensesDataValidator),
         schemaHooks.resolveData(dailyExpensesDataResolver)

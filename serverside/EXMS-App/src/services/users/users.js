@@ -18,6 +18,7 @@ import {
 } from './users.schema.js'
 import { UsersService, getOptions } from './users.class.js'
 import { usersPath, usersMethods } from './users.shared.js'
+import primaryuserhook from './hooks/primaryuserhook.js'
 
 export * from './users.class.js'
 export * from './users.schema.js'
@@ -46,7 +47,9 @@ export const users = (app) => {
       all: [schemaHooks.validateQuery(usersQueryValidator), schemaHooks.resolveQuery(usersQueryResolver)],
       find: [],
       get: [],
-      create: [validate.form(userSchema, { abortEarly: false }),Admin(),Primaryuser(),schemaHooks.validateData(usersDataValidator), schemaHooks.resolveData(usersDataResolver)],
+      create: [validate.form(userSchema, { abortEarly: false }),
+        
+        schemaHooks.validateData(usersDataValidator), schemaHooks.resolveData(usersDataResolver)],
       patch: [validate.form(userSchemaPatch, { abortEarly: false }),schemaHooks.validateData(usersPatchValidator), schemaHooks.resolveData(usersPatchResolver)],
       remove: []
     },
