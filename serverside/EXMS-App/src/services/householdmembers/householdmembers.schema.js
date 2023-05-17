@@ -8,10 +8,11 @@ export const householdMembersSchema = {
   $id: 'HouseholdMembers',
   type: 'object',
   additionalProperties: false,
-  required: ['_id', 'text'],
+  required: ['_id', 'household','user'],
   properties: {
     _id: ObjectIdSchema(),
-    text: { type: 'string' }
+    household: ObjectIdSchema(),
+    user:ObjectIdSchema()
   }
 }
 export const householdMembersValidator = getValidator(householdMembersSchema, dataValidator)
@@ -24,7 +25,7 @@ export const householdMembersDataSchema = {
   $id: 'HouseholdMembersData',
   type: 'object',
   additionalProperties: false,
-  required: ['text'],
+  required: ['household','user'],
   properties: {
     ...householdMembersSchema.properties
   }
