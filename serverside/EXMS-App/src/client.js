@@ -1,6 +1,13 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/client.html
 import { feathers } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
+<<<<<<< Updated upstream
+=======
+import { resetPasswordClient } from './services/reset-password/reset-password.shared.js'
+
+import { forgotPasswordClient } from './services/forgot-password/forgot-password.shared.js'
+
+>>>>>>> Stashed changes
 import { householdMembersClient } from './services/householdmembers/householdmembers.shared.js'
 
 import { householdsMembersClient } from './services/households-members/households-members.shared.js'
@@ -44,5 +51,12 @@ export const createClient = (connection, authenticationOptions = {}) => {
 
   client.configure(householdMembersClient)
 
+<<<<<<< Updated upstream
+=======
+  client.configure(forgotPasswordClient)
+
+  client.configure(resetPasswordClient)
+
+>>>>>>> Stashed changes
   return client
 }

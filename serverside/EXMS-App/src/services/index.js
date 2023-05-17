@@ -1,3 +1,9 @@
+<<<<<<< Updated upstream
+=======
+import { resetPassword } from './reset-password/reset-password.js'
+
+import { forgotPassword } from './forgot-password/forgot-password.js'
+>>>>>>> Stashed changes
 
 import { householdMembers  } from './householdmembers/householdmembers.js'
 
@@ -12,8 +18,16 @@ import { expenseTypes } from './expensetypes/expensetypes.js'
 import { users } from './users/users.js'
 
 export const services = (app) => {
+<<<<<<< Updated upstream
   app.configure(householdMembers )
  
+=======
+  app.configure(resetPassword)
+
+  app.configure(forgotPassword)
+
+  app.configure(householdMembers)
+>>>>>>> Stashed changes
 
   app.configure(dailyExpenses)
 
