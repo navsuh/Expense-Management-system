@@ -1,5 +1,6 @@
+import { forgotPassword } from './forgot-password/forgot-password.js'
 
-import { householdMembers  } from './householdmembers/householdmembers.js'
+import { householdMembers } from './householdmembers/householdmembers.js'
 
 import { dailyExpenses } from './daily-expenses/daily-expenses.js'
 
@@ -12,8 +13,9 @@ import { expenseTypes } from './expensetypes/expensetypes.js'
 import { users } from './users/users.js'
 
 export const services = (app) => {
-  app.configure(householdMembers )
- 
+  app.configure(forgotPassword)
+
+  app.configure(householdMembers)
 
   app.configure(dailyExpenses)
 
