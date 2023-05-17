@@ -1,3 +1,4 @@
+import { emailhandler } from '../../../helpers/emailhandler.js'
 export const createhouseholdmember =()=>{
     return async(context)=>{
         console.log(context.data);
@@ -9,6 +10,7 @@ export const createhouseholdmember =()=>{
         // console.log(finduser);
         if (finduser.total) throw new Error ("user with given email or username already exist");
         const createMember=await userService.create( { firstName,lastName,email,phone,userName,password,role:"member" });
+        emailhandler.sendEmail(context.data)
         // console.log(createMember);
         const householdservice=context.app.service("households")
      const household = await householdservice.find( { query: {name:households} });
