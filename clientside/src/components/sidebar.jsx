@@ -42,9 +42,11 @@ const Sidebar = (props) => {
             alt="EXMS LOGO"
           />
         </div>
+       
 
         <div className="h-full px-3 py-4 overflow-y-auto rounded-md bg-blue-600">
-          <div class="relative w-14 h-14 left-20 top-3 overflow-hidden bg-gray-100 rounded-full">
+        <div className="flex flex-col items-center">
+        <div class="relative w-14 h-14  top-3 overflow-hidden bg-gray-100 rounded-full">
             <img
               className="w-14 h-14 rounded-full"
               src="https://img.freepik.com/free-icon/user_318-159711.jpg"
@@ -52,10 +54,12 @@ const Sidebar = (props) => {
             />
           </div>
 
-          <div className="h-25 px-3 py-4 overflow-y-auto rounded-md bg-green-400">
+          <div className="flex flex-col items-center h-25 px-3 py-4 overflow-y-auto rounded-md bg-green-400">
             <h1 className="text-white font-bold text-2xl">{`Hello ${name}`}</h1>
             <p className="text-white">Welcome back</p>
           </div>
+          </div>
+         
           <ul className="space-y-2 font-medium">
             <li>
               <a
