@@ -1,7 +1,7 @@
-import SearchInput from "../searchInput";
+
 import Sidebar from "../sidebar";
 import Tablist from "../tabList";
-import { IoAddCircle } from "react-icons/io5";
+
 
 
 import { Outlet } from "react-router-dom";
