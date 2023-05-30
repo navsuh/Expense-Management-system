@@ -1,3 +1,4 @@
+import Sidebar from '../sidebar';
 import Tablist from '../tabList';
 
 import {
@@ -22,7 +23,7 @@ const PrimaryUser = () => {
     return ( <>
   
     <div className="p-4 sm:ml-64">
-        
+     <Sidebar/>
     <Tablist tabList={tabList}/>
     {/* <ExpenseTypeTable expenseList={expenseList}/> */}
     <Outlet/>

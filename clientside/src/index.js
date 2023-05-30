@@ -14,15 +14,18 @@ import HouseholdTable from "./components/Primary user/houseHoldTable";
 import MemberTable from "./components/Primary user/memberTable";
 import PeriodicExpensesTable from "./components/Primary user/periodicExpensesTable";
 import DailyExpensesTable from "./components/Primary user/dailyExpensesTable";
-
 import MemberUser from "./components/member/member";
-
+import Register from "./components/Register";
+import Login from "./components/Login ";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
       <Routes>
+    <Route index={true} element={<Login/>}></Route>
+      <Route  path="/login" element={<Login/>}></Route>
+      <Route path="/register" element={<Register/>}></Route>
         {/* <Route index={true} element={<LoginForm/>}/> */}
         <Route path="/admin" element={<Admin />}>
           <Route path="expensetype" element={<ExpenseTypeTable />} />

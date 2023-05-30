@@ -1,3 +1,4 @@
+import Sidebar from '../sidebar';
 import Tablist from '../tabList';
 import ExpenseTypeTable from './expenseTypeTable';
 import UserTable from './userTable';
@@ -22,7 +23,7 @@ const Admin = () => {
     return ( <>
   
     <div className="p-4 sm:ml-64">
-        
+     <Sidebar></Sidebar>   
     <Tablist tabList={tabList}/>
     {/* <ExpenseTypeTable expenseList={expenseList}/> */}
     <Outlet/>
