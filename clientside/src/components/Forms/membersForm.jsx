@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
@@ -14,7 +14,7 @@ const schema = yup.object().shape({
   userName: yup.string().min(6).max(20).required(),
   password: yup.string().min(8).max(32).required(),
 });
-const Register = () => {
+const memberForm = () => {
   const {
     register,
     handleSubmit,
@@ -47,13 +47,8 @@ const Register = () => {
           <div className="mt-12 flex flex-col items-center  ">
             <img src="/assests/images/logoexms.png" alt="logoimage" />
 
-            <h1 className="text-xl xl:text-3xl font-bold">Sign Up</h1>
-            <span className="mt-6">
-              Already have an account?{" "}
-              <Link to={"/login"} className="loginspan">
-                Log in
-              </Link>{" "}
-            </span>
+            <h1 className="text-xl xl:text-3xl font-bold">Add Member</h1>
+          
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
@@ -142,4 +137,4 @@ const Register = () => {
     </div>
   );
 };
-export default Register;
+export default memberForm;

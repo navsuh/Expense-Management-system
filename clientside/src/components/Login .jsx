@@ -53,7 +53,7 @@ const Login = () => {
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
                   <div>
-                    <p>Username</p>
+                    <label htmlFor="email">Username</label>
                     <input
                       {...register("email")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -62,8 +62,8 @@ const Login = () => {
                     />
                     <p>{errors.email?.message}</p>
                   </div>
-                  <div className="relative">
-                    <p className="mt-5">Password</p>
+                  <div className="relative mt-5">
+                    <label htmlFor="password">Password</label>
                     <input
                       {...register("password")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -89,7 +89,9 @@ const Login = () => {
                   >
                     <span className="ml-3">LOG IN</span>
                   </button>
-                  <p className="my-4">Forgot Password</p>
+                  <div className="my-2">
+                  <label htmlFor="forgotPassword" style={{cursor:"pointer"}}>Forgot Password</label>
+                  </div>
                 </div>
               </div>
             </form>
