@@ -22,6 +22,9 @@ import HouseHoldForm from "./components/Forms/houseHoldForm";
 import MemberUser from "./components/member/member";
 import Register from "./components/Register";
 import Login from "./components/Login ";
+import MemberForm from "./components/Forms/membersForm";
+import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
+import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -49,8 +52,12 @@ root.render(
           <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />
           <Route path="dailyexpenses" element={<DailyExpensesTable />} />
         </Route>
-        <Route path="/primaryuser/householdform" element={<HouseHoldForm />} />
+        <Route path="/primaryuser/memberform" element={<MemberForm/>}/>
+        <Route path="/primaryuser/periodicexpenseform" element={<PeriodicExpenseForm/>}/>
+        <Route path="/primaryuser/dailyexpenseform" element={<DailyExpenseForm/>}/>
 
+
+        
         <Route path="/memberuser" element={<MemberUser />}>
           <Route index={true} element={<PeriodicExpensesTable />} />
           <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />

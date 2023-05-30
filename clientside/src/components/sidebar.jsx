@@ -60,7 +60,7 @@ const Sidebar = (props) => {
           </div>
           </div>
          
-          <ul className="space-y-2 font-medium">
+          <ul className="space-y-2 mt-2 font-small">
             <li>
               <a
                 href="/"

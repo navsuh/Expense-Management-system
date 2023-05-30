@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
+import {IoArrowBack} from "react-icons/io5"
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import {  useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -14,7 +15,8 @@ const schema = yup.object().shape({
   userName: yup.string().min(6).max(20).required(),
   password: yup.string().min(8).max(32).required(),
 });
-const Register = () => {
+const MemberForm = () => {
+  const navigate =useNavigate()
   const {
     register,
     handleSubmit,
@@ -35,9 +37,12 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
+         <IoArrowBack className="text-gray-800 h-8 w-8" style={{cursor:"pointer"}}  onClick={()=>navigate(-1)}/>
+
+        <div className="flex-1 text-center hidden lg:flex ml-20 mt-20">
+
           <img
-            src="/assests/images/homeimgae.png"
+            src="/assests/images/addMember.png"
             alt="homeimage"
             style={{ height: "600px" }}
           />
@@ -45,15 +50,9 @@ const Register = () => {
 
         <div className="lg:w-1/2  p-6">
           <div className="mt-12 flex flex-col items-center  ">
-            <img src="/assests/images/logoexms.png" alt="logoimage" />
-
-            <h1 className="text-xl xl:text-3xl font-bold">Sign Up</h1>
-            <span className="mt-6">
-              Already have an account?{" "}
-              <Link to={"/login"} className="loginspan">
-                Log in
-              </Link>{" "}
-            </span>
+          
+            <h1 className="text-xl xl:text-3xl font-bold">Add Member</h1>
+          
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
@@ -142,4 +141,4 @@ const Register = () => {
     </div>
   );
 };
-export default Register;
+export default MemberForm;

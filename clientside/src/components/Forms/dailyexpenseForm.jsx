@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import {IoArrowBack} from "react-icons/io5"
+import {  useNavigate } from "react-router-dom";
 
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -12,9 +12,14 @@ const schema = yup.object().shape({
   email: yup.string().min(3).max(50).required(),
   phone: yup.string().min(8).max(10).required(),
   userName: yup.string().min(6).max(20).required(),
-  password: yup.string().min(8).max(32).required(),
+  description: yup.string().min(6).max(20).required(),
+  paidThrough: yup.string().min(6).max(20).required(),
+  paidBy: yup.string().min(6).max(20).required(),
+  
 });
-const Register = () => {
+const DailyExpenseForm = () => {
+  const navigate =useNavigate()
+   
   const {
     register,
     handleSubmit,
@@ -23,11 +28,7 @@ const Register = () => {
     resolver: yupResolver(schema),
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+ 
 
   const onSubmitHandler = (data) => {
     console.log({ data });
@@ -35,25 +36,22 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
+         <IoArrowBack className="text-gray-800 h-8 w-8" style={{cursor:"pointer"}} onClick={()=>navigate(-1)} />
+
+        <div className="flex-1 text-center hidden lg:flex ml-15 mt-40">
+
           <img
-            src="/assests/images/homeimgae.png"
+            src="/assests/images/Dailyexpense.png"
             alt="homeimage"
-            style={{ height: "600px" }}
+            style={{ height: "550px", width:"600px" }}
           />
         </div>
 
         <div className="lg:w-1/2  p-6">
           <div className="mt-12 flex flex-col items-center  ">
-            <img src="/assests/images/logoexms.png" alt="logoimage" />
-
-            <h1 className="text-xl xl:text-3xl font-bold">Sign Up</h1>
-            <span className="mt-6">
-              Already have an account?{" "}
-              <Link to={"/login"} className="loginspan">
-                Log in
-              </Link>{" "}
-            </span>
+          
+            <h1 className="text-xl xl:text-3xl font-bold">Add Daily Expense</h1>
+          
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
@@ -87,46 +85,38 @@ const Register = () => {
                     />
                     <p>{errors.email?.message}</p>
                   </div>
+                
                   <div className="mt-5">
-                    <label htmlFor="phone">Phone Number</label>
+                    <label htmlFor="description">Description</label>
                     <input
-                      {...register("phone")}
+                      {...register("description")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
-                      placeholder="Phone Number"
+                      placeholder="policy name, emi account"
                     />
-                    <p>{errors.phone?.message}</p>
+                    <p>{errors.description?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="userName">UserName</label>
+                    <label htmlFor="paidThrough">Paid Through</label>
                     <input
-                      {...register("userName")}
+                      {...register("paidThrough")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
-                      placeholder="User Name"
+                      placeholder="Upi, Sbi bank"
                     />
-                    <p>{errors.userName?.message}</p>
+                    <p>{errors.paidThrough?.message}</p>
                   </div>
-                  <div className="relative mt-5">
-                    <label htmlFor="password">Password</label>
+                  <div className="mt-5">
+                    <label htmlFor="paidBy">Paid By</label>
                     <input
-                      {...register("password")}
+                      {...register("paidBy")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Password"
+                      type="text"
+                      placeholder="Person name"
                     />
-                    <span
-                      className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer mt-3"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? (
-                        <AiFillEye className="h-6 w-6 " />
-                      ) : (
-                        <AiFillEyeInvisible className="h-6 w-6 " />
-                      )}
-                    </span>
-                    <p>{errors.password?.message}</p>
+                    <p>{errors.paidBy?.message}</p>
                   </div>
+                 
                   <button
                     type="submit"
                     className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
@@ -142,4 +132,4 @@ const Register = () => {
     </div>
   );
 };
-export default Register;
+export default DailyExpenseForm;
