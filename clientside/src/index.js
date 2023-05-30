@@ -8,15 +8,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Admin from "./components/Admin/Admin";
 import ExpenseTypeTable from "./components/Admin/expenseTypeTable";
 import UserTable from "./components/Admin/userTable";
+import ExpenseTypeForm from "./components/Forms/expensetypeForm";
+
 
 import PrimaryUser from "./components/Primary user/PrimaryUser";
 import HouseholdTable from "./components/Primary user/houseHoldTable";
 import MemberTable from "./components/Primary user/memberTable";
 import PeriodicExpensesTable from "./components/Primary user/periodicExpensesTable";
 import DailyExpensesTable from "./components/Primary user/dailyExpensesTable";
+
 import MemberUser from "./components/member/member";
 import Register from "./components/Register";
 import Login from "./components/Login ";
+
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -31,6 +37,7 @@ root.render(
           <Route path="expensetype" element={<ExpenseTypeTable />} />
           <Route path="users" element={<UserTable />} />
         </Route>
+        <Route path="/admin/expensetypeform" element={<ExpenseTypeForm/>}/>
 
         <Route path="/primaryuser" element={<PrimaryUser />}>
           <Route path="household" element={<HouseholdTable />} />
