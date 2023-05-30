@@ -1,12 +1,12 @@
 
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import SearchInput from "../searchInput";
-import { IoAddCircle } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import { IoAddCircle } from "react-icons/io5";
+// import SearchInput from "../searchInput";
+// import { IoAddCircle } from "react-icons/io5";
+// import { Link } from "react-router-dom";
+// import { IoAddCircle } from "react-icons/io5";
 
-import SearchInput from "../searchInput";
-import { Link } from "react-router-dom";
+// import SearchInput from "../searchInput";
+// import { Link } from "react-router-dom";
 
 const houseHoldList = [
   {
