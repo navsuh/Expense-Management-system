@@ -37,8 +37,8 @@ const Sidebar = (props) => {
       >
         <div className="bg-white-300">
           <img
-            className="object-contain h-20 w-full rounded-md"
-            src="/assests/images/EXMS LOGO1.png"
+            className="object-contain h-16 w-full rounded-md"
+            src="/assests/images/logoexms.png"
             alt="EXMS LOGO"
           />
         </div>
