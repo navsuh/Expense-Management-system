@@ -1,6 +1,8 @@
 
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-
+import SearchInput from "../searchInput";
+import { IoAddCircle } from "react-icons/io5";
+import { Link } from "react-router-dom";
 const houseHoldList = [
   {
     _id: 1,
@@ -28,6 +30,16 @@ const HouseholdTable = (props) => {
   // const {expenseList}=props
   return (
     <>
+     <div className="flex flex-row justify-between">
+          <div>
+            <SearchInput />
+          </div>
+          <div>
+            <Link to={"/primaryuser/householdform"}>
+            <IoAddCircle className="text-blue-800 h-14 w-14" />
+            </Link>
+          </div>
+        </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">

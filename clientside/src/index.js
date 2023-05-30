@@ -20,6 +20,9 @@ import DailyExpensesTable from "./components/Primary user/dailyExpensesTable";
 import MemberUser from "./components/member/member";
 import Register from "./components/Register";
 import Login from "./components/Login ";
+import MemberForm from "./components/Forms/membersForm";
+import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
+import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
 
 
@@ -45,7 +48,12 @@ root.render(
           <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />
           <Route path="dailyexpenses" element={<DailyExpensesTable />} />
         </Route>
+        <Route path="/primaryuser/memberform" element={<MemberForm/>}/>
+        <Route path="/primaryuser/periodicexpenseform" element={<PeriodicExpenseForm/>}/>
+        <Route path="/primaryuser/dailyexpenseform" element={<DailyExpenseForm/>}/>
 
+
+        
         <Route path="/memberuser" element={<MemberUser />}>
          
           <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />

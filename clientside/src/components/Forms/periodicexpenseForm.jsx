@@ -16,7 +16,7 @@ const schema = yup.object().shape({
   userName: yup.string().min(6).max(20).required(),
   password: yup.string().min(8).max(32).required(),
 });
-const MemberForm = () => {
+const PeriodicExpenseForm = () => {
   const navigate =useNavigate()
   const {
     register,
@@ -38,12 +38,12 @@ const MemberForm = () => {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-         <IoArrowBack className="text-gray-800 h-8 w-8" style={{cursor:"pointer"}}  onClick={()=>navigate(-1)}/>
+         <IoArrowBack className="text-gray-800 h-8 w-8" style={{cursor:"pointer"}} onClick={()=>navigate(-1)}/>
 
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-10">
+        <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
 
           <img
-            src="/assests/images/addMember.png"
+            src="/assests/images/Periodicexpense.png"
             alt="homeimage"
             style={{ height: "600px" }}
           />
@@ -52,7 +52,7 @@ const MemberForm = () => {
         <div className="lg:w-1/2  p-6">
           <div className="mt-12 flex flex-col items-center  ">
           
-            <h1 className="text-xl xl:text-3xl font-bold">Add Member</h1>
+            <h1 className="text-xl xl:text-3xl font-bold">Add Periodic Expense</h1>
           
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
@@ -142,4 +142,4 @@ const MemberForm = () => {
     </div>
   );
 };
-export default MemberForm;
+export default PeriodicExpenseForm;

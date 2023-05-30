@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import { Link } from "react-router-dom";
 import {IoArrowBack} from "react-icons/io5"
-
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import {  useNavigate } from "react-router-dom";
+
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -16,8 +15,9 @@ const schema = yup.object().shape({
   userName: yup.string().min(6).max(20).required(),
   password: yup.string().min(8).max(32).required(),
 });
-const MemberForm = () => {
-  const navigate =useNavigate()
+const DailyExpenseForm = () => {
+   const navigate =useNavigate()
+   
   const {
     register,
     handleSubmit,
@@ -38,21 +38,21 @@ const MemberForm = () => {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-         <IoArrowBack className="text-gray-800 h-8 w-8" style={{cursor:"pointer"}}  onClick={()=>navigate(-1)}/>
+         <IoArrowBack className="text-gray-800 h-8 w-8" style={{cursor:"pointer"}} onClick={()=>navigate(-1)} />
 
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-10">
+        <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
 
           <img
-            src="/assests/images/addMember.png"
+            src="/assests/images/Dailyexpense.png"
             alt="homeimage"
-            style={{ height: "600px" }}
+            style={{ height: "550px" }}
           />
         </div>
 
         <div className="lg:w-1/2  p-6">
           <div className="mt-12 flex flex-col items-center  ">
           
-            <h1 className="text-xl xl:text-3xl font-bold">Add Member</h1>
+            <h1 className="text-xl xl:text-3xl font-bold">Add Daily Expense</h1>
           
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
@@ -142,4 +142,4 @@ const MemberForm = () => {
     </div>
   );
 };
-export default MemberForm;
+export default DailyExpenseForm;
