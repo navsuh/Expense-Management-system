@@ -2,9 +2,7 @@ import Sidebar from "../sidebar";
 import Tablist from "../tabList";
 // import ExpenseTypeTable from './expenseTypeTable';
 // import UserTable from './userTable';
-import { IoAddCircle } from "react-icons/io5";
 
-import SearchInput from "../searchInput";
 import { Outlet } from "react-router-dom";
 
 const tabList = [
@@ -29,14 +27,7 @@ const Admin = () => {
       <div className="p-4 sm:ml-64">
         <Sidebar></Sidebar>
         <Tablist tabList={tabList} />
-        <div className="flex flex-row justify-between">
-          <div>
-            <SearchInput />
-          </div>
-          <div>
-            <IoAddCircle className="text-blue-800 h-14 w-14" />
-          </div>
-        </div>
+       
         {/* <ExpenseTypeTable expenseList={expenseList}/> */}
         <Outlet />
         {/* <UserTable userList={userList}/> */}

@@ -9,18 +9,19 @@ import Admin from "./components/Admin/Admin";
 import ExpenseTypeTable from "./components/Admin/expenseTypeTable";
 import UserTable from "./components/Admin/userTable";
 import ExpenseTypeForm from "./components/Forms/expensetypeForm";
-
+import UserForm from "./components/Forms/userForm";
 
 import PrimaryUser from "./components/Primary user/PrimaryUser";
 import HouseholdTable from "./components/Primary user/houseHoldTable";
 import MemberTable from "./components/Primary user/memberTable";
 import PeriodicExpensesTable from "./components/Primary user/periodicExpensesTable";
 import DailyExpensesTable from "./components/Primary user/dailyExpensesTable";
+import HouseHoldForm from "./components/Forms/houseHoldForm";
+
 
 import MemberUser from "./components/member/member";
 import Register from "./components/Register";
 import Login from "./components/Login ";
-
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -29,25 +30,29 @@ root.render(
     <BrowserRouter>
       <App />
       <Routes>
-    <Route index={true} element={<Login/>}></Route>
-      <Route  path="/login" element={<Login/>}></Route>
-      <Route path="/register" element={<Register/>}></Route>
+        <Route index={true} element={<Login />} />
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
         {/* <Route index={true} element={<LoginForm/>}/> */}
         <Route path="/admin" element={<Admin />}>
+          <Route index={true} element={<ExpenseTypeTable />} />
           <Route path="expensetype" element={<ExpenseTypeTable />} />
           <Route path="users" element={<UserTable />} />
         </Route>
-        <Route path="/admin/expensetypeform" element={<ExpenseTypeForm/>}/>
+        <Route path="/admin/expensetypeform" element={<ExpenseTypeForm />} />
+        <Route path="/admin/userform" element={<UserForm />} />
 
         <Route path="/primaryuser" element={<PrimaryUser />}>
+          <Route index={true} element={<HouseholdTable />} />
           <Route path="household" element={<HouseholdTable />} />
           <Route path="members" element={<MemberTable />} />
           <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />
           <Route path="dailyexpenses" element={<DailyExpensesTable />} />
         </Route>
+        <Route path="/primaryuser/householdform" element={<HouseHoldForm />} />
 
         <Route path="/memberuser" element={<MemberUser />}>
-         
+          <Route index={true} element={<PeriodicExpensesTable />} />
           <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />
           <Route path="dailyexpenses" element={<DailyExpensesTable />} />
         </Route>
