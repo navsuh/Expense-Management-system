@@ -52,6 +52,8 @@ root.render(
           <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />
           <Route path="dailyexpenses" element={<DailyExpensesTable />} />
         </Route>
+        
+        <Route path="/primaryuser/householdform" element={<HouseHoldForm/>}/>
         <Route path="/primaryuser/memberform" element={<MemberForm/>}/>
         <Route path="/primaryuser/periodicexpenseform" element={<PeriodicExpenseForm/>}/>
         <Route path="/primaryuser/dailyexpenseform" element={<DailyExpenseForm/>}/>

@@ -6,22 +6,17 @@ import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-
-
-
-
 const schema = yup.object().shape({
   name: yup.string().min(3).max(50).required(),
   addressLine1: yup.string().min(3).max(50).required(),
   addressLine2: yup.string().min(3).max(50).required(),
   area: yup.string().min(3).max(50).required(),
   city: yup.string().min(3).max(50).required(),
-  state:yup.string().min(3).max(50).required(),
-  zipcode:yup.number().min(6).max(6).required(),
-  
+  state: yup.string().min(3).max(50).required(),
+  zipcode: yup.number().min(6).max(6).required(),
 });
 const HouseHoldForm = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -30,43 +25,37 @@ const HouseHoldForm = () => {
     resolver: yupResolver(schema),
   });
 
-  
-
   const onSubmitHandler = (data) => {
     console.log({ data });
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-      <IoArrowBack className="self-start w-8 h-8 cursor-pointer" onClick={()=>navigate(-1)}/>
+        <IoArrowBack
+          className="self-start w-8 h-8 cursor-pointer"
+          onClick={() => navigate(-1)}
+        />
         <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
           <img
             src="/assests/images/houseHoldForm.png"
             alt="homeimage"
-            style={{ height: "500px",width: "700px" }}
+            style={{ height: "500px", width: "700px" }}
           />
         </div>
 
         <div className="lg:w-1/2  p-6">
           <div className="mt-12 flex flex-col items-center  ">
-          
+            <h1 className="text-xl xl:text-3xl font-bold text-orange-500">
+              ADD HOUSEHOLD
+            </h1>
 
-            <h1 className="text-xl xl:text-3xl font-bold text-orange-500">ADD HOUSEHOLD</h1>
-           
-            
-  
-  
-  
-  
-  
-  
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
                   <div className="mt-5">
                     <label htmlFor="name">Name</label>
                     <input
-                    id="name"
+                      id="name"
                       {...register("name")}
                       className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -77,7 +66,7 @@ const HouseHoldForm = () => {
                   <div className="mt-5">
                     <label htmlFor="addressLine1">AddressLine1</label>
                     <input
-                    id="addressLine1"
+                      id="addressLine1"
                       {...register("addressLine1")}
                       className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -88,7 +77,7 @@ const HouseHoldForm = () => {
                   <div className="mt-5">
                     <label htmlFor="addressLine2">AddressLine2</label>
                     <input
-                    id="addressLine2"
+                      id="addressLine2"
                       {...register("addressLine2")}
                       className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -99,7 +88,7 @@ const HouseHoldForm = () => {
                   <div className="mt-5">
                     <label htmlFor="area">Area</label>
                     <input
-                    id="area"
+                      id="area"
                       {...register("area")}
                       className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -110,7 +99,7 @@ const HouseHoldForm = () => {
                   <div className="mt-5">
                     <label htmlFor="city">City</label>
                     <input
-                    id="city"
+                      id="city"
                       {...register("city")}
                       className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -121,7 +110,7 @@ const HouseHoldForm = () => {
                   <div className="mt-5">
                     <label htmlFor="state">State</label>
                     <input
-                    id="state"
+                      id="state"
                       {...register("state")}
                       className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -132,7 +121,7 @@ const HouseHoldForm = () => {
                   <div className="mt-5">
                     <label htmlFor="zipcode">Zipcode</label>
                     <input
-                    id="zipcode"
+                      id="zipcode"
                       {...register("zipcode")}
                       className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -140,8 +129,7 @@ const HouseHoldForm = () => {
                     />
                     <p>{errors.zipcode?.message}</p>
                   </div>
-                
-                 
+
                   <button
                     type="submit"
                     className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
@@ -158,21 +146,3 @@ const HouseHoldForm = () => {
   );
 };
 export default HouseHoldForm;
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-  
-
-         
