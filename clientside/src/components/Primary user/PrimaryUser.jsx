@@ -34,12 +34,10 @@ const PrimaryUser = () => {
       <div className="p-4 sm:ml-64">
         
         <Sidebar />
-        <h1 className="ml-7 font-medium">Dashboard</h1>
+        <h1 className="ml-7 font-semibold text-2xl">Dashboard</h1>
         <Tablist tabList={tabList} />
-       
-        {/* <ExpenseTypeTable expenseList={expenseList}/> */}
         <Outlet />
-        {/* <UserTable userList={userList}/> */}
+      
       </div>
     </>
   );
