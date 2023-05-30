@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // import { Link } from "react-router-dom";
 import {IoArrowBack} from "react-icons/io5"
-
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import {  useNavigate } from "react-router-dom";
 
@@ -40,7 +39,7 @@ const MemberForm = () => {
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
          <IoArrowBack className="text-gray-800 h-8 w-8" style={{cursor:"pointer"}}  onClick={()=>navigate(-1)}/>
 
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-10">
+        <div className="flex-1 text-center hidden lg:flex ml-20 mt-20">
 
           <img
             src="/assests/images/addMember.png"

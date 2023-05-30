@@ -1,8 +1,6 @@
 import Sidebar from "../sidebar";
 import Tablist from "../tabList";
-import { IoAddCircle } from "react-icons/io5";
 
-import SearchInput from "../searchInput";
 import { Link, Outlet } from "react-router-dom";
 
 const tabList = [
@@ -31,7 +29,9 @@ const PrimaryUser = () => {
   return (
     <>
       <div className="p-4 sm:ml-64">
+        
         <Sidebar />
+        <h1 className="ml-7 font-medium">Dashboard</h1>
         <Tablist tabList={tabList} />
        
         {/* <ExpenseTypeTable expenseList={expenseList}/> */}

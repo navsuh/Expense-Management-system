@@ -3,7 +3,7 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
 import { IoAddCircle } from "react-icons/io5";
-
+import { FaFilter } from "react-icons/fa";
 const dailyExpensesList = [
   {
     _id: 1,
@@ -34,7 +34,9 @@ const DailyExpensesTable = (props) => {
           <div>
             <SearchInput />
           </div>
-          <div>
+          <div className="flex flex-row justify-between">
+            
+            <FaFilter className="mt-5 mr-20 text-blue-800"/>
             <Link to={"/primaryuser/dailyexpenseform"}>
             <IoAddCircle className="text-blue-800 h-14 w-14" />
             </Link>
