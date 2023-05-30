@@ -42,7 +42,7 @@ const DailyExpensesTable = (props) => {
             </Link>
           </div>
         </div>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="relative shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
             <tr>
