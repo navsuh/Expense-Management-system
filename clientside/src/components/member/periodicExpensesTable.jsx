@@ -1,4 +1,4 @@
-import { FiEdit } from "react-icons/fi";
+
 import { AiOutlineDelete,AiOutlineEdit } from "react-icons/ai";
 
 const periodicExpenseList=[
