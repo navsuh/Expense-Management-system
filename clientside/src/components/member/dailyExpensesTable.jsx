@@ -1,4 +1,8 @@
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import SearchInput from "../searchInput";
+import { Link } from "react-router-dom";
+import { IoAddCircle } from "react-icons/io5";
+import { FaFilter } from "react-icons/fa";
 
 const dailyExpensesList = [
   {
@@ -22,10 +26,23 @@ const dailyExpensesList = [
     paidBy: "user 2 ",
   },
 ];
-const DailyExpensesTable = (props) => {
+const DailyExpensesTableMember = (props) => {
   // const {userList}=props
+
   return (
     <>
+      <div className="flex flex-row justify-between">
+          <div>
+            <SearchInput />
+          </div>
+          <div className="flex flex-row justify-between">
+            
+            <FaFilter className="mt-5 mr-20 text-blue-800"/>
+            <Link to={"/memberuser/dailyexpenseform"}>
+            <IoAddCircle className="text-blue-800 h-14 w-14" />
+            </Link>
+          </div>
+        </div>
       <div className="relative  shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
@@ -53,7 +70,9 @@ const DailyExpensesTable = (props) => {
                 <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
+                  <Link to={`/memberuser/dailyexpenses/${eachDailyExpense._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
+                    </Link>
                     <AiOutlineDelete className="w-8 h-6" />
                   </div>
                 </td>
@@ -66,4 +85,4 @@ const DailyExpensesTable = (props) => {
   );
 };
 
-export default DailyExpensesTable;
+export default DailyExpensesTableMember;

@@ -20,6 +20,11 @@ import HouseHoldForm from "./components/Forms/houseHoldForm";
 
 
 import MemberUser from "./components/member/member";
+import PeriodicExpensesTableMember from "./components/member/periodicExpensesTable";
+import DailyExpensesTableMember from "./components/member/dailyExpensesTable";
+
+
+
 import Register from "./components/Register";
 import Login from "./components/Login ";
 import MemberForm from "./components/Forms/membersForm";
@@ -73,10 +78,16 @@ root.render(
 
         
         <Route path="/memberuser" element={<MemberUser />}>
-          <Route index={true} element={<PeriodicExpensesTable />} />
-          <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />
-          <Route path="dailyexpenses" element={<DailyExpensesTable />} />
+          <Route index={true} element={<PeriodicExpensesTableMember  />} />
+          <Route path="periodicexpenses" element={<PeriodicExpensesTableMember />} />
+          <Route path="dailyexpenses" element={<DailyExpensesTableMember />} />
         </Route>
+
+        <Route path="/memberuser/periodicexpenses/:id" element={<PeriodicExpenseForm/>}/>
+
+        <Route path="/memberuser/dailyexpenseform" element={<DailyExpenseForm/>}/>
+        <Route path="/memberuser/dailyexpenses/:id" element={<DailyExpenseForm/>}/>
+
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

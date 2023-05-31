@@ -1,6 +1,6 @@
 import { RiDashboardFill } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { IoNotifications} from "react-icons/io5";
 import { AiOutlineSetting } from "react-icons/ai";
 
 const Sidebar = (props) => {
@@ -76,7 +76,7 @@ const Sidebar = (props) => {
                 href="/"
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
-                <IoNotificationsOutline className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
+                <IoNotifications className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Notification</span>
               </a>
             </li>
