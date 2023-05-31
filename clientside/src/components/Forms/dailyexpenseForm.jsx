@@ -105,14 +105,14 @@ const DailyExpenseForm = () => {
                     <p>{errors.firstName?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="lastName">Last Name</label>
+                    <label htmlFor="dueDate">Due Date</label>
                     <input
-                      {...register("lastName")}
+                      {...register("dueDate")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="Last Name"
+                      type="date"
+                      placeholder=""
                     />
-                    <p>{errors.lastName?.message}</p>
+                    <p>{errors.dueDate?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="email">Email</label>

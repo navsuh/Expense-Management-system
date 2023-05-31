@@ -1,9 +1,9 @@
-import React , { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
-import { useParams ,useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const periodicExpenseList = [
   {
@@ -36,40 +36,42 @@ const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
   frequency: yup.string().min(3).max(50).required(),
   amount: yup.string().min(1).max(50).required(),
- 
+  dueDate: yup.date().required(),
+  paymentDetails: yup.object().shape({
+    amounts: yup.string().min(1).max(50).required(),
+    date: yup.date().required(),
+    method: yup.string().min(3).max(50).required(),
+  }),
   description: yup.string().min(6).max(20).required(),
   paidThrough: yup.string().min(6).max(20).required(),
   paidBy: yup.string().min(6).max(20).required(),
-
 });
 const PeriodicExpenseForm = () => {
-  const navigate =useNavigate()
-  const {id}=useParams()
+  const navigate = useNavigate();
+  const { id } = useParams();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  useEffect(()=>{
-    if(!id) return;
+  useEffect(() => {
+    if (!id) return;
     console.log(id);
-    const periodicExpense=periodicExpenseList.find((p)=>p._id===id)
+    const periodicExpense = periodicExpenseList.find((p) => p._id === id);
     console.log(periodicExpense);
-    setValue("_id",periodicExpense._id)
-    setValue("firstName",periodicExpense.periodicExpense)
-    setValue("frequency",periodicExpense.frequency)
-    setValue("amount",periodicExpense.amount)
-    
-    setValue("description",periodicExpense.description)
-    setValue("paidThrough",periodicExpense.paidThrough)
-    setValue("paidBy",periodicExpense.paidBy)
-    
+    setValue("_id", periodicExpense._id);
+    setValue("firstName", periodicExpense.periodicExpense);
+    setValue("frequency", periodicExpense.frequency);
+    setValue("amount", periodicExpense.amount);
 
-  },[id,setValue])
+    setValue("description", periodicExpense.description);
+    setValue("paidThrough", periodicExpense.paidThrough);
+    setValue("paidBy", periodicExpense.paidBy);
+  }, [id, setValue]);
 
   const onSubmitHandler = (data) => {
     console.log({ data });
@@ -77,10 +79,13 @@ const PeriodicExpenseForm = () => {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-         <IoArrowBack className="text-gray-800 h-8 w-8" style={{cursor:"pointer"}} onClick={()=>navigate(-1)}/>
+        <IoArrowBack
+          className="text-gray-800 h-8 w-8"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate(-1)}
+        />
 
         <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
-
           <img
             src="/assests/images/Periodicexpense.png"
             alt="homeimage"
@@ -90,13 +95,13 @@ const PeriodicExpenseForm = () => {
 
         <div className="lg:w-1/2  p-6">
           <div className="mt-12 flex flex-col items-center">
-          
-            <h1 className="text-xl xl:text-3xl font-bold">Add Periodic Expense</h1>
-          
+            <h1 className="text-xl xl:text-3xl font-bold">
+              Add Periodic Expense
+            </h1>
+
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
-                    
                   <div>
                     <label htmlFor="firstName">First Name</label>
                     <input
@@ -127,6 +132,58 @@ const PeriodicExpenseForm = () => {
                     />
                     <p>{errors.amount?.message}</p>
                   </div>
+                  <div className="mt-5">
+                    <label htmlFor="dueDate">Due Date</label>
+                    <input
+                      {...register("dueDate")}
+                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      type="date"
+                      placeholder=""
+                    />
+                    {/* <p>{errors.dueDate?.message}</p> */}
+                  </div>
+{/* ------------------------------------------------------------------------------------------------------------------ */}
+                   <div className="mt-5  border  pl-4 pr-4 h-80">
+                  <label htmlFor="paymentDetails">Payment Details:-</label>
+                      <br />
+                   <div className="mt-5">
+                   <label htmlFor="amounts">Amount</label>
+                   
+                    <input
+                      {...register("paymentDetails.amounts")}
+                      className="w-70 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      type="text"
+                      placeholder="amounts"
+                    />
+                    <p>{errors.amounts?.message}</p>
+                  </div>
+
+                  <div className="mt-5">
+                    <label htmlFor="date">Date</label>
+                    <input
+                      {...register("paymentDetails.date")}
+                      className="w-70 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      type="date"
+                      placeholder=""
+                    />
+                    {/* <p>{errors.dueDate?.message}</p> */}
+                  </div>
+                   
+                  <div className="mt-5">
+                    <label htmlFor="method">Method</label>
+                    <input
+                      {...register("paymentDetails.method")}
+                      className="w-70 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      type="text"
+                      placeholder="policy name, emi account"
+                    />
+                    <p>{errors.paymentDetails?.message}</p>
+                  </div>
+
+
+                   </div>
+
+{/* --------------------------------------------------------------------------------------------------------------- */}
                   <div className="mt-5">
                     <label htmlFor="description">Description</label>
                     <input
