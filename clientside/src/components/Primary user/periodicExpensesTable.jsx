@@ -6,7 +6,7 @@ import { IoAddCircle } from "react-icons/io5";
 import { FaFilter } from "react-icons/fa";
 const periodicExpenseList = [
   {
-    _id: 1,
+    _id: "1",
     household: "household 1",
     frequency: "frequency Name 1",
     amount: "amount 1",
@@ -18,7 +18,7 @@ const periodicExpenseList = [
     paidBy: "user 1 ",
   },
   {
-    _id: 2,
+    _id: "2",
     household: "household 2",
     frequency: "frequency Name 2",
     amount: "amount 2",
@@ -77,7 +77,9 @@ const PeriodicExpensesTable = (props) => {
                 <td className="px-6 py-4">{eachPeriodicExpense.paidBy}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
+                  <Link to={`/primaryuser/periodicexpenses/${eachPeriodicExpense._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
+                    </Link>
                     <AiOutlineDelete className="w-8 h-6" />
                   </div>
                 </td>

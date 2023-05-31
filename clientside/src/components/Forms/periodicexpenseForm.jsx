@@ -1,15 +1,42 @@
-import React from "react";
+import React , { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {IoArrowBack} from "react-icons/io5"
-import {  useNavigate } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
+import { useParams ,useNavigate} from "react-router-dom";
+
+const periodicExpenseList = [
+  {
+    _id: "1",
+    periodicExpense: "periodicExpense 1",
+    frequency: "frequency Name 1",
+    amount: "amount 1",
+    dueDate: "expense due date 1",
+    expensetype: "pediodic expense type 1",
+    paymentDetails: "details 1",
+    description: "description 1",
+    paidThrough: "bank details 1",
+    paidBy: "user 1 ",
+  },
+  {
+    _id: "2",
+    periodicExpense: "periodicExpense 2",
+    frequency: "frequency Name 2",
+    amount: "amount 2",
+    dueDate: "expense due date 2",
+    expensetype: "pediodic expense type 2",
+    paymentDetails: "details 2",
+    description: "description 2",
+    paidThrough: "bank details 2",
+    paidBy: "user 2 ",
+  },
+];
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
   frequency: yup.string().min(3).max(50).required(),
-  amount: yup.string().min(1).required(),
-  userName: yup.string().min(6).max(20).required(),
+  amount: yup.string().min(1).max(50).required(),
+ 
   description: yup.string().min(6).max(20).required(),
   paidThrough: yup.string().min(6).max(20).required(),
   paidBy: yup.string().min(6).max(20).required(),
@@ -17,13 +44,32 @@ const schema = yup.object().shape({
 });
 const PeriodicExpenseForm = () => {
   const navigate =useNavigate()
+  const {id}=useParams()
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(()=>{
+    if(!id) return;
+    console.log(id);
+    const periodicExpense=periodicExpenseList.find((p)=>p._id===id)
+    console.log(periodicExpense);
+    setValue("_id",periodicExpense._id)
+    setValue("firstName",periodicExpense.periodicExpense)
+    setValue("frequency",periodicExpense.frequency)
+    setValue("amount",periodicExpense.amount)
+    
+    setValue("description",periodicExpense.description)
+    setValue("paidThrough",periodicExpense.paidThrough)
+    setValue("paidBy",periodicExpense.paidBy)
+    
+
+  },[id,setValue])
 
   const onSubmitHandler = (data) => {
     console.log({ data });
@@ -76,7 +122,7 @@ const PeriodicExpenseForm = () => {
                     <input
                       {...register("amount")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="number"
+                      type="text"
                       placeholder="amount"
                     />
                     <p>{errors.amount?.message}</p>

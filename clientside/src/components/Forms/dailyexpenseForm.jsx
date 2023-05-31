@@ -1,9 +1,32 @@
-import React from "react";
+import React , { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {IoArrowBack} from "react-icons/io5"
-import {  useNavigate } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
+import { useParams ,useNavigate} from "react-router-dom";
+
+const dailyExpensesList = [
+  {
+    _id: "1",
+    household: "household 1",
+    dueDate: "expense due date 1",
+    expensetype: "daily expense type 1",
+    paymentDetails: "details 1",
+    description: "description 1",
+    paidThrough: "bank details 1",
+    paidBy: "user 1 ",
+  },
+  {
+    _id: "2",
+    household: "household 2",
+    dueDate: "expense due date 2",
+    expensetype: "daily expense type 2",
+    paymentDetails: "details 2",
+    description: "description 2",
+    paidThrough: "bank details 2",
+    paidBy: "user 2 ",
+  },
+];
 
 
 const schema = yup.object().shape({
@@ -19,16 +42,32 @@ const schema = yup.object().shape({
 });
 const DailyExpenseForm = () => {
   const navigate =useNavigate()
+  const {id}=useParams()
    
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm({
     resolver: yupResolver(schema),
   });
 
- 
+  useEffect(()=>{
+    if(!id) return;
+    
+    const dailyExpense=dailyExpensesList.find((p)=>p._id===id)
+    
+    setValue("_id",dailyExpense._id)
+    
+    
+    
+    setValue("description",dailyExpense.description)
+    setValue("paidThrough",dailyExpense.paidThrough)
+    setValue("paidBy",dailyExpense.paidBy)
+    
+
+  },[id,setValue])
 
   const onSubmitHandler = (data) => {
     console.log({ data });
