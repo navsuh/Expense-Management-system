@@ -144,7 +144,7 @@ const PeriodicExpenseForm = () => {
                       type="date"
                       placeholder=""
                     />
-                    {/* <p>{errors.dueDate?.message}</p> */}
+                    <p>{errors.dueDate?.message}</p>
                   </div>
 {/* ------------------------------------------------------------------------------------------------------------------ */}
                    <div className="mt-5  border  pl-4 pr-4 h-80">
