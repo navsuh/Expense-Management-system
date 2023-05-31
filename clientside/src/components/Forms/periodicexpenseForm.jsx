@@ -124,7 +124,7 @@ const PeriodicExpenseForm = () => {
                       type="text"
                       placeholder="frequency"
                     />
-                    <p>{errors.frequency?.message}</p>
+                    <p className="text-red-500">{errors.frequency?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="amount">Amount</label>
@@ -170,7 +170,7 @@ const PeriodicExpenseForm = () => {
                       type="date"
                       placeholder=""
                     />
-                    <p>{errors.paymentDetails?.date.message}</p>
+                    <p>{errors.paymentDetails?.date.message.slice(15,40)}</p>
                   </div>
                    
                   <div className="mt-5">

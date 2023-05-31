@@ -33,26 +33,26 @@ export const forgotPasswordDataValidator = getValidator(forgotPasswordDataSchema
 export const forgotPasswordDataResolver = resolve({})
 
 // Schema for updating existing data
-export const forgotPasswordPatchSchema = {
-  $id: 'ForgotPasswordPatch',
-  type: 'object',
-  additionalProperties: false,
-  required: [],
-  properties: {
-    ...forgotPasswordSchema.properties
-  }
-}
-export const forgotPasswordPatchValidator = getValidator(forgotPasswordPatchSchema, dataValidator)
-export const forgotPasswordPatchResolver = resolve({})
+// export const forgotPasswordPatchSchema = {
+//   $id: 'ForgotPasswordPatch',
+//   type: 'object',
+//   additionalProperties: false,
+//   required: [],
+//   properties: {
+//     ...forgotPasswordSchema.properties
+//   }
+// }
+// export const forgotPasswordPatchValidator = getValidator(forgotPasswordPatchSchema, dataValidator)
+// export const forgotPasswordPatchResolver = resolve({})
 
-// Schema for allowed query properties
-export const forgotPasswordQuerySchema = {
-  $id: 'ForgotPasswordQuery',
-  type: 'object',
-  additionalProperties: false,
-  properties: {
-    ...querySyntax(forgotPasswordSchema.properties)
-  }
-}
-export const forgotPasswordQueryValidator = getValidator(forgotPasswordQuerySchema, queryValidator)
-export const forgotPasswordQueryResolver = resolve({})
+// // Schema for allowed query properties
+// export const forgotPasswordQuerySchema = {
+//   $id: 'ForgotPasswordQuery',
+//   type: 'object',
+//   additionalProperties: false,
+//   properties: {
+//     ...querySyntax(forgotPasswordSchema.properties)
+//   }
+// }
+// export const forgotPasswordQueryValidator = getValidator(forgotPasswordQuerySchema, queryValidator)
+// export const forgotPasswordQueryResolver = resolve({})

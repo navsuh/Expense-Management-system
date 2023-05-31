@@ -60,7 +60,7 @@ export const usersPatchSchema = {
   $id: 'UsersPatch',
   type: 'object',
   additionalProperties: false,
-  required: ['updatedBy','updatedAt'],
+  required: [],
   properties: {
     ...usersSchema.properties
   }

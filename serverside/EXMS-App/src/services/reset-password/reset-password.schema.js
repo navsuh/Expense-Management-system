@@ -8,10 +8,12 @@ export const resetPasswordSchema = {
   $id: 'ResetPassword',
   type: 'object',
   additionalProperties: false,
-  required: ['_id', 'text'],
+  required: ['newPassword', 'confirmedPassword'],
   properties: {
-    _id: ObjectIdSchema(),
-    text: { type: 'string' }
+    
+    newPassword: { type: 'string' },
+    confirmedPassword: { type: 'string' },
+    email: { type: 'string',format: 'email' }
   }
 }
 export const resetPasswordValidator = getValidator(resetPasswordSchema, dataValidator)
@@ -24,7 +26,7 @@ export const resetPasswordDataSchema = {
   $id: 'ResetPasswordData',
   type: 'object',
   additionalProperties: false,
-  required: ['text'],
+  required: ['newPassword', 'confirmedPassword'],
   properties: {
     ...resetPasswordSchema.properties
   }
@@ -33,26 +35,26 @@ export const resetPasswordDataValidator = getValidator(resetPasswordDataSchema, 
 export const resetPasswordDataResolver = resolve({})
 
 // Schema for updating existing data
-export const resetPasswordPatchSchema = {
-  $id: 'ResetPasswordPatch',
-  type: 'object',
-  additionalProperties: false,
-  required: [],
-  properties: {
-    ...resetPasswordSchema.properties
-  }
-}
-export const resetPasswordPatchValidator = getValidator(resetPasswordPatchSchema, dataValidator)
-export const resetPasswordPatchResolver = resolve({})
+// export const resetPasswordPatchSchema = {
+//   $id: 'ResetPasswordPatch',
+//   type: 'object',
+//   additionalProperties: false,
+//   required: ['newPassword', 'confirmedPassword'],
+//   properties: {
+//     ...resetPasswordSchema.properties
+//   }
+// }
+// export const resetPasswordPatchValidator = getValidator(resetPasswordPatchSchema, dataValidator)
+// export const resetPasswordPatchResolver = resolve({})
 
 // Schema for allowed query properties
-export const resetPasswordQuerySchema = {
-  $id: 'ResetPasswordQuery',
-  type: 'object',
-  additionalProperties: false,
-  properties: {
-    ...querySyntax(resetPasswordSchema.properties)
-  }
-}
-export const resetPasswordQueryValidator = getValidator(resetPasswordQuerySchema, queryValidator)
-export const resetPasswordQueryResolver = resolve({})
+// export const resetPasswordQuerySchema = {
+//   $id: 'ResetPasswordQuery',
+//   type: 'object',
+//   additionalProperties: false,
+//   properties: {
+//     ...querySyntax(resetPasswordSchema.properties)
+//   }
+// }
+// export const resetPasswordQueryValidator = getValidator(resetPasswordQuerySchema, queryValidator)
+// export const resetPasswordQueryResolver = resolve({})
