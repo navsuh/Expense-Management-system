@@ -1,11 +1,14 @@
-import React from "react";
+import React , { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useParams ,useNavigate} from "react-router-dom";
 
-
+const expenseList = [
+  { _id: "1", name: "Expense type 1" },
+  { _id: "2", name: "Expense type 2" },
+];
 
 
 
@@ -15,14 +18,27 @@ const schema = yup.object().shape({
 });
 const ExpenseTypeForm = () => {
     const navigate = useNavigate();
+    const {id}=useParams()
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm({
     resolver: yupResolver(schema),
   });
 
+  useEffect(()=>{
+    if(!id) return;
+    console.log(id);
+    const expensetype=expenseList.find((e)=>e._id===id)
+    console.log(typeof(id));
+   console.log(expensetype);
+    setValue("_id",expensetype._id)
+    setValue("name",expensetype.name)
+    
+
+  },[id,setValue])
  
 
   const onSubmitHandler = (data) => {

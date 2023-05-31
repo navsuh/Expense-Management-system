@@ -6,8 +6,8 @@ import Tablist from "../tabList";
 import { Outlet } from "react-router-dom";
 
 const tabList = [
-  { _id: 1, tabName: "Expense type", tabPath: "/admin/expensetype" },
-  { _id: 2, tabName: "Users", tabPath: "/admin/users" },
+  { _id: "1", tabName: "Expense type", tabPath: "/admin/expensetype" },
+  { _id: "2", tabName: "Users", tabPath: "/admin/users" },
 ];
 
 // const expenseList=[{_id:1,name:"Expense type 1"},{_id:2,name:"Expense type 2"}]

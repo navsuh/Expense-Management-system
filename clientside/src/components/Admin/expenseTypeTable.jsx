@@ -5,8 +5,8 @@ import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
 
 const expenseList = [
-  { _id: 1, name: "Expense type 1" },
-  { _id: 2, name: "Expense type 2" },
+  { _id: "1", name: "Expense type 1" },
+  { _id: "2", name: "Expense type 2" },
 ];
 
 const ExpenseTypeTable = (props) => {
@@ -44,9 +44,9 @@ const ExpenseTypeTable = (props) => {
                 <td className="px-6 py-4">{eachExpense.name}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
-                  {/* <Link to={"/admin/expensetypeform"}> */}
+                  <Link to={`/admin/expensetype/${eachExpense._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
-                    {/* </Link> */}
+                    </Link>
                     <AiOutlineDelete className="w-8 h-6" />
                   </div>
                 </td>

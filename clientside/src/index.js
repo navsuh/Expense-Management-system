@@ -43,7 +43,9 @@ root.render(
           <Route path="users" element={<UserTable />} />
         </Route>
         <Route path="/admin/expensetypeform" element={<ExpenseTypeForm />} />
+        <Route path="/admin/expensetype/:id" element={<ExpenseTypeForm />} />
         <Route path="/admin/userform" element={<UserForm />} />
+        <Route path="/admin/users/:id" element={<UserForm />} />
 
         <Route path="/primaryuser" element={<PrimaryUser />}>
           <Route index={true} element={<HouseholdTable />} />
