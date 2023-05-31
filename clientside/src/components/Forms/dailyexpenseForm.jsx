@@ -59,9 +59,6 @@ const DailyExpenseForm = () => {
     const dailyExpense=dailyExpensesList.find((p)=>p._id===id)
     
     setValue("_id",dailyExpense._id)
-    
-    
-    
     setValue("description",dailyExpense.description)
     setValue("paidThrough",dailyExpense.paidThrough)
     setValue("paidBy",dailyExpense.paidBy)
@@ -104,15 +101,16 @@ const DailyExpenseForm = () => {
                     />
                     <p>{errors.firstName?.message}</p>
                   </div>
+                  
                   <div className="mt-5">
-                    <label htmlFor="dueDate">Due Date</label>
+                    <label htmlFor="lastName">Last Name</label>
                     <input
-                      {...register("dueDate")}
+                      {...register("lastName")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="date"
-                      placeholder=""
+                      type="text"
+                      placeholder="Last Name"
                     />
-                    <p>{errors.dueDate?.message}</p>
+                    <p>{errors.lastName?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="email">Email</label>
