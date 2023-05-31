@@ -47,6 +47,7 @@ const schema = yup.object().shape({
   paidBy: yup.string().min(6).max(20).required(),
 });
 const PeriodicExpenseForm = () => {
+  
   const navigate = useNavigate();
   const { id } = useParams();
   const {
@@ -75,7 +76,9 @@ const PeriodicExpenseForm = () => {
 
   const onSubmitHandler = (data) => {
     console.log({ data });
+    
   };
+  console.log(errors);
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
@@ -150,12 +153,12 @@ const PeriodicExpenseForm = () => {
                    <label htmlFor="amounts">Amount</label>
                    
                     <input
-                      {...register("paymentDetails.amounts")}
+                      {...register('paymentDetails.amounts')}
                       className="w-70 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
                       placeholder="amounts"
                     />
-                    <p>{errors.amounts?.message}</p>
+                    <p>{errors.paymentDetails?.amounts.message}</p>
                   </div>
 
                   <div className="mt-5">
@@ -166,7 +169,7 @@ const PeriodicExpenseForm = () => {
                       type="date"
                       placeholder=""
                     />
-                    {/* <p>{errors.dueDate?.message}</p> */}
+                    <p>{errors.paymentDetails?.date.message}</p>
                   </div>
                    
                   <div className="mt-5">
@@ -177,7 +180,7 @@ const PeriodicExpenseForm = () => {
                       type="text"
                       placeholder="policy name, emi account"
                     />
-                    <p>{errors.paymentDetails?.message}</p>
+                    <p>{errors.paymentDetails?.method.message}</p>
                   </div>
 
 
