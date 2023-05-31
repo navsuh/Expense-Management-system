@@ -1,11 +1,45 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // import { Link } from "react-router-dom";
 import {IoArrowBack} from "react-icons/io5"
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import {  useNavigate } from "react-router-dom";
+import { useParams , useNavigate } from "react-router-dom";
+
+// const memberList = [
+//   { _id: "1", household: "household 1", user: "user 1" },
+//   { _id: "2", household: "household 1", user: "user 2" },
+// ];
+
+const userList = [
+  {
+    _id: "1",
+    firstName: "user 1 fName",
+    lastName: "user 1 lName",
+    email: "user 1 email",
+    phone: "user 1 phone",
+    userName: "user 1 userName",
+    role: "user 1 role",
+    lastLoggedIn: "user 1 lastLoggedIn",
+    isActive: true,
+    updatedBy: "user 1 updatedBy",
+    updatedAt: "user1 updatedAt",
+  },
+  {
+    _id: "2",
+    firstName: "user 2 fName",
+    lastName: "user 2 lName",
+    email: "user 2 email",
+    phone: "user 2 phone",
+    userName: "user 2 userName",
+    role: "user 2 role",
+    lastLoggedIn: "user 2 lastLoggedIn",
+    isActive: true,
+    updatedBy: "user 2 updatedBy",
+    updatedAt: "user2 updatedAt",
+  },
+];
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -17,10 +51,12 @@ const schema = yup.object().shape({
 });
 const MemberForm = () => {
   const navigate =useNavigate()
+  const {id}=useParams()
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -30,6 +66,22 @@ const MemberForm = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(()=>{
+    if(!id) return;
+    console.log(id);
+    const member=userList.find((m)=>m._id===id)
+    
+    setValue("_id",member._id)
+    setValue("firstName",member.firstName)
+    setValue("lastName",member.lastName)
+    setValue("email",member.email)
+    setValue("phone",member.phone)
+    setValue("userName",member.userName)
+    // setValue("isActive",member.isActive)
+    
+
+  },[id,setValue])
 
   const onSubmitHandler = (data) => {
     console.log({ data });

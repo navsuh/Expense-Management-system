@@ -5,8 +5,8 @@ import { IoAddCircle } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const memberList = [
-  { _id: 1, household: "household 1", user: "user 1" },
-  { _id: 2, household: "household 1", user: "user 2" },
+  { _id: "1", household: "household 1", user: "user 1" },
+  { _id: "2", household: "household 1", user: "user 2" },
 ];
 
 const MemberTable = (props) => {
@@ -46,7 +46,9 @@ const MemberTable = (props) => {
                 <td className="px-6 py-4">{eachMember.user}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
+                  <Link to={`/primaryuser/members/${eachMember._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
+                    </Link >
                     <AiOutlineDelete className="w-8 h-6" />
                   </div>
                 </td>

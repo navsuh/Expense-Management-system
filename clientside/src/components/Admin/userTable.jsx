@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const userList = [
   {
-    _id: 1,
+    _id: "1",
     firstName: "user 1 fName",
     lastName: "user 1 lName",
     email: "user 1 email",
@@ -21,7 +21,7 @@ const userList = [
     updatedAt: "user1 updatedAt",
   },
   {
-    _id: 2,
+    _id: "2",
     firstName: "user 2 fName",
     lastName: "user 2 lName",
     email: "user 2 email",
@@ -68,7 +68,10 @@ const UserTable = (props) => {
                 <td className="px-6 py-4">{eachUser.firstName}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
+                  <Link to={`/admin/users/${eachUser._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
+                    
+                    </Link>
                     <AiOutlineDelete className="w-8 h-6" />
                   </div>
                 </td>

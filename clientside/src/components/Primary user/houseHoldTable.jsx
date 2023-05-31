@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const houseHoldList = [
   {
-    _id: 1,
+    _id: "1",
     name: "HouseHold Name 1",
     addressLine1: "HouseHold addressLine1 1",
     addressLine2: "HouseHold addressLine2 1",
@@ -16,7 +16,7 @@ const houseHoldList = [
     zipcode: "HouseHold zipcode 1",
   },
   {
-    _id: 1,
+    _id: "2",
     name: "HouseHold Name 2",
     addressLine1: "HouseHold addressLine1 2",
     addressLine2: "HouseHold addressLine2 2",
@@ -60,7 +60,9 @@ const HouseholdTable = (props) => {
                 <td className="px-6 py-4">{eachHousehold.name}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
+                  <Link to={`/primaryuser/household/${eachHousehold._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
+                  </Link>
                     <AiOutlineDelete className="w-8 h-6" />
                   </div>
                 </td>

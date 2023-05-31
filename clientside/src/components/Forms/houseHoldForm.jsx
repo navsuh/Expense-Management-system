@@ -1,10 +1,32 @@
-import React from "react";
+import React , { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
 import { IoArrowBack } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useParams ,useNavigate} from "react-router-dom";
+
+const houseHoldList = [
+  {
+    _id: "1",
+    name: "HouseHold Name 1",
+    addressLine1: "HouseHold addressLine1 1",
+    addressLine2: "HouseHold addressLine2 1",
+    area: "HouseHold area 1",
+    city: "HouseHold city 1",
+    state: "HouseHold state 1",
+    zipcode: "HouseHold zipcode 1",
+  },
+  {
+    _id: "2",
+    name: "HouseHold Name 2",
+    addressLine1: "HouseHold addressLine1 2",
+    addressLine2: "HouseHold addressLine2 2",
+    area: "HouseHold area 2",
+    city: "HouseHold city 2",
+    state: "HouseHold state 2",
+    zipcode: "HouseHold zipcode 2",
+  },
+];
 
 const schema = yup.object().shape({
   name: yup.string().min(3).max(50).required(),
@@ -17,13 +39,32 @@ const schema = yup.object().shape({
 });
 const HouseHoldForm = () => {
   const navigate = useNavigate();
+  const {id}=useParams()
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(()=>{
+    if(!id) return;
+    console.log(id);
+    const houseHold=houseHoldList.find((h)=>h._id===id)
+    
+    setValue("_id",houseHold._id)
+    setValue("name",houseHold.name)
+    setValue("addressLine1",houseHold.addressLine1)
+    setValue("addressLine2",houseHold.addressLine2)
+    setValue("area",houseHold.area)
+    setValue("city",houseHold.city)
+    setValue("state",houseHold.state)
+    setValue("zipcode",houseHold.zipcode)
+    
+
+  },[id,setValue])
 
   const onSubmitHandler = (data) => {
     console.log({ data });

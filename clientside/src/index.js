@@ -42,10 +42,13 @@ root.render(
           <Route path="expensetype" element={<ExpenseTypeTable />} />
           <Route path="users" element={<UserTable />} />
         </Route>
+        
         <Route path="/admin/expensetypeform" element={<ExpenseTypeForm />} />
         <Route path="/admin/expensetype/:id" element={<ExpenseTypeForm />} />
+        
         <Route path="/admin/userform" element={<UserForm />} />
         <Route path="/admin/users/:id" element={<UserForm />} />
+
 
         <Route path="/primaryuser" element={<PrimaryUser />}>
           <Route index={true} element={<HouseholdTable />} />
@@ -56,9 +59,16 @@ root.render(
         </Route>
         
         <Route path="/primaryuser/householdform" element={<HouseHoldForm/>}/>
+        <Route path="/primaryuser/household/:id" element={<HouseHoldForm/>}/>
+
         <Route path="/primaryuser/memberform" element={<MemberForm/>}/>
+        <Route path="/primaryuser/members/:id" element={<MemberForm/>}/>
+
         <Route path="/primaryuser/periodicexpenseform" element={<PeriodicExpenseForm/>}/>
+        <Route path="/primaryuser/periodicexpenses/:id" element={<PeriodicExpenseForm/>}/>
+
         <Route path="/primaryuser/dailyexpenseform" element={<DailyExpenseForm/>}/>
+        <Route path="/primaryuser/dailyexpenses/:id" element={<DailyExpenseForm/>}/>
 
 
         
