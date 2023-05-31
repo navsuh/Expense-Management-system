@@ -1,17 +1,6 @@
-// import { MongoDBService } from '@feathersjs/mongodb'
-
-// // By default calls the standard MongoDB adapter service methods but can be customized with your own functionality.
-// export class ResetPasswordService extends MongoDBService {}
-
-// export const getOptions = (app) => {
-//   return {
-//     paginate: app.get('paginate'),
-//     Model: app.get('mongodbClient').then((db) => db.collection('reset-password'))
-//   }
-// }
-
-
-export class ResetPasswordService {
+// This is a skeleton for a custom service class. Remove or add the methods you need here
+import bcrypt from "bcrypt";
+export class ChangepasswordService {
   constructor(options) {
     this.options = options
   }
@@ -32,13 +21,11 @@ export class ResetPasswordService {
       }
     })
     if (userResponse && userResponse.data.length > 0) {
-      
-      
+      let comparePassword = await bcrypt.compare(data.currentPassword, userResponse.data[0].password)
+      if (comparePassword) {
         if (
           newPassword.toString() !== email.toString() &&
-          newPassword.toString() !== userResponse.data[0].firstName
-          &&
-          newPassword.toString() !== userResponse.data[0].lastName
+          newPassword.toString() !== userResponse.data[0].name
         ) {
           if (newPassword.toString() === confirmedPassword.toString()) {
             let updatePassword = await userService.patch(
@@ -51,19 +38,37 @@ export class ResetPasswordService {
             result.record = updatePassword
             return result
           }
-        }else{
-          throw new Error("please enter the valid password")
         }
-      
-        
-      
+      }else{
+        throw new Error("please enter the correct current password")
+      }
     }
   }
 
-  
+  // This method has to be added to the 'methods' option to make it available to clients
+  // async update(id, data, _params) {
+  //   return {
+  //     id: 0,
+  //     ...data
+  //   }
+  // }
+
+  // async patch(id, data, _params) {
+  //   return {
+  //     id: 0,
+  //     text: `Fallback for ${id}`,
+  //     ...data
+  //   }
+  // }
+
+  // async remove(id, _params) {
+  //   return {
+  //     id: 0,
+  //     text: 'removed'
+  //   }
+  // }
 }
 
 export const getOptions = (app) => {
   return { app }
 }
-

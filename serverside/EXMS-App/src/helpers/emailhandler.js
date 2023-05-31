@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 export const emailhandler = {
-  sendEmail: async function (userdata) {
+  sendEmail: async function (userdata,context) {
     
     const user = process.env.movie_rental_email_id
     const pass = process.env.movie_rental_email_pass
@@ -18,16 +18,29 @@ export const emailhandler = {
       }
     })
     try {
-      const info = await transporter.sendMail({
-        from: user, // sender address
-        to: userdata.email, // list of receivers
-        subject: `Hello ${userdata.firstName} ${userdata.lastName}`, // Subject line
-        text: `You are added as memeber to ${userdata.households}`, // plain text body
-        html: `<b>Your login credentials are email:${userdata.email} and password:${userdata.password}</b>` // html body
-      })
-      console.log('Message sent: %s', info.messageId)
+      if (context==="householdmembers"){
+        const info = await transporter.sendMail({
+          from: user, // sender address
+          to: userdata.email, // list of receivers
+          subject: `Hello ${userdata.firstName} ${userdata.lastName}`, // Subject line
+          text: `You are added as member to ${userdata.households}`, // plain text body
+          html: `<b>Your login credentials are email:${userdata.email} and password:${userdata.password}</b>` // html body
+        })
+        console.log('Message sent: %s', info.messageId)
+
+      }else if(context==="forgot-password"){
+        const info = await transporter.sendMail({
+          from: user, // sender address
+          to: userdata.email, // list of receivers
+          subject: `Change Password`, // Subject line
+          text: "please click the below link to reset your password", // plain text body
+          html: "<div> <p>please click the below link to reset your password</p> <a href='http://localhost:3000/changepassword'>Change your password</a></div>" // html body
+        })
+        console.log('Message sent: %s', info.messageId)
+      }
+    
     } catch (err) {
-      console.log('here')
+      // console.log('here')
       console.log(err)
     }
   }

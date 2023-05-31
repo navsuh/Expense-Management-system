@@ -4,6 +4,7 @@ import validate from 'feathers-validate-joi'
 import { userSchema,userSchemaPatch } from './users.model.js'
 import { Admin} from './hooks/Admin.js'
 import {Primaryuser } from './hooks/primaryuser.js'
+import { Memberuser } from './hooks/memberuser.js'
 
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
@@ -18,7 +19,7 @@ import {
 } from './users.schema.js'
 import { UsersService, getOptions } from './users.class.js'
 import { usersPath, usersMethods } from './users.shared.js'
-import primaryuserhook from './hooks/primaryuserhook.js'
+
 
 export * from './users.class.js'
 export * from './users.schema.js'
@@ -50,6 +51,7 @@ export const users = (app) => {
       create: [validate.form(userSchema, { abortEarly: false }),
         Admin(),
         Primaryuser(),
+        Memberuser(),
         schemaHooks.validateData(usersDataValidator), schemaHooks.resolveData(usersDataResolver)],
       patch: [validate.form(userSchemaPatch, { abortEarly: false }),schemaHooks.validateData(usersPatchValidator), schemaHooks.resolveData(usersPatchResolver)],
       remove: []

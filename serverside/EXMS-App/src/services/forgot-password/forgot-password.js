@@ -1,18 +1,18 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
-import forgotpasshook from './hook/forgotpasshook.js'
+// import forgotpasshook from './hook/forgotpasshook.js'
 import { forgotPasswordsSchema } from './forgot-password.models.js'
 import validate from "feathers-validate-joi"
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   forgotPasswordDataValidator,
-  forgotPasswordPatchValidator,
-  forgotPasswordQueryValidator,
+  // forgotPasswordPatchValidator,
+  // forgotPasswordQueryValidator,
   forgotPasswordResolver,
   forgotPasswordExternalResolver,
   forgotPasswordDataResolver,
-  forgotPasswordPatchResolver,
-  forgotPasswordQueryResolver
+  // forgotPasswordPatchResolver,
+  // forgotPasswordQueryResolver
 } from './forgot-password.schema.js'
 import { ForgotPasswordService, getOptions } from './forgot-password.class.js'
 import { forgotPasswordPath, forgotPasswordMethods } from './forgot-password.shared.js'
@@ -34,26 +34,26 @@ export const forgotPassword = (app) => {
     around: {
       all: [
         // authenticate('jwt'),
-        schemaHooks.resolveExternal(forgotPasswordExternalResolver),
-        schemaHooks.resolveResult(forgotPasswordResolver)
+        // schemaHooks.resolveExternal(forgotPasswordExternalResolver),
+        // schemaHooks.resolveResult(forgotPasswordResolver)
       ]
     },
     before: {
       all: [
-        schemaHooks.validateQuery(forgotPasswordQueryValidator),
-        schemaHooks.resolveQuery(forgotPasswordQueryResolver)
+        // schemaHooks.validateQuery(forgotPasswordQueryValidator),
+        // schemaHooks.resolveQuery(forgotPasswordQueryResolver)
       ],
       find: [],
       get: [],
       create: [
         validate.form(forgotPasswordsSchema,{abortEarly:false}),
-        forgotpasshook(),
+        // forgotpasshook(),
         schemaHooks.validateData(forgotPasswordDataValidator),
         schemaHooks.resolveData(forgotPasswordDataResolver)
       ],
       patch: [
-        schemaHooks.validateData(forgotPasswordPatchValidator),
-        schemaHooks.resolveData(forgotPasswordPatchResolver)
+        // schemaHooks.validateData(forgotPasswordPatchValidator),
+        // schemaHooks.resolveData(forgotPasswordPatchResolver)
       ],
       remove: []
     },
