@@ -105,6 +105,7 @@ const PeriodicExpenseForm = () => {
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
+                  
                   <div>
                     <label htmlFor="firstName">First Name</label>
                     <input
@@ -143,7 +144,7 @@ const PeriodicExpenseForm = () => {
                       type="date"
                       placeholder=""
                     />
-                    {/* <p>{errors.dueDate?.message}</p> */}
+                    <p>{errors.dueDate?.message}</p>
                   </div>
 {/* ------------------------------------------------------------------------------------------------------------------ */}
                    <div className="mt-5  border  pl-4 pr-4 h-80">
