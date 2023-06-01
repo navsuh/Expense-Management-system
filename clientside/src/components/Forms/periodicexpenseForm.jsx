@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
 import { useParams, useNavigate } from "react-router-dom";
-
+import { RiArrowDownSLine } from "react-icons/ri";
 const periodicExpenseList = [
   {
     _id: "1",
@@ -47,7 +47,6 @@ const schema = yup.object().shape({
   paidBy: yup.string().min(6).max(20).required(),
 });
 const PeriodicExpenseForm = () => {
-  
   const navigate = useNavigate();
   const { id } = useParams();
   const {
@@ -76,158 +75,212 @@ const PeriodicExpenseForm = () => {
 
   const onSubmitHandler = (data) => {
     console.log({ data });
-    
   };
   console.log(errors);
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-      <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-        <IoArrowBack
-          className="text-gray-800 h-8 w-8"
-          style={{ cursor: "pointer" }}
-          onClick={() => navigate(-1)}
-        />
-
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
+      <div className="max-w-screen-md  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 flex-col p-10">
+        <div className="flex flex-row justify-between  ">
+          <div>
+            <IoArrowBack
+              className="text-gray-800 h-8 w-8"
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate(-1)}
+            />
+          </div>
+          {/* <div className="flex-1 hidden lg:flex ml-15 mt justify-end">
           <img
-            src="/assests/images/Periodicexpense.png"
+            src="/assests/images/Dailyexpense.png"
             alt="homeimage"
-            style={{ height: "600px" }}
+            style={{ height: "300px", width: "320px" }}
           />
+        </div> */}
         </div>
 
-        <div className="lg:w-1/2  p-6">
-          <div className="mt-12 flex flex-col items-center">
-            <h1 className="text-xl xl:text-3xl font-bold">
+        <div className=" bg-white px-6 sm:py-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold  text-gray-900 sm:text-4xl">
               Add Periodic Expense
-            </h1>
+            </h2>
+          </div>
+          <form
+            onSubmit={handleSubmit(onSubmitHandler)}
+            className="mx-auto mt-16 max-w-xl "
+          >
+            <div className="grid gap-x-8 gap-y-6 grid-cols-2">
+              <div className="w-full mt-2 h-32 ">
+                <label htmlFor="selectHousehold" className="">
+                  Household
+                </label>
 
-            <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <div className="w-full flex-1 mt-8">
-                <div className="mx-auto max-w-xs">
-                  
-                  <div>
-                    <label htmlFor="firstName">First Name</label>
-                    <input
-                      {...register("firstName")}
-                      className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="First Name"
-                    />
-                    <p>{errors.firstName?.message}</p>
-                  </div>
-                  <div className="mt-5">
-                    <label htmlFor="frequency">Frequency</label>
-                    <input
-                      {...register("frequency")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="frequency"
-                    />
-                    <p className="text-red-500">{errors.frequency?.message}</p>
-                  </div>
-                  <div className="mt-5">
-                    <label htmlFor="amount">Amount</label>
-                    <input
-                      {...register("amount")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="amount"
-                    />
-                    <p>{errors.amount?.message}</p>
-                  </div>
-                  <div className="mt-5">
-                    <label htmlFor="dueDate">Due Date</label>
-                    <input
-                      {...register("dueDate")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="date"
-                      placeholder=""
-                    />
-                    <p>{errors.dueDate?.message}</p>
-                  </div>
-{/* ------------------------------------------------------------------------------------------------------------------ */}
-                   <div className="mt-5  border  pl-4 pr-4 h-80">
-                  <label htmlFor="paymentDetails">Payment Details:-</label>
-                      <br />
-                   <div className="mt-5">
-                   <label htmlFor="amounts">Amount</label>
-                   
-                    <input
-                      {...register('paymentDetails.amounts')}
-                      className="w-70 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="amounts"
-                    />
-                    <p>{errors.paymentDetails?.amounts.message}</p>
-                  </div>
-
-                  <div className="mt-5">
-                    <label htmlFor="date">Date</label>
-                    <input
-                      {...register("paymentDetails.date")}
-                      className="w-70 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="date"
-                      placeholder=""
-                    />
-                    <p>{errors.paymentDetails?.date.message.slice(15,40)}</p>
-                  </div>
-                   
-                  <div className="mt-5">
-                    <label htmlFor="method">Method</label>
-                    <input
-                      {...register("paymentDetails.method")}
-                      className="w-70 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="policy name, emi account"
-                    />
-                    <p>{errors.paymentDetails?.method.message}</p>
-                  </div>
-
-
-                   </div>
-
-{/* --------------------------------------------------------------------------------------------------------------- */}
-                  <div className="mt-5">
-                    <label htmlFor="description">Description</label>
-                    <input
-                      {...register("description")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="policy name, emi account"
-                    />
-                    <p>{errors.description?.message}</p>
-                  </div>
-                  <div className="mt-5">
-                    <label htmlFor="paidThrough">Paid Through</label>
-                    <input
-                      {...register("paidThrough")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="Upi, Sbi bank"
-                    />
-                    <p>{errors.paidThrough?.message}</p>
-                  </div>
-                  <div className="mt-5">
-                    <label htmlFor="paidBy">Paid By</label>
-                    <input
-                      {...register("paidBy")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="Person name"
-                    />
-                    <p>{errors.paidBy?.message}</p>
-                  </div>
-                  <button
-                    type="submit"
-                    className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200 ">
+                  <select
+                    className="appearance-none w-full py-1 px-2 h-14 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
+                    name="selectHousehold"
+                    id="selectHousehold"
+                    {...register("selectHousehold")}
                   >
-                    <span className="ml-3">ADD</span>
-                  </button>
+                    <option value="">Select...</option>
+                    <option value="1">Item 1</option>
+                    <option value="2">Item 2</option>
+                    <option value="3">Item 3</option>
+                    <option value="1">Item 1</option>
+                    <option value="2">Item 2</option>
+                    <option value="3">Item 3</option>
+                  </select>
+                  <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 border-l">
+                    <p className="h-4 w-4">
+                      <RiArrowDownSLine />
+                    </p>
+                  </div>
+                </div>
+                <p className="text-red-500">
+                  {errors.selectHousehold?.message}
+                </p>
+              </div>
+              <div className="w-full mt-2 h-32 ">
+                <label htmlFor="selectExpense" className="">
+                  Expense Type
+                </label>
+
+                <div className="relative border rounded-lg border-gray-300 text-gray-800  ">
+                  <select
+                    className="appearance-none w-full py-1 px-2 h-14 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
+                    name="selectExpense"
+                    id="selectExpense"
+                    {...register("selectExpense")}
+                  >
+                    <option value="">Select...</option>
+                    <option value="1">Item 1</option>
+                    <option value="2">Item 2</option>
+                    <option value="3">Item 3</option>
+                    <option value="1">Item 1</option>
+                    <option value="2">Item 2</option>
+                    <option value="3">Item 3</option>
+                  </select>
+                  <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 ">
+                    <p className="h-4 w-4">
+                      <RiArrowDownSLine />
+                    </p>
+                  </div>
+                </div>
+                <p className="text-red-500">{errors.selectExpense?.message}</p>
+              </div>
+
+              {/* ------------------------------------------------------------------------------------------------------------------ */}
+              <div>
+                <label htmlFor="paymentDetails">Payment Details:-</label>
+
+                <div className="flex  flex-col md:flex-row ">
+                  <br />
+                  <div>
+                    <label htmlFor="paymentDetails.amounts">Amounts</label>
+
+                    <div className="mt-2.5">
+                      <input
+                        {...register("amounts")}
+                        type="text"
+                        name="amounts"
+                        id="amounts"
+                        className="block  w-52 lg:w-30 px-4 py-4 mr-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                        placeholder="Amount"
+                      />
+                      <p className="text-red-500">
+                        {errors.paymentDetails?.amounts.message.slice(15)}
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="date">Date</label>
+
+                    <div className="mt-2.5">
+                      <input
+                        {...register("paymentDetails.date")}
+                        type="date"
+                        name="date"
+                        id="date"
+                        className="block w-52 lg:w-36 px-4 mr-2 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      />
+                      <p className="text-red-500">
+                        {errors.paymentDetails?.date.message.slice(15, 41)}
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="method">Method</label>
+
+                    <div className="mt-2.5">
+                      <input
+                        {...register("paymentDetails.method")}
+                        type="text"
+                        name="method"
+                        id="method"
+                        className="block  w-52 lg:w-30 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                        placeholder="Netbanking"
+                      />
+                      <p className="text-red-500 ml-2">
+                        {errors.paymentDetails?.method.message.slice(15)}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </form>
-          </div>
+              {/* --------------------------------------------------------------------------------------------------------------- */}
+
+              <div className="col-span-2">
+                <label htmlFor="description">Description</label>
+                <div className="mt-2.5">
+                  <textarea
+                    {...register("description")}
+                    name="description"
+                    id="description"
+                    rows="4"
+                    className="block w-full rounded-lg  px-4 py-4 font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    placeholder="Payment Description(policy name, emi account)"
+                  ></textarea>
+                  <p className="text-red-500">{errors.description?.message}</p>
+                </div>
+              </div>
+              <div>
+                <label htmlFor="paidThrough">Paid Through</label>
+
+                <div className="mt-2.5">
+                  <input
+                    {...register("paidThrough")}
+                    type="text"
+                    name="paidThrough"
+                    id="paidThrough"
+                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    placeholder="icicibank, sbi bank etc."
+                  />
+                  <p className="text-red-500">{errors.paidThrough?.message}</p>
+                </div>
+              </div>
+              <div>
+                <label htmlFor="paidBy">Paid By</label>
+
+                <div className="mt-2.5">
+                  <input
+                    {...register("paidBy")}
+                    type="text"
+                    name="paidBy"
+                    id="paidBy"
+                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    placeholder="Paid By"
+                  />
+                  <p className="text-red-500">{errors.paidBy?.message}</p>
+                </div>
+              </div>
+            </div>
+            <div className="mt-10">
+              <button
+                type="submit"
+                className=" font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out  items-center justify-center focus:shadow-outline focus:outline-none"
+              >
+                ADD
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
