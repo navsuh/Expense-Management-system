@@ -99,132 +99,126 @@ const DailyExpenseForm = () => {
             onSubmit={handleSubmit(onSubmitHandler)}
             className="mx-auto mt-16 max-w-xl "
           >
-            <div className="grid gap-x-8 gap-y-6 grid-cols-2">
-            <div className="w-full mt-2 h-32 ">
-                <label htmlFor="selectHousehold" className="">
-                    Household
+            <div className="grid gap-x-6 gap-y-4 grid-cols-2 ">
+              <div className="w-full mt-2 h-24 ">
+                <label htmlFor="selectHousehold" className="mb-0">
+                  Household
                 </label>
 
-                
-                  <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200 ">
-                    <select
-                      className="appearance-none w-full py-1 px-2 h-14 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
-                      name="selectHousehold"
-                      id="selectHousehold"
-                      {...register("selectHousehold")}
-                    >
-                      <option  value="">Select...</option>
-                      <option value="1">Item 1</option>
-                      <option value="2">Item 2</option>
-                      <option value="3">Item 3</option>
-                      <option value="1">Item 1</option>
-                      <option value="2">Item 2</option>
-                      <option value="3">Item 3</option>
-                    </select>
-                    <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 border-l">
-                      <p className="h-4 w-4">
-                        <RiArrowDownSLine />
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-red-500">
-                        {errors.selectHousehold?.message}
-                      </p>
-              </div>
-              <div className="w-full mt-2 h-32 ">
-                <label htmlFor="selectExpense" className="">
-                    Expense Type
-                </label>
-                
-                  <div className="relative border rounded-lg border-gray-300 text-gray-800  ">
-                    <select
-                      className="appearance-none w-full py-1 px-2 h-14 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
-                      name="selectExpense"
-                      id="selectExpense"
-                      {...register("selectExpense")}
-
-                    >
-                      <option value="">Select...</option>
-                      <option value="1">Item 1</option>
-                      <option value="2">Item 2</option>
-                      <option value="3">Item 3</option>
-                      <option value="1">Item 1</option>
-                      <option value="2">Item 2</option>
-                      <option value="3">Item 3</option>
-                    </select>
-                    <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 ">
-                      <p className="h-4 w-4">
-                        <RiArrowDownSLine />
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-red-500">
-                        {errors.selectExpense?.message}
-                      </p>
-              </div>
-
-
-              {/* ------------------------------------------------------------------------------------------------------------------ */}
-              <div>
-                <label htmlFor="paymentDetails">Payment Details:-</label>
-
-                <div className="flex  flex-col md:flex-row ">
-                  <br />
-                  <div>
-                    <label htmlFor="paymentDetails.amounts">Amounts</label>
-
-                    <div className="mt-2.5">
-                      <input
-                        {...register("amounts")}
-                        type="text"
-                        name="amounts"
-                        id="amounts"
-                        className="block  w-52 lg:w-30 px-4 py-4 mr-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                        placeholder="Amount"
-                      />
-                      <p className="text-red-500">
-                        {errors.paymentDetails?.amounts.message.slice(15)}
-                      </p>
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="date">Date</label>
-
-                    <div className="mt-2.5">
-                      <input
-                        {...register("paymentDetails.date")}
-                        type="date"
-                        name="date"
-                        id="date"
-                        className="block w-52 lg:w-36 px-4 mr-2 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      />
-                      <p className="text-red-500">
-                        {errors.paymentDetails?.date.message.slice(15, 41)}
-                      </p>
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="method">Method</label>
-
-                    <div className="mt-2.5">
-                      <input
-                        {...register("paymentDetails.method")}
-                        type="text"
-                        name="method"
-                        id="method"
-                        className="block  w-52 lg:w-30 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                        placeholder="Netbanking"
-                      />
-                      <p className="text-red-500 ml-2">
-                        {errors.paymentDetails?.method.message.slice(15)}
-                      </p>
-                    </div>
+                <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200 ">
+                  <select
+                    className="appearance-none w-full py-1 px-2 h-14 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
+                    name="selectHousehold"
+                    id="selectHousehold"
+                    {...register("selectHousehold")}
+                  >
+                    <option value="">Select...</option>
+                    <option value="1">Item 1</option>
+                    <option value="2">Item 2</option>
+                    <option value="3">Item 3</option>
+                    <option value="1">Item 1</option>
+                    <option value="2">Item 2</option>
+                    <option value="3">Item 3</option>
+                  </select>
+                  <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 border-l">
+                    <p className="h-4 w-4">
+                      <RiArrowDownSLine />
+                    </p>
                   </div>
                 </div>
+                <p className="text-red-500">
+                  {errors.selectHousehold?.message}
+                </p>
               </div>
+              <div className="w-full mt-2 h-24">
+                <label htmlFor="selectExpense" className="">
+                  Expense Type
+                </label>
+
+                <div className="relative border rounded-lg border-gray-300 text-gray-800  ">
+                  <select
+                    className="appearance-none w-full py-1 px-2 h-14 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
+                    name="selectExpense"
+                    id="selectExpense"
+                    {...register("selectExpense")}
+                  >
+                    <option value="">Select...</option>
+                    <option value="1">Item 1</option>
+                    <option value="2">Item 2</option>
+                    <option value="3">Item 3</option>
+                    <option value="1">Item 1</option>
+                    <option value="2">Item 2</option>
+                    <option value="3">Item 3</option>
+                  </select>
+                  <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 ">
+                    <p className="h-4 w-4">
+                      <RiArrowDownSLine />
+                    </p>
+                  </div>
+                </div>
+                <p className="text-red-500">{errors.selectExpense?.message}</p>
+              </div>
+
+             
+
+              {/* ------------------------------------------------------------------------------------------------------------------ */}
+              
+                <label htmlFor="paymentDetails" className="mt-14">Payment Details:-</label>
+
+                <div className="flex mb-4  col-span-2 h-28 border rounded-lg border-gray-300 px-2">
+                <div className="w-1/3  h-12 mr-2">
+                
+                <label htmlFor="amount">Amount</label>
+
+                <div className="mt-2.5">
+                  <input
+                    {...register("paymentDetails.amounts")}
+                    type="text"
+                    name="amount"
+                    id="amount"
+                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    placeholder="Amount"
+                  />
+                  <p className="text-red-500">{errors.paymentDetails?.amounts.message.slice(15)}</p>
+                </div>
+                </div>
+                <div className="w-1/3  h-12 mr-2">
+                
+                <label htmlFor="date">Date</label>
+
+                <div className="mt-2.5">
+                  <input
+                    {...register("paymentDetails.date")}
+                    type="date"
+                    name="date"
+                    id="date"
+                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    placeholder="Paid By"
+                  />
+                  <p className="text-red-500">{errors.paymentDetails?.date.message.slice(15,41)}</p>
+                </div>
+                </div>
+                <div className="w-1/3  h-12 mr-2">
+                
+                <label htmlFor="method">Method</label>
+
+                <div className="mt-2.5">
+                  <input
+                    {...register("paymentDetails.method")}
+                    type="text"
+                    name="method"
+                    id="method"
+                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    placeholder="upi,debit card"
+                  />
+                  <p className="text-red-500">{errors.paymentDetails?.method.message.slice(15)}</p>
+                </div>
+                </div>
+              </div>
+              
               {/* --------------------------------------------------------------------------------------------------------------- */}
 
-              <div className="col-span-2">
+              <div className="col-span-2 ">
                 <label htmlFor="description">Description</label>
                 <div className="mt-2.5">
                   <textarea
@@ -268,6 +262,8 @@ const DailyExpenseForm = () => {
                   <p className="text-red-500">{errors.paidBy?.message}</p>
                 </div>
               </div>
+
+              
             </div>
             <div className="mt-10">
               <button
