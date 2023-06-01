@@ -1,7 +1,8 @@
 import { RiDashboardFill } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
-import { IoNotifications} from "react-icons/io5";
+import { IoNotifications } from "react-icons/io5";
 import { AiOutlineSetting } from "react-icons/ai";
+import { MdChangeCircle } from "react-icons/md";
 
 const Sidebar = (props) => {
   // const {name}=props
@@ -42,24 +43,23 @@ const Sidebar = (props) => {
             alt="EXMS LOGO"
           />
         </div>
-       
 
         <div className="h-full px-3 py-4 overflow-y-auto rounded-md bg-blue-600">
-        <div className="flex flex-col items-center">
-        <div className="relative w-14 h-14  top-3 overflow-hidden bg-gray-100 rounded-full">
-            <img
-              className="w-14 h-14 rounded-full"
-              src="https://img.freepik.com/free-icon/user_318-159711.jpg"
-              alt="Rounded avatar"
-            />
+          <div className="flex flex-col items-center">
+            <div className="relative w-14 h-14  top-3 overflow-hidden bg-gray-100 rounded-full">
+              <img
+                className="w-14 h-14 rounded-full"
+                src="https://img.freepik.com/free-icon/user_318-159711.jpg"
+                alt="Rounded avatar"
+              />
+            </div>
+
+            <div className="flex flex-col items-center h-25 w-60 px-3 py-4 overflow-y-auto rounded-md bg-green-400">
+              <h1 className="text-white font-bold text-2xl">{`Hello ${name}`}</h1>
+              <p className="text-white">Welcome back</p>
+            </div>
           </div>
 
-          <div className="flex flex-col items-center h-25 w-60 px-3 py-4 overflow-y-auto rounded-md bg-green-400">
-            <h1 className="text-white font-bold text-2xl">{`Hello ${name}`}</h1>
-            <p className="text-white">Welcome back</p>
-          </div>
-          </div>
-         
           <ul className="space-y-2 mt-2 font-small">
             <li>
               <a
@@ -87,6 +87,15 @@ const Sidebar = (props) => {
               >
                 <AiOutlineSetting className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Settings</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/"
+                className="flex items-center p-2 text-white rounded-lg hover:bg-black"
+              >
+                <MdChangeCircle className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
+                <span className="ml-3 text-white">Change Password</span>
               </a>
             </li>
             <li>
