@@ -163,9 +163,10 @@ const DailyExpenseForm = () => {
 
               {/* ------------------------------------------------------------------------------------------------------------------ */}
               
-                <label htmlFor="paymentDetails" className="mt-14">Payment Details:-</label>
+                <label htmlFor="paymentDetails" >Payment Details:-</label>
 
-                <div className="flex mb-4  col-span-2 h-28 border rounded-lg border-gray-300 px-2">
+                <div 
+                className={`flex mb-4  col-span-2 ${errors.paymentDetails?'h-40':'h-28'} border rounded-lg border-gray-300 px-2`}>
                 <div className="w-1/3  h-12 mr-2">
                 
                 <label htmlFor="amount">Amount</label>
