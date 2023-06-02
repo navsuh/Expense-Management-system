@@ -4,6 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const schema = yup.object().shape({
   email: yup.string().min(3).max(50).required(),
@@ -18,6 +21,11 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const showToastMessage = () => {
+    toast.success('Successfully Login !', {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,6 +35,9 @@ const Login = () => {
 
   const onSubmitHandler = (data) => {
     console.log({ data });
+    // toast.success('Success Notification !', {
+    //   position: toast.POSITION.TOP_RIGHT
+    // })
   };
 
   return (
@@ -83,12 +94,15 @@ const Login = () => {
                     <p>{errors.password?.message}</p>
                   </div>
 
-                  <button
+                 <button
                     type="submit"
+                    onClick={showToastMessage}
                     className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                   >
                     <span className="ml-3">LOG IN</span>
                   </button>
+                 
+                  <ToastContainer/>
                   <div className="my-2">
                   <label htmlFor="forgotPassword" style={{cursor:"pointer"}}>Forgot Password</label>
                   </div>
