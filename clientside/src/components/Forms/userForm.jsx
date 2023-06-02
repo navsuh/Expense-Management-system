@@ -1,10 +1,39 @@
-import React, { useState } from "react";
+import React , { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
+import { useParams ,useNavigate} from "react-router-dom";
 
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+
+const userList = [
+  {
+    _id: "1",
+    firstName: "user 1 fName",
+    lastName: "user 1 lName",
+    email: "user 1 email",
+    phone: "user 1 phone",
+    userName: "user 1 userName",
+    role: "user 1 role",
+    lastLoggedIn: "user 1 lastLoggedIn",
+    isActive: true,
+    updatedBy: "user 1 updatedBy",
+    updatedAt: "user1 updatedAt",
+  },
+  {
+    _id: "2",
+    firstName: "user 2 fName",
+    lastName: "user 2 lName",
+    email: "user 2 email",
+    phone: "user 2 phone",
+    userName: "user 2 userName",
+    role: "user 2 role",
+    lastLoggedIn: "user 2 lastLoggedIn",
+    isActive: true,
+    updatedBy: "user 2 updatedBy",
+    updatedAt: "user2 updatedAt",
+  },
+];
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -12,22 +41,36 @@ const schema = yup.object().shape({
   email: yup.string().min(3).max(50).required(),
   phone: yup.string().min(8).max(10).required(),
   userName: yup.string().min(6).max(20).required(),
-  password: yup.string().min(8).max(32).required(),
+  isActive:yup.boolean()
+  
 });
-const Register = () => {
+const UserForm = () => {
+    const navigate = useNavigate();
+    const {id}=useParams()
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm({
     resolver: yupResolver(schema),
   });
+  useEffect(()=>{
+    if(!id) return;
+    console.log(id);
+    const user=userList.find((u)=>u._id===id)
+    
+    setValue("_id",user._id)
+    setValue("firstName",user.firstName)
+    setValue("lastName",user.lastName)
+    setValue("email",user.email)
+    setValue("phone",user.phone)
+    setValue("userName",user.userName)
+    setValue("isActive",user.isActive)
+    
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  },[id,setValue])
+  
 
   const onSubmitHandler = (data) => {
     console.log({ data });
@@ -35,31 +78,28 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
+      <IoArrowBack className="self-start w-8 h-8 cursor-pointer" onClick={()=>navigate(-1)}/>
         <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
           <img
-            src="/assests/images/homeimgae.png"
+            src="/assests/images/userForm.png"
             alt="homeimage"
-            style={{ height: "600px" }}
+            style={{ height: "500px",width: "400px" }}
           />
         </div>
 
         <div className="lg:w-1/2  p-6">
           <div className="mt-12 flex flex-col items-center  ">
-            <img src="/assests/images/logoexms.png" alt="logoimage" />
+          
 
-            <h1 className="text-xl xl:text-3xl font-bold">Sign Up</h1>
-            <span className="mt-6">
-              Already have an account?{" "}
-              <Link to={"/login"} className="loginspan">
-                Log in
-              </Link>{" "}
-            </span>
+            <h1 className="text-xl xl:text-3xl font-bold text-orange-500">ADD USER</h1>
+           
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
-                  <div>
+                  <div className="mt-5">
                     <label htmlFor="firstName">First Name</label>
                     <input
+                    id="firstName"
                       {...register("firstName")}
                       className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -68,8 +108,9 @@ const Register = () => {
                     <p>{errors.firstName?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="lastName">Last Name</label>
+                    <label className="mt-5" htmlFor="Last Name">Last Name</label>
                     <input
+                    id="Last Name"
                       {...register("lastName")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -78,8 +119,9 @@ const Register = () => {
                     <p>{errors.lastName?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="email">Email</label>
+                    <label className="mt-5" htmlFor="Email">Email</label>
                     <input
+                    id="Email"
                       {...register("email")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="email"
@@ -88,8 +130,9 @@ const Register = () => {
                     <p>{errors.email?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="phone">Phone Number</label>
+                    <label className="mt-5" htmlFor="Phone Number">Phone Number</label>
                     <input
+                    id="Phone Number"
                       {...register("phone")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -98,8 +141,9 @@ const Register = () => {
                     <p>{errors.phone?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="userName">UserName</label>
+                    <label className="mt-5" htmlFor="UserName">UserName</label>
                     <input
+                    id="UserName"
                       {...register("userName")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="text"
@@ -107,26 +151,19 @@ const Register = () => {
                     />
                     <p>{errors.userName?.message}</p>
                   </div>
-                  <div className="relative mt-5">
-                    <label htmlFor="password">Password</label>
-                    <input
-                      {...register("password")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Password"
+                  <div className="flex">
+                  <input
+                    id="isActive"
+                      {...register("isActive")}
+                      className="mt-5 mr-1 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      type="checkbox"
+                    
                     />
-                    <span
-                      className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer mt-3"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? (
-                        <AiFillEye className="h-6 w-6 " />
-                      ) : (
-                        <AiFillEyeInvisible className="h-6 w-6 " />
-                      )}
-                    </span>
-                    <p>{errors.password?.message}</p>
+                    <label className="mt-5" htmlFor="isActive">isActive</label>
+                   
+                    
                   </div>
+                 
                   <button
                     type="submit"
                     className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
@@ -142,4 +179,22 @@ const Register = () => {
     </div>
   );
 };
-export default Register;
+export default UserForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+  
+
+         

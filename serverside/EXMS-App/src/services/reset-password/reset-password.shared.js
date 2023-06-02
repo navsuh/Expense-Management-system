@@ -1,6 +1,6 @@
 export const resetPasswordPath = 'reset-password'
 
-export const resetPasswordMethods = ['find', 'get', 'create', 'patch', 'remove']
+export const resetPasswordMethods = ['create']
 
 export const resetPasswordClient = (client) => {
   const connection = client.get('connection')

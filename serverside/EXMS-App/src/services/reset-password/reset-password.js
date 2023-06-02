@@ -4,13 +4,13 @@ import { authenticate } from '@feathersjs/authentication'
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   resetPasswordDataValidator,
-  resetPasswordPatchValidator,
-  resetPasswordQueryValidator,
+  // resetPasswordPatchValidator,
+  // resetPasswordQueryValidator,
   resetPasswordResolver,
   resetPasswordExternalResolver,
   resetPasswordDataResolver,
-  resetPasswordPatchResolver,
-  resetPasswordQueryResolver
+  // resetPasswordPatchResolver,
+  // resetPasswordQueryResolver
 } from './reset-password.schema.js'
 import { ResetPasswordService, getOptions } from './reset-password.class.js'
 import { resetPasswordPath, resetPasswordMethods } from './reset-password.shared.js'
@@ -31,15 +31,15 @@ export const resetPassword = (app) => {
   app.service(resetPasswordPath).hooks({
     around: {
       all: [
-        authenticate('jwt'),
-        schemaHooks.resolveExternal(resetPasswordExternalResolver),
-        schemaHooks.resolveResult(resetPasswordResolver)
+        // authenticate('jwt'),
+        // schemaHooks.resolveExternal(resetPasswordExternalResolver),
+        // schemaHooks.resolveResult(resetPasswordResolver)
       ]
     },
     before: {
       all: [
-        schemaHooks.validateQuery(resetPasswordQueryValidator),
-        schemaHooks.resolveQuery(resetPasswordQueryResolver)
+        // schemaHooks.validateQuery(resetPasswordQueryValidator),
+        // schemaHooks.resolveQuery(resetPasswordQueryResolver)
       ],
       find: [],
       get: [],
@@ -48,8 +48,8 @@ export const resetPassword = (app) => {
         schemaHooks.resolveData(resetPasswordDataResolver)
       ],
       patch: [
-        schemaHooks.validateData(resetPasswordPatchValidator),
-        schemaHooks.resolveData(resetPasswordPatchResolver)
+        // schemaHooks.validateData(resetPasswordPatchValidator),
+        // schemaHooks.resolveData(resetPasswordPatchResolver)
       ],
       remove: []
     },

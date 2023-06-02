@@ -1,10 +1,45 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
+import {IoArrowBack} from "react-icons/io5"
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useParams , useNavigate } from "react-router-dom";
+
+// const memberList = [
+//   { _id: "1", household: "household 1", user: "user 1" },
+//   { _id: "2", household: "household 1", user: "user 2" },
+// ];
+
+const userList = [
+  {
+    _id: "1",
+    firstName: "user 1 fName",
+    lastName: "user 1 lName",
+    email: "user 1 email",
+    phone: "user 1 phone",
+    userName: "user 1 userName",
+    role: "user 1 role",
+    lastLoggedIn: "user 1 lastLoggedIn",
+    isActive: true,
+    updatedBy: "user 1 updatedBy",
+    updatedAt: "user1 updatedAt",
+  },
+  {
+    _id: "2",
+    firstName: "user 2 fName",
+    lastName: "user 2 lName",
+    email: "user 2 email",
+    phone: "user 2 phone",
+    userName: "user 2 userName",
+    role: "user 2 role",
+    lastLoggedIn: "user 2 lastLoggedIn",
+    isActive: true,
+    updatedBy: "user 2 updatedBy",
+    updatedAt: "user2 updatedAt",
+  },
+];
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -14,11 +49,14 @@ const schema = yup.object().shape({
   userName: yup.string().min(6).max(20).required(),
   password: yup.string().min(8).max(32).required(),
 });
-const Register = () => {
+const MemberForm = () => {
+  const navigate =useNavigate()
+  const {id}=useParams()
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -29,15 +67,34 @@ const Register = () => {
     setShowPassword(!showPassword);
   };
 
+  useEffect(()=>{
+    if(!id) return;
+    console.log(id);
+    const member=userList.find((m)=>m._id===id)
+    
+    setValue("_id",member._id)
+    setValue("firstName",member.firstName)
+    setValue("lastName",member.lastName)
+    setValue("email",member.email)
+    setValue("phone",member.phone)
+    setValue("userName",member.userName)
+    // setValue("isActive",member.isActive)
+    
+
+  },[id,setValue])
+
   const onSubmitHandler = (data) => {
     console.log({ data });
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
+         <IoArrowBack className="text-gray-800 h-8 w-8" style={{cursor:"pointer"}}  onClick={()=>navigate(-1)}/>
+
+        <div className="flex-1 text-center hidden lg:flex ml-20 mt-20">
+
           <img
-            src="/assests/images/homeimgae.png"
+            src="/assests/images/addMember.png"
             alt="homeimage"
             style={{ height: "600px" }}
           />
@@ -45,15 +102,9 @@ const Register = () => {
 
         <div className="lg:w-1/2  p-6">
           <div className="mt-12 flex flex-col items-center  ">
-            <img src="/assests/images/logoexms.png" alt="logoimage" />
-
-            <h1 className="text-xl xl:text-3xl font-bold">Sign Up</h1>
-            <span className="mt-6">
-              Already have an account?{" "}
-              <Link to={"/login"} className="loginspan">
-                Log in
-              </Link>{" "}
-            </span>
+          
+            <h1 className="text-xl xl:text-3xl font-bold text-orange-500">Add Member</h1>
+          
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
@@ -142,4 +193,4 @@ const Register = () => {
     </div>
   );
 };
-export default Register;
+export default MemberForm;

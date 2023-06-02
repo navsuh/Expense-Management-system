@@ -1,9 +1,14 @@
-import { FiEdit } from "react-icons/fi";
+
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { IoAddCircle } from "react-icons/io5";
+
+import SearchInput from "../searchInput";
+import { Link } from "react-router-dom";
+
 
 const userList = [
   {
-    _id: 1,
+    _id: "1",
     firstName: "user 1 fName",
     lastName: "user 1 lName",
     email: "user 1 email",
@@ -16,7 +21,7 @@ const userList = [
     updatedAt: "user1 updatedAt",
   },
   {
-    _id: 2,
+    _id: "2",
     firstName: "user 2 fName",
     lastName: "user 2 lName",
     email: "user 2 email",
@@ -34,7 +39,17 @@ const UserTable = (props) => {
   // const {userList}=props
   return (
     <>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+     <div className="flex flex-row justify-between">
+        <div>
+          <SearchInput />
+        </div>
+        <div>
+        <Link to={"/admin/userform"}>
+          <IoAddCircle className="text-blue-800 h-14 w-14" />
+          </Link>
+        </div>
+      </div>
+      <div className="relative  shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
             <tr>
@@ -53,7 +68,10 @@ const UserTable = (props) => {
                 <td className="px-6 py-4">{eachUser.firstName}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
+                  <Link to={`/admin/users/${eachUser._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
+                    
+                    </Link>
                     <AiOutlineDelete className="w-8 h-6" />
                   </div>
                 </td>

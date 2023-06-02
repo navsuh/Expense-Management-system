@@ -1,6 +1,6 @@
 export const forgotPasswordPath = 'forgot-password'
 
-export const forgotPasswordMethods = ['find','get','create','patch']
+export const forgotPasswordMethods = ['create']
 
 export const forgotPasswordClient = (client) => {
   const connection = client.get('connection')
