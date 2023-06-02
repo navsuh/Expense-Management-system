@@ -3,16 +3,21 @@ import axios from 'axios'
 const apiEndPoint=process.env.REACT_APP_API_URL+"users"
 
 export const createPrimaryUserSlice = (set) => ({
-    primaryUser: {},
+    primaryUser: [],
     addPrimaryUser: async(userData) =>  {
-      console.log(userData);
-        const response=await axios.post(apiEndPoint,userData,{
+      const {data}=userData
+      const newData={...data,role:"Primaryuser"}
+
+      console.log(newData);
+      
+        const response=await axios.post(apiEndPoint,newData,{
           headers: {
             'Content-Type': 'application/json'
           }
         })
-        set({ primaryUser: await response.json() })
-
+        // set({ primaryUser: response.data })
+console.log(response);
 
 },
+
   })

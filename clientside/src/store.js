@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { createPrimaryUserSlice } from './src/slice/createPrimaryUserSlice'
+import { createPrimaryUserSlice } from './slice/createPrimaryUserSlice'
 
 
 export const useBoundStore = create((...a) => ({

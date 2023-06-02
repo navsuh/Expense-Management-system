@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { Link } from "react-router-dom";
 
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useBoundStore } from "../store";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -25,12 +26,15 @@ const Register = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const addPrimaryUser=useBoundStore(store=>store.addPrimaryUser)
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
+    // console.log({ data });
+    addPrimaryUser({data})
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">

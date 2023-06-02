@@ -1,6 +1,6 @@
 export const Primaryuser =()=>{
     return async(context)=>{
-    //  console.log(context.data);
+     console.log(context.data);
     const {email,userName,role}=context.data
     if(role==="Primaryuser"){
         const userservice=context.app.service("users")

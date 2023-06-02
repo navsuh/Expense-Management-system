@@ -6,6 +6,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useParams ,useNavigate} from "react-router-dom";
 
 
+
 const userList = [
   {
     _id: "1",
@@ -47,6 +48,7 @@ const schema = yup.object().shape({
 const UserForm = () => {
     const navigate = useNavigate();
     const {id}=useParams()
+    
   const {
     register,
     handleSubmit,
@@ -74,6 +76,7 @@ const UserForm = () => {
 
   const onSubmitHandler = (data) => {
     console.log( data );
+    
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
