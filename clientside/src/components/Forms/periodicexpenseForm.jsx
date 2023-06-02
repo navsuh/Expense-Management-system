@@ -100,7 +100,7 @@ const PeriodicExpenseForm = () => {
 
         <div className=" bg-white px-6 sm:py-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold  text-gray-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold  text-orange-500 sm:text-4xl">
               Add Periodic Expense
             </h2>
           </div>

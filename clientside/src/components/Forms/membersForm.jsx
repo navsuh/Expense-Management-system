@@ -103,7 +103,7 @@ const MemberForm = () => {
         <div className="lg:w-1/2  p-6">
           <div className="mt-12 flex flex-col items-center  ">
           
-            <h1 className="text-xl xl:text-3xl font-bold">Add Member</h1>
+            <h1 className="text-xl xl:text-3xl font-bold text-orange-500">Add Member</h1>
           
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
