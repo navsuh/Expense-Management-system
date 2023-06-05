@@ -39,8 +39,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
+   
   if(!primaryUser.firstName) return
   
+ 
 
 
   console.log("1f");

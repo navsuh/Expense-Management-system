@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useBoundStore } from "../store";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().min(3).max(50).required(),
@@ -21,11 +22,11 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const showToastMessage = () => {
-    toast.success('Successfully Login !', {
-        position: toast.POSITION.TOP_RIGHT
-    });
-};
+//   const showToastMessage = () => {
+//     toast.success('Successfully Login !', {
+//         position: toast.POSITION.TOP_RIGHT
+//     });
+// };
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,12 +34,59 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  const loginUser=useBoundStore(store=>store.loginUser)
+
+  const token=useBoundStore(store=>store.primaryUser)
+
+  const error_msg=useBoundStore(store=>store.error_msg)
+
+  const navigate = useNavigate();
+
+  // useEffect(()=>{
+  // if(!primaryUser.firstName) return
+  
+
+
+  // console.log("1f");
+  // console.log(primaryUser);
+
+  // // toast.success('Registration Successful', {
+  // //   position: "top-right",
+  // //   autoClose: 5000,
+  // //   hideProgressBar: false,
+  // //   closeOnClick: true,
+  // //   pauseOnHover: true,
+  // //   draggable: true,
+  // //   progress: undefined,
+  // //   theme: "light",
+  // //   });    
+  // alert("Registration successfull please login")
+
+ 
+  // navigate("/login")
+
+  // },[primaryUser,navigate])
+
   const onSubmitHandler = (data) => {
     console.log({ data });
     // toast.success('Success Notification !', {
     //   position: toast.POSITION.TOP_RIGHT
     // })
+    loginUser({data})
   };
+
+  const displayErrorMessage=()=>{
+    toast.error(error_msg, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -96,11 +144,12 @@ const Login = () => {
 
                  <button
                     type="submit"
-                    onClick={showToastMessage}
+                   
                     className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                   >
                     <span className="ml-3">LOG IN</span>
                   </button>
+                  {error_msg?displayErrorMessage():null}
                  
                   <ToastContainer/>
                   <div className="my-2">
