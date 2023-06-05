@@ -6,5 +6,5 @@ import { createUserLoginSlice } from './slice/createUserLoginSlice'
 
 export const useBoundStore = create((...a) => ({
   ...createPrimaryUserSlice(...a),
-  ... createUserLoginSlice(...a),
+  ...createUserLoginSlice(...a),
 }))

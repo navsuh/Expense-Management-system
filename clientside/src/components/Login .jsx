@@ -36,36 +36,49 @@ const Login = () => {
 
   const loginUser=useBoundStore(store=>store.loginUser)
 
-  const token=useBoundStore(store=>store.primaryUser)
+  const token=useBoundStore(store=>store.token)
+  const role=useBoundStore(store=>store.role)
 
   const error_msg=useBoundStore(store=>store.error_msg)
 
   const navigate = useNavigate();
 
-  // useEffect(()=>{
-  // if(!primaryUser.firstName) return
+  useEffect(()=>{
+  if(!token) return
+  if (!sessionStorage.getItem("token")) return
   
 
 
-  // console.log("1f");
-  // console.log(primaryUser);
-
-  // // toast.success('Registration Successful', {
-  // //   position: "top-right",
-  // //   autoClose: 5000,
-  // //   hideProgressBar: false,
-  // //   closeOnClick: true,
-  // //   pauseOnHover: true,
-  // //   draggable: true,
-  // //   progress: undefined,
-  // //   theme: "light",
-  // //   });    
-  // alert("Registration successfull please login")
+if(role==="Admin"){
+  alert("Registration successfull please login")
 
  
-  // navigate("/login")
+  navigate("/admin")
+}else if(role==="Primaryuser"){
+  alert("Registration successfull please login")
 
-  // },[primaryUser,navigate])
+ 
+  navigate("/primaryuser")
+}else if(role==="member"){
+  alert("Registration successfull please login")
+
+ 
+  navigate("/memberuser")
+}
+
+  // toast.success('Registration Successful', {
+  //   position: "top-right",
+  //   autoClose: 5000,
+  //   hideProgressBar: false,
+  //   closeOnClick: true,
+  //   pauseOnHover: true,
+  //   draggable: true,
+  //   progress: undefined,
+  //   theme: "light",
+  //   });    
+  
+
+  },[token,navigate,role])
 
   const onSubmitHandler = (data) => {
     console.log({ data });
