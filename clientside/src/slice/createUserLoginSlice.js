@@ -5,9 +5,10 @@ const apiEndPoint=process.env.REACT_APP_API_URL+"authentication"
 export const createUserLoginSlice = (set) => ({
     token: "",
     error_msg:"",
+    role:"",
     loginUser: async(userData) =>  {
       const {data}=userData
-      const newData={...data,strategy:"strategy"}
+      const newData={...data,strategy:"local"}
 
       // console.log(newData);
       try {
@@ -16,7 +17,10 @@ export const createUserLoginSlice = (set) => ({
             'Content-Type': 'application/json'
           }
         })
-        set({ token: response.data })
+        console.log(response.data.accessToken);
+        console.log(response.data.users.role);
+        sessionStorage.setItem("token",response.data.accessToken)
+        set({error_msg: "", token: response.data.accessToken,role:response.data.users.role})
         
       } catch (error) {
         const {response}=error

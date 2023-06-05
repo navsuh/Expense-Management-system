@@ -41,13 +41,8 @@ const Register = () => {
   useEffect(()=>{
    
   if(!primaryUser.firstName) return
-  
- 
-
-
   console.log("1f");
   console.log(primaryUser);
-
   // toast.success('Registration Successful', {
   //   position: "top-right",
   //   autoClose: 5000,
