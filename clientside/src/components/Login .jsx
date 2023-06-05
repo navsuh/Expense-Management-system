@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
-  email: yup.string().min(3).max(50).required(),
+  email: yup.string().email().required(),
   password: yup.string().min(8).max(32).required(),
 });
 
@@ -89,7 +89,7 @@ const Login = () => {
       draggable: true,
       progress: undefined,
       toastId: customId,
-      limit:1,
+      limit: 1,
       theme: "light",
     });
   };
@@ -125,7 +125,7 @@ const Login = () => {
                       type="email"
                       placeholder="Email"
                     />
-                    <p>{errors.email?.message}</p>
+                    <p className="text-red-600">{errors.email?.message}</p>
                   </div>
                   <div className="relative mt-5">
                     <label htmlFor="password">Password</label>
@@ -145,26 +145,18 @@ const Login = () => {
                         <AiFillEyeInvisible className="h-6 w-6 " />
                       )}
                     </span>
-                    <p>{errors.password?.message}</p>
+                    <p className="text-red-600">{errors.password?.message}</p>
                   </div>
 
                   <button
                     type="submit"
-                    className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                    className="mt-5 mb-2 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                   >
                     <span className="ml-3">LOG IN</span>
                   </button>
                   {error_msg ? displayErrorMessage() : null}
 
-                  
-                  <div className="my-2">
-                    <label
-                      htmlFor="forgotPassword"
-                      style={{ cursor: "pointer" }}
-                    >
-                      Forgot Password
-                    </label>
-                  </div>
+                  <Link to={"/forgotpassword"} className="text-blue-600 hover:text-blue-800 underline-offset-2">Forgot Password?</Link>
                 </div>
               </div>
             </form>

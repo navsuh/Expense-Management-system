@@ -33,6 +33,9 @@ import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
 import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
 import { ToastContainer} from "react-toastify";
+import ChangePasswordForm from "./components/Forms/ChangePasswordForm";
+import ForgotPasswordForm from "./components/Forms/ForgetPasswordForm";
+import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -94,6 +97,12 @@ root.render(
 
         <Route path="/memberuser/dailyexpenseform" element={<DailyExpenseForm/>}/>
         <Route path="/memberuser/dailyexpenses/:id" element={<DailyExpenseForm/>}/>
+
+        
+        <Route path="/changepassword" element={<ChangePasswordForm/>}/>
+        <Route path="/resetpassword" element={<ResetPasswordForm/>}/>
+        <Route path="/forgotpassword" element={<ForgotPasswordForm/>}/>
+
 
       </Routes>
     </BrowserRouter>

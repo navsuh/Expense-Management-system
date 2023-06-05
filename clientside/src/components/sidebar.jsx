@@ -3,7 +3,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { IoNotifications } from "react-icons/io5";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdChangeCircle } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = (props) => {
   // const {name}=props
@@ -92,13 +92,13 @@ const Sidebar = (props) => {
               </a>
             </li>
             <li>
-              <a
-                href="/"
+              < Link
+                to="/changepassword"
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <MdChangeCircle className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Change Password</span>
-              </a>
+              </Link>
             </li>
             <li>
               <button
