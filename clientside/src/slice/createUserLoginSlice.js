@@ -3,7 +3,7 @@ import axios from 'axios'
 const apiEndPoint=process.env.REACT_APP_API_URL+"authentication"
 
 export const createUserLoginSlice = (set) => ({
-    primaryUser: {},
+    token: "",
     error_msg:"",
     addPrimaryUser: async(userData) =>  {
       const {data}=userData
