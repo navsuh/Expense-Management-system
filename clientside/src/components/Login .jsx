@@ -1,12 +1,12 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
@@ -22,11 +22,11 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-//   const showToastMessage = () => {
-//     toast.success('Successfully Login !', {
-//         position: toast.POSITION.TOP_RIGHT
-//     });
-// };
+  //   const showToastMessage = () => {
+  //     toast.success('Successfully Login !', {
+  //         position: toast.POSITION.TOP_RIGHT
+  //     });
+  // };
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -34,61 +34,52 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const loginUser=useBoundStore(store=>store.loginUser)
+  const loginUser = useBoundStore((store) => store.loginUser);
 
-  const token=useBoundStore(store=>store.token)
-  const role=useBoundStore(store=>store.role)
+  const token = useBoundStore((store) => store.token);
+  const role = useBoundStore((store) => store.role);
 
-  const error_msg=useBoundStore(store=>store.error_msg)
+  const error_msg = useBoundStore((store) => store.error_msg);
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-  if(!token) return
-  if (!sessionStorage.getItem("token")) return
-  
+  useEffect(() => {
+    if (!token) return;
+    if (!sessionStorage.getItem("token")) return;
 
+    if (role === "Admin") {
+      alert("login sucessfull");
+      navigate("/admin");
+    } else if (role === "Primaryuser") {
+      alert("login sucessfull");
+      navigate("/primaryuser");
+    } else if (role === "member") {
+      alert("login sucessfull");
+      navigate("/memberuser");
+    }
 
-if(role==="Admin"){
-  alert("login sucessfull")
-
- 
-  navigate("/admin")
-}else if(role==="Primaryuser"){
-  alert("login sucessfull")
-
- 
-  navigate("/primaryuser")
-}else if(role==="member"){
-  alert("login sucessfull")
-
- 
-  navigate("/memberuser")
-}
-
-  // toast.success('Registration Successful', {
-  //   position: "top-right",
-  //   autoClose: 5000,
-  //   hideProgressBar: false,
-  //   closeOnClick: true,
-  //   pauseOnHover: true,
-  //   draggable: true,
-  //   progress: undefined,
-  //   theme: "light",
-  //   });    
-  
-
-  },[token,navigate,role])
+    // toast.success('Registration Successful', {
+    //   position: "top-right",
+    //   autoClose: 5000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    //   });
+  }, [token, navigate, role]);
+  const customId = "custom-id-yes";
 
   const onSubmitHandler = (data) => {
     console.log({ data });
     // toast.success('Success Notification !', {
     //   position: toast.POSITION.TOP_RIGHT
     // })
-    loginUser({data})
+    loginUser({ data });
   };
 
-  const displayErrorMessage=()=>{
+  const displayErrorMessage = () => {
     toast.error(error_msg, {
       position: "top-right",
       autoClose: 5000,
@@ -97,9 +88,11 @@ if(role==="Admin"){
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      toastId: customId,
+      limit:1,
       theme: "light",
-      });
-  }
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -155,18 +148,22 @@ if(role==="Admin"){
                     <p>{errors.password?.message}</p>
                   </div>
 
-                 <button
+                  <button
                     type="submit"
-                   
                     className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                   >
                     <span className="ml-3">LOG IN</span>
                   </button>
-                  {error_msg?displayErrorMessage():null}
-                 
-                  <ToastContainer/>
+                  {error_msg ? displayErrorMessage() : null}
+
+                  
                   <div className="my-2">
-                  <label htmlFor="forgotPassword" style={{cursor:"pointer"}}>Forgot Password</label>
+                    <label
+                      htmlFor="forgotPassword"
+                      style={{ cursor: "pointer" }}
+                    >
+                      Forgot Password
+                    </label>
                   </div>
                 </div>
               </div>

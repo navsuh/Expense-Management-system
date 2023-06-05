@@ -41,19 +41,21 @@ const Register = () => {
   useEffect(()=>{
    
   if(!primaryUser.firstName) return
-  console.log("1f");
-  console.log(primaryUser);
-  // toast.success('Registration Successful', {
-  //   position: "top-right",
-  //   autoClose: 5000,
-  //   hideProgressBar: false,
-  //   closeOnClick: true,
-  //   pauseOnHover: true,
-  //   draggable: true,
-  //   progress: undefined,
-  //   theme: "light",
-  //   });    
-  alert("Registration successfull please login")
+  // console.log("1f");
+  // console.log(primaryUser);
+  toast.success('Registration Successful', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  pauseOnFocusLoss: false,
+  toastId: "customId",
+    theme: "light",
+    });    
+  // alert("Registration successfull please login")
 
  
   navigate("/login")

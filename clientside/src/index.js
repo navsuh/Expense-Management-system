@@ -32,11 +32,14 @@ import MemberForm from "./components/Forms/membersForm";
 import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
 import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
+import { ToastContainer} from "react-toastify";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <ToastContainer limit={1}/>
       <App />
       <Routes>
 
