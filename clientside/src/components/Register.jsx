@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -28,9 +32,47 @@ const Register = () => {
 
   const addPrimaryUser=useBoundStore(store=>store.addPrimaryUser)
 
+  const primaryUser=useBoundStore(store=>store.primaryUser)
+
+  const error_msg=useBoundStore(store=>store.error_msg)
+
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+  if(!primaryUser.firstName) return
+  
+
+
+  console.log("1f");
+  console.log(primaryUser);
+
+  // toast.success('Registration Successful', {
+  //   position: "top-right",
+  //   autoClose: 5000,
+  //   hideProgressBar: false,
+  //   closeOnClick: true,
+  //   pauseOnHover: true,
+  //   draggable: true,
+  //   progress: undefined,
+  //   theme: "light",
+  //   });    
+  alert("Registration successfull please login")
+
+ 
+  navigate("/login")
+
+  },[primaryUser,navigate])
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  const displayErrorMessage=()=>{
+  
+  }
+
+ 
+
 
   const onSubmitHandler = (data) => {
     // console.log({ data });
@@ -140,6 +182,9 @@ const Register = () => {
                 </div>
               </div>
             </form>
+            
+            {error_msg?displayErrorMessage():null}
+            <ToastContainer/>
           </div>
         </div>
       </div>
