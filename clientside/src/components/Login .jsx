@@ -50,17 +50,17 @@ const Login = () => {
 
 
 if(role==="Admin"){
-  alert("Registration successfull please login")
+  alert("login sucessfull")
 
  
   navigate("/admin")
 }else if(role==="Primaryuser"){
-  alert("Registration successfull please login")
+  alert("login sucessfull")
 
  
   navigate("/primaryuser")
 }else if(role==="member"){
-  alert("Registration successfull please login")
+  alert("login sucessfull")
 
  
   navigate("/memberuser")
