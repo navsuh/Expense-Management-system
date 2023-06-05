@@ -4,11 +4,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
 import { useParams ,useNavigate} from "react-router-dom";
+import { useBoundStore } from "../../store.js";
 
-const expenseList = [
-  { _id: "1", name: "Expense type 1" },
-  { _id: "2", name: "Expense type 2" },
-];
+// const expenseList = [
+//   { _id: "1", name: "Expense type 1" },
+//   { _id: "2", name: "Expense type 2" },
+// ];
 
 
 
@@ -19,6 +20,7 @@ const schema = yup.object().shape({
 const ExpenseTypeForm = () => {
     const navigate = useNavigate();
     const {id}=useParams()
+    const expenseList=useBoundStore(store=>store.expenseTypes)
   const {
     register,
     handleSubmit,
@@ -27,6 +29,14 @@ const ExpenseTypeForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const createExpenseTypes=useBoundStore(store=>store.createExpenseTypes)
+  // const token=useBoundStore(store=>store.token)
+  const updateExpenseTypes=useBoundStore(store=>store.updateExpenseTypes)
+
+  const error_msg=useBoundStore(store=>store.error_msg)
+
+ 
 
   useEffect(()=>{
     if(!id) return;
@@ -38,11 +48,22 @@ const ExpenseTypeForm = () => {
     setValue("name",expensetype.name)
     
 
-  },[id,setValue])
+  },[id,setValue,expenseList])
  
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
+    if(data._id){
+      // console.log("here");
+      updateExpenseTypes({data})
+      return navigate("/admin/expensetype")
+    }
+    else {
+      createExpenseTypes({data})
+      // console.log("dispatched");
+      return navigate("/admin/expensetype")
+    }
+    
+    
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -86,6 +107,7 @@ const ExpenseTypeForm = () => {
                 </div>
               </div>
             </form>
+            <p className="text-red-500">{error_msg?error_msg:null}</p>
           </div>
         </div>
 

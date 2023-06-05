@@ -1,15 +1,29 @@
+import { useEffect } from "react";
+
+import { useBoundStore } from "../../store.js";
+
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { IoAddCircle } from "react-icons/io5";
 
 import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
 
-const expenseList = [
-  { _id: "1", name: "Expense type 1" },
-  { _id: "2", name: "Expense type 2" },
-];
+// const expenseList = [
+//   { _id: "1", name: "Expense type 1" },
+//   { _id: "2", name: "Expense type 2" },
+// ];
 
 const ExpenseTypeTable = (props) => {
+  const getAllExpenseTypes=useBoundStore(store=>store.getAllExpenseTypes)
+  const deleteExpenseTypes=useBoundStore(store=>store.deleteExpenseTypes)
+  const expenseList=useBoundStore(store=>store.expenseTypes)
+  // console.log(expenseList);
+  useEffect(() => {
+    getAllExpenseTypes();
+  }, [getAllExpenseTypes]);
+ const deleteExpenseType=(id)=>{
+  deleteExpenseTypes(id)
+ }
   // const {expenseList}=props
   return (
     <>
@@ -47,7 +61,7 @@ const ExpenseTypeTable = (props) => {
                   <Link to={`/admin/expensetype/${eachExpense._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <AiOutlineDelete className="w-8 h-6" />
+                    <AiOutlineDelete onClick={()=>deleteExpenseType(eachExpense._id)}className="w-8 h-6" />
                   </div>
                 </td>
               </tr>
