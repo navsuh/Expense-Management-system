@@ -38,11 +38,11 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  // useEffect(()=>{
+  useEffect(()=>{
    
   if(!primaryUser.firstName) return
-  // console.log("1f");
-  // console.log(primaryUser);
+  console.log("1f");
+  console.log(primaryUser);
   toast.success('Registration Successful', {
     position: "top-right",
     autoClose: 5000,
@@ -55,82 +55,68 @@ const Register = () => {
   toastId: "customId",
     theme: "light",
     });    
-  // if(!primaryUser.firstName) return
   
- 
-  // console.log("1f");
-  // console.log(primaryUser);
 
-  // // toast.success('Registration Successful', {
-  // //   position: "top-right",
-  // //   autoClose: 5000,
-  // //   hideProgressBar: false,
-  // //   closeOnClick: true,
-  // //   pauseOnHover: true,
-  // //   draggable: true,
-  // //   progress: undefined,
-  // //   theme: "light",
-  // //   });    
-  // alert("Registration successfull please login")
+  
 
  
-  // navigate("/login")
+  navigate("/login")
 
-  // },[primaryUser,navigate])
+  },[primaryUser,navigate])
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  // const displayErrorMessage=()=>{
-  //   toast.error(error_msg, {
-  //     position: "top-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "light",
-  //     });
-  // }
+  const displayErrorMessage=()=>{
+    toast.error(error_msg, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
 
  
 
 
   const onSubmitHandler = (data) => {
     // console.log({ data });
+    addPrimaryUser({data})
+    // if(!primaryUser.firstName) {
+    //    toast.success('Registration Successful', {
+    //       position: "top-right",
+    //       autoClose: 5000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //       theme: "light",
+    //       });    
+    //       setTimeout(() => {
+    //         navigate("/login")
+    //       }, 5000);
+       
 
-    if(!primaryUser.firstName) {
-       toast.success('Registration Successful', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });    
-          setTimeout(() => {
-            navigate("/login")
-          }, 5000);
-       addPrimaryUser({data})
-
-    }
-    else if(error_msg) {
-      console.log(error_msg);
-      toast.error(error_msg, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
-    }
+    // }
+    // else if(error_msg) {
+    //   console.log(error_msg);
+    //   toast.error(error_msg, {
+    //     position: "top-right",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "light",
+    //     });
+    // }
 
   };
   return (
@@ -238,8 +224,8 @@ const Register = () => {
               </div>
             </form>
             
-            {/* {error_msg?displayErrorMessage():null} */}
-            <ToastContainer/>
+            {error_msg?displayErrorMessage():null}
+            {/* <ToastContainer/> */}
           </div>
         </div>
       </div>
