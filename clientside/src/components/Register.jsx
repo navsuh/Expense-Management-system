@@ -85,7 +85,6 @@ const Register = () => {
 
   const onSubmitHandler = (data) => {
     // console.log({ data });
-    addPrimaryUser({data})
 
     if(!primaryUser.firstName) {
        toast.success('Registration Successful', {
@@ -99,10 +98,12 @@ const Register = () => {
           theme: "light",
           });    
           setTimeout(() => {
-            
+            navigate("/login")
           }, 5000);
+       addPrimaryUser({data})
+
     }
-    else {
+    else if(error_msg) {
       console.log(error_msg);
       toast.error(error_msg, {
         position: "top-right",
@@ -115,6 +116,7 @@ const Register = () => {
         theme: "light",
         });
     }
+
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
