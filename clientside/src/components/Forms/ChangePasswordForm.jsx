@@ -4,7 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { useBoundStore } from "../../store";
+import { useBoundStore } from "../../store.js";
+
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -15,6 +16,9 @@ const schema = yup.object().shape({
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
+  const changePassword=useBoundStore(store=>store.changePassword)
+  const error_msg=useBoundStore(store=>store.error_msg)
+  const changepasswordresponse=useBoundStore(store=>store.changepasswordresponse)
 
   const {
     register,
@@ -25,23 +29,21 @@ const ChangePasswordForm = () => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {}, []);
+useEffect(()=>{
+if(changepasswordresponse.status===200){
+  alert(changepasswordresponse.msg)
+  sessionStorage.removeItem("token")
+  navigate("/login")
+}
+},[changepasswordresponse,navigate])
 
-<<<<<<< Updated upstream
-  const changePassword = useBoundStore((store) => store.changePassword);
-=======
-  const changePassword=useBoundStore(store=>store.changePassword)
-  const error_msg=useBoundStore(store=>store.error_msg)
->>>>>>> Stashed changes
+
+  
 
 
   const onSubmitHandler = (data) => {
     console.log({ data });
-<<<<<<< Updated upstream
-    changePassword({ data }); // Call the changePassword function with the form data
-=======
     changePassword({data})
->>>>>>> Stashed changes
   };
 
   return (

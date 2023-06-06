@@ -23,6 +23,7 @@ export const createhouseholdmember =()=>{
      delete context.data.userName
      delete context.data.password
      delete context.data.households
+     delete context.data.role
      context.data.household=household.data[0]._id
      context.data.user=createMember._id
 

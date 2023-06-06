@@ -13,8 +13,22 @@ export const useBoundStore = create(devtools (persist((...a) => ({
   ...createPrimaryUserSlice(...a),
   ...createUserLoginSlice(...a),
   ...createExpenseTypeSlice(...a),
-  ...changepasswordSlice(...a)
-}),{ name: 'bound-store' })
+  ...changepasswordSlice(...a),
+}),{ name: 'boundstore',
+partialize: (state) =>
+Object.fromEntries(
+  Object.entries(state).filter(([key]) => !['changepasswordresponse'].includes(key))
+), })
 
 )
 )
+
+// export const useBoundStore = create(devtools ((...a) => ({
+//   ...createPrimaryUserSlice(...a),
+//   ...createUserLoginSlice(...a),
+//   ...createExpenseTypeSlice(...a),
+//   ...changepasswordSlice(...a),
+// })
+
+// )
+// )
