@@ -27,12 +27,12 @@ export const createExpenseTypeSlice = (set) => ({
         
         const {data}=response.data
         console.log(data);
-        set((store)=>({error_msg: "", expenseTypes: data}))
+        set((store)=>({error_msg: "", expenseTypes: data}),false,"getAllExpenseTypes")
         
       } catch (error) {
         const {response}=error
         const {data}=response
-        set({ error_msg: data.message})
+        set({ error_msg: data.message},false,"getAllExpenseTypesErrorMsg")
       }
     
 },
@@ -53,12 +53,12 @@ export const createExpenseTypeSlice = (set) => ({
         // console.log(response.data.accessToken);
         // console.log(response.data.users.role);
         console.log(response.data);
-        set((store)=>({error_msg: "", expenseTypes: [...store.expenseTypes,response.data]}))
+        set((store)=>({error_msg: "", expenseTypes: [...store.expenseTypes,response.data]}),false,"createExpenseTypes")
         
       } catch (error) {
         const {response}=error
         const {data}=response
-        set({ error_msg: data.message})
+        set({ error_msg: data.message},false,"createExpenseTypesErrorMsg")
       }
     
 },
@@ -94,12 +94,12 @@ return eachExpense
   }
 })
   
-  }))
+  }),false,"updateExpenseTypes")
     
   } catch (error) {
     const {response}=error
     const {data}=response
-    set({ error_msg: data.message})
+    set({ error_msg: data.message},false,"updateExpenseTypesErrorMsg")
   }
 
 },
@@ -123,12 +123,12 @@ deleteExpenseTypes: async(id) =>  {
     
     set((store)=>({error_msg: "", expenseTypes: store.expenseTypes.filter((eachExpense)=>{
       return eachExpense._id!==response.data._id
-    })}))
+    })}),false,"deleteExpenseTypes")
     
   } catch (error) {
     const {response}=error
     const {data}=response
-    set({ error_msg: data.message})
+    set({ error_msg: data.message},false,"deleteExpenseTypesErrorMsg")
   }
 
 },
