@@ -7,6 +7,6 @@ export const householdmembersSchema = Joi.object({
     phone: Joi.string().length(10).required(),
     userName: Joi.string().min(5).max(50).required(),
     password: Joi.string().min(8).max(255).required(),
-    households:Joi.string().min(5).max(50).required(),
+    households:Joi.string().min(4).max(50).required(),
     role: Joi.string().min(5).max(50)
   });

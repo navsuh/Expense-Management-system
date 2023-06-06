@@ -8,13 +8,27 @@ export const createMemberSlice =(set)=>({
    error_msg:"",
   
 
-  getAllMembers:async(userData)=>{
-
-    
-
-
-
-
+  getAllMembers:async()=>{
+    const token = sessionStorage.getItem("token");
+    //    console.log(token);
+    try {
+      const response = await axios.get(apiEndPoint, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      const { data } = response.data;
+      console.log(data);
+      set(
+        (store) => ({ error_msg: "", households: data }),
+        false,
+        "getAllHouseholds"
+      );
+    } catch (error) {
+      const { response } = error;
+      const { data } = response;
+      set({ error_msg: data.message }, false, "getAllHouseholdsErrorMsg");
+    }
   },
 
    addMember:async(userData)=>{
