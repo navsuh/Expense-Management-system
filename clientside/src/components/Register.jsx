@@ -55,11 +55,7 @@ const Register = () => {
   toastId: "customId",
     theme: "light",
     });    
-  
 
-  
-
- 
   navigate("/login")
 
   },[primaryUser,navigate])
@@ -121,7 +117,7 @@ const Register = () => {
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-      <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
+      <div className="max-w-screen-xl  sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
         <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
           <img
             src="/assests/images/homeimgae.png"

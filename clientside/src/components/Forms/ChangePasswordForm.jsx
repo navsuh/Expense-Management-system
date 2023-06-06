@@ -37,8 +37,8 @@ if(changepasswordresponse.status===200){
 }
 },[changepasswordresponse,navigate])
 
-
-  
+  const changePassword=useBoundStore(store=>store.changePassword)
+  const error_msg=useBoundStore(store=>store.error_msg)
 
 
   const onSubmitHandler = (data) => {

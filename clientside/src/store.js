@@ -4,8 +4,10 @@ import { createPrimaryUserSlice } from './slice/createPrimaryUserSlice'
 import { createUserLoginSlice } from './slice/createUserLoginSlice'
 
 import { createExpenseTypeSlice } from './slice/createExpenseTypeSlice'
-
+import { createHouseholdSlice } from './slice/createHouseholdSlice'
 import { changepasswordSlice } from './slice/createChangePasswordSlice'
+import {createMemberSlice} from './slice/createMemberSlice'
+
 import { persist } from 'zustand/middleware'
 import { devtools } from 'zustand/middleware'
 

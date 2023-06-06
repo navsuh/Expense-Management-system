@@ -14,6 +14,7 @@ export const createhouseholdmember =()=>{
         // console.log(createMember);
         const householdservice=context.app.service("households")
      const household = await householdservice.find( { query: {name:households} });
+     if(!household) throw new Error("household not found")
     //  console.log(expensetype.data[0]._id);
     //  console.log(household.data[0]._id);
      delete context.data.firstName

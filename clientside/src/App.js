@@ -15,11 +15,10 @@ function App() {
   return (
     <div className="App">
      {/* <Sidebar /> */}
-    
-        
+  
     <Outlet/>
-   
     </div>
+  
   );
 }
 

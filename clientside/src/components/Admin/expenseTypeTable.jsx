@@ -61,7 +61,7 @@ const ExpenseTypeTable = (props) => {
                   <Link to={`/admin/expensetype/${eachExpense._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <AiOutlineDelete onClick={()=>deleteExpenseType(eachExpense._id)}className="w-8 h-6" />
+                    <AiOutlineDelete onClick={()=>deleteExpenseType(eachExpense._id)}className="w-8 h-6 ml-1 cursor-pointer" />
                   </div>
                 </td>
               </tr>
