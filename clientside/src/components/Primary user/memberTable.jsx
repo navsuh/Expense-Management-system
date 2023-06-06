@@ -3,14 +3,22 @@ import { AiOutlineDelete,AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
 import { IoAddCircle } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useBoundStore } from "../../store";
+import { useEffect } from "react";
 
-const memberList = [
-  { _id: "1", household: "household 1", user: "user 1" },
-  { _id: "2", household: "household 1", user: "user 2" },
-];
+// const memberList = [
+//   { _id: "1", household: "household 1", user: "user 1" },
+//   { _id: "2", household: "household 1", user: "user 2" },
+// ];
 
 const MemberTable = (props) => {
   // const {userList}=props
+  const getAllMembers = useBoundStore(store=>store.getAllMembers)
+  const memberList = useBoundStore(store=>store.member)
+  console.log(memberList);
+  useEffect(()=>{
+    getAllMembers();
+  },[getAllMembers])
   return (
     <>
      <div className="flex flex-row justify-between">

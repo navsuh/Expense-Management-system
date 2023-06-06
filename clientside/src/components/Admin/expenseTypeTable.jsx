@@ -39,8 +39,8 @@ const ExpenseTypeTable = (props) => {
         </div>
       </div>
 
-      <div className="w-full relative  shadow-md sm:rounded-lg ml-6">
-        <table className="w-11/12 text-sm text-left text-gray-500  ml-6 rounded-lg">
+      <div className="relative  shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left text-gray-500  ml-6 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
             <tr>
               <th scope="col" className="px-6 py-3">

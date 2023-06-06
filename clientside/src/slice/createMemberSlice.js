@@ -1,13 +1,12 @@
 import axios from "axios";
 
 
-const apiEndPoint = process.env.REACT_APP_API_URL+"users"
+const apiEndPoint = process.env.REACT_APP_API_URL+"householdmembers"
 
 export const createMemberSlice =(set)=>({
-   member:{},
+   member:[],
    error_msg:"",
   
-
   getAllMembers:async()=>{
     const token = sessionStorage.getItem("token");
     //    console.log(token);
@@ -20,14 +19,14 @@ export const createMemberSlice =(set)=>({
       const { data } = response.data;
       console.log(data);
       set(
-        (store) => ({ error_msg: "", households: data }),
+        (store) => ({ error_msg: "", member: data }),
         false,
-        "getAllHouseholds"
+        "getAllMembers"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllHouseholdsErrorMsg");
+      set({ error_msg: data.message }, false, "getAllMembersErrorMsg");
     }
   },
 
@@ -49,14 +48,5 @@ export const createMemberSlice =(set)=>({
         set({ error_msg: data.message},false,"addMemberErrorMsg")
       }
    }
-
-
-
-
-
-
-
-
-
 
 })

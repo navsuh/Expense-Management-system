@@ -37,7 +37,7 @@ const Login = () => {
   const loginUser = useBoundStore((store) => store.loginUser);
 
   const token = useBoundStore((store) => store.token);
-  const role = useBoundStore((store) => store.role);
+  const user = useBoundStore((store) => store.user);
 
   const error_msg = useBoundStore((store) => store.error_msg);
 
@@ -47,13 +47,13 @@ const Login = () => {
     if (!token) return;
     if (!sessionStorage.getItem("token")) return;
 
-    if (role === "Admin") {
+    if (user.role === "Admin") {
       alert("login sucessfull");
       navigate("/admin");
-    } else if (role === "Primaryuser") {
+    } else if (user.role === "Primaryuser") {
       alert("login sucessfull");
       navigate("/primaryuser");
-    } else if (role === "member") {
+    } else if (user.role === "member") {
       alert("login sucessfull");
       navigate("/memberuser");
     }
@@ -68,7 +68,7 @@ const Login = () => {
     //   progress: undefined,
     //   theme: "light",
     //   });
-  }, [token, navigate, role]);
+  }, [token, navigate, user.role]);
   const customId = "custom-id-yes";
 
   const onSubmitHandler = (data) => {

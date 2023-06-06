@@ -4,11 +4,15 @@ import { IoNotifications } from "react-icons/io5";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdChangeCircle } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import { useBoundStore } from "../store";
 
 const Sidebar = (props) => {
   // const {name}=props
   const navigate = useNavigate();
-  const name = "user";
+  const user = useBoundStore((store) => store.user);
+  const name = user.firstName;
+ console.log(user);
+
   return (
     <>
       <button
