@@ -16,6 +16,8 @@ export const useBoundStore = create(devtools (persist((...a) => ({
   ...createUserLoginSlice(...a),
   ...createExpenseTypeSlice(...a),
   ...changepasswordSlice(...a),
+  ...createHouseholdSlice(...a),
+  ...createMemberSlice(...a),
 }),{ name: 'boundstore',
 partialize: (state) =>
 Object.fromEntries(
