@@ -9,23 +9,6 @@ export const changepasswordSlice = (set) => ({
     const { data } = userData;
     const newData = { ...data };
 
-<<<<<<< Updated upstream
-    const token = sessionStorage.getItem('token');
-    try {
-      const response = await axios.put(apiEndPoint, newData, {
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      });
-      set({ error_msg: '', changepasswordresponse: response.data });
-    } catch (error) {
-      const { response } = error;
-      const { data } = response;
-      set({ error_msg: data.message, changepasswordresponse: {} });
-    }
-  }
-});
-=======
       // console.log(newData);
       console.log(data);
       console.log(newData);
@@ -50,4 +33,4 @@ export const changepasswordSlice = (set) => ({
 },
 
   })
->>>>>>> Stashed changes
+  

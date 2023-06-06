@@ -68,8 +68,3 @@ export const expenseTypes = (app) => {
     }
   })
 }
-
-// {"firstName": "user1fistname","lastName": "user1lastname","email": "user1@testmail.com",
-// "password": "12345678","phone": "1234567890","userName": "user1username","role":"Admin"}
-
-// {"strategy": "local","email": "user1@testmail.com","password": "12345678"}

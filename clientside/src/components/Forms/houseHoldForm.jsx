@@ -4,29 +4,30 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
 import { useParams ,useNavigate} from "react-router-dom";
+import { useBoundStore } from "../../store";
 
-const houseHoldList = [
-  {
-    _id: "1",
-    name: "HouseHold Name 1",
-    addressLine1: "HouseHold addressLine1 1",
-    addressLine2: "HouseHold addressLine2 1",
-    area: "HouseHold area 1",
-    city: "HouseHold city 1",
-    state: "HouseHold state 1",
-    zipcode: "HouseHold zipcode 1",
-  },
-  {
-    _id: "2",
-    name: "HouseHold Name 2",
-    addressLine1: "HouseHold addressLine1 2",
-    addressLine2: "HouseHold addressLine2 2",
-    area: "HouseHold area 2",
-    city: "HouseHold city 2",
-    state: "HouseHold state 2",
-    zipcode: "HouseHold zipcode 2",
-  },
-];
+// const houseHoldList = [
+//   {
+//     _id: "1",
+//     name: "HouseHold Name 1",
+//     addressLine1: "HouseHold addressLine1 1",
+//     addressLine2: "HouseHold addressLine2 1",
+//     area: "HouseHold area 1",
+//     city: "HouseHold city 1",
+//     state: "HouseHold state 1",
+//     zipcode: "HouseHold zipcode 1",
+//   },
+//   {
+//     _id: "2",
+//     name: "HouseHold Name 2",
+//     addressLine1: "HouseHold addressLine1 2",
+//     addressLine2: "HouseHold addressLine2 2",
+//     area: "HouseHold area 2",
+//     city: "HouseHold city 2",
+//     state: "HouseHold state 2",
+//     zipcode: "HouseHold zipcode 2",
+//   },
+// ];
 
 const schema = yup.object().shape({
   name: yup.string().min(3).max(50).required(),
@@ -35,7 +36,7 @@ const schema = yup.object().shape({
   area: yup.string().min(3).max(50).required(),
   city: yup.string().min(3).max(50).required(),
   state: yup.string().min(3).max(50).required(),
-  zipcode: yup.number().min(6).max(6).required(),
+  zipcode: yup.number().min(4).required(),
 });
 const HouseHoldForm = () => {
   const navigate = useNavigate();
@@ -48,12 +49,20 @@ const HouseHoldForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+ const houseHoldList =useBoundStore(store=>store.households)
+
+console.log(houseHoldList);
+const createHouseholds = useBoundStore(store=>store.createHouseholds)
+const updateHouseholds =useBoundStore(store=>store.updateHouseholds)
+const error_msg=useBoundStore(store=>store.error_msg)
+
+console.log("hello");
 
   useEffect(()=>{
     if(!id) return;
-    console.log(id);
+    // console.log(id);
     const houseHold=houseHoldList.find((h)=>h._id===id)
-    
+    console.log(houseHold);
     setValue("_id",houseHold._id)
     setValue("name",houseHold.name)
     setValue("addressLine1",houseHold.addressLine1)
@@ -64,10 +73,22 @@ const HouseHoldForm = () => {
     setValue("zipcode",houseHold.zipcode)
     
 
-  },[id,setValue])
+  },[id,setValue,houseHoldList])
 
   const onSubmitHandler = (data) => {
     console.log({ data });
+    if(data._id){
+      console.log("update");
+      updateHouseholds({data})
+      return navigate("/primaryuser/household")
+
+    }
+    else {
+      createHouseholds({data})
+      console.log("create");
+      return navigate("/primaryuser/household")
+    }
+
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -180,6 +201,8 @@ const HouseHoldForm = () => {
                 </div>
               </div>
             </form>
+            <p className="text-red-500">{error_msg?error_msg:null}</p>
+
           </div>
         </div>
       </div>

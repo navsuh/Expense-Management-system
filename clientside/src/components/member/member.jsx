@@ -1,9 +1,6 @@
 import Sidebar from "../sidebar";
 import Tablist from "../tabList";
 
-
-
-
 import { Outlet } from "react-router-dom";
 
 const tabList = [
@@ -16,6 +13,7 @@ const tabList = [
 ];
 
 const MemberUser = () => {
+  
   return (
     <>
       <div className="p-4 sm:ml-64">

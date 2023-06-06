@@ -3,32 +3,23 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
 import { IoAddCircle } from "react-icons/io5";
 import { Link } from "react-router-dom";
-
-const houseHoldList = [
-  {
-    _id: "1",
-    name: "HouseHold Name 1",
-    addressLine1: "HouseHold addressLine1 1",
-    addressLine2: "HouseHold addressLine2 1",
-    area: "HouseHold area 1",
-    city: "HouseHold city 1",
-    state: "HouseHold state 1",
-    zipcode: "HouseHold zipcode 1",
-  },
-  {
-    _id: "2",
-    name: "HouseHold Name 2",
-    addressLine1: "HouseHold addressLine1 2",
-    addressLine2: "HouseHold addressLine2 2",
-    area: "HouseHold area 2",
-    city: "HouseHold city 2",
-    state: "HouseHold state 2",
-    zipcode: "HouseHold zipcode 2",
-  },
-];
+import { useBoundStore } from "../../store";
+import { useEffect } from "react";
 
 const HouseholdTable = (props) => {
   // const {expenseList}=props
+  const getAllHouseholds =useBoundStore(store=>store.getAllHouseholds)
+   const houseHoldList =useBoundStore(store=>store.households)
+  const deleteHouseholds=useBoundStore(store=>store.deleteHouseholds)
+   
+    // console.log(getAllHouseholds);
+  //  console.log(houseHoldList);
+  useEffect(()=>{
+    getAllHouseholds();
+  },[getAllHouseholds])
+  const deleteHousehold=(id)=>{
+    deleteHouseholds(id)
+   }
   return (
     <>
      <div className="flex flex-row justify-between">
@@ -50,7 +41,7 @@ const HouseholdTable = (props) => {
               </th>
 
               <th scope="col" className="px-6 py-3">
-                Action
+                Actions
               </th>
             </tr>
           </thead>
@@ -63,7 +54,7 @@ const HouseholdTable = (props) => {
                   <Link to={`/primaryuser/household/${eachHousehold._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
                   </Link>
-                    <AiOutlineDelete className="w-8 h-6" />
+                    <AiOutlineDelete  onClick={()=>deleteHousehold(eachHousehold._id)} className="w-8 h-6 ml-1 cursor-pointer" />
                   </div>
                 </td>
               </tr>

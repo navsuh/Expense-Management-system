@@ -27,21 +27,13 @@ const ChangePasswordForm = () => {
 
   useEffect(() => {}, []);
 
-<<<<<<< Updated upstream
-  const changePassword = useBoundStore((store) => store.changePassword);
-=======
   const changePassword=useBoundStore(store=>store.changePassword)
   const error_msg=useBoundStore(store=>store.error_msg)
->>>>>>> Stashed changes
 
 
   const onSubmitHandler = (data) => {
     console.log({ data });
-<<<<<<< Updated upstream
-    changePassword({ data }); // Call the changePassword function with the form data
-=======
     changePassword({data})
->>>>>>> Stashed changes
   };
 
   return (
