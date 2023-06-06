@@ -20,12 +20,12 @@ export const createUserLoginSlice = (set) => ({
         // console.log(response.data.accessToken);
         // console.log(response.data.users.role);
         sessionStorage.setItem("token",response.data.accessToken)
-        set({error_msg: "", token: response.data.accessToken,role:response.data.users.role})
+        set({error_msg: "", token: response.data.accessToken,role:response.data.users.role},false,"loginUser")
         
       } catch (error) {
         const {response}=error
         const {data}=response
-        set({ error_msg: data.message})
+        set({ error_msg: data.message},false,"loginUserErrorMsg")
       }
     
 },

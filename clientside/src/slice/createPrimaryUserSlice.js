@@ -16,13 +16,13 @@ export const createPrimaryUserSlice = (set) => ({
             'Content-Type': 'application/json'
           }
         })
-        set({ error_msg:"",primaryUser: response.data })
+        set({ error_msg:"",primaryUser: response.data },false,"addPrimaryUser")
      
         
       } catch (error) {
         const {response}=error
         const {data}=response
-        set({ error_msg: data.message})
+        set({ error_msg: data.message},false,"addPrimaryUserErrorMsg")
       }
     
 },

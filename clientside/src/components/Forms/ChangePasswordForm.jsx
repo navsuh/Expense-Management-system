@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store";
 
 const schema = yup.object().shape({
@@ -20,20 +20,28 @@ const ChangePasswordForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
+    // setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   useEffect(() => {}, []);
 
+<<<<<<< Updated upstream
   const changePassword = useBoundStore((store) => store.changePassword);
+=======
+  const changePassword=useBoundStore(store=>store.changePassword)
+  const error_msg=useBoundStore(store=>store.error_msg)
+>>>>>>> Stashed changes
 
-  console.log(changePassword);
 
   const onSubmitHandler = (data) => {
     console.log({ data });
+<<<<<<< Updated upstream
     changePassword({ data }); // Call the changePassword function with the form data
+=======
+    changePassword({data})
+>>>>>>> Stashed changes
   };
 
   return (
@@ -130,6 +138,7 @@ const ChangePasswordForm = () => {
               </button>
             </div>
           </form>
+          <p className="text-red-500">{error_msg?error_msg:null}</p>
         </div>
       </div>
     </div>
