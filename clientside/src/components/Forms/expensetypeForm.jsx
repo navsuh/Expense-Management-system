@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate,Navigate } from "react-router-dom";
 import { useBoundStore } from "../../store.js";
 
 // const expenseList = [
@@ -15,6 +15,7 @@ const schema = yup.object().shape({
   name: yup.string().min(3).max(50).required(),
 });
 const ExpenseTypeForm = () => {
+  const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
   const { id } = useParams();
   const expenseList = useBoundStore((store) => store.expenseTypes);
@@ -54,6 +55,11 @@ const ExpenseTypeForm = () => {
       return navigate("/admin/expensetype");
     }
   };
+  
+  if(user.role!=="Admin"){
+    sessionStorage.removeItem("token")
+return <Navigate to="/login" replace={true} />
+  }
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center items-center flex-1 p-10">

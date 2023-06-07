@@ -2,8 +2,9 @@ import Sidebar from "../sidebar";
 import Tablist from "../tabList";
 // import ExpenseTypeTable from './expenseTypeTable';
 // import UserTable from './userTable';
-
+import { useBoundStore } from "../../store.js";
 import { Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const tabList = [
   { _id: "1", tabName: "Expense type", tabPath: "/admin/expensetype" },
@@ -22,6 +23,11 @@ const tabList = [
 // ]
 
 const Admin = () => {
+  const user = useBoundStore((store) => store.user);
+  if(user.role!=="Admin"){
+    sessionStorage.removeItem("token")
+return <Navigate to="/login" replace={true} />
+  }
   return (
     <>
       <div className="p-4 sm:ml-64">

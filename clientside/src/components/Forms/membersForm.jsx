@@ -5,7 +5,7 @@ import * as yup from "yup";
 // import { Link } from "react-router-dom";
 import {IoArrowBack} from "react-icons/io5"
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { useParams , useNavigate } from "react-router-dom";
+import { useParams , useNavigate,Navigate } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
 
@@ -52,6 +52,7 @@ const schema = yup.object().shape({
   password: yup.string().min(8).max(32).required(),
 });
 const MemberForm = () => {
+  const user = useBoundStore((store) => store.user);
   const navigate =useNavigate()
   const {id}=useParams()
   const {
@@ -88,6 +89,10 @@ console.log(householdList);
   const onSubmitHandler = (data) => {
     console.log({ data });
   };
+  if(user.role!=="Primaryuser"){
+    sessionStorage.removeItem("token")
+return <Navigate to="/login" replace={true} />
+  }
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">

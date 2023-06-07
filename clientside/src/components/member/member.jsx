@@ -1,8 +1,8 @@
 import Sidebar from "../sidebar";
 import Tablist from "../tabList";
-
+import { useBoundStore } from "../../store.js";
 import { Outlet } from "react-router-dom";
-
+import { Navigate } from "react-router-dom";
 const tabList = [
   {
     _id: 1,
@@ -13,7 +13,11 @@ const tabList = [
 ];
 
 const MemberUser = () => {
-  
+  const user = useBoundStore((store) => store.user);
+  if(user.role!=="member"){
+    sessionStorage.removeItem("token")
+return <Navigate to="/login" replace={true} />
+  }
   return (
     <>
       <div className="p-4 sm:ml-64">
