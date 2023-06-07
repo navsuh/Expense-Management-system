@@ -7,28 +7,28 @@ import { useParams, useNavigate,Navigate } from "react-router-dom";
 // import { IoCaretDownSharp } from "react-icons/io5";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
-const dailyExpensesList = [
-  {
-    _id: "1",
-    household: "household 1",
-    dueDate: "expense due date 1",
-    expensetype: "daily expense type 1",
-    paymentDetails: "details 1",
-    description: "description 1",
-    paidThrough: "bank details 1",
-    paidBy: "user 1 ",
-  },
-  {
-    _id: "2",
-    household: "household 2",
-    dueDate: "expense due date 2",
-    expensetype: "daily expense type 2",
-    paymentDetails: "details 2",
-    description: "description 2",
-    paidThrough: "bank details 2",
-    paidBy: "user 2 ",
-  },
-];
+// const dailyExpensesList = [
+//   {
+//     _id: "1",
+//     household: "household 1",
+//     dueDate: "expense due date 1",
+//     expensetype: "daily expense type 1",
+//     paymentDetails: "details 1",
+//     description: "description 1",
+//     paidThrough: "bank details 1",
+//     paidBy: "user 1 ",
+//   },
+//   {
+//     _id: "2",
+//     household: "household 2",
+//     dueDate: "expense due date 2",
+//     expensetype: "daily expense type 2",
+//     paymentDetails: "details 2",
+//     description: "description 2",
+//     paidThrough: "bank details 2",
+//     paidBy: "user 2 ",
+//   },
+// ];
 
 const schema = yup.object().shape({
   selectHousehold: yup.string().required(),
@@ -49,10 +49,11 @@ const DailyExpenseForm = () => {
   const { id } = useParams();
   const houseHoldsOptions =useBoundStore(store=>store.households)
   console.log(houseHoldsOptions);
-  
-  const expenseList = useBoundStore((store) => store.expenseTypes);
+  const dailyExpensesList = useBoundStore(store=>store.dailyExpense)
+  const expenseTypes=useBoundStore(store=>store.expenseTypes)
+  const updateDailyExpense =useBoundStore(store=>store.updateDailyExpense)
 
-   console.log(expenseList);
+   console.log(expenseTypes);
   const {
     register,
     handleSubmit,
@@ -66,16 +67,32 @@ const DailyExpenseForm = () => {
     if (!id) return;
 
     const dailyExpense = dailyExpensesList.find((p) => p._id === id);
-
+    
     setValue("_id", dailyExpense._id);
     setValue("description", dailyExpense.description);
     setValue("paidThrough", dailyExpense.paidThrough);
     setValue("paidBy", dailyExpense.paidBy);
+    setValue("selectHousehold",dailyExpense.households)
+    setValue("selectExpense",dailyExpense.expensetypes)
+    setValue("paymentDetails",dailyExpense.paymentDetails)
+
   }, [id, setValue]);
 
   const onSubmitHandler = (data) => {
     console.log({ data });
-  };
+    if(data._id){
+      console.log("update");
+      updateDailyExpense({data})
+      // return navigate("/primaryuser/household")
+
+    }
+    else {
+      // createHouseholds({data})
+      console.log("create");
+      // return navigate("/primaryuser/household")
+    }
+  }
+
   if(user.role==="Admin"){
     sessionStorage.removeItem("token")
 return <Navigate to="/login" replace={true} />
@@ -123,7 +140,7 @@ return <Navigate to="/login" replace={true} />
                     id="selectHousehold"
                     {...register("selectHousehold")}
                   >
-               {houseHoldsOptions.map(house=><option value="">{house.name}</option>)}
+               {houseHoldsOptions.map(house=><option key={house._id} value="">{house.name}</option>)}
 
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 border-l">
@@ -148,14 +165,14 @@ return <Navigate to="/login" replace={true} />
                     id="selectExpense"
                     {...register("selectExpense")}
                   >
-                  {/* {expenseList.map(expense=><option value="">{expense.name}</option>)} */}
-                  <option value="">Select...</option>
+                  {expenseTypes.map(expense=><option key={expense._id} value="">{expense.name}</option>)}
+                  {/* <option value="">Select...</option>
                     <option value="1">Item 1</option>
                     <option value="2">Item 2</option>
                     <option value="3">Item 3</option>
                     <option value="1">Item 1</option>
                     <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
+                    <option value="3">Item 3</option> */}
 
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 ">

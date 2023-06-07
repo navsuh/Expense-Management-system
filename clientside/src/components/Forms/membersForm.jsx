@@ -198,7 +198,7 @@ return <Navigate to="/login" replace={true} />
                     id="selectHousehold"
                     {...register("selectHousehold")}
                   >
-                    {householdList.map(house=><option value="">{house.name}</option>)}
+                    {householdList.map(house=><option key={house._id} value="">{house.name}</option>)}
              
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 border-l">

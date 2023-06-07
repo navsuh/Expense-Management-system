@@ -47,6 +47,37 @@ export const createMemberSlice =(set)=>({
         const {data}=response
         set({ error_msg: data.message},false,"addMemberErrorMsg")
       }
-   }
+   },
+
+   deleteMember: async (id) => {
+    const token = sessionStorage.getItem("token");
+    try {
+      const response = await axios.delete(`${apiEndPoint}/${id}`, {
+        headers: {
+          // 'Content-Type': 'application/json',
+          Authorization: "Bearer " + token,
+        },
+      });
+      // console.log(response.data.accessToken);
+      // console.log(response.data.users.role);
+
+      console.log(response.data);
+
+      set(
+        (store) => ({
+          error_msg: "",
+          member: store.member.filter((eachHousehold) => {
+            return eachHousehold._id !== response.data._id;
+          }),
+        }),
+        false,
+        "deleteMember"
+      );
+    } catch (error) {
+      const { response } = error;
+      const { data } = response;
+      set({ error_msg: data.message }, false, "deleteMemberErrorMsg");
+    }
+  },
 
 })
