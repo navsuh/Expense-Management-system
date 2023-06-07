@@ -37,6 +37,7 @@ import ChangePasswordForm from "./components/Forms/ChangePasswordForm";
 import ForgotPasswordForm from "./components/Forms/ForgetPasswordForm";
 import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
 
+import PrivateRoute from "./components/privateRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -52,20 +53,20 @@ root.render(
         {/* <Route index={true} element={<LoginForm/>}/> */}
         
         
-        <Route path="/admin" element={<Admin />}>
+        <Route path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>}>
           <Route index={true} element={<ExpenseTypeTable />} />
           <Route path="expensetype" element={<ExpenseTypeTable />} />
           <Route path="users" element={<UserTable />} />
         </Route>
         
-        <Route path="/admin/expensetypeform" element={<ExpenseTypeForm />} />
-        <Route path="/admin/expensetype/:id" element={<ExpenseTypeForm />} />
+        <Route path="/admin/expensetypeform" element={<PrivateRoute><ExpenseTypeForm /></PrivateRoute>} />
+        <Route path="/admin/expensetype/:id" element={<PrivateRoute><ExpenseTypeForm /></PrivateRoute>} />
         
-        <Route path="/admin/userform" element={<UserForm />} />
-        <Route path="/admin/users/:id" element={<UserForm />} />
+        <Route path="/admin/userform" element={<PrivateRoute><UserForm /></PrivateRoute>} />
+        <Route path="/admin/users/:id" element={<PrivateRoute><UserForm /></PrivateRoute>} />
 
 
-        <Route path="/primaryuser" element={<PrimaryUser />}>
+        <Route path="/primaryuser" element={<PrivateRoute><PrimaryUser /></PrivateRoute>}>
           <Route index={true} element={<HouseholdTable />} />
           <Route path="household" element={<HouseholdTable />} />
           <Route path="members" element={<MemberTable />} />
@@ -73,33 +74,33 @@ root.render(
           <Route path="dailyexpenses" element={<DailyExpensesTable />} />
         </Route>
         
-        <Route path="/primaryuser/householdform" element={<HouseHoldForm/>}/>
-        <Route path="/primaryuser/household/:id" element={<HouseHoldForm/>}/>
+        <Route path="/primaryuser/householdform" element={<PrivateRoute><HouseHoldForm/></PrivateRoute>}/>
+        <Route path="/primaryuser/household/:id" element={<PrivateRoute><HouseHoldForm/></PrivateRoute>}/>
 
-        <Route path="/primaryuser/memberform" element={<MemberForm/>}/>
-        <Route path="/primaryuser/members/:id" element={<MemberForm/>}/>
+        <Route path="/primaryuser/memberform" element={<PrivateRoute><MemberForm/></PrivateRoute>}/>
+        <Route path="/primaryuser/members/:id" element={<PrivateRoute><MemberForm/></PrivateRoute>}/>
 
-        <Route path="/primaryuser/periodicexpenseform" element={<PeriodicExpenseForm/>}/>
-        <Route path="/primaryuser/periodicexpenses/:id" element={<PeriodicExpenseForm/>}/>
+        <Route path="/primaryuser/periodicexpenseform" element={<PrivateRoute><PeriodicExpenseForm/></PrivateRoute>}/>
+        <Route path="/primaryuser/periodicexpenses/:id" element={<PrivateRoute><PeriodicExpenseForm/></PrivateRoute>}/>
 
-        <Route path="/primaryuser/dailyexpenseform" element={<DailyExpenseForm/>}/>
-        <Route path="/primaryuser/dailyexpenses/:id" element={<DailyExpenseForm/>}/>
+        <Route path="/primaryuser/dailyexpenseform" element={<PrivateRoute><DailyExpenseForm/></PrivateRoute>}/>
+        <Route path="/primaryuser/dailyexpenses/:id" element={<PrivateRoute><DailyExpenseForm/></PrivateRoute>}/>
 
 
         
-        <Route path="/memberuser" element={<MemberUser />}>
+        <Route path="/memberuser" element={<PrivateRoute><MemberUser /></PrivateRoute>}>
           <Route index={true} element={<PeriodicExpensesTableMember  />} />
           <Route path="periodicexpenses" element={<PeriodicExpensesTableMember />} />
           <Route path="dailyexpenses" element={<DailyExpensesTableMember />} />
         </Route>
 
-        <Route path="/memberuser/periodicexpenses/:id" element={<PeriodicExpenseForm/>}/>
+        <Route path="/memberuser/periodicexpenses/:id" element={<PrivateRoute><PeriodicExpenseForm/></PrivateRoute>}/>
 
-        <Route path="/memberuser/dailyexpenseform" element={<DailyExpenseForm/>}/>
-        <Route path="/memberuser/dailyexpenses/:id" element={<DailyExpenseForm/>}/>
+        <Route path="/memberuser/dailyexpenseform" element={<PrivateRoute><DailyExpenseForm/></PrivateRoute>}/>
+        <Route path="/memberuser/dailyexpenses/:id" element={<PrivateRoute><DailyExpenseForm/></PrivateRoute>}/>
 
         
-        <Route path="/changepassword" element={<ChangePasswordForm/>}/>
+        <Route path="/changepassword" element={<PrivateRoute><ChangePasswordForm/></PrivateRoute>}/>
         <Route path="/resetpassword" element={<ResetPasswordForm/>}/>
         <Route path="/forgotpassword" element={<ForgotPasswordForm/>}/>
 
