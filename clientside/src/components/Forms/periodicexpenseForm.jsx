@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate,Navigate } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
+import { useBoundStore } from "../../store";
 const periodicExpenseList = [
   {
     _id: "1",
@@ -48,6 +49,7 @@ const schema = yup.object().shape({
   paidBy: yup.string().min(6).max(20).required(),
 });
 const PeriodicExpenseForm = () => {
+  const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
   const { id } = useParams();
   const {
@@ -78,6 +80,10 @@ const PeriodicExpenseForm = () => {
     console.log({ data });
   };
   console.log(errors);
+  if(user.role==="Admin"){
+    sessionStorage.removeItem("token")
+return <Navigate to="/login" replace={true} />
+  }
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-md  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 flex-col p-10">

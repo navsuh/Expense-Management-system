@@ -2,9 +2,11 @@
 import Sidebar from "../sidebar";
 import Tablist from "../tabList";
 
-
+import { useBoundStore } from "../../store.js";
 
 import { Outlet } from "react-router-dom";
+// import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 const tabList = [
   { _id: 1, tabName: "Household", tabPath: "/primaryuser/household" },
@@ -29,6 +31,11 @@ const tabList = [
 // ]
 
 const PrimaryUser = () => {
+  const user = useBoundStore((store) => store.user);
+  if(user.role!=="Primaryuser"){
+    sessionStorage.removeItem("token")
+return <Navigate to="/login" replace={true} />
+  }
   return (
     <>
       <div className="p-4 sm:ml-64">

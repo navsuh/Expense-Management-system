@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate,Navigate } from "react-router-dom";
 // import { IoCaretDownSharp } from "react-icons/io5";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
@@ -44,6 +44,7 @@ const schema = yup.object().shape({
 });
 
 const DailyExpenseForm = () => {
+  const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
   const { id } = useParams();
   const houseHoldsOptions =useBoundStore(store=>store.households)
@@ -75,6 +76,10 @@ const DailyExpenseForm = () => {
   const onSubmitHandler = (data) => {
     console.log({ data });
   };
+  if(user.role==="Admin"){
+    sessionStorage.removeItem("token")
+return <Navigate to="/login" replace={true} />
+  }
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-md  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 flex-col p-10">

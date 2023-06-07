@@ -57,6 +57,7 @@ root.render(
           <Route index={true} element={<ExpenseTypeTable />} />
           <Route path="expensetype" element={<ExpenseTypeTable />} />
           <Route path="users" element={<UserTable />} />
+          {/* <Route path="expensetypeform" element={<ExpenseTypeForm />} /> */}
         </Route>
         
         <Route path="/admin/expensetypeform" element={<PrivateRoute><ExpenseTypeForm /></PrivateRoute>} />
