@@ -59,7 +59,7 @@ export const createDailyExpenseSlice = (set) => ({
   updateDailyExpense: async (userData) => {
     const { data } = userData;
 
-    const { name, addressLine1, addressLine2, area, city, state, zipcode } =data;
+    const { households, expensetypes, description, paidThrough, paidBy, paymentDetails } =data;
     //   console.log(data);
     const { _id } = data;
 
@@ -68,7 +68,7 @@ export const createDailyExpenseSlice = (set) => ({
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        { name, addressLine1, addressLine2, area, city, state, zipcode },
+        { households, expensetypes, description, paidThrough, paidBy, paymentDetails  },
         
         {
           headers: {
@@ -85,19 +85,19 @@ export const createDailyExpenseSlice = (set) => ({
       set(
         (store) => ({
           error_msg: "",
-          dailyExpense: store.dailyExpense.map((eachHousehold) => {
-            if (eachHousehold._id === response.data._id) {
+          dailyExpense: store.dailyExpense.map((eachExpense) => {
+            if (eachExpense._id === response.data._id) {
               return {
                 _id: response.data._id,
-                name: response.data._id.name,
-                addressLine1: response.data._id.addressLine1,
-                addressLine2: response.data._id.addressLine2,
-                area: response.data._id.area,
-                city: response.data._id.city,
-                zipcode: response.data._id.zipcode,
+                households: response.data._id.households,
+                expensetypes: response.data._id.expensetypes,
+                description: response.data._id.description,
+                paidThrough: response.data._id.paidThrough,
+                paidBy: response.data._id.paidBy,
+                paymentDetails: response.data._id.paymentDetails,
               };
             } else {
-              return eachHousehold;
+              return eachExpense;
             }
           }),
         }),

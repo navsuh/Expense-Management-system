@@ -15,10 +15,15 @@ const MemberTable = (props) => {
   // const {userList}=props
   const getAllMembers = useBoundStore(store=>store.getAllMembers)
   const memberList = useBoundStore(store=>store.member)
+  const deleteMembers =useBoundStore(store=>store.deleteMember)
   console.log(memberList);
   useEffect(()=>{
     getAllMembers();
   },[getAllMembers])
+
+  const deleteMember=(id)=>{
+    deleteMembers(id)
+   }
   return (
     <>
      <div className="flex flex-row justify-between">
@@ -57,7 +62,7 @@ const MemberTable = (props) => {
                   <Link to={`/primaryuser/members/${eachMember._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
                     </Link >
-                    <AiOutlineDelete className="w-8 h-6" />
+                    <AiOutlineDelete onClick={()=>deleteMember(eachMember._id)} className="w-8 h-6 ml-1 cursor-pointer" />
                   </div>
                 </td>
               </tr>

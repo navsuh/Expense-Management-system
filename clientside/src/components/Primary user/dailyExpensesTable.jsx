@@ -33,9 +33,14 @@ const DailyExpensesTable = (props) => {
 
   const getAllDailyExpense = useBoundStore(store=>store.getAllDailyExpense)
   const dailyExpensesList = useBoundStore(store=>store.dailyExpense)
+  const deleteDailyExpenses = useBoundStore(store=>store.deleteDailyExpense)
   useEffect(()=>{
     getAllDailyExpense();
   },[getAllDailyExpense])
+  
+  const deleteDailyExpense=(id)=>{
+    deleteDailyExpenses(id)
+   }
   return (
     <>
     <div className="flex flex-row justify-between">
@@ -80,7 +85,7 @@ const DailyExpensesTable = (props) => {
                   <Link to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <AiOutlineDelete className="w-8 h-6" />
+                    <AiOutlineDelete  onClick={()=>deleteDailyExpense(eachDailyExpense._id)}  className="w-8 h-6 cursor-pointer ml-1" />
                   </div>
                 </td>
               </tr>
@@ -91,5 +96,4 @@ const DailyExpensesTable = (props) => {
     </>
   );
 };
-
 export default DailyExpensesTable;
