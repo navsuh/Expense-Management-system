@@ -143,14 +143,14 @@ const DailyExpenseForm = () => {
                     id="selectExpense"
                     {...register("selectExpense")}
                   >
-                  {/* {expenseList.map(expense=><option value="">{expense.name}</option>)} */}
-                  <option value="">Select...</option>
+                  {expenseList.map(expense=><option value="">{expense.name}</option>)}
+                  {/* <option value="">Select...</option>
                     <option value="1">Item 1</option>
                     <option value="2">Item 2</option>
                     <option value="3">Item 3</option>
                     <option value="1">Item 1</option>
                     <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
+                    <option value="3">Item 3</option> */}
 
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 ">
