@@ -18,8 +18,8 @@ const ChangePasswordForm = () => {
   const navigate = useNavigate();
   const changePassword=useBoundStore(store=>store.changePassword)
   const error_msg=useBoundStore(store=>store.error_msg)
-  const changepasswordresponse=useBoundStore(store=>store.changepasswordresponse)
-
+  const changePasswordResponse=useBoundStore(store=>store.changePasswordResponse)
+  const changePasswordReset=useBoundStore(store=>store.changePasswordReset)
   const {
     register,
     handleSubmit,
@@ -30,12 +30,13 @@ const ChangePasswordForm = () => {
   });
 
 useEffect(()=>{
-if(changepasswordresponse.status===200){
-  alert(changepasswordresponse.msg)
+if(changePasswordResponse.status===200){
+  alert(changePasswordResponse.msg)
   sessionStorage.removeItem("token")
+  changePasswordReset()
   navigate("/login")
 }
-},[changepasswordresponse,navigate])
+},[changePasswordResponse,navigate,changePasswordReset])
 
   
 

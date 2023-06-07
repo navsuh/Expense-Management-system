@@ -3,35 +3,46 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useBoundStore } from "../../store.js";
 
 
 
 const schema = yup.object().shape({
     email: yup.string().email().required(),
-    currentPassword: yup.string().min(8).max(32).required(),
-    newPassword: yup.string().min(8).max(32).required(),
-    confirmedPassword: yup.string().min(8).max(32).required(),
+    // currentPassword: yup.string().min(8).max(32).required(),
+    // newPassword: yup.string().min(8).max(32).required(),
+    // confirmedPassword: yup.string().min(8).max(32).required(),
 });
 
 const ForgotPasswordForm = () => {
   const navigate = useNavigate();
+  const forgetPassword=useBoundStore(store=>store.forgetPassword)
+  const error_msg=useBoundStore(store=>store.error_msg)
+  const forgetPasswordResponse=useBoundStore(store=>store.forgetPasswordResponse)
+  const forgetPasswordReset=useBoundStore(store=>store.forgetPasswordReset)
   
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
+    // setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
- 
-  }, []);
+  useEffect(()=>{
+    if(forgetPasswordResponse.status===200){
+      alert(forgetPasswordResponse.msg)
+      // sessionStorage.removeItem("token")
+      forgetPasswordReset()
+      navigate("/resetpassword")
+    }
+    },[forgetPasswordResponse,navigate,forgetPasswordReset])
 
   const onSubmitHandler = (data) => {
     console.log({ data });
+    forgetPassword({data})
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -79,13 +90,14 @@ const ForgotPasswordForm = () => {
             <div className="mt-10">
               <button
                 type="submit"
-                onClick={()=> navigate("/resetpassword")}
+               
                 className=" font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out  items-center justify-center focus:shadow-outline focus:outline-none"
               >
                 RECOVER PASSWORD
               </button>
             </div>
           </form>
+          <p className="text-red-500">{error_msg?error_msg:null}</p>
         </div>
       </div>
     </div>

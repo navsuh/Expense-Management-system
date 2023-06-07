@@ -47,8 +47,8 @@ export class ResetPasswordService {
               { new: true }
             )
             result.status = 200
-            result.msg = 'Password changed successfully'
-            result.record = updatePassword
+            result.msg = 'Password changed successfully kindly login'
+            // result.record = updatePassword
             return result
           }
         }else{

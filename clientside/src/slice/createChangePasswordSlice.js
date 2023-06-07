@@ -3,7 +3,7 @@ import axios from 'axios';
 const apiEndPoint = process.env.REACT_APP_API_URL + 'changepassword';
 
 export const changepasswordSlice = (set) => ({
-  changepasswordresponse: {},
+  changePasswordResponse: {},
   error_msg: '',
   changePassword: async (userData) => {
     const { data } = userData;
@@ -20,7 +20,7 @@ export const changepasswordSlice = (set) => ({
 
         })
         console.log(response);
-        set({ error_msg:"",changepasswordresponse: response.data },false,"changePassword")
+        set({ error_msg:"",changePasswordResponse: response.data },false,"changePassword")
      
         
       } catch (error) {
@@ -29,6 +29,9 @@ export const changepasswordSlice = (set) => ({
         set({ error_msg: data.message},false,"Changepassword Error Message")
       }
     
+},
+changePasswordReset: () => {
+  set({ error_msg:"",changePasswordResponse: {} },false,"changePasswordReset")
 },
 
   })

@@ -1,37 +1,53 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
-import { useParams, useNavigate } from "react-router-dom";
-
-
+import { useNavigate } from "react-router-dom";
+import { useBoundStore } from "../../store.js";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    currentPassword: yup.string().min(8).max(32).required(),
-    newPassword: yup.string().min(8).max(32).required(),
-    confirmedPassword: yup.string().min(8).max(32).required(),
+  email: yup.string().email().required(),
+  newPassword: yup.string().min(8).max(32).required(),
+  confirmedPassword: yup.string().min(8).max(32).required(),
 });
 
 const ResetPasswordForm = () => {
   const navigate = useNavigate();
-  
+  const resetPassword = useBoundStore((store) => store.resetPassword);
+  const error_msg = useBoundStore((store) => store.error_msg);
+  const resetPasswordResponse = useBoundStore(
+    (store) => store.resetPasswordResponse
+  );
+  const resetPasswordReset = useBoundStore((store) => store.resetPasswordReset);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
+    // setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   useEffect(() => {
- 
-  }, []);
+    if (resetPasswordResponse.status === 200) {
+      alert(resetPasswordResponse.msg);
+      // sessionStorage.removeItem("token")
+      resetPasswordReset();
+      navigate("/login");
+    }
+  }, [resetPasswordResponse, navigate, resetPasswordReset]);
 
   const onSubmitHandler = (data) => {
     console.log({ data });
+    resetPassword({ data });
   };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -44,7 +60,6 @@ const ResetPasswordForm = () => {
               onClick={() => navigate(-1)}
             />
           </div>
-       
         </div>
 
         <div className=" bg-white px-6 sm:py-6 lg:px-8">
@@ -57,66 +72,85 @@ const ResetPasswordForm = () => {
             onSubmit={handleSubmit(onSubmitHandler)}
             className="mx-auto mt-16 max-w-xl "
           >
-            <div className="flex flex-col ">
-            <div>
-                <label htmlFor="email">Email</label>
+            <div className="w-full flex-1 mt-8">
+              <div className="mx-auto max-w-xs">
+                <div>
+                  <label htmlFor="email">Email</label>
 
-                <div className="mt-1.5">
-                  <input
-                    {...register("email")}
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    placeholder="abc@gmail.com"
-                  />
-                  <p className="text-red-500">{errors.email?.message}</p>
+                  <div className="mt-1.5">
+                    <input
+                      {...register("email")}
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                      placeholder="abc@gmail.com"
+                    />
+                    <p className="text-red-500">{errors.email?.message}</p>
+                  </div>
                 </div>
-              </div>
-            
-              <div className="mt-4">
-                <label htmlFor="newPassword">New Password</label>
 
-                <div className="mt-1.5">
+                <div className="relative mt-5">
+                  <label htmlFor="newPassword">New Password</label>
+
                   <input
                     {...register("newPassword")}
-                    type="text"
+                    type={showPassword ? "text" : "password"}
                     name="newPassword"
                     id="newPassword"
-                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    // className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     placeholder="New Password"
                   />
+                  <span
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer mt-3"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? (
+                      <AiFillEye className="h-6 w-6 " />
+                    ) : (
+                      <AiFillEyeInvisible className="h-6 w-6 " />
+                    )}
+                  </span>
                   <p className="text-red-500">{errors.newPassword?.message}</p>
                 </div>
-              </div>
-              <div className="mt-4">
-                <label htmlFor="confirmedPassword">Confirm Password</label>
+                <div className="relative mt-5">
+                  <label htmlFor="confirmedPassword">Confirm Password</label>
 
-                <div className="mt-1.5">
                   <input
                     {...register("confirmedPassword")}
-                    type="text"
+                    type={showPassword ? "text" : "password"}
                     name="confirmedPassword"
                     id="confirmedPassword"
-                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     placeholder="Confirm Password"
                   />
-                  <p className="text-red-500">{errors.confirmedPassword?.message}</p>
+                  <span
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer mt-3"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? (
+                      <AiFillEye className="h-6 w-6 " />
+                    ) : (
+                      <AiFillEyeInvisible className="h-6 w-6 " />
+                    )}
+                  </span>
+                  <p className="text-red-500">
+                    {errors.confirmedPassword?.message}
+                  </p>
+                </div>
+                <div className="mt-10">
+                  <button
+                    type="submit"
+                    className=" font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out  items-center justify-center focus:shadow-outline focus:outline-none"
+                  >
+                    RESET
+                  </button>
                 </div>
               </div>
-
-              
-            </div>
-            <div className="mt-10">
-              <button
-                type="submit"
-                onClick={()=> navigate("/login")}
-                className=" font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out  items-center justify-center focus:shadow-outline focus:outline-none"
-              >
-                RESET
-              </button>
             </div>
           </form>
+          <p className="text-red-500">{error_msg ? error_msg : null}</p>
         </div>
       </div>
     </div>
