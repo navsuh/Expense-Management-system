@@ -32,11 +32,13 @@ export const emailhandler = {
         const info = await transporter.sendMail({
           from: user, // sender address
           to: userdata.email, // list of receivers
-          subject: `Change Password`, // Subject line
+          subject: `Reset Password `, // Subject line
           text: "please click the below link to reset your password", // plain text body
-          html: "<div> <p>please click the below link to reset your password</p> <a href='http://localhost:3000/resetpassword'>Change your password</a></div>" // html body
+          html: `<div> <h4>Hello ${userdata.firstName}</h4> <p>Please click the below link to reset your password</p> <a href='http://localhost:3000/resetpassword'>Reset password</a></div>` // html body
         })
         console.log('Message sent: %s', info.messageId)
+        console.log(userdata);
+
       }
     
     } catch (err) {

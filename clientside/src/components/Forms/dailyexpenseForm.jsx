@@ -6,6 +6,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useParams, useNavigate } from "react-router-dom";
 // import { IoCaretDownSharp } from "react-icons/io5";
 import { RiArrowDownSLine } from "react-icons/ri";
+import { useBoundStore } from "../../store";
 const dailyExpensesList = [
   {
     _id: "1",
@@ -45,7 +46,12 @@ const schema = yup.object().shape({
 const DailyExpenseForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const houseHoldsOptions =useBoundStore(store=>store.households)
+  console.log(houseHoldsOptions);
+  
+  const expenseList = useBoundStore((store) => store.expenseTypes);
 
+   console.log(expenseList);
   const {
     register,
     handleSubmit,
@@ -54,7 +60,7 @@ const DailyExpenseForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
+   
   useEffect(() => {
     if (!id) return;
 
@@ -112,13 +118,8 @@ const DailyExpenseForm = () => {
                     id="selectHousehold"
                     {...register("selectHousehold")}
                   >
-                    <option value="">Select...</option>
-                    <option value="1">Item 1</option>
-                    <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
-                    <option value="1">Item 1</option>
-                    <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
+               {houseHoldsOptions.map(house=><option value="">{house.name}</option>)}
+
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 border-l">
                     <p className="h-4 w-4">
@@ -142,13 +143,15 @@ const DailyExpenseForm = () => {
                     id="selectExpense"
                     {...register("selectExpense")}
                   >
-                    <option value="">Select...</option>
+                  {/* {expenseList.map(expense=><option value="">{expense.name}</option>)} */}
+                  <option value="">Select...</option>
                     <option value="1">Item 1</option>
                     <option value="2">Item 2</option>
                     <option value="3">Item 3</option>
                     <option value="1">Item 1</option>
                     <option value="2">Item 2</option>
                     <option value="3">Item 3</option>
+
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 ">
                     <p className="h-4 w-4">
