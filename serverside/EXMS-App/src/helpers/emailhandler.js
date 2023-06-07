@@ -4,8 +4,8 @@ export const emailhandler = {
     
     const user = process.env.movie_rental_email_id
     const pass = process.env.movie_rental_email_pass
-//   console.log(user);
-//   console.log(pass);
+  console.log(user);
+  console.log(pass);
   
   
     let transporter = nodemailer.createTransport({
