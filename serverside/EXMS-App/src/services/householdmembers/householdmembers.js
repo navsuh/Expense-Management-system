@@ -3,7 +3,7 @@ import { authenticate } from '@feathersjs/authentication'
 import { createhouseholdmember } from './hooks/createhouseholdmember.js'
 import validate from 'feathers-validate-joi'
 import { householdmembersSchema } from './householdmembers.model.js'
-
+import { getAllHouseholdMembers } from './hooks/getAllhouseholdmember.js'
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   householdMembersDataValidator,
@@ -59,7 +59,8 @@ export const householdMembers = (app) => {
       remove: []
     },
     after: {
-      all: []
+      all: [],
+      find: [getAllHouseholdMembers()],
     },
     error: {
       all: []

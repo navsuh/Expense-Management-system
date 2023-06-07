@@ -32,9 +32,11 @@ export const createHouseholdSlice = (set) => ({
   createHouseholds: async (userData) => {
     const { data } = userData;
     const token = sessionStorage.getItem("token");
+    const {name, addressLine1, addressLine2, area, city, state, zipcode}=data
+    const newData={name, addressLine1, addressLine2, area, city, state, zipcode}
     //    console.log(token);
     try {
-      const response = await axios.post(apiEndPoint, data, {
+      const response = await axios.post(apiEndPoint, newData, {
         headers: {
           Authorization: "Bearer " + token,
         },

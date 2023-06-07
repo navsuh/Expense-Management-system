@@ -57,7 +57,7 @@ const createHouseholds = useBoundStore(store=>store.createHouseholds)
 const updateHouseholds =useBoundStore(store=>store.updateHouseholds)
 const error_msg=useBoundStore(store=>store.error_msg)
 
-console.log("hello");
+
 
   useEffect(()=>{
     if(!id) return;
@@ -77,7 +77,9 @@ console.log("hello");
   },[id,setValue,houseHoldList])
 
   const onSubmitHandler = (data) => {
+    console.log("1");
     console.log({ data });
+    console.log("2");
     if(data._id){
       console.log("update");
       updateHouseholds({data})
@@ -86,7 +88,7 @@ console.log("hello");
     }
     else {
       createHouseholds({data})
-      console.log("create");
+      
       return navigate("/primaryuser/household")
     }
 
