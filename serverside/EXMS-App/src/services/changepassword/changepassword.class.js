@@ -21,6 +21,8 @@ export class ChangepasswordService {
       }
     })
     if(!userResponse || userResponse.data.length === 0) throw new Error("please enter the correct email")
+    if(!newPassword !==confirmedPassword) throw new Error("New password and confirm password did not match")
+
     if (userResponse && userResponse.data.length > 0) {
       let comparePassword = await bcrypt.compare(data.currentPassword, userResponse.data[0].password)
       if (comparePassword) {

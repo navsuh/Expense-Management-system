@@ -101,9 +101,9 @@ root.render(
         <Route path="/memberuser/dailyexpenses/:id" element={<PrivateRoute><DailyExpenseForm/></PrivateRoute>}/>
 
         
-        <Route path="/changepassword" element={<PrivateRoute><ChangePasswordForm/></PrivateRoute>}/>
+        {/* <Route path="/changepassword" element={<PrivateRoute><ChangePasswordForm/></PrivateRoute>}/> */}
         <Route path="/resetpassword" element={<ResetPasswordForm/>}/>
-        <Route path="/forgotpassword" element={<ForgotPasswordForm/>}/>
+        
 
 
       </Routes>
