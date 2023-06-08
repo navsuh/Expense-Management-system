@@ -17,7 +17,7 @@ import { useBoundStore } from "../../store";
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
   lastName: yup.string().min(3).max(50).required(),
-  email: yup.string().min(3).max(50).required(),
+  // email: yup.string().min(3).max(50).required(),
   phone: yup.string().min(8).max(10).required(),
   userName: yup.string().min(6).max(20).required(),
   // password: yup.string().min(8).max(32).required(),
@@ -45,7 +45,7 @@ const EditMemberForm = () => {
     setValue("_id", member._id);
     setValue("firstName", member.firstName);
     setValue("lastName", member.lastName);
-    setValue("email", member.email);
+    // setValue("email", member.email);
     setValue("phone", member.phone);
     setValue("userName", member.userName);
     setValue("householdName", member.household);
@@ -104,7 +104,7 @@ const EditMemberForm = () => {
                     />
                     <p className="text-red-500">{errors.lastName?.message}</p>
                   </div>
-                  <div className="mt-5">
+                  {/* <div className="mt-5">
                     <label htmlFor="email">Email</label>
                     <input
                       {...register("email")}
@@ -113,7 +113,7 @@ const EditMemberForm = () => {
                       placeholder="Email"
                     />
                     <p>{errors.email?.message}</p>
-                  </div>
+                  </div> */}
                   <div className="mt-5">
                     <label htmlFor="phone">Phone Number</label>
                     <input
