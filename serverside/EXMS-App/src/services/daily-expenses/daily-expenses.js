@@ -60,7 +60,8 @@ export const dailyExpenses = (app) => {
       remove: []
     },
     after: {
-      all: []
+      all: [],
+    
     },
     error: {
       all: []

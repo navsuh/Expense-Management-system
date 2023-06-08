@@ -34,7 +34,7 @@ const periodicExpenseList = [
 ];
 
 const schema = yup.object().shape({
-  selectHousehold: yup.string().required(),
+  households: yup.string().required(),
   selectExpense: yup.string().required(),
   frequency: yup.string().required(),
   amount: yup.string().min(1).max(50).required(),
@@ -51,6 +51,9 @@ const schema = yup.object().shape({
 const PeriodicExpenseForm = () => {
   const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
+  const houseHoldsOptions =useBoundStore(store=>store.households)
+  const expenseTypes=useBoundStore(store=>store.expenseTypes)
+
   const { id } = useParams();
   const {
     register,
@@ -64,7 +67,7 @@ const PeriodicExpenseForm = () => {
   useEffect(() => {
     if (!id) return;
     console.log(id);
-    const periodicExpense = periodicExpenseList.find((p) => p._id === id);
+    const periodicExpense = periodicExpenseList.find((p) => p._id === id); 
     console.log(periodicExpense);
     setValue("_id", periodicExpense._id);
     setValue("firstName", periodicExpense.periodicExpense);
@@ -116,24 +119,19 @@ return <Navigate to="/login" replace={true} />
           >
             <div className="grid gap-x-8 gap-y-4 grid-cols-2">
               <div className="w-full mt-2 h-32 ">
-                <label htmlFor="selectHousehold" className="">
+                <label htmlFor="households" className="">
                   Household
                 </label>
 
                 <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200 ">
                   <select
                     className="appearance-none w-full py-1 px-2 h-14 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
-                    name="selectHousehold"
-                    id="selectHousehold"
-                    {...register("selectHousehold")}
+                    name="households"
+                    id="households"
+                    {...register("households")}
                   >
-                    <option value="">Select...</option>
-                    <option value="1">Item 1</option>
-                    <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
-                    <option value="1">Item 1</option>
-                    <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
+                 {houseHoldsOptions.map(house=><option key={house._id} value={house.name}>{house.name}</option>)}
+
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 border-l">
                     <p className="h-4 w-4">
@@ -142,7 +140,7 @@ return <Navigate to="/login" replace={true} />
                   </div>
                 </div>
                 <p className="text-red-500">
-                  {errors.selectHousehold?.message}
+                  {errors.households?.message}
                 </p>
               </div>
               <div className="w-full mt-2 h-32 ">
@@ -157,13 +155,8 @@ return <Navigate to="/login" replace={true} />
                     id="selectExpense"
                     {...register("selectExpense")}
                   >
-                    <option value="">Select...</option>
-                    <option value="1">Item 1</option>
-                    <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
-                    <option value="1">Item 1</option>
-                    <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
+                  {expenseTypes.map(expense=><option key={expense._id} value={expense.name}>{expense.name}</option>)}
+
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 ">
                     <p className="h-4 w-4">

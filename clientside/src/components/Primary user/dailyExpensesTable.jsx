@@ -40,8 +40,9 @@ const DailyExpensesTable = (props) => {
   
   const deleteDailyExpense=(id)=>{
     deleteDailyExpenses(id)
-    
+
    }
+   
   return (
     <>
     <div className="flex flex-row justify-between">

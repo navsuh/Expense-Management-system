@@ -118,7 +118,7 @@ return <Navigate to="/login" replace={true} />
                     id="households"
                     {...register("households")}
                   >
-               {houseHoldsOptions.map(house=><option key={house._id} value="">{house.name}</option>)}
+               {houseHoldsOptions.map(house=><option key={house._id} value={house.name}>{house.name}</option>)}
 
                   </select>
                   <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 border-l">
@@ -143,7 +143,7 @@ return <Navigate to="/login" replace={true} />
                     id="selectExpense"
                     {...register("selectExpense")}
                   >
-                  {expenseTypes.map(expense=><option key={expense._id} value="">{expense.name}</option>)}
+                  {expenseTypes.map(expense=><option key={expense._id} value={expense.name}>{expense.name}</option>)}
                   {/* <option value="">Select...</option>
                     <option value="1">Item 1</option>
                     <option value="2">Item 2</option>

@@ -3,35 +3,50 @@ import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
 import { IoAddCircle } from "react-icons/io5";
 import { FaFilter } from "react-icons/fa";
-const periodicExpenseList = [
-  {
-    _id: "1",
-    household: "household 1",
-    frequency: "frequency Name 1",
-    amount: "amount 1",
-    dueDate: "expense due date 1",
-    expensetype: "pediodic expense type 1",
-    paymentDetails: "details 1",
-    description: "description 1",
-    paidThrough: "bank details 1",
-    paidBy: "user 1 ",
-  },
-  {
-    _id: "2",
-    household: "household 2",
-    frequency: "frequency Name 2",
-    amount: "amount 2",
-    dueDate: "expense due date 2",
-    expensetype: "pediodic expense type 2",
-    paymentDetails: "details 2",
-    description: "description 2",
-    paidThrough: "bank details 2",
-    paidBy: "user 2 ",
-  },
-];
+import { useBoundStore } from "../../store";
+import { useEffect } from "react";
+// const periodicExpenseList = [
+//   {
+//     _id: "1",
+//     household: "household 1",
+//     frequency: "frequency Name 1",
+//     amount: "amount 1",
+//     dueDate: "expense due date 1",
+//     expensetype: "pediodic expense type 1",
+//     paymentDetails: "details 1",
+//     description: "description 1",
+//     paidThrough: "bank details 1",
+//     paidBy: "user 1 ",
+//   },
+//   {
+//     _id: "2",
+//     household: "household 2",
+//     frequency: "frequency Name 2",
+//     amount: "amount 2",
+//     dueDate: "expense due date 2",
+//     expensetype: "pediodic expense type 2",
+//     paymentDetails: "details 2",
+//     description: "description 2",
+//     paidThrough: "bank details 2",
+//     paidBy: "user 2 ",
+//   },
+// ];
 
 const PeriodicExpensesTable = (props) => {
-  // const {userList}=props
+  // const {userList}=prop
+  const getAllPeriodicExpense =useBoundStore(store=>store.getAllPeriodicExpense)
+  const periodicExpenseList =useBoundStore(store=>store.periodicExpense)
+  const deletePeriodicExpenses = useBoundStore(store=>store.deletePeriodicExpense)
+
+  useEffect(()=>{
+    getAllPeriodicExpense();
+  },[getAllPeriodicExpense])
+  
+
+  const deletePeriodicExpense=(id)=>{
+    deletePeriodicExpenses(id)
+
+   }
   return (
     <>
       <div className="flex flex-row justify-between">
@@ -71,8 +86,8 @@ const PeriodicExpensesTable = (props) => {
                 className="border-b bg-gray-50 "
                 key={eachPeriodicExpense._id}
               >
-                <td className="px-6 py-4">{eachPeriodicExpense.dueDate}</td>
-                <td className="px-6 py-4">{eachPeriodicExpense.expensetype}</td>
+                <td className="px-6 py-4">{eachPeriodicExpense.dueDate.toString()}</td>
+                <td className="px-6 py-4">{eachPeriodicExpense.expensetypes}</td>
                 <td className="px-6 py-4">{eachPeriodicExpense.paidBy}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
@@ -81,7 +96,7 @@ const PeriodicExpensesTable = (props) => {
                     >
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <AiOutlineDelete className="w-8 h-6" />
+                    <AiOutlineDelete onClick={()=>deletePeriodicExpense(eachPeriodicExpense._id)} className="w-8 h-6 cursor-pointer" />
                   </div>
                 </td>
               </tr>

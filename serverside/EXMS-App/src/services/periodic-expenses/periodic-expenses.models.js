@@ -6,12 +6,7 @@ const attr = {
     expensetypes:Joi.string().min(5).max(100).required(),
     frequency:Joi.string().min(3).max(50).required(),
     amount:Joi.number().min(0).required(),
-    dueDate: Joi.object({
-        day: Joi.number().required(),
-        month: Joi.number().required(),
-        year: Joi.number().required()
-      }).required(),
-    
+    dueDate: Joi.string().required(),
     description:Joi.string().min(5).max(100).required(),
     paidThrough:Joi.string().min(3).max(50).required(),
     paidBy:Joi.string().min(3).max(50).required(),

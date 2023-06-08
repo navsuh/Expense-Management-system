@@ -20,6 +20,7 @@ const HouseholdTable = (props) => {
   const deleteHousehold=(id)=>{
     deleteHouseholds(id)
    }
+   
   return (
     <>
      <div className="flex flex-row justify-between">
