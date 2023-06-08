@@ -13,7 +13,7 @@ export const getAllHouseholdMembers =()=>{
     //    console.log(households.data);
 // console.log(householdmembers);
 const householdmembersData=householdmembers.map((eachHouseholdmember)=>{
-    let member={_id:eachHouseholdmember._id}
+    let member={_id:eachHouseholdmember._id,householdId:eachHouseholdmember.household,memberUserId:eachHouseholdmember.user}
     const household=households.data.find((eachHousehold)=>eachHousehold._id.equals(eachHouseholdmember.household))
     const user=users.data.find((eachUser)=>eachUser._id.equals(eachHouseholdmember.user))
     const {name}=household
@@ -22,11 +22,11 @@ const householdmembersData=householdmembers.map((eachHouseholdmember)=>{
     return member
 })
         
-          console.log(householdmembersData);
+        //   console.log(householdmembersData);
         
      
     
-     delete context.data
+     delete context.result.data
     //  delete context.data.lastName
     //  delete context.data.email
     //  delete context.data.phone
@@ -35,7 +35,7 @@ const householdmembersData=householdmembers.map((eachHouseholdmember)=>{
     //  delete context.data.households
     //  delete context.data.role
     //  context.data.household=household.data[0]._id
-     context.data=householdmembersData
+    context.result.data=householdmembersData
 
         
         

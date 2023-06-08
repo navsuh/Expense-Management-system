@@ -28,7 +28,8 @@ import DailyExpensesTableMember from "./components/member/dailyExpensesTable";
 
 import Register from "./components/Register";
 import Login from "./components/Login ";
-import MemberForm from "./components/Forms/membersForm";
+import CreateMemberForm from "./components/Forms/createMembersForm";
+import EditMemberForm from "./components/Forms/editMembersForm";
 import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
 import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
@@ -78,8 +79,8 @@ root.render(
         <Route path="/primaryuser/householdform" element={<PrivateRoute><HouseHoldForm/></PrivateRoute>}/>
         <Route path="/primaryuser/household/:id" element={<PrivateRoute><HouseHoldForm/></PrivateRoute>}/>
 
-        <Route path="/primaryuser/memberform" element={<PrivateRoute><MemberForm/></PrivateRoute>}/>
-        <Route path="/primaryuser/members/:id" element={<PrivateRoute><MemberForm/></PrivateRoute>}/>
+        <Route path="/primaryuser/memberform" element={<PrivateRoute><CreateMemberForm/></PrivateRoute>}/>
+        <Route path="/primaryuser/members/:id" element={<PrivateRoute><EditMemberForm/></PrivateRoute>}/>
 
         <Route path="/primaryuser/periodicexpenseform" element={<PrivateRoute><PeriodicExpenseForm/></PrivateRoute>}/>
         <Route path="/primaryuser/periodicexpenses/:id" element={<PrivateRoute><PeriodicExpenseForm/></PrivateRoute>}/>

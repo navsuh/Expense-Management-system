@@ -14,15 +14,15 @@ import { useEffect } from "react";
 const MemberTable = (props) => {
   // const {userList}=props
   const getAllMembers = useBoundStore(store=>store.getAllMembers)
-  const memberList = useBoundStore(store=>store.member)
-  const deleteMembers =useBoundStore(store=>store.deleteMember)
+  const memberList = useBoundStore(store=>store.memberData)
+  const handleDeleteMember =useBoundStore(store=>store.deleteMember)
   console.log(memberList);
   useEffect(()=>{
     getAllMembers();
   },[getAllMembers])
 
-  const deleteMember=(id)=>{
-    deleteMembers(id)
+  const onDeleteMember=(id)=>{
+    handleDeleteMember(id)
    }
   return (
     <>
@@ -56,13 +56,13 @@ const MemberTable = (props) => {
             {memberList.map((eachMember) => (
               <tr className="border-b bg-gray-50 " key={eachMember._id}>
                 <td className="px-6 py-4">{eachMember.household}</td>
-                <td className="px-6 py-4">{eachMember.user}</td>
+                <td className="px-6 py-4">{eachMember.firstName}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
                   <Link to={`/primaryuser/members/${eachMember._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
                     </Link >
-                    <AiOutlineDelete onClick={()=>deleteMember(eachMember._id)} className="w-8 h-6 ml-1 cursor-pointer" />
+                    <AiOutlineDelete onClick={()=>onDeleteMember(eachMember._id)} className="w-8 h-6 ml-1 cursor-pointer" />
                   </div>
                 </td>
               </tr>
