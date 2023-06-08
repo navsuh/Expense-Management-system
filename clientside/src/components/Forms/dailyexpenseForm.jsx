@@ -55,7 +55,7 @@ const DailyExpenseForm = () => {
     setValue("selectExpense",dailyExpense.expensetypes)
     setValue("paymentDetails",dailyExpense.paymentDetails)
 
-  }, [id, setValue]);
+  }, [id, setValue,dailyExpensesList]);
 
   const onSubmitHandler = (data) => {
     console.log({ data });

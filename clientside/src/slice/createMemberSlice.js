@@ -4,7 +4,7 @@ import axios from "axios";
 const apiEndPoint = process.env.REACT_APP_API_URL+"householdmembers"
 
 export const createMemberSlice =(set)=>({
-   member:[],
+   memberData:[],
    error_msg:"",
   
   getAllMembers:async()=>{
@@ -17,9 +17,7 @@ export const createMemberSlice =(set)=>({
         },
       });
       const { data } = response.data;
-      console.log(data);
-      set(
-        (store) => ({ error_msg: "", member: data }),
+      set({ error_msg: "", memberData: data },
         false,
         "getAllMembers"
       );
@@ -32,15 +30,25 @@ export const createMemberSlice =(set)=>({
 
    addMember:async(userData)=>{
     const {data} =userData
-    const newData={...data,role:"member"}
+    const {email,firstName,householdName,lastName,password,phone,userName}=data
+    const newData={firstName,lastName,email,phone,userName,password,role:"member",householdName}
+    const token = sessionStorage.getItem("token");
+    console.log(newData);
     try {
         const response=await axios.post(apiEndPoint,newData,{
           headers: {
-            'Content-Type': 'application/json'
-          }
+            Authorization: "Bearer " + token,
+          },
         })
-        set({ error_msg:"",member: response.data },false,"addMember")
-     
+        console.log(response.data);
+        set(
+          (state) => ({
+            error_msg: "",
+            memberData: [...state.memberData, response.data],
+          }),
+          false,
+          "addMember"
+        );
         
       } catch (error) {
         const {response}=error
@@ -48,6 +56,58 @@ export const createMemberSlice =(set)=>({
         set({ error_msg: data.message},false,"addMemberErrorMsg")
       }
    },
+
+   updateMember: async (userData) => {
+    const { data } = userData;
+
+    const { name } = data;
+    const { _id } = data;
+
+    const token = sessionStorage.getItem("token");
+
+    try {
+      const response = await axios.patch(
+        `${apiEndPoint}/${_id}`,
+        { name },
+        {
+          headers: {
+            // 'Content-Type': 'application/json',
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      // console.log(response.data.accessToken);
+      // console.log(response.data.users.role);
+
+      console.log(response.data);
+
+      set(
+        (state) => ({
+          error_msg: "",
+          expenseTypes: state.memberData.map((eachMemberData) => {
+            if (eachMemberData._id === response.data._id) {
+              return { _id: response.data._id,
+                firstName:response.data.email,
+                lastName:response.data.lastName,
+                email:response.data.email,
+                phone:response.data.phone,
+                userName:response.data.email,
+                household:response.data.email,
+              };
+            } else {
+              return eachMemberData;
+            }
+          }),
+        }),
+        false,
+        "updateMember"
+      );
+    } catch (error) {
+      const { response } = error;
+      const { data } = response;
+      set({ error_msg: data.message }, false, "updateMemberErrorMsg");
+    }
+  },
 
    deleteMember: async (id) => {
     const token = sessionStorage.getItem("token");
@@ -64,10 +124,10 @@ export const createMemberSlice =(set)=>({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          member: store.member.filter((eachHousehold) => {
-            return eachHousehold._id !== response.data._id;
+          memberData: state.memberData.filter((eachMemberData) => {
+            return eachMemberData._id !== response.data._id;
           }),
         }),
         false,

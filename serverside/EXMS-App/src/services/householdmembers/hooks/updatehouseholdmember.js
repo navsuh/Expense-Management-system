@@ -1,5 +1,5 @@
 import { emailhandler } from '../../../helpers/emailhandler.js'
-export const createhouseholdmember =()=>{
+export const updatehouseholdmember =()=>{
     return async(context)=>{
         console.log(context.data);
 
