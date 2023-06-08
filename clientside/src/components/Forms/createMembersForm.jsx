@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // import { Link } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
+import {  useNavigate, Navigate } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
 
@@ -104,7 +104,7 @@ const CreateMemberForm = () => {
                       type="text"
                       placeholder="First Name"
                     />
-                    <p>{errors.firstName?.message}</p>
+                    <p className="text-red-500">{errors.firstName?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="lastName">Last Name</label>
@@ -114,7 +114,7 @@ const CreateMemberForm = () => {
                       type="text"
                       placeholder="Last Name"
                     />
-                    <p>{errors.lastName?.message}</p>
+                    <p className="text-red-500">{errors.lastName?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="email">Email</label>
@@ -124,7 +124,7 @@ const CreateMemberForm = () => {
                       type="email"
                       placeholder="Email"
                     />
-                    <p>{errors.email?.message}</p>
+                    <p className="text-red-500">{errors.email?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="phone">Phone Number</label>
@@ -134,7 +134,7 @@ const CreateMemberForm = () => {
                       type="text"
                       placeholder="Phone Number"
                     />
-                    <p>{errors.phone?.message}</p>
+                    <p className="text-red-500">{errors.phone?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="userName">UserName</label>
@@ -144,7 +144,7 @@ const CreateMemberForm = () => {
                       type="text"
                       placeholder="User Name"
                     />
-                    <p>{errors.userName?.message}</p>
+                    <p className="text-red-500">{errors.userName?.message}</p>
                   </div>
                   <div className="relative mt-5">
                     <label htmlFor="password">Password</label>
@@ -164,7 +164,7 @@ const CreateMemberForm = () => {
                         <AiFillEyeInvisible className="h-6 w-6 " />
                       )}
                     </span>
-                    <p>{errors.password?.message}</p>
+                    <p className="text-red-500">{errors.password?.message}</p>
                   </div>
                   <div className="w-full mt-2 h-24 ">
                     <label htmlFor="selectHousehold" className="mb-0">

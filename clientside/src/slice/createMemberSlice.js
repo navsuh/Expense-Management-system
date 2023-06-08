@@ -57,18 +57,16 @@ export const createMemberSlice =(set)=>({
       }
    },
 
-   updateMember: async (userData) => {
-    const { data } = userData;
-
-    const { name } = data;
-    const { _id } = data;
+   updateMember: async (memberuserData) => {
+    
+    const { _id } = memberuserData;
 
     const token = sessionStorage.getItem("token");
-
+console.log(memberuserData);
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        { name },
+        memberuserData,
         {
           headers: {
             // 'Content-Type': 'application/json',
@@ -76,32 +74,30 @@ export const createMemberSlice =(set)=>({
           },
         }
       );
-      // console.log(response.data.accessToken);
-      // console.log(response.data.users.role);
 
       console.log(response.data);
 
-      set(
-        (state) => ({
-          error_msg: "",
-          expenseTypes: state.memberData.map((eachMemberData) => {
-            if (eachMemberData._id === response.data._id) {
-              return { _id: response.data._id,
-                firstName:response.data.email,
-                lastName:response.data.lastName,
-                email:response.data.email,
-                phone:response.data.phone,
-                userName:response.data.email,
-                household:response.data.email,
-              };
-            } else {
-              return eachMemberData;
-            }
-          }),
-        }),
-        false,
-        "updateMember"
-      );
+      // set(
+      //   (state) => ({
+      //     error_msg: "",
+      //     expenseTypes: state.memberData.map((eachMemberData) => {
+      //       if (eachMemberData._id === response.data._id) {
+      //         return { _id: response.data._id,
+      //           firstName:response.data.email,
+      //           lastName:response.data.lastName,
+      //           email:response.data.email,
+      //           phone:response.data.phone,
+      //           userName:response.data.email,
+      //           household:response.data.email,
+      //         };
+      //       } else {
+      //         return eachMemberData;
+      //       }
+      //     }),
+      //   }),
+      //   false,
+      //   "updateMember"
+      // );
     } catch (error) {
       const { response } = error;
       const { data } = response;
