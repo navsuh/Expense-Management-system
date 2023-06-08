@@ -7,34 +7,13 @@ import { useParams, useNavigate,Navigate } from "react-router-dom";
 // import { IoCaretDownSharp } from "react-icons/io5";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
-// const dailyExpensesList = [
-//   {
-//     _id: "1",
-//     household: "household 1",
-//     dueDate: "expense due date 1",
-//     expensetype: "daily expense type 1",
-//     paymentDetails: "details 1",
-//     description: "description 1",
-//     paidThrough: "bank details 1",
-//     paidBy: "user 1 ",
-//   },
-//   {
-//     _id: "2",
-//     household: "household 2",
-//     dueDate: "expense due date 2",
-//     expensetype: "daily expense type 2",
-//     paymentDetails: "details 2",
-//     description: "description 2",
-//     paidThrough: "bank details 2",
-//     paidBy: "user 2 ",
-//   },
-// ];
+
 
 const schema = yup.object().shape({
-  selectHousehold: yup.string().required(),
+  households: yup.string().required(),
   selectExpense: yup.string().required(),
   paymentDetails: yup.object().shape({
-    amounts: yup.string().min(1).max(50).required(),
+    amount: yup.string().min(1).max(50).required(),
     date: yup.date().required(),
     method: yup.string().min(3).max(50).required(),
   }),
@@ -67,12 +46,12 @@ const DailyExpenseForm = () => {
     if (!id) return;
 
     const dailyExpense = dailyExpensesList.find((p) => p._id === id);
-    
+    console.log(dailyExpense);
     setValue("_id", dailyExpense._id);
     setValue("description", dailyExpense.description);
     setValue("paidThrough", dailyExpense.paidThrough);
     setValue("paidBy", dailyExpense.paidBy);
-    setValue("selectHousehold",dailyExpense.households)
+    setValue("households",dailyExpense.households)
     setValue("selectExpense",dailyExpense.expensetypes)
     setValue("paymentDetails",dailyExpense.paymentDetails)
 
@@ -129,16 +108,16 @@ return <Navigate to="/login" replace={true} />
           >
             <div className="grid gap-x-6 gap-y-4 grid-cols-2 ">
               <div className="w-full mt-2 h-24 ">
-                <label htmlFor="selectHousehold" className="mb-0">
+                <label htmlFor="households" className="mb-0">
                   Household
                 </label>
 
                 <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200 ">
                   <select
                     className="appearance-none w-full py-1 px-2 h-14 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
-                    name="selectHousehold"
-                    id="selectHousehold"
-                    {...register("selectHousehold")}
+                    name="households"
+                    id="households"
+                    {...register("households")}
                   >
                {houseHoldsOptions.map(house=><option key={house._id} value="">{house.name}</option>)}
 
@@ -150,7 +129,7 @@ return <Navigate to="/login" replace={true} />
                   </div>
                 </div>
                 <p className="text-red-500">
-                  {errors.selectHousehold?.message}
+                  {errors.households?.message}
                 </p>
               </div>
               <div className="w-full mt-2 h-24">
@@ -198,14 +177,14 @@ return <Navigate to="/login" replace={true} />
 
                 <div className="mt-2.5">
                   <input
-                    {...register("paymentDetails.amounts")}
+                    {...register("paymentDetails.amount")}
                     type="text"
                     name="amount"
                     id="amount"
                     className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     placeholder="Amount"
                   />
-                  <p className="text-red-500">{errors.paymentDetails?.amounts.message.slice(15)}</p>
+                  <p className="text-red-500">{errors.paymentDetails?.amount.message.slice(15)}</p>
                 </div>
                 </div>
                 <div className="w-1/3  h-12 mr-2">
