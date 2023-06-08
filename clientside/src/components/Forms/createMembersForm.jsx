@@ -21,7 +21,7 @@ const schema = yup.object().shape({
   phone: yup.string().min(8).max(10).required(),
   userName: yup.string().min(6).max(20).required(),
   password: yup.string().min(8).max(32).required(),
-  householdName: yup.string().min(8).max(10).required(),
+  householdName: yup.string().required(),
 });
 const CreateMemberForm = () => {
   const user = useBoundStore((store) => store.user);

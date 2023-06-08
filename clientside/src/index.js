@@ -34,8 +34,8 @@ import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
 import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
 import { ToastContainer} from "react-toastify";
-import ChangePasswordForm from "./components/Forms/ChangePasswordForm";
-import ForgotPasswordForm from "./components/Forms/ForgetPasswordForm";
+// import ChangePasswordForm from "./components/Forms/ChangePasswordForm";
+// import ForgotPasswordForm from "./components/Forms/ForgetPasswordForm";
 import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
 
 import PrivateRoute from "./components/privateRoute";

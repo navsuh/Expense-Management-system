@@ -3,7 +3,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { IoNotifications } from "react-icons/io5";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdChangeCircle } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../store";
 import { useState } from "react";
 import ChangePassword from "./Forms/ChangePasswordForm";
