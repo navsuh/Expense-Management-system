@@ -40,6 +40,7 @@ const DailyExpensesTable = (props) => {
   
   const deleteDailyExpense=(id)=>{
     deleteDailyExpenses(id)
+    
    }
   return (
     <>
