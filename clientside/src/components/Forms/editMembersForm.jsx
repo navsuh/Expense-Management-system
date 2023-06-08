@@ -92,7 +92,7 @@ const EditMemberForm = () => {
                       type="text"
                       placeholder="First Name"
                     />
-                    <p>{errors.firstName?.message}</p>
+                    <p className="text-red-500">{errors.firstName?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="lastName">Last Name</label>
@@ -102,7 +102,7 @@ const EditMemberForm = () => {
                       type="text"
                       placeholder="Last Name"
                     />
-                    <p>{errors.lastName?.message}</p>
+                    <p className="text-red-500">{errors.lastName?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="email">Email</label>
@@ -122,7 +122,7 @@ const EditMemberForm = () => {
                       type="text"
                       placeholder="Phone Number"
                     />
-                    <p>{errors.phone?.message}</p>
+                    <p className="text-red-500">{errors.phone?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="userName">UserName</label>
@@ -132,7 +132,7 @@ const EditMemberForm = () => {
                       type="text"
                       placeholder="User Name"
                     />
-                    <p>{errors.userName?.message}</p>
+                    <p className="text-red-500">{errors.userName?.message}</p>
                   </div>
 
                   <div className="w-full mt-2 h-24 ">
@@ -167,7 +167,7 @@ const EditMemberForm = () => {
                     type="submit"
                     className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                   >
-                    <span className="ml-3">ADD</span>
+                    <span className="ml-3">UPDATE</span>
                   </button>
                 </div>
               </div>
