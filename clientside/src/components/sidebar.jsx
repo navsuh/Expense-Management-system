@@ -60,9 +60,9 @@ const Sidebar = (props) => {
               />
             </div>
 
-            <div className="flex flex-col items-center h-25 w-60 px-3 py-4 overflow-y-auto rounded-md bg-green-400">
+            <div className="flex flex-col items-center justify-center h-25 w-60 px-3 py-4 flex-wrap rounded-md bg-green-400">
               <h1 className="text-white font-bold text-2xl">{`Hello ${name}`}</h1>
-              <p className="text-white">Welcome back</p>
+              <p className="text-white font-bold text-xl">Welcome back</p>
             </div>
           </div>
 
