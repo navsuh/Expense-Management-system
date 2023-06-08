@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { IoArrowBack } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
-import { useBoundStore } from "../../store.js";
 
+import { useNavigate } from "react-router-dom";
+import { useBoundStore } from "../../store";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -14,137 +13,138 @@ const schema = yup.object().shape({
   confirmedPassword: yup.string().min(8).max(32).required(),
 });
 
-const ChangePasswordForm = () => {
-  const navigate = useNavigate();
-  const changePassword=useBoundStore(store=>store.changePassword)
-  const error_msg=useBoundStore(store=>store.error_msg)
-  const changePasswordResponse=useBoundStore(store=>store.changePasswordResponse)
-  const changePasswordReset=useBoundStore(store=>store.changePasswordReset)
+const ChangePassword = ({ isModalOpen, handleModalClose }) => {
+  const changePassword = useBoundStore((store) => store.changePassword);
+  const error_msg = useBoundStore((store) => store.error_msg);
+  const changePasswordResponse = useBoundStore(
+    (store) => store.changePasswordResponse
+  );
+  const changePasswordReset = useBoundStore((store) => store.changePasswordReset);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const navigate = useNavigate();
 
-useEffect(()=>{
-if(changePasswordResponse.status===200){
-  alert(changePasswordResponse.msg)
-  sessionStorage.removeItem("token")
-  changePasswordReset()
-  navigate("/login")
-}
-},[changePasswordResponse,navigate,changePasswordReset])
-
-  
-
+  useEffect(() => {
+    if (changePasswordResponse.status === 200) {
+      alert(changePasswordResponse.msg);
+      sessionStorage.removeItem("token");
+      changePasswordReset();
+      navigate("/login");
+    }
+  }, [changePasswordResponse, navigate, changePasswordReset]);
 
   const onSubmitHandler = (data) => {
     console.log({ data });
-    changePassword({data})
+    changePassword({ data });
   };
 
+  if (!isModalOpen) return null;
+
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-      <div className="max-w-screen-sm  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 flex-col p-10">
-        <div className="flex">
-          <div>
-            <IoArrowBack
-              className="text-gray-800 h-8 w-8"
-              style={{ cursor: "pointer" }}
-              onClick={() => navigate(-1)}
-            />
-          </div>
+    <div
+      id="modal-body"
+      onClick={(e) => e.target.id === "modal-body" && handleModalClose()}
+      className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]"
+    >
+      <div className="w-96 bg-white rounded-md px-6 py-6">
+        <div className="flex justify-end">
+          <span
+            onClick={() => handleModalClose()}
+            className="text-red-500 text-2xl cursor-pointer"
+          >
+            &times;
+          </span>
         </div>
 
-        <div className=" bg-white px-6 sm:py-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold  text-orange-500 sm:text-4xl">
-              Change Password
-            </h2>
-          </div>
-          <form
-            onSubmit={handleSubmit(onSubmitHandler)}
-            className="mx-auto mt-16 max-w-xl "
-          >
-            <div className="flex flex-col">
-              <div>
-                <label htmlFor="email">Email</label>
-                <div className="mt-1.5">
-                  <input
-                    {...register("email")}
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    placeholder="abc@gmail.com"
-                  />
-                  <p className="text-red-500">{errors.email?.message}</p>
-                </div>
-              </div>
-              <div className="mt-4">
-                <label htmlFor="currentPassword">Current Password</label>
-                <div className="mt-1.5">
-                  <input
-                    {...register("currentPassword")}
-                    type="password"
-                    name="currentPassword"
-                    id="currentPassword"
-                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    placeholder="Current Password"
-                  />
-                  <p className="text-red-500">
-                    {errors.currentPassword?.message}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4">
-                <label htmlFor="newPassword">New Password</label>
-                <div className="mt-1.5">
-                  <input
-                    {...register("newPassword")}
-                    type="password"
-                    name="newPassword"
-                    id="newPassword"
-                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    placeholder="New Password"
-                  />
-                  <p className="text-red-500">{errors.newPassword?.message}</p>
-                </div>
-              </div>
-              <div className="mt-4">
-                <label htmlFor="confirmedPassword">Confirm Password</label>
-                <div className="mt-1.5">
-                  <input
-                    {...register("confirmedPassword")}
-                    type="password"
-                    name="confirmedPassword"
-                    id="confirmedPassword"
-                    className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    placeholder="Confirm Password"
-                  />
-                  <p className="text-red-500">
-                    {errors.confirmedPassword?.message}
-                  </p>
-                </div>
+        <div className="my-8">
+          <h2 className="text-3xl font-bold text-center text-orange-500">
+            Change Password
+          </h2>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmitHandler)}>
+          <div className="flex flex-col space-y-4">
+            <div className="flex">
+              <label htmlFor="email" className="w-24">Email</label>
+              <div className="flex-grow">
+                <input
+                  {...register("email")}
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  placeholder="abc@gmail.com"
+                />
+                <p className="text-red-500">{errors.email?.message}</p>
               </div>
             </div>
-            <div className="mt-10">
+            <div className="flex">
+              <label htmlFor="currentPassword" className="w-24">Current Password</label>
+              <div className="flex-grow">
+                <input
+                  {...register("currentPassword")}
+                  type="password"
+                  name="currentPassword"
+                  id="currentPassword"
+                  className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  placeholder="Current Password"
+                />
+                <p className="text-red-500">
+                  {errors.currentPassword?.message}
+                </p>
+              </div>
+            </div>
+            <div className="flex">
+              <label htmlFor="newPassword" className="w-24">New Password</label>
+              <div className="flex-grow">
+                <input
+                  {...register("newPassword")}
+                  type="password"
+                  name="newPassword"
+                  id="newPassword"
+                  className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  placeholder="New Password"
+                />
+                <p className="text-red-500">{errors.newPassword?.message}</p>
+              </div>
+            </div>
+            <div className="flex">
+              <label htmlFor="confirmedPassword" className="w-24">Confirm Password</label>
+              <div className="flex-grow">
+                <input
+                  {...register("confirmedPassword")}
+                  type="password"
+                  name="confirmedPassword"
+                  id="confirmedPassword"
+                  className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  placeholder="Confirm Password"
+                />
+                <p className="text-red-500">
+                  {errors.confirmedPassword?.message}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8">
               <button
                 type="submit"
-                className=" font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out  items-center justify-center focus:shadow-outline focus:outline-none"
+                className="w-full py-4 font-semibold bg-blue-500 text-gray-100 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out focus:shadow-outline focus:outline-none"
               >
                 CHANGE
               </button>
             </div>
-          </form>
-          <p className="text-red-500">{error_msg?error_msg:null}</p>
-        </div>
+          </div>
+        </form>
+
+        <p className="text-red-500">{error_msg ? error_msg : null}</p>
       </div>
     </div>
   );
 };
 
-export default ChangePasswordForm;
+export default ChangePassword;

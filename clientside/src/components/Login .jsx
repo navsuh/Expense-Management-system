@@ -8,6 +8,7 @@ import { useBoundStore } from "../store";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import ForgotPasswordForm from "./Forms/ForgetPasswordForm";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -94,7 +95,13 @@ const Login = () => {
     });
   };
 
+const [isModalOpen, setIsModalOpen] = useState(false);
+ const handleModalClose = () => {
+   setIsModalOpen(false);
+ };
   return (
+    <>
+     <ForgotPasswordForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
     <div className="min-h-fit bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-10 bg-white shadow-xl sm:rounded-lg flex justify-center flex-1 p-6">
         <div className="flex-1 text-center hidden lg:flex ml-20">
@@ -153,17 +160,23 @@ const Login = () => {
                     className="mt-5 mb-2 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                   >
                     <span className="ml-3">LOG IN</span>
+
                   </button>
+
+                  {/* <Link to={"/forgotpassword"} className="text-blue-600 hover:text-blue-800 underline-offset-2">Forgot Password?</Link> */}
                   {error_msg ? displayErrorMessage() : null}
 
-                  <Link to={"/forgotpassword"} className="text-blue-600 hover:text-blue-800 underline-offset-2">Forgot Password?</Link>
+
                 </div>
               </div>
             </form>
+            <button onClick={() => setIsModalOpen(true)} className="text-blue-600 hover:text-blue-800 underline-offset-2 mt-2">Forgot Password?</button>
+
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

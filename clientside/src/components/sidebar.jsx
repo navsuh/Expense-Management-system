@@ -5,7 +5,8 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { MdChangeCircle } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useBoundStore } from "../store";
-
+import { useState } from "react";
+import ChangePassword from "./Forms/ChangePasswordForm";
 const Sidebar = (props) => {
   // const {name}=props
   const navigate = useNavigate();
@@ -13,8 +14,14 @@ const Sidebar = (props) => {
   const name = user.firstName;
  console.log(user);
 
+ const [isModalOpen, setIsModalOpen] = useState(false);
+ const handleModalClose = () => {
+   setIsModalOpen(false);
+ };
+
   return (
     <>
+    <ChangePassword isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
       <button
         data-drawer-target="default-sidebar"
         data-drawer-toggle="default-sidebar"
@@ -96,13 +103,13 @@ const Sidebar = (props) => {
               </a>
             </li>
             <li>
-              < Link
-                to="/changepassword"
+              < button
+               onClick={() => setIsModalOpen(true)}
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <MdChangeCircle className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
-                <span className="ml-3 text-white">Change Password</span>
-              </Link>
+                <span    className="ml-3 text-white">Change Password</span>
+              </button>
             </li>
             <li>
               <button
@@ -115,6 +122,7 @@ const Sidebar = (props) => {
                 <IoIosLogOut className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Logout</span>
               </button>
+              {/* <button >MOdal</button> */}
             </li>
           </ul>
         </div>
