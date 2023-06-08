@@ -14,9 +14,14 @@ export const householdmembersSchema = Joi.object({
   export const updatehouseholdmembersSchema = Joi.object({
     firstName: Joi.string().min(5).max(50),
     lastName: Joi.string().min(5).max(50),
-    email: Joi.string().email(),
+    // email: Joi.string().email(),
     phone: Joi.string().length(10),
     userName: Joi.string().min(5).max(50),
     householdName:Joi.string(),
-    role: Joi.string().min(5).max(50)
+    // role: Joi.string().min(5).max(50),
+    householdId:Joi.string(),
+    memberUserId:Joi.string(),
+
+
+
   });

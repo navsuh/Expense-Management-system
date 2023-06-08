@@ -27,6 +27,7 @@ const EditMemberForm = () => {
   const user = useBoundStore((store) => store.user);
   const memberList = useBoundStore((store) => store.memberData);
   const houseHoldList = useBoundStore((store) => store.households);
+  const updateMember = useBoundStore((store) => store.updateMember);
   const navigate = useNavigate();
   const { id } = useParams();
   const {
@@ -53,6 +54,14 @@ const EditMemberForm = () => {
 
   const onSubmitHandler = (data) => {
     console.log({ data });
+    const member = memberList.find((m) => m._id === id);
+    const {householdId,memberUserId}=member
+   
+    const newdata={...data,householdId,memberUserId}
+    
+    // console.log(newdata);
+    updateMember(newdata)
+    return navigate("/primaryuser/members");
   };
   if (user.role !== "Primaryuser") {
     sessionStorage.removeItem("token");
