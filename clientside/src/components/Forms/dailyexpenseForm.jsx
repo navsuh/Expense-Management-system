@@ -13,13 +13,13 @@ const schema = yup.object().shape({
   households: yup.string().required(),
   selectExpense: yup.string().required(),
   paymentDetails: yup.object().shape({
-    amount: yup.string().min(1).max(50).required(),
+    amount: yup.string().min(0).required(),
     date: yup.date().required(),
     method: yup.string().min(3).max(50).required(),
   }),
-  description: yup.string().min(6).max(20).required(),
-  paidThrough: yup.string().min(6).max(20).required(),
-  paidBy: yup.string().min(6).max(20).required(),
+  description: yup.string().min(6).max(80).required(),
+  paidThrough: yup.string().min(3).max(50).required(),
+  paidBy: yup.string().min(3).max(50).required(),
 });
 
 const DailyExpenseForm = () => {
@@ -31,7 +31,7 @@ const DailyExpenseForm = () => {
   const dailyExpensesList = useBoundStore(store=>store.dailyExpense)
   const expenseTypes=useBoundStore(store=>store.expenseTypes)
   const updateDailyExpense =useBoundStore(store=>store.updateDailyExpense)
-
+  const createDailyExpense =useBoundStore(store=>store.createDailyExpense)
    console.log(expenseTypes);
   const {
     register,
@@ -62,13 +62,12 @@ const DailyExpenseForm = () => {
     if(data._id){
       console.log("update");
       updateDailyExpense({data})
-      // return navigate("/primaryuser/household")
-
+      // return navigate("/primaryuser/dailyexpenses")
     }
     else {
-      // createHouseholds({data})
+      createDailyExpense({data})
       console.log("create");
-      // return navigate("/primaryuser/household")
+      return navigate("/primaryuser/dailyexpenses")
     }
   }
 
