@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiEndPoint = process.env.REACT_APP_API_URL + 'reset-password';
 
-export const createResetPasswordSlice = (set) => ({
+export const ResetPasswordSlice = (set) => ({
   resetPasswordResponse: {},
   error_msg: '',
   resetPassword: async (userData) => {

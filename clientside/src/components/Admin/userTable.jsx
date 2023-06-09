@@ -10,14 +10,14 @@ import { Link } from "react-router-dom";
 const UserTable = (props) => {
   
   const getAllUsers=useBoundStore(store=>store.getAllUsers)
-  const softdeleteExpenseTypes=useBoundStore(store=>store.softdeleteExpenseTypes)
+  const softdeleteUser=useBoundStore(store=>store.softdeleteExpenseTypes)
   const userList=useBoundStore(store=>store.usersData)
   // console.log(expenseList);
   useEffect(() => {
     getAllUsers();
   }, [getAllUsers]);
- const softDeleteuser=(id)=>{
-  softdeleteExpenseTypes(id)
+ const onSoftDeleteuser=(id)=>{
+  softdeleteUser(id)
  }
   return (
     <>
@@ -58,7 +58,7 @@ const UserTable = (props) => {
                     <AiOutlineEdit className="w-8 h-6" />
                     
                     </Link>
-                    <AiOutlineDelete onClick={()=>softDeleteuser(eachUser._id)} className="w-8 h-6 cursor-pointer ml-2" />
+                    <AiOutlineDelete onClick={()=>onSoftDeleteuser(eachUser._id)} className="w-8 h-6" />
                   </div>
                 </td>
               </tr>

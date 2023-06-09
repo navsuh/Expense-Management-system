@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiEndPoint = process.env.REACT_APP_API_URL + 'forgot-password';
 
-export const createForgetPasswordSlice = (set) => ({
+export const ForgetPasswordSlice = (set) => ({
   forgetPasswordResponse: {},
   error_msg: '',
   forgetPassword: async (userData) => {

@@ -1,7 +1,7 @@
 import { emailhandler } from '../../../helpers/emailhandler.js'
 export const updatehouseholdmember =()=>{
     return async(context)=>{
-        console.log(context.data);
+        // console.log(context.data);
 
         const {firstName,lastName,phone,userName,householdName,memberUserId}=context.data
   

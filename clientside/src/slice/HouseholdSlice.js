@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const apiEndPoint = process.env.REACT_APP_API_URL + "daily-expenses";
+const apiEndPoint = process.env.REACT_APP_API_URL + "households";
 
-export const createDailyExpenseSlice = (set) => ({
-  dailyExpense: [],
+export const HouseholdSlice = (set) => ({
+  households: [],
   error_msg: "",
 
-  getAllDailyExpense: async () => {
+  getAllHouseholds: async () => {
     const token = sessionStorage.getItem("token");
     //    console.log(token);
     try {
@@ -16,25 +16,27 @@ export const createDailyExpenseSlice = (set) => ({
         },
       });
       const { data } = response.data;
-      // console.log(data);
+      console.log(data);
       set(
-        (store) => ({ error_msg: "", dailyExpense: data }),
+        (store) => ({ error_msg: "", households: data }),
         false,
-        "getAllDailyExpense"
+        "getAllHouseholds"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllDailyExpenseErrorMsg");
+      set({ error_msg: data.message }, false, "getAllHouseholdsErrorMsg");
     }
   },
 
-  createDailyExpense: async (userData) => {
+  createHouseholds: async (userData) => {
     const { data } = userData;
     const token = sessionStorage.getItem("token");
+    const {name, addressLine1, addressLine2, area, city, state, zipcode}=data
+    const newData={name, addressLine1, addressLine2, area, city, state, zipcode}
     //    console.log(token);
     try {
-      const response = await axios.post(apiEndPoint, data, {
+      const response = await axios.post(apiEndPoint, newData, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -42,33 +44,33 @@ export const createDailyExpenseSlice = (set) => ({
 
       console.log(response.data);
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          dailyExpense: [...store.dailyExpense, response.data],
+          households: [...state.households, response.data],
         }),
         false,
-        "createDailyExpense"
+        "createHouseholds"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "createDailyExpenseErrorMsg");
+      set({ error_msg: data.message }, false, "createHouseholdsErrorMsg");
     }
   },
 
-  updateDailyExpense: async (userData) => {
-    const { updatedData } = userData;
+  updateHouseholds: async (userData) => {
+    const { data } = userData;
 
-    const { households, expensetypes, description, paidThrough, paidBy, paymentDetails } =updatedData;
+    const { name, addressLine1, addressLine2, area, city, state, zipcode } =data;
     //   console.log(data);
-    const { _id } = updatedData;
+    const { _id } = data;
 
     const token = sessionStorage.getItem("token");
 
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        { households, expensetypes, description, paidThrough, paidBy, paymentDetails},
+        { name, addressLine1, addressLine2, area, city, state, zipcode },
         
         {
           headers: {
@@ -83,38 +85,35 @@ export const createDailyExpenseSlice = (set) => ({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          dailyExpense: store.dailyExpense.map((eachExpense) => {
-            if (eachExpense._id === response.data._id) {
+          households: state.households.map((eachHousehold) => {
+            if (eachHousehold._id === response.data._id) {
               return {
                 _id: response.data._id,
-                households: response.data._id.households,
-                expensetypes: response.data._id.expensetypes,
-                description: response.data._id.description,
-                paidThrough: response.data._id.paidThrough,
-                paidBy: response.data._id.paidBy,
-                paymentDetails: response.data._id.paymentDetails,
-                selectExpense:response.data._id.selectExpense,
-                household:response.data._id.household
-
+                name: response.data._id.name,
+                addressLine1: response.data._id.addressLine1,
+                addressLine2: response.data._id.addressLine2,
+                area: response.data._id.area,
+                city: response.data._id.city,
+                zipcode: response.data._id.zipcode,
               };
             } else {
-              return eachExpense;
+              return eachHousehold;
             }
           }),
         }),
         false,
-        "updateDailyExpense"
+        "updatehouseholds"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "updateDailyExpenseErrorMsg");
+      set({ error_msg: data.message }, false, "updatehouseholdsErrorMsg");
     }
   },
 
-  deleteDailyExpense: async (id) => {
+  deleteHouseholds: async (id) => {
     const token = sessionStorage.getItem("token");
     try {
       const response = await axios.delete(`${apiEndPoint}/${id}`, {
@@ -129,19 +128,19 @@ export const createDailyExpenseSlice = (set) => ({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          dailyExpense: store.dailyExpense.filter((eachHousehold) => {
+          households: state.households.filter((eachHousehold) => {
             return eachHousehold._id !== response.data._id;
           }),
         }),
         false,
-        "deleteDailyExpense"
+        "deletehouseholds"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "deleteDailyExpenseErrorMsg");
+      set({ error_msg: data.message }, false, "deletehouseholdsErrorMsg");
     }
   },
 });

@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const apiEndPoint = process.env.REACT_APP_API_URL + "households";
+const apiEndPoint = process.env.REACT_APP_API_URL + "periodic-expenses";
 
-export const createHouseholdSlice = (set) => ({
-  households: [],
+export const PeriodicExpenseSlice = (set) => ({
+  periodicExpense: [],
   error_msg: "",
 
-  getAllHouseholds: async () => {
+  getAllPeriodicExpense: async () => {
     const token = sessionStorage.getItem("token");
     //    console.log(token);
     try {
@@ -18,25 +18,23 @@ export const createHouseholdSlice = (set) => ({
       const { data } = response.data;
       console.log(data);
       set(
-        (store) => ({ error_msg: "", households: data }),
+        (store) => ({ error_msg: "", periodicExpense: data }),
         false,
-        "getAllHouseholds"
+        "getAllPeriodicExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllHouseholdsErrorMsg");
+      set({ error_msg: data.message }, false, "getAllPeriodicExpenseErrorMsg");
     }
   },
 
-  createHouseholds: async (userData) => {
+  createPeriodicExpense: async (userData) => {
     const { data } = userData;
     const token = sessionStorage.getItem("token");
-    const {name, addressLine1, addressLine2, area, city, state, zipcode}=data
-    const newData={name, addressLine1, addressLine2, area, city, state, zipcode}
     //    console.log(token);
     try {
-      const response = await axios.post(apiEndPoint, newData, {
+      const response = await axios.post(apiEndPoint, data, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -44,24 +42,24 @@ export const createHouseholdSlice = (set) => ({
 
       console.log(response.data);
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          households: [...store.households, response.data],
+          periodicExpense: [...state.periodicExpense, response.data],
         }),
         false,
-        "createHouseholds"
+        "createPeriodicExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "createHouseholdsErrorMsg");
+      set({ error_msg: data.message }, false, "createPeriodicExpenseErrorMsg");
     }
   },
 
-  updateHouseholds: async (userData) => {
+  updatePeriodicExpense: async (userData) => {
     const { data } = userData;
 
-    const { name, addressLine1, addressLine2, area, city, state, zipcode } =data;
+    const { households, expensetypes, description, paidThrough, paidBy, paymentDetails } =data;
     //   console.log(data);
     const { _id } = data;
 
@@ -70,7 +68,7 @@ export const createHouseholdSlice = (set) => ({
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        { name, addressLine1, addressLine2, area, city, state, zipcode },
+        { households, expensetypes, description, paidThrough, paidBy, paymentDetails  },
         
         {
           headers: {
@@ -85,35 +83,35 @@ export const createHouseholdSlice = (set) => ({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          households: store.households.map((eachHousehold) => {
-            if (eachHousehold._id === response.data._id) {
+          periodicExpense: state.periodicExpense.map((eachExpense) => {
+            if (eachExpense._id === response.data._id) {
               return {
                 _id: response.data._id,
-                name: response.data._id.name,
-                addressLine1: response.data._id.addressLine1,
-                addressLine2: response.data._id.addressLine2,
-                area: response.data._id.area,
-                city: response.data._id.city,
-                zipcode: response.data._id.zipcode,
+                households: response.data._id.households,
+                expensetypes: response.data._id.expensetypes,
+                description: response.data._id.description,
+                paidThrough: response.data._id.paidThrough,
+                paidBy: response.data._id.paidBy,
+                paymentDetails: response.data._id.paymentDetails,
               };
             } else {
-              return eachHousehold;
+              return eachExpense;
             }
           }),
         }),
         false,
-        "updatehouseholds"
+        "updatePeriodicExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "updatehouseholdsErrorMsg");
+      set({ error_msg: data.message }, false, "updatePeriodicExpenseErrorMsg");
     }
   },
 
-  deleteHouseholds: async (id) => {
+  deletePeriodicExpense: async (id) => {
     const token = sessionStorage.getItem("token");
     try {
       const response = await axios.delete(`${apiEndPoint}/${id}`, {
@@ -128,19 +126,19 @@ export const createHouseholdSlice = (set) => ({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          households: store.households.filter((eachHousehold) => {
+          periodicExpense: state.periodicExpense.filter((eachHousehold) => {
             return eachHousehold._id !== response.data._id;
           }),
         }),
         false,
-        "deletehouseholds"
+        "deletePeriodicExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "deletehouseholdsErrorMsg");
+      set({ error_msg: data.message }, false, "deletePeriodicExpenseErrorMsg");
     }
   },
 });
