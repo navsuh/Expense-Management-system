@@ -16,7 +16,7 @@ export const DailyExpenseSlice = (set) => ({
         },
       });
       const { data } = response.data;
-      console.log(data);
+      // console.log(data);
       set(
         (store) => ({ error_msg: "", dailyExpense: data }),
         false,
@@ -57,18 +57,18 @@ export const DailyExpenseSlice = (set) => ({
   },
 
   updateDailyExpense: async (userData) => {
-    const { data } = userData;
+    const { updatedData } = userData;
 
-    const { households, expensetypes, description, paidThrough, paidBy, paymentDetails } =data;
+    const { households, expensetypes, description, paidThrough, paidBy, paymentDetails } =updatedData;
     //   console.log(data);
-    const { _id } = data;
+    const { _id } = updatedData;
 
     const token = sessionStorage.getItem("token");
 
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        { households, expensetypes, description, paidThrough, paidBy, paymentDetails  },
+        { households, expensetypes, description, paidThrough, paidBy, paymentDetails},
         
         {
           headers: {
@@ -95,6 +95,9 @@ export const DailyExpenseSlice = (set) => ({
                 paidThrough: response.data._id.paidThrough,
                 paidBy: response.data._id.paidBy,
                 paymentDetails: response.data._id.paymentDetails,
+                selectExpense:response.data._id.selectExpense,
+                household:response.data._id.household
+
               };
             } else {
               return eachExpense;

@@ -12,7 +12,7 @@ const Sidebar = (props) => {
   const navigate = useNavigate();
   const user = useBoundStore((store) => store.user);
   const name = user.firstName;
- console.log(user);
+//  console.log(user);
 
  const [isModalOpen, setIsModalOpen] = useState(false);
  const handleModalClose = () => {

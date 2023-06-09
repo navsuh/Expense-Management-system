@@ -13,8 +13,8 @@ const schema = yup.object().shape({
   households: yup.string().required(),
   selectExpense: yup.string().required(),
   paymentDetails: yup.object().shape({
-    amount: yup.string().min(0).required(),
-    date: yup.string().required(),
+    amount: yup.number().min(0).required(),
+    date: yup.date().required(),
     method: yup.string().min(3).max(50).required(),
   }),
   description: yup.string().min(6).max(80).required(),
@@ -27,14 +27,16 @@ const DailyExpenseForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const houseHoldsOptions =useBoundStore(store=>store.households)
-  console.log(houseHoldsOptions);
+  // console.log(houseHoldsOptions);
   const dailyExpensesList = useBoundStore(store=>store.dailyExpense)
   const expenseTypes=useBoundStore(store=>store.expenseTypes)
   const updateDailyExpense =useBoundStore(store=>store.updateDailyExpense)
   const createDailyExpense =useBoundStore(store=>store.createDailyExpense)
 
+
   const getAllExpenseTypes =useBoundStore(store=>store.getAllExpenseTypes)
-   console.log(expenseTypes);
+  const getAllDailyExpense =useBoundStore(store=>store.getAllDailyExpense)
+  //  console.log(expenseTypes);
   const {
     register,
     handleSubmit,
@@ -54,29 +56,68 @@ const DailyExpenseForm = () => {
 
     const dailyExpense = dailyExpensesList.find((p) => p._id === id);
     console.log(dailyExpense);
+
+     const newDate =new  Date(dailyExpense.paymentDetails.date )
+     dailyExpense.paymentDetails.date = newDate
     setValue("_id", dailyExpense._id);
     setValue("description", dailyExpense.description);
     setValue("paidThrough", dailyExpense.paidThrough);
     setValue("paidBy", dailyExpense.paidBy);
-    setValue("households",dailyExpense.households)
-    setValue("selectExpense",dailyExpense.expensetypes)
+    setValue("households",dailyExpense.household)
+    setValue("selectExpense",dailyExpense.selectExpense)
     setValue("paymentDetails",dailyExpense.paymentDetails)
-
+    
   }, [id, setValue,dailyExpensesList]);
 
-  const onSubmitHandler = (data) => {
-    console.log({ data });
-    if(data._id){
-      console.log("update");
-      updateDailyExpense({data})
-      // return navigate("/primaryuser/dailyexpenses")
+
+  const onSubmitHandler =(data) => {
+    try {
+      if (data._id) {
+        const householdId = houseHoldsOptions.find(house => house.name === data.households)?._id;
+        const expenseTypeId = expenseTypes.find(expense => expense.name === data.selectExpense)?._id;
+         
+        // let objectDate = data.paymentDetails.date;
+        // let day = objectDate.getDate();
+        // console.log(day); // 23
+       
+        // let month = objectDate.getMonth()+1;
+        // console.log(month + 1); // 8
+        
+        // let year = objectDate.getFullYear();
+      
+
+        // let format3 = year + "-" +"0"+ month + "-" + "0"+ day;
+        // console.log(typeof format3);
+
+        // data.paymentDetails.date =format3
+
+        console.log(data);
+        console.log(houseHoldsOptions);
+        console.log(expenseTypes);
+        console.log(householdId);
+        console.log(expenseTypeId);
+
+
+        const updatedData = {
+          ...data,
+          households: householdId,
+          expenseTypes: expenseTypeId,
+          
+        };
+        
+        console.log(updatedData);
+        
+         updateDailyExpense({updatedData});
+      } else {
+         createDailyExpense({data});
+      }
+  
+      navigate("/primaryuser/dailyexpenses");
+    } catch (error) {
+      console.error("Error submitting form:", error);
     }
-    else {
-      createDailyExpense({data})
-      console.log("create");
-      return navigate("/primaryuser/dailyexpenses")
-    }
-  }
+  };
+  
 
   if(user.role==="Admin"){
     sessionStorage.removeItem("token")
@@ -184,7 +225,7 @@ return <Navigate to="/login" replace={true} />
                 <div className="mt-2.5">
                   <input
                     {...register("paymentDetails.amount")}
-                    type="text"
+                    type="number"
                     name="amount"
                     id="amount"
                     className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
