@@ -65,7 +65,9 @@ const DailyExpenseForm = () => {
     setValue("paidBy", dailyExpense.paidBy);
     setValue("households",dailyExpense.household)
     setValue("selectExpense",dailyExpense.selectExpense)
-    setValue("paymentDetails",dailyExpense.paymentDetails)
+    setValue("amount",dailyExpense.paymentDetails.amount)
+    setValue("date",dailyExpense.paymentDetails.date)
+    setValue("method",dailyExpense.paymentDetails.method)
     
   }, [id, setValue,dailyExpensesList]);
 
