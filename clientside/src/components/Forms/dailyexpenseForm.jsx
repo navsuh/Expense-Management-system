@@ -56,6 +56,9 @@ const DailyExpenseForm = () => {
 
     const dailyExpense = dailyExpensesList.find((p) => p._id === id);
     console.log(dailyExpense);
+
+     const newDate =new  Date(dailyExpense.paymentDetails.date )
+     dailyExpense.paymentDetails.date = newDate
     setValue("_id", dailyExpense._id);
     setValue("description", dailyExpense.description);
     setValue("paidThrough", dailyExpense.paidThrough);
