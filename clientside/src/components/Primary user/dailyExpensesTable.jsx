@@ -34,6 +34,7 @@ const DailyExpensesTable = (props) => {
   const getAllDailyExpense = useBoundStore(store=>store.getAllDailyExpense)
   const dailyExpensesList = useBoundStore(store=>store.dailyExpense)
   const deleteDailyExpenses = useBoundStore(store=>store.deleteDailyExpense)
+  
   useEffect(()=>{
     getAllDailyExpense();
   },[getAllDailyExpense])
