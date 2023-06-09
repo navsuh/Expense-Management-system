@@ -3,7 +3,7 @@ export const updatehouseholdmember =()=>{
     return async(context)=>{
         console.log(context.data);
 
-    //     const {firstName,lastName,email,phone,userName,password,role,householdName}=context.data
+        const {firstName,lastName,phone,userName,householdName,_id,householdId,memberUserId}=context.data
     //     if(role==='member'){
     //       const userService=context.app.service("users")
     //     const finduser = await userService.find( { query: {$or: [{ email:email }, { userName: userName }]} });

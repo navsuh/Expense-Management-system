@@ -55,7 +55,7 @@ export const householdMembers = (app) => {
         schemaHooks.resolveData(householdMembersDataResolver)
       ],
       patch: [
-        // validate.form(updatehouseholdmembersSchema, { abortEarly: false }),
+        validate.form(updatehouseholdmembersSchema, { abortEarly: false }),
         updatehouseholdmember(),
         schemaHooks.validateData(householdMembersPatchValidator),
         schemaHooks.resolveData(householdMembersPatchResolver)

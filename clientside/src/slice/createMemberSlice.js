@@ -17,6 +17,9 @@ export const createMemberSlice =(set)=>({
         },
       });
       const { data } = response.data;
+      console.log("1");
+      console.log(data);
+      console.log("2");
       set({ error_msg: "", memberData: data },
         false,
         "getAllMembers"
