@@ -33,14 +33,14 @@ const DailyExpensesTable = (props) => {
 
   const getAllDailyExpense = useBoundStore(store=>store.getAllDailyExpense)
   const dailyExpensesList = useBoundStore(store=>store.dailyExpense)
-  const deleteDailyExpenses = useBoundStore(store=>store.deleteDailyExpense)
+  const deleteDailyExpense = useBoundStore(store=>store.deleteDailyExpense)
   
   useEffect(()=>{
     getAllDailyExpense();
   },[getAllDailyExpense])
   
-  const deleteDailyExpense=(id)=>{
-    deleteDailyExpenses(id)
+  const ondeleteDailyExpense=(id)=>{
+    deleteDailyExpense(id)
 
    }
    
@@ -88,7 +88,7 @@ const DailyExpensesTable = (props) => {
                   <Link to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <AiOutlineDelete  onClick={()=>deleteDailyExpense(eachDailyExpense._id)}  className="w-8 h-6 cursor-pointer ml-1" />
+                    <AiOutlineDelete  onClick={()=>ondeleteDailyExpense(eachDailyExpense._id)}  className="w-8 h-6 cursor-pointer ml-1" />
                   </div>
                 </td>
               </tr>

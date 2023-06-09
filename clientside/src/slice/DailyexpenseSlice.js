@@ -129,10 +129,10 @@ export const DailyExpenseSlice = (set) => ({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          dailyExpense: store.dailyExpense.filter((eachHousehold) => {
-            return eachHousehold._id !== response.data._id;
+          dailyExpense: state.dailyExpense.filter((eachdailyExpense) => {
+            return eachdailyExpense._id !== response.data._id;
           }),
         }),
         false,
