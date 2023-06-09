@@ -38,6 +38,7 @@ const PeriodicExpensesTable = (props) => {
   const periodicExpenseList =useBoundStore(store=>store.periodicExpense)
   const deletePeriodicExpenses = useBoundStore(store=>store.deletePeriodicExpense)
 
+
   useEffect(()=>{
     getAllPeriodicExpense();
   },[getAllPeriodicExpense])
@@ -87,7 +88,7 @@ const PeriodicExpensesTable = (props) => {
                 key={eachPeriodicExpense._id}
               >
                 <td className="px-6 py-4">{eachPeriodicExpense.dueDate.toString()}</td>
-                <td className="px-6 py-4">{eachPeriodicExpense.expensetypes}</td>
+                <td className="px-6 py-4">{eachPeriodicExpense.selectExpense}</td>
                 <td className="px-6 py-4">{eachPeriodicExpense.paidBy}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">

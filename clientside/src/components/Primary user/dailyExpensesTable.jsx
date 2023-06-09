@@ -80,7 +80,7 @@ const DailyExpensesTable = (props) => {
             {dailyExpensesList.map((eachDailyExpense) => (
               <tr className="border-b bg-gray-50 " key={eachDailyExpense._id}>
                 <td className="px-6 py-4">{eachDailyExpense.paymentDetails.date}</td>
-                <td className="px-6 py-4">{eachDailyExpense.expensetypes}</td>
+                <td className="px-6 py-4">{eachDailyExpense.selectExpense}</td>
                 <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">

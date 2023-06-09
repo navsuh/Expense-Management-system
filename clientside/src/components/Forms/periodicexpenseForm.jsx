@@ -53,6 +53,7 @@ const PeriodicExpenseForm = () => {
   const navigate = useNavigate();
   const houseHoldsOptions =useBoundStore(store=>store.households)
   const expenseTypes=useBoundStore(store=>store.expenseTypes)
+  const getAllExpenseTypes =useBoundStore(store=>store.getAllExpenseTypes)
 
   const { id } = useParams();
   const {
@@ -63,6 +64,11 @@ const PeriodicExpenseForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(()=>{
+    getAllExpenseTypes();
+  },[])
+  
 
   useEffect(() => {
     if (!id) return;

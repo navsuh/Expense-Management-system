@@ -32,6 +32,8 @@ const DailyExpenseForm = () => {
   const expenseTypes=useBoundStore(store=>store.expenseTypes)
   const updateDailyExpense =useBoundStore(store=>store.updateDailyExpense)
   const createDailyExpense =useBoundStore(store=>store.createDailyExpense)
+
+  const getAllExpenseTypes =useBoundStore(store=>store.getAllExpenseTypes)
    console.log(expenseTypes);
   const {
     register,
@@ -41,7 +43,12 @@ const DailyExpenseForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-   
+  
+  useEffect(()=>{
+    getAllExpenseTypes()
+  })
+
+
   useEffect(() => {
     if (!id) return;
 

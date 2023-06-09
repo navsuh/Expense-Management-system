@@ -17,6 +17,7 @@ import {
 } from './daily-expenses.schema.js'
 import { DailyExpensesService, getOptions } from './daily-expenses.class.js'
 import { dailyExpensesPath, dailyExpensesMethods } from './daily-expenses.shared.js'
+import { getAllDailyExpense } from './hooks/getDailyExpense.js'
 
 
 export * from './daily-expenses.class.js'
@@ -61,7 +62,7 @@ export const dailyExpenses = (app) => {
     },
     after: {
       all: [],
-    
+     find :[getAllDailyExpense()]
     },
     error: {
       all: []
