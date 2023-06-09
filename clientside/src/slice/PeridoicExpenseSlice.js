@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const apiEndPoint = process.env.REACT_APP_API_URL + "daily-expenses";
+const apiEndPoint = process.env.REACT_APP_API_URL + "periodic-expenses";
 
-export const createDailyExpenseSlice = (set) => ({
-  dailyExpense: [],
+export const PeriodicExpenseSlice = (set) => ({
+  periodicExpense: [],
   error_msg: "",
 
-  getAllDailyExpense: async () => {
+  getAllPeriodicExpense: async () => {
     const token = sessionStorage.getItem("token");
     //    console.log(token);
     try {
@@ -18,18 +18,18 @@ export const createDailyExpenseSlice = (set) => ({
       const { data } = response.data;
       console.log(data);
       set(
-        (store) => ({ error_msg: "", dailyExpense: data }),
+        (store) => ({ error_msg: "", periodicExpense: data }),
         false,
-        "getAllDailyExpense"
+        "getAllPeriodicExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllDailyExpenseErrorMsg");
+      set({ error_msg: data.message }, false, "getAllPeriodicExpenseErrorMsg");
     }
   },
 
-  createDailyExpense: async (userData) => {
+  createPeriodicExpense: async (userData) => {
     const { data } = userData;
     const token = sessionStorage.getItem("token");
     //    console.log(token);
@@ -42,21 +42,21 @@ export const createDailyExpenseSlice = (set) => ({
 
       console.log(response.data);
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          dailyExpense: [...store.dailyExpense, response.data],
+          periodicExpense: [...state.periodicExpense, response.data],
         }),
         false,
-        "createDailyExpense"
+        "createPeriodicExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "createDailyExpenseErrorMsg");
+      set({ error_msg: data.message }, false, "createPeriodicExpenseErrorMsg");
     }
   },
 
-  updateDailyExpense: async (userData) => {
+  updatePeriodicExpense: async (userData) => {
     const { data } = userData;
 
     const { households, expensetypes, description, paidThrough, paidBy, paymentDetails } =data;
@@ -83,9 +83,9 @@ export const createDailyExpenseSlice = (set) => ({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          dailyExpense: store.dailyExpense.map((eachExpense) => {
+          periodicExpense: state.periodicExpense.map((eachExpense) => {
             if (eachExpense._id === response.data._id) {
               return {
                 _id: response.data._id,
@@ -102,16 +102,16 @@ export const createDailyExpenseSlice = (set) => ({
           }),
         }),
         false,
-        "updateDailyExpense"
+        "updatePeriodicExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "updateDailyExpenseErrorMsg");
+      set({ error_msg: data.message }, false, "updatePeriodicExpenseErrorMsg");
     }
   },
 
-  deleteDailyExpense: async (id) => {
+  deletePeriodicExpense: async (id) => {
     const token = sessionStorage.getItem("token");
     try {
       const response = await axios.delete(`${apiEndPoint}/${id}`, {
@@ -126,19 +126,19 @@ export const createDailyExpenseSlice = (set) => ({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          dailyExpense: store.dailyExpense.filter((eachHousehold) => {
+          periodicExpense: state.periodicExpense.filter((eachHousehold) => {
             return eachHousehold._id !== response.data._id;
           }),
         }),
         false,
-        "deleteDailyExpense"
+        "deletePeriodicExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "deleteDailyExpenseErrorMsg");
+      set({ error_msg: data.message }, false, "deletePeriodicExpenseErrorMsg");
     }
   },
 });

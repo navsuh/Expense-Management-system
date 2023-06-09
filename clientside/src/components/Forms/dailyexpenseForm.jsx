@@ -14,7 +14,7 @@ const schema = yup.object().shape({
   selectExpense: yup.string().required(),
   paymentDetails: yup.object().shape({
     amount: yup.string().min(0).required(),
-    date: yup.date().required(),
+    date: yup.string().required(),
     method: yup.string().min(3).max(50).required(),
   }),
   description: yup.string().min(6).max(80).required(),

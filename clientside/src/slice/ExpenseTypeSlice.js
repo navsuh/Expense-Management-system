@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiEndPoint = process.env.REACT_APP_API_URL + "expensetypes";
 
-export const createExpenseTypeSlice = (set) => ({
+export const ExpenseTypeSlice = (set) => ({
   expenseTypes: [],
   error_msg: "",
 
@@ -49,9 +49,9 @@ export const createExpenseTypeSlice = (set) => ({
       // console.log(response.data.users.role);
       console.log(response.data);
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          expenseTypes: [...store.expenseTypes, response.data],
+          expenseTypes: [...state.expenseTypes, response.data],
         }),
         false,
         "createExpenseTypes"
@@ -88,9 +88,9 @@ export const createExpenseTypeSlice = (set) => ({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          expenseTypes: store.expenseTypes.map((eachExpense) => {
+          expenseTypes: state.expenseTypes.map((eachExpense) => {
             if (eachExpense._id === response.data._id) {
               return { _id: response.data._id, name: response.data._id.name };
             } else {
@@ -123,9 +123,9 @@ export const createExpenseTypeSlice = (set) => ({
       console.log(response.data);
 
       set(
-        (store) => ({
+        (state) => ({
           error_msg: "",
-          expenseTypes: store.expenseTypes.filter((eachExpense) => {
+          expenseTypes: state.expenseTypes.filter((eachExpense) => {
             return eachExpense._id !== response.data._id;
           }),
         }),

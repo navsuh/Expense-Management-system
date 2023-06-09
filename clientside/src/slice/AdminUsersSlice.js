@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiEndPoint = process.env.REACT_APP_API_URL + "users";
 
-export const createAdminUsersSlice = (set) => ({
+export const AdminUsersSlice = (set) => ({
   usersData: [],
   error_msg: "",
 
@@ -79,7 +79,8 @@ const {firstName,isActive,lastName, phone,userName}=data
       set({ error_msg: data.message }, false, "update User ErrorMsg");
     }
   },
-  softdeleteExpenseTypes: async (id) => {
+
+  softdeleteUser: async (id) => {
     const token = sessionStorage.getItem("token");
 
     try {

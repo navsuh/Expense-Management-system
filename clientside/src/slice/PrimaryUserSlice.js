@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const apiEndPoint=process.env.REACT_APP_API_URL+"users"
 
-export const createPrimaryUserSlice = (set) => ({
+export const PrimaryUserSlice = (set) => ({
     primaryUser: {},
     error_msg:"",
     addPrimaryUser: async(userData) =>  {

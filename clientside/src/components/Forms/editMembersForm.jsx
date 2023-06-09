@@ -53,10 +53,10 @@ const EditMemberForm = () => {
   }, [id, setValue, memberList]);
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
+    // console.log({ data });
     const member = memberList.find((m) => m._id === id);
     const {memberUserId}=member
-    console.log(memberUserId);
+    // console.log(memberUserId);
     const newData={...data,memberUserId}
    
     updateMember({newData})
