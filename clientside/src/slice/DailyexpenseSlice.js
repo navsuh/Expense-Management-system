@@ -33,7 +33,7 @@ export const DailyExpenseSlice = (set) => ({
     console.log(userData);
     const { newData } = userData;
     const token = sessionStorage.getItem("token");
-       console.log(newData);
+      //  console.log(newData);
     try {
       const response = await axios.post(apiEndPoint, newData, {
         headers: {
@@ -41,15 +41,14 @@ export const DailyExpenseSlice = (set) => ({
         },
       });
 
-      console.log(response.data);
-      // set(
-      //   (store) => ({
-      //     error_msg: "",
-      //     dailyExpense: [...store.dailyExpense, response.data],
-      //   }),
-      //   false,
-      //   "createDailyExpense"
-      // );
+      set(
+        (state) => ({
+          error_msg: "",
+          dailyExpense: [...state.dailyExpense, response.data],
+        }),
+        false,
+        "createDailyExpense"
+      );
     } catch (error) {
       const { response } = error;
       const { data } = response;
@@ -115,34 +114,34 @@ export const DailyExpenseSlice = (set) => ({
   //   }
   // },
 
-  // deleteDailyExpense: async (id) => {
-  //   const token = sessionStorage.getItem("token");
-  //   try {
-  //     const response = await axios.delete(`${apiEndPoint}/${id}`, {
-  //       headers: {
-  //         // 'Content-Type': 'application/json',
-  //         Authorization: "Bearer " + token,
-  //       },
-  //     });
-  //     // console.log(response.data.accessToken);
-  //     // console.log(response.data.users.role);
+  deleteDailyExpense: async (id) => {
+    const token = sessionStorage.getItem("token");
+    try {
+      const response = await axios.delete(`${apiEndPoint}/${id}`, {
+        headers: {
+          // 'Content-Type': 'application/json',
+          Authorization: "Bearer " + token,
+        },
+      });
+      // console.log(response.data.accessToken);
+      // console.log(response.data.users.role);
 
-  //     console.log(response.data);
+      console.log(response.data);
 
-  //     set(
-  //       (store) => ({
-  //         error_msg: "",
-  //         dailyExpense: store.dailyExpense.filter((eachHousehold) => {
-  //           return eachHousehold._id !== response.data._id;
-  //         }),
-  //       }),
-  //       false,
-  //       "deleteDailyExpense"
-  //     );
-  //   } catch (error) {
-  //     const { response } = error;
-  //     const { data } = response;
-  //     set({ error_msg: data.message }, false, "deleteDailyExpenseErrorMsg");
-  //   }
-  // },
+      set(
+        (store) => ({
+          error_msg: "",
+          dailyExpense: store.dailyExpense.filter((eachHousehold) => {
+            return eachHousehold._id !== response.data._id;
+          }),
+        }),
+        false,
+        "deleteDailyExpense"
+      );
+    } catch (error) {
+      const { response } = error;
+      const { data } = response;
+      set({ error_msg: data.message }, false, "deleteDailyExpenseErrorMsg");
+    }
+  },
 });
