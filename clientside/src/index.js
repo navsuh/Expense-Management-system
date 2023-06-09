@@ -33,7 +33,7 @@ import EditMemberForm from "./components/Forms/editMembersForm";
 import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
 import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
-import { ToastContainer} from "react-toastify";
+// import { ToastContainer} from "react-toastify";
 // import ChangePasswordForm from "./components/Forms/ChangePasswordForm";
 // import ForgotPasswordForm from "./components/Forms/ForgetPasswordForm";
 import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
@@ -44,7 +44,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <ToastContainer limit={1}/>
+    {/* <ToastContainer limit={1}/> */}
       <App />
       <Routes>
 
@@ -64,7 +64,7 @@ root.render(
         <Route path="/admin/expensetypeform" element={<PrivateRoute><ExpenseTypeForm /></PrivateRoute>} />
         <Route path="/admin/expensetype/:id" element={<PrivateRoute><ExpenseTypeForm /></PrivateRoute>} />
         
-        <Route path="/admin/userform" element={<PrivateRoute><UserForm /></PrivateRoute>} />
+        {/* <Route path="/admin/userform" element={<PrivateRoute><UserForm /></PrivateRoute>} /> */}
         <Route path="/admin/users/:id" element={<PrivateRoute><UserForm /></PrivateRoute>} />
 
 

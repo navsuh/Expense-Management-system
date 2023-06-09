@@ -4,6 +4,8 @@ import { createPrimaryUserSlice } from './slice/createPrimaryUserSlice'
 import { createUserLoginSlice } from './slice/createUserLoginSlice'
 
 import { createExpenseTypeSlice } from './slice/createExpenseTypeSlice'
+import { createAdminUsersSlice } from './slice/createAdminUsersSlice'
+
 import { createHouseholdSlice } from './slice/createHouseholdSlice'
 import { changepasswordSlice } from './slice/createChangePasswordSlice'
 import {createMemberSlice} from './slice/createMemberSlice'
@@ -18,6 +20,7 @@ export const useBoundStore = create(devtools (persist((...a) => ({
   ...createPrimaryUserSlice(...a),
   ...createUserLoginSlice(...a),
   ...createExpenseTypeSlice(...a),
+  ...createAdminUsersSlice(...a),
   ...changepasswordSlice(...a),
   ...createHouseholdSlice(...a),
   ...createMemberSlice(...a),

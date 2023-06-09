@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useNavigate } from "react-router-dom";
@@ -41,20 +41,20 @@ const Register = () => {
   useEffect(()=>{
    
   if(!primaryUser.firstName) return
-  console.log("1f");
-  console.log(primaryUser);
-  toast.success('Registration Successful', {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  pauseOnFocusLoss: false,
-  toastId: "customId",
-    theme: "light",
-    });    
+  
+  // console.log(primaryUser);
+  // toast.success('Registration Successful', {
+  //   position: "top-right",
+  //   autoClose: 5000,
+  //   hideProgressBar: false,
+  //   closeOnClick: true,
+  //   pauseOnHover: true,
+  //   draggable: true,
+  //   progress: undefined,
+  // pauseOnFocusLoss: false,
+  // toastId: "customId",
+  //   theme: "light",
+  //   });    
 
   navigate("/login")
 
@@ -64,18 +64,18 @@ const Register = () => {
     setShowPassword(!showPassword);
   };
 
-  const displayErrorMessage=()=>{
-    toast.error(error_msg, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      });
-  }
+  // const displayErrorMessage=()=>{
+  //   toast.error(error_msg, {
+  //     position: "top-right",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "light",
+  //     });
+  // }
 
  
 
@@ -219,8 +219,8 @@ const Register = () => {
                 </div>
               </div>
             </form>
-            
-            {error_msg?displayErrorMessage():null}
+            <p className="text-red-500">{error_msg ? error_msg : null}</p>
+            {/* {error_msg?displayErrorMessage():null} */}
             {/* <ToastContainer/> */}
           </div>
         </div>

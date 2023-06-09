@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "./Forms/ForgetPasswordForm";
@@ -47,7 +47,7 @@ const Login = () => {
   useEffect(() => {
     if (!token) return;
     if (!sessionStorage.getItem("token")) return;
-
+    if (!user.isActive) return;
     if (user.role === "Admin") {
       alert("login sucessfull");
       navigate("/admin");
@@ -70,7 +70,7 @@ const Login = () => {
     //   theme: "light",
     //   });
   }, [token, navigate, user.role]);
-  const customId = "custom-id-yes";
+  // const customId = "custom-id-yes";
 
   const onSubmitHandler = (data) => {
     console.log({ data });
@@ -80,20 +80,20 @@ const Login = () => {
     loginUser({ data });
   };
 
-  const displayErrorMessage = () => {
-    toast.error(error_msg, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      toastId: customId,
-      limit: 1,
-      theme: "light",
-    });
-  };
+  // const displayErrorMessage = () => {
+  //   toast.error(error_msg, {
+  //     position: "top-right",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     toastId: customId,
+  //     limit: 1,
+  //     theme: "light",
+  //   });
+  // };
 
 const [isModalOpen, setIsModalOpen] = useState(false);
  const handleModalClose = () => {
@@ -164,12 +164,13 @@ const [isModalOpen, setIsModalOpen] = useState(false);
                   </button>
 
                   {/* <Link to={"/forgotpassword"} className="text-blue-600 hover:text-blue-800 underline-offset-2">Forgot Password?</Link> */}
-                  {error_msg ? displayErrorMessage() : null}
+                  {/* {error_msg ? displayErrorMessage() : null} */}
 
 
                 </div>
               </div>
             </form>
+            <p className="text-red-500">{error_msg ? error_msg : null}</p>
             <button onClick={() => setIsModalOpen(true)} className="text-blue-600 hover:text-blue-800 underline-offset-2 mt-2">Forgot Password?</button>
 
           </div>

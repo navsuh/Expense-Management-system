@@ -20,7 +20,7 @@ export const createExpenseTypeSlice = (set) => ({
       // console.log(response.data.users.role);
 
       const { data } = response.data;
-      console.log(data);
+      // console.log(data);
       set(
         (store) => ({ error_msg: "", expenseTypes: data }),
         false,
