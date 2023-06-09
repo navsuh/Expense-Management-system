@@ -16,7 +16,9 @@ const MemberTable = (props) => {
   const getAllMembers = useBoundStore(store=>store.getAllMembers)
   const memberList = useBoundStore(store=>store.memberData)
   const handleDeleteMember =useBoundStore(store=>store.deleteMember)
-  console.log(memberList);
+  // console.log("1");
+  // console.log(memberList);
+  // console.log("2");
   useEffect(()=>{
     getAllMembers();
   },[getAllMembers])
