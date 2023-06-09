@@ -12,11 +12,11 @@ import { useBoundStore } from "../../store";
 const schema = yup.object().shape({
   households: yup.string().required(),
   selectExpense: yup.string().required(),
-  paymentDetails: yup.object().shape({
+  // paymentDetails: yup.object().shape({
     amount: yup.number().min(0).required(),
-    date: yup.date().required(),
+    date: yup.string().required(),
     method: yup.string().min(3).max(50).required(),
-  }),
+  // }),
   description: yup.string().min(6).max(80).required(),
   paidThrough: yup.string().min(3).max(50).required(),
   paidBy: yup.string().min(3).max(50).required(),
@@ -71,7 +71,7 @@ const DailyExpenseForm = () => {
 
 
   const onSubmitHandler =(data) => {
-    try {
+   
       if (data._id) {
         const householdId = houseHoldsOptions.find(house => house.name === data.households)?._id;
         const expenseTypeId = expenseTypes.find(expense => expense.name === data.selectExpense)?._id;
@@ -109,13 +109,20 @@ const DailyExpenseForm = () => {
         
          updateDailyExpense({updatedData});
       } else {
-         createDailyExpense({data});
+        // console.log(data);
+        const{amount,date,method,selectExpense}=data
+        const paymentDetails={amount,date,method}
+        delete data.amount
+        delete data.date
+        delete data.method
+        delete data.selectExpense
+        const newData={...data,paymentDetails,expensetypes:selectExpense}
+        // console.log(newData);
+        createDailyExpense({newData});
       }
   
       navigate("/primaryuser/dailyexpenses");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+ 
   };
   
 
@@ -217,21 +224,24 @@ return <Navigate to="/login" replace={true} />
                 <label htmlFor="paymentDetails" >Payment Details:-</label>
 
                 <div 
-                className={`flex mb-4  col-span-2 ${errors.paymentDetails?'h-40':'h-28'} border rounded-lg border-gray-300 px-2`}>
+                // className={`flex mb-4  col-span-2 ${errors.paymentDetails?'h-40':'h-28'} border rounded-lg border-gray-300 px-2`}>
+                className={`flex mb-4  col-span-2 'h-40' border rounded-lg border-gray-300 px-2`}>
                 <div className="w-1/3  h-12 mr-2">
                 
                 <label htmlFor="amount">Amount</label>
 
                 <div className="mt-2.5">
                   <input
-                    {...register("paymentDetails.amount")}
+                    // {...register("paymentDetails.amount")}
+                    {...register("amount")}
                     type="number"
                     name="amount"
                     id="amount"
                     className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     placeholder="Amount"
                   />
-                  <p className="text-red-500">{errors.paymentDetails?.amount.message.slice(15)}</p>
+                  {/* <p className="text-red-500">{errors.paymentDetails?.amount.message.slice(15)}</p> */}
+                  <p className="text-red-500">{errors.amount?.message.slice(15)}</p>
                 </div>
                 </div>
                 <div className="w-1/3  h-12 mr-2">
@@ -240,14 +250,16 @@ return <Navigate to="/login" replace={true} />
 
                 <div className="mt-2.5">
                   <input
-                    {...register("paymentDetails.date")}
+                    // {...register("paymentDetails.date")}
+                    {...register("date")}
                     type="date"
                     name="date"
                     id="date"
                     className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     placeholder="Paid By"
                   />
-                  <p className="text-red-500">{errors.paymentDetails?.date.message.slice(15,41)}</p>
+                  {/* <p className="text-red-500">{errors.paymentDetails?.date.message.slice(15,41)}</p> */}
+                  <p className="text-red-500">{errors.date?.message}</p>
                 </div>
                 </div>
                 <div className="w-1/3  h-12 mr-2">
@@ -256,14 +268,16 @@ return <Navigate to="/login" replace={true} />
 
                 <div className="mt-2.5">
                   <input
-                    {...register("paymentDetails.method")}
+                    // {...register("paymentDetails.method")}
+                    {...register("method")}
                     type="text"
                     name="method"
                     id="method"
                     className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     placeholder="upi,debit card"
                   />
-                  <p className="text-red-500">{errors.paymentDetails?.method.message.slice(15)}</p>
+                  {/* <p className="text-red-500">{errors.paymentDetails?.method.message.slice(15)}</p> */}
+                  <p className="text-red-500">{errors.method?.message.slice(15)}</p>
                 </div>
                 </div>
               </div>

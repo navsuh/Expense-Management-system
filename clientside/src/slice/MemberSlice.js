@@ -58,56 +58,32 @@ export const MemberSlice =(set)=>({
       }
    },
 
-//    updateMember: async (memberuserData) => {
-//     const {newData}=memberuserData
-//     const { _id } = newData;
-//     console.log("1");
-//       console.log(newData);
-//       console.log("2");
-//     const token = sessionStorage.getItem("token");
+   updateMember: async (memberuserData) => {
+    const {newData}=memberuserData
+    const { _id } = newData;
     
-//     try {
-//       const response = await axios.patch(
-//         `${apiEndPoint}/${_id}`,
-//         newData,
-//         {
-//           headers: {
-//             // 'Content-Type': 'application/json',
-//             Authorization: "Bearer " + token,
-//           },
-//         }
-//       );
-// console.log("1");
-//       console.log(response.data);
-//       console.log("2");
+    const token = sessionStorage.getItem("token");
+    
+    try {
+      await axios.patch(
+        `${apiEndPoint}/${_id}`,
+        newData,
+        {
+          headers: {
+            // 'Content-Type': 'application/json',
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
 
-//       // set(
-//       //   (state) => ({
-//       //     error_msg: "",
-//       //     expenseTypes: state.memberData.map((eachMemberData) => {
-//       //       if (eachMemberData._id === response.data._id) {
-//       //         return { _id: response.data._id,
-//       //           firstName:response.data.email,
-//       //           lastName:response.data.lastName,
-//       //           email:response.data.email,
-//       //           phone:response.data.phone,
-//       //           userName:response.data.email,
-//       //           household:response.data.email,
-//       //         };
-//       //       } else {
-//       //         return eachMemberData;
-//       //       }
-//       //     }),
-//       //   }),
-//       //   false,
-//       //   "updateMember"
-//       // );
-//     } catch (error) {
-//       const { response } = error;
-//       const { data } = response;
-//       set({ error_msg: data.message }, false, "updateMemberErrorMsg");
-//     }
-//   },
+
+   
+    } catch (error) {
+      const { response } = error;
+      const { data } = response;
+      set({ error_msg: data.message }, false, "updateMemberErrorMsg");
+    }
+  },
 
    deleteMember: async (id) => {
     const token = sessionStorage.getItem("token");
