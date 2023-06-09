@@ -37,16 +37,16 @@ const schema = yup.object().shape({
   households: yup.string().required(),
   selectExpense: yup.string().required(),
   frequency: yup.string().required(),
-  amount: yup.string().min(1).max(50).required(),
+  amount: yup.string().min(1).required(),
   dueDate: yup.date().required(),
   paymentDetails: yup.object().shape({
     amounts: yup.string().min(1).max(50).required(),
     date: yup.date().required(),
     method: yup.string().min(3).max(50).required(),
   }),
-  description: yup.string().min(6).max(20).required(),
-  paidThrough: yup.string().min(6).max(20).required(),
-  paidBy: yup.string().min(6).max(20).required(),
+  description: yup.string().min(5).max(20).required(),
+  paidThrough: yup.string().min(3).max(20).required(),
+  paidBy: yup.string().min(3).max(20).required(),
 });
 const PeriodicExpenseForm = () => {
   const user = useBoundStore((store) => store.user);
@@ -79,7 +79,6 @@ const PeriodicExpenseForm = () => {
     setValue("firstName", periodicExpense.periodicExpense);
     setValue("frequency", periodicExpense.frequency);
     setValue("amount", periodicExpense.amount);
-
     setValue("description", periodicExpense.description);
     setValue("paidThrough", periodicExpense.paidThrough);
     setValue("paidBy", periodicExpense.paidBy);
@@ -175,14 +174,14 @@ return <Navigate to="/login" replace={true} />
 
               <div className="flex mb-4  col-span-2">
                 <div className="w-1/3  h-12 mr-2">
-                  <label htmlFor="amounts">Amount</label>
+                  <label htmlFor="amount">Amount</label>
 
                   <div className="mt-2.5">
                     <input
                       {...register("amount")}
                       type="text"
-                      name="amounts"
-                      id="amounts"
+                      name="amount"
+                      id="amount"
                       className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       placeholder="Amount"
                     />
@@ -240,19 +239,19 @@ return <Navigate to="/login" replace={true} />
 
               <div className={`flex mb-4  col-span-2 ${errors.paymentDetails?'h-40':'h-28'} border rounded-lg border-gray-300 px-2`}>
                 <div className="w-1/3  h-12 mr-2">
-                  <label htmlFor="amount">Amount</label>
+                  <label htmlFor="amounts">Amount</label>
 
                   <div className="mt-2.5">
                     <input
                       {...register("paymentDetails.amounts")}
                       type="text"
-                      name="amount"
-                      id="amount"
+                      name="amounts"
+                      id="amounts"
                       className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      placeholder="Amount"
+                      placeholder="Amounts"
                     />
                     <p className="text-red-500">
-                      {errors.paymentDetails?.amounts.message.slice(15)}
+                      {errors.amounts?.message.slice(15)}
                     </p>
                   </div>
                 </div>
@@ -269,7 +268,7 @@ return <Navigate to="/login" replace={true} />
                       placeholder="Paid By"
                     />
                     <p className="text-red-500">
-                      {errors.paymentDetails?.date.message.slice(15, 41)}
+                      {errors.paymentDetails?.date?.message.slice(15, 41)}
                     </p>
                   </div>
                 </div>
@@ -286,7 +285,7 @@ return <Navigate to="/login" replace={true} />
                       placeholder="upi,debit card"
                     />
                     <p className="text-red-500">
-                      {errors.paymentDetails?.method.message.slice(15)}
+                      {errors.paymentDetails?.method?.message.slice(15)}
                     </p>
                   </div>
                 </div>

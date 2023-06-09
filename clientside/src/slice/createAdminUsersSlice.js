@@ -20,7 +20,7 @@ export const createAdminUsersSlice = (set) => ({
       // console.log(response.data.users.role);
 
       const { data } = response.data;
-      
+
       set(
         (state) => ({ error_msg: "", usersData: data }),
         false,
@@ -33,20 +33,17 @@ export const createAdminUsersSlice = (set) => ({
     }
   },
 
- 
-
   updateUser: async (userData) => {
     const { data } = userData;
 
-    
     const { _id } = data;
-console.log(data);
+    console.log(data);
     const token = sessionStorage.getItem("token");
-const {firstName,isActive,lastName, phone,userName}=data
+    const { firstName, isActive, lastName, phone, userName } = data;
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        {firstName,isActive,lastName, phone,userName},
+        { firstName, isActive, lastName, phone, userName },
         {
           headers: {
             // 'Content-Type': 'application/json',
@@ -83,18 +80,22 @@ const {firstName,isActive,lastName, phone,userName}=data
     const token = sessionStorage.getItem("token");
 
     try {
-      const response = await axios.patch(`${apiEndPoint}/${id}`,{isActive:false} ,{
-        headers: {
-          // 'Content-Type': 'application/json',
-          Authorization: "Bearer " + token,
-        },
-      });
+      const response = await axios.patch(
+        `${apiEndPoint}/${id}`,
+        { isActive: false },
+        {
+          headers: {
+            // 'Content-Type': 'application/json',
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
       // console.log(response.data.accessToken);
       // console.log(response.data.users.role);
 
       console.log(response.data);
 
-          set(
+      set(
         (state) => ({
           error_msg: "",
           usersData: state.usersData.map((eachUser) => {
