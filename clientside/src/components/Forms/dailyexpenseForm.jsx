@@ -46,7 +46,7 @@ const DailyExpenseForm = () => {
   
   useEffect(()=>{
     getAllExpenseTypes()
-  })
+  },[])
 
 
   useEffect(() => {

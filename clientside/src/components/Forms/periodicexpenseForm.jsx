@@ -67,7 +67,7 @@ const PeriodicExpenseForm = () => {
 
   useEffect(()=>{
     getAllExpenseTypes();
-  },[])
+  },[getAllExpenseTypes])
   
 
   useEffect(() => {

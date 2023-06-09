@@ -7,39 +7,39 @@ import { useParams ,useNavigate,Navigate} from "react-router-dom";
 import { useBoundStore } from "../../store";
 
 
-const userList = [
-  {
-    _id: "1",
-    firstName: "user 1 fName",
-    lastName: "user 1 lName",
-    email: "user 1 email",
-    phone: "user 1 phone",
-    userName: "user 1 userName",
-    role: "user 1 role",
-    lastLoggedIn: "user 1 lastLoggedIn",
-    isActive: true,
-    updatedBy: "user 1 updatedBy",
-    updatedAt: "user1 updatedAt",
-  },
-  {
-    _id: "2",
-    firstName: "user 2 fName",
-    lastName: "user 2 lName",
-    email: "user 2 email",
-    phone: "user 2 phone",
-    userName: "user 2 userName",
-    role: "user 2 role",
-    lastLoggedIn: "user 2 lastLoggedIn",
-    isActive: true,
-    updatedBy: "user 2 updatedBy",
-    updatedAt: "user2 updatedAt",
-  },
-];
+// const userList = [
+//   {
+//     _id: "1",
+//     firstName: "user 1 fName",
+//     lastName: "user 1 lName",
+//     email: "user 1 email",
+//     phone: "user 1 phone",
+//     userName: "user 1 userName",
+//     role: "user 1 role",
+//     lastLoggedIn: "user 1 lastLoggedIn",
+//     isActive: true,
+//     updatedBy: "user 1 updatedBy",
+//     updatedAt: "user1 updatedAt",
+//   },
+//   {
+//     _id: "2",
+//     firstName: "user 2 fName",
+//     lastName: "user 2 lName",
+//     email: "user 2 email",
+//     phone: "user 2 phone",
+//     userName: "user 2 userName",
+//     role: "user 2 role",
+//     lastLoggedIn: "user 2 lastLoggedIn",
+//     isActive: true,
+//     updatedBy: "user 2 updatedBy",
+//     updatedAt: "user2 updatedAt",
+//   },
+// ];
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
   lastName: yup.string().min(3).max(50).required(),
-  email: yup.string().min(3).max(50).required(),
+  // email: yup.string().min(3).max(50).required(),
   phone: yup.string().min(8).max(10).required(),
   userName: yup.string().min(6).max(20).required(),
   isActive:yup.boolean()
@@ -49,7 +49,8 @@ const UserForm = () => {
   const user = useBoundStore((store) => store.user);
     const navigate = useNavigate();
     const {id}=useParams()
-    
+    const userList=useBoundStore(store=>store.usersData)
+    const updateUser=useBoundStore(store=>store.updateUser)
   const {
     register,
     handleSubmit,
@@ -66,7 +67,7 @@ const UserForm = () => {
     setValue("_id",user._id)
     setValue("firstName",user.firstName)
     setValue("lastName",user.lastName)
-    setValue("email",user.email)
+    // setValue("email",user.email)
     setValue("phone",user.phone)
     setValue("userName",user.userName)
     setValue("isActive",user.isActive)
@@ -77,7 +78,8 @@ const UserForm = () => {
 
   const onSubmitHandler = (data) => {
     console.log( data );
-    
+    updateUser({data})
+    return navigate("/admin/users");
   };
   if(user.role!=="Admin"){
     sessionStorage.removeItem("token")
@@ -126,7 +128,7 @@ return <Navigate to="/login" replace={true} />
                     />
                     <p>{errors.lastName?.message}</p>
                   </div>
-                  <div className="mt-5">
+                  {/* <div className="mt-5">
                     <label className="mt-5" htmlFor="Email">Email</label>
                     <input
                     id="Email"
@@ -136,7 +138,7 @@ return <Navigate to="/login" replace={true} />
                       placeholder="Email"
                     />
                     <p>{errors.email?.message}</p>
-                  </div>
+                  </div> */}
                   <div className="mt-5">
                     <label className="mt-5" htmlFor="Phone Number">Phone Number</label>
                     <input
@@ -165,6 +167,7 @@ return <Navigate to="/login" replace={true} />
                       {...register("isActive")}
                       className="mt-5 mr-1 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       type="checkbox"
+                      defaultValue
                     
                     />
                     <label className="mt-5" htmlFor="isActive">isActive</label>
