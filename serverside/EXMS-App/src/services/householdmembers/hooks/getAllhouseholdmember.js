@@ -6,7 +6,7 @@ export const getAllHouseholdMembers =()=>{
        
         const userService=context.app.service("users")
         const users = await userService.find();
-        console.log(users);
+        
         if(!users) throw new Error("no users found")
         const householdservice=context.app.service("households")
        const households = await householdservice.find();
@@ -27,7 +27,7 @@ const householdmembersData=householdmembers.map((eachHouseholdmember)=>{
     return member
 })
         
-          console.log(householdmembersData);
+        //   console.log(householdmembersData);
         
      
     

@@ -17,9 +17,7 @@ export const createMemberSlice =(set)=>({
         },
       });
       const { data } = response.data;
-      console.log("1");
-      console.log(data);
-      console.log("2");
+   
       set({ error_msg: "", memberData: data },
         false,
         "getAllMembers"
@@ -61,15 +59,15 @@ export const createMemberSlice =(set)=>({
    },
 
    updateMember: async (memberuserData) => {
+    const {newData}=memberuserData
+    const { _id } = newData;
     
-    const { _id } = memberuserData;
-
     const token = sessionStorage.getItem("token");
-console.log(memberuserData);
+    
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        memberuserData,
+        newData,
         {
           headers: {
             // 'Content-Type': 'application/json',

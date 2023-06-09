@@ -55,12 +55,11 @@ const EditMemberForm = () => {
   const onSubmitHandler = (data) => {
     console.log({ data });
     const member = memberList.find((m) => m._id === id);
-    const {householdId,memberUserId}=member
+    const {memberUserId}=member
+    console.log(memberUserId);
+    const newData={...data,memberUserId}
    
-    const newdata={...data,householdId,memberUserId}
-    
-    // console.log(newdata);
-    updateMember(newdata)
+    updateMember({newData})
     return navigate("/primaryuser/members");
   };
   if (user.role !== "Primaryuser") {
