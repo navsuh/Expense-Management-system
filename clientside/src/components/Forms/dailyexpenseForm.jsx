@@ -35,7 +35,7 @@ const DailyExpenseForm = () => {
 
 
   const getAllExpenseTypes =useBoundStore(store=>store.getAllExpenseTypes)
-  const getAllDailyExpense =useBoundStore(store=>store.getAllDailyExpense)
+  // const getAllDailyExpense =useBoundStore(store=>store.getAllDailyExpense)
   //  console.log(expenseTypes);
   const {
     register,
@@ -55,10 +55,7 @@ const DailyExpenseForm = () => {
     if (!id) return;
 
     const dailyExpense = dailyExpensesList.find((p) => p._id === id);
-    console.log(dailyExpense);
-
-     const newDate =new  Date(dailyExpense.paymentDetails.date )
-     dailyExpense.paymentDetails.date = newDate
+ 
     setValue("_id", dailyExpense._id);
     setValue("description", dailyExpense.description);
     setValue("paidThrough", dailyExpense.paidThrough);
@@ -75,41 +72,35 @@ const DailyExpenseForm = () => {
   const onSubmitHandler =(data) => {
    
       if (data._id) {
-        const householdId = houseHoldsOptions.find(house => house.name === data.households)?._id;
-        const expenseTypeId = expenseTypes.find(expense => expense.name === data.selectExpense)?._id;
-         
-        // let objectDate = data.paymentDetails.date;
-        // let day = objectDate.getDate();
-        // console.log(day); // 23
-       
-        // let month = objectDate.getMonth()+1;
-        // console.log(month + 1); // 8
-        
-        // let year = objectDate.getFullYear();
-      
+        // const householdId = houseHoldsOptions.find(house => house.name === data.households)?._id;
+        // const expenseTypeId = expenseTypes.find(expense => expense.name === data.selectExpense)?._id;
 
-        // let format3 = year + "-" +"0"+ month + "-" + "0"+ day;
-        // console.log(typeof format3);
-
-        // data.paymentDetails.date =format3
-
-        console.log(data);
-        console.log(houseHoldsOptions);
-        console.log(expenseTypes);
-        console.log(householdId);
-        console.log(expenseTypeId);
+        // console.log(data);
+        // console.log(houseHoldsOptions);
+        // console.log(expenseTypes);
+        // console.log(householdId);
+        // console.log(expenseTypeId);
 
 
-        const updatedData = {
-          ...data,
-          households: householdId,
-          expenseTypes: expenseTypeId,
+        // const updatedData = {
+        //   ...data,
+        //   households: householdId,
+        //   expenseTypes: expenseTypeId,
           
-        };
+        // };
         
-        console.log(updatedData);
-        
-         updateDailyExpense({updatedData});
+        // console.log(updatedData);
+      console.log("1");
+        console.log(data);
+        console.log("2");
+        const{amount,date,method,selectExpense}=data
+        const paymentDetails={amount,date,method}
+        delete data.amount
+        delete data.date
+        delete data.method
+        delete data.selectExpense
+        const newData={...data,paymentDetails,expensetypes:selectExpense}
+        updateDailyExpense({newData});
       } else {
         // console.log(data);
         const{amount,date,method,selectExpense}=data

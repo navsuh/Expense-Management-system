@@ -8,7 +8,7 @@ export const dailyexpense =()=>{
      const expensetypeservice=context.app.service("expensetypes")
      const expensetype = await expensetypeservice.find( { query: {name:expensetypes} });
      const householdservice=context.app.service("households")
-     console.log(householdservice);
+    //  console.log(householdservice);
      const household = await householdservice.find( { query: {name:households} });
     //  console.log(household);
     //  console.log(expensetype.data[0]._id);

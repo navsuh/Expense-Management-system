@@ -1,10 +1,10 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
-import { dailyExpenseSchema } from './daily-expenses.models.js'
+import { dailyExpenseSchema,dailyPatchExpenseSchema } from './daily-expenses.models.js'
 import validate from 'feathers-validate-joi'
 import { dailyexpense } from './hooks/createdailyexpense.js'
 import { hooks as schemaHooks } from '@feathersjs/schema'
-
+import { updateDailyExpenseResult } from './hooks/updateDailyExpenseResult.js'
 import {
   dailyExpensesDataValidator,
   dailyExpensesPatchValidator,
@@ -55,6 +55,8 @@ export const dailyExpenses = (app) => {
         schemaHooks.resolveData(dailyExpensesDataResolver)
       ],
       patch: [
+        validate.form(dailyPatchExpenseSchema,{abortEarly:false}),
+        dailyexpense(),
         schemaHooks.validateData(dailyExpensesPatchValidator),
         schemaHooks.resolveData(dailyExpensesPatchResolver)
       ],
@@ -62,7 +64,8 @@ export const dailyExpenses = (app) => {
     },
     after: {
       all: [],
-     find :[getAllDailyExpense()]
+     find :[getAllDailyExpense()],
+     patch:[updateDailyExpenseResult()],
     },
     error: {
       all: []
