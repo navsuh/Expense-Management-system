@@ -65,6 +65,7 @@ export const dailyExpenses = (app) => {
     after: {
       all: [],
      find :[getAllDailyExpense()],
+     create:[updateDailyExpenseResult()],
      patch:[updateDailyExpenseResult()],
     },
     error: {

@@ -6,45 +6,45 @@ import { IoArrowBack } from "react-icons/io5";
 import { useParams, useNavigate,Navigate } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
-const periodicExpenseList = [
-  {
-    _id: "1",
-    periodicExpense: "periodicExpense 1",
-    frequency: "frequency Name 1",
-    amount: "amount 1",
-    dueDate: "expense due date 1",
-    expensetype: "pediodic expense type 1",
-    paymentDetails: "details 1",
-    description: "description 1",
-    paidThrough: "bank details 1",
-    paidBy: "user 1 ",
-  },
-  {
-    _id: "2",
-    periodicExpense: "periodicExpense 2",
-    frequency: "frequency Name 2",
-    amount: "amount 2",
-    dueDate: "expense due date 2",
-    expensetype: "pediodic expense type 2",
-    paymentDetails: "details 2",
-    description: "description 2",
-    paidThrough: "bank details 2",
-    paidBy: "user 2 ",
-  },
-];
+// const periodicExpenseList = [
+//   {
+//     _id: "1",
+//     periodicExpense: "periodicExpense 1",
+//     frequency: "frequency Name 1",
+//     amount: "amount 1",
+//     dueDate: "expense due date 1",
+//     expensetype: "pediodic expense type 1",
+//     paymentDetails: "details 1",
+//     description: "description 1",
+//     paidThrough: "bank details 1",
+//     paidBy: "user 1 ",
+//   },
+//   {
+//     _id: "2",
+//     periodicExpense: "periodicExpense 2",
+//     frequency: "frequency Name 2",
+//     amount: "amount 2",
+//     dueDate: "expense due date 2",
+//     expensetype: "pediodic expense type 2",
+//     paymentDetails: "details 2",
+//     description: "description 2",
+//     paidThrough: "bank details 2",
+//     paidBy: "user 2 ",
+//   },
+// ];
 
 const schema = yup.object().shape({
   households: yup.string().required(),
   selectExpense: yup.string().required(),
   frequency: yup.string().required(),
-  amount: yup.string().min(1).required(),
-  dueDate: yup.date().required(),
-  paymentDetails: yup.object().shape({
-    amounts: yup.string().min(1).max(50).required(),
-    date: yup.date().required(),
+  amount: yup.number().min(1).required(),
+  dueDate: yup.string().required(),
+  // paymentDetails: yup.object().shape({
+    paymentDetailsAmount: yup.number().min(1).max(350).required(),
+    date: yup.string().required(),
     method: yup.string().min(3).max(50).required(),
-  }),
-  description: yup.string().min(5).max(20).required(),
+  // }),
+  description: yup.string().min(5).max(50).required(),
   paidThrough: yup.string().min(3).max(20).required(),
   paidBy: yup.string().min(3).max(20).required(),
 });
@@ -53,8 +53,11 @@ const PeriodicExpenseForm = () => {
   const navigate = useNavigate();
   const houseHoldsOptions =useBoundStore(store=>store.households)
   const expenseTypes=useBoundStore(store=>store.expenseTypes)
+  const createPeriodicExpense=useBoundStore(store=>store.createPeriodicExpense)
+  const periodicExpenseList=useBoundStore(store=>store.periodicExpense)
+  const updatePeriodicExpense=useBoundStore(store=>store.updatePeriodicExpense)
   const getAllExpenseTypes =useBoundStore(store=>store.getAllExpenseTypes)
-
+  const error_msg = useBoundStore((store) => store.error_msg);
   const { id } = useParams();
   const {
     register,
@@ -76,16 +79,55 @@ const PeriodicExpenseForm = () => {
     const periodicExpense = periodicExpenseList.find((p) => p._id === id); 
     console.log(periodicExpense);
     setValue("_id", periodicExpense._id);
-    setValue("firstName", periodicExpense.periodicExpense);
+    setValue("households", periodicExpense.household);
+    setValue("selectExpense", periodicExpense.selectExpense);
+    setValue("paymentDetailsAmount",periodicExpense.paymentDetails.amount)
+    setValue("date",periodicExpense.paymentDetails.date)
+    setValue("method",periodicExpense.paymentDetails.method)
     setValue("frequency", periodicExpense.frequency);
     setValue("amount", periodicExpense.amount);
+    setValue("dueDate", periodicExpense.dueDate);
     setValue("description", periodicExpense.description);
     setValue("paidThrough", periodicExpense.paidThrough);
     setValue("paidBy", periodicExpense.paidBy);
-  }, [id, setValue]);
+  }, [id, setValue,periodicExpenseList]);
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
+    // console.log({ data });
+    if (data._id) {
+      // const householdId = houseHoldsOptions.find(house => house.name === data.households)?._id;
+      // const expenseTypeId = expenseTypes.find(expense => expense.name === data.selectExpense)?._id;
+
+      // const updatedData = {
+      //   ...data,
+      //   households: householdId,
+      //   expenseTypes: expenseTypeId,
+        
+      // };
+      
+      const{paymentDetailsAmount,date,method,selectExpense}=data
+      const paymentDetails={amount:paymentDetailsAmount,date,method}
+      delete data.paymentDetailsAmount
+      delete data.date
+      delete data.method
+      delete data.selectExpense
+      const newData={...data,paymentDetails,expensetypes:selectExpense}
+      
+      updatePeriodicExpense({newData});
+    } else {
+      // console.log(data);
+      const{paymentDetailsAmount,date,method,selectExpense}=data
+      const paymentDetails={amount:paymentDetailsAmount,date,method}
+      delete data.paymentDetailsAmount
+      delete data.date
+      delete data.method
+      delete data.selectExpense
+      const newData={...data,paymentDetails,expensetypes:selectExpense}
+      // console.log(newData);
+      createPeriodicExpense({newData});
+    }
+
+    navigate("/primaryuser/periodicexpenses");
   };
   console.log(errors);
   if(user.role==="Admin"){
@@ -201,7 +243,7 @@ return <Navigate to="/login" replace={true} />
                       placeholder="Paid By"
                     />
                     <p className="text-red-500">
-                      {errors.dueDate?.message.slice(55, 70)}
+                      {errors.dueDate?.message}
                     </p>
                   </div>
                 </div>
@@ -216,9 +258,9 @@ return <Navigate to="/login" replace={true} />
                       {...register("frequency")}
                     >
                       <option value="">Select...</option>
-                      <option value="1">Weekly</option>
-                      <option value="2">Monthly</option>
-                      <option value="3">Yearly</option>
+                      <option value="Weekly">Weekly</option>
+                      <option value="Monthly">Monthly</option>
+                      <option value="Yearly">Yearly</option>
                     </select>
                     <p className="text-red-500">{errors.frequency?.message}</p>
 
@@ -237,21 +279,23 @@ return <Navigate to="/login" replace={true} />
                 Payment Details:-
               </label>
 
-              <div className={`flex mb-4  col-span-2 ${errors.paymentDetails?'h-40':'h-28'} border rounded-lg border-gray-300 px-2`}>
+              <div 
+              // className={`flex mb-4  col-span-2 ${errors.paymentDetails?'h-40':'h-28'} border rounded-lg border-gray-300 px-2`} 
+              className={`flex mb-4  col-span-2 'h-40' border rounded-lg border-gray-300 px-2`}>
                 <div className="w-1/3  h-12 mr-2">
-                  <label htmlFor="amounts">Amount</label>
+                  <label htmlFor="paymentDetailsAmount">Amount</label>
 
                   <div className="mt-2.5">
                     <input
-                      {...register("paymentDetails.amounts")}
+                      {...register("paymentDetailsAmount")}
                       type="text"
-                      name="amounts"
+                      name="paymentDetailsAmount"
                       id="amounts"
                       className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       placeholder="Amounts"
                     />
                     <p className="text-red-500">
-                      {errors.amounts?.message.slice(15)}
+                      {errors.paymentDetailsAmount?.message}
                     </p>
                   </div>
                 </div>
@@ -260,7 +304,7 @@ return <Navigate to="/login" replace={true} />
 
                   <div className="mt-2.5">
                     <input
-                      {...register("paymentDetails.date")}
+                      {...register("date")}
                       type="date"
                       name="date"
                       id="date"
@@ -268,7 +312,7 @@ return <Navigate to="/login" replace={true} />
                       placeholder="Paid By"
                     />
                     <p className="text-red-500">
-                      {errors.paymentDetails?.date?.message.slice(15, 41)}
+                      {errors.date?.message}
                     </p>
                   </div>
                 </div>
@@ -277,7 +321,7 @@ return <Navigate to="/login" replace={true} />
 
                   <div className="mt-2.5">
                     <input
-                      {...register("paymentDetails.method")}
+                      {...register("method")}
                       type="text"
                       name="method"
                       id="method"
@@ -285,7 +329,7 @@ return <Navigate to="/login" replace={true} />
                       placeholder="upi,debit card"
                     />
                     <p className="text-red-500">
-                      {errors.paymentDetails?.method?.message.slice(15)}
+                      {errors.method?.message}
                     </p>
                   </div>
                 </div>
@@ -347,6 +391,7 @@ return <Navigate to="/login" replace={true} />
               </button>
             </div>
           </form>
+          <p className="text-red-500">{error_msg ? error_msg : null}</p>
         </div>
       </div>
     </div>

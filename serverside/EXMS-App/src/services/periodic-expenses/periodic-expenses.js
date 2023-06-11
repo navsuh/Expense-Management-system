@@ -1,8 +1,9 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
-import { periodicExpenseSchema } from './periodic-expenses.models.js'
+import { periodicExpenseSchema,updateperiodicExpenseSchema } from './periodic-expenses.models.js'
 import validate from 'feathers-validate-joi'
 import {periodicexpense} from "./hook/createperiodicexpensehook.js"
+import { updatePeriodicExpenseResult } from './hook/updatePeriodicExpenseResult.js'
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   periodicExpensesDataValidator,
@@ -52,6 +53,8 @@ export const periodicExpenses = (app) => {
         schemaHooks.resolveData(periodicExpensesDataResolver)
       ],
       patch: [
+        validate.form(updateperiodicExpenseSchema,{abortEarly:false}),
+        periodicexpense(),
         schemaHooks.validateData(periodicExpensesPatchValidator),
         schemaHooks.resolveData(periodicExpensesPatchResolver)
       ],
@@ -59,7 +62,9 @@ export const periodicExpenses = (app) => {
     },
     after: {
       all: [],
-      find:[getAllPeriodicExpenses()]
+      find:[getAllPeriodicExpenses()],
+      create:[updatePeriodicExpenseResult()],
+patch:[updatePeriodicExpenseResult()],
     },
     error: {
       all: []

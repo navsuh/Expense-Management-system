@@ -18,7 +18,7 @@ export const DailyExpenseSlice = (set) => ({
       const { data } = response.data;
       // console.log(data);
       set(
-        (store) => ({ error_msg: "", dailyExpense: data }),
+        (state) => ({ error_msg: "", dailyExpense: data }),
         false,
         "getAllDailyExpense"
       );

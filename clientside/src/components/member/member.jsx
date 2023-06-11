@@ -5,11 +5,11 @@ import { Outlet } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 const tabList = [
   {
-    _id: 1,
+    _id: "1",
     tabName: "Periodic Expenses",
     tabPath: "/memberuser/periodicexpenses",
   },
-  { _id: 2, tabName: "Daily Expenses", tabPath: "/memberuser/dailyexpenses" },
+  { _id: "2", tabName: "Daily Expenses", tabPath: "/memberuser/dailyexpenses" },
 ];
 
 const MemberUser = () => {

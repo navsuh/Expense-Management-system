@@ -1,5 +1,5 @@
 
-export const updateDailyExpenseResult =()=>{
+export const updatePeriodicExpenseResult =()=>{
     return async(context)=>{
         // console.log(context.result);
     
@@ -15,7 +15,7 @@ export const updateDailyExpenseResult =()=>{
     context.result.household =households.data[0].name
     
     // context.result.data=dailyExpensesData      
-    
+    console.log(context.result);
      return context; 
     }
   }

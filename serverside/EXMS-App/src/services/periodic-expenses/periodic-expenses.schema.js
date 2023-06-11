@@ -21,10 +21,10 @@ export const periodicExpensesSchema = {
   ],
   properties: {
     _id: ObjectIdSchema(),
-    households: {type:"object"},
+    households: ObjectIdSchema(),
     frequency: { type: 'string' },
     dueDate: { type: 'string',format:"date" },
-    expensetypes: {type:"object"},
+    expensetypes: ObjectIdSchema(),
     amount: { type: 'number'},
     description: { type: 'string' },
     paidThrough: { type: 'string' },

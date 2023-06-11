@@ -32,7 +32,7 @@ const DailyExpenseForm = () => {
   const expenseTypes=useBoundStore(store=>store.expenseTypes)
   const updateDailyExpense =useBoundStore(store=>store.updateDailyExpense)
   const createDailyExpense =useBoundStore(store=>store.createDailyExpense)
-
+  const error_msg = useBoundStore((store) => store.error_msg);
 
   const getAllExpenseTypes =useBoundStore(store=>store.getAllExpenseTypes)
   // const getAllDailyExpense =useBoundStore(store=>store.getAllDailyExpense)
@@ -48,7 +48,7 @@ const DailyExpenseForm = () => {
   
   useEffect(()=>{
     getAllExpenseTypes()
-  },[])
+  },[getAllExpenseTypes])
 
 
   useEffect(() => {
@@ -75,13 +75,6 @@ const DailyExpenseForm = () => {
         // const householdId = houseHoldsOptions.find(house => house.name === data.households)?._id;
         // const expenseTypeId = expenseTypes.find(expense => expense.name === data.selectExpense)?._id;
 
-        // console.log(data);
-        // console.log(houseHoldsOptions);
-        // console.log(expenseTypes);
-        // console.log(householdId);
-        // console.log(expenseTypeId);
-
-
         // const updatedData = {
         //   ...data,
         //   households: householdId,
@@ -89,10 +82,7 @@ const DailyExpenseForm = () => {
           
         // };
         
-        // console.log(updatedData);
-      console.log("1");
-        console.log(data);
-        console.log("2");
+      
         const{amount,date,method,selectExpense}=data
         const paymentDetails={amount,date,method}
         delete data.amount
@@ -333,6 +323,7 @@ return <Navigate to="/login" replace={true} />
               </button>
             </div>
           </form>
+          <p className="text-red-500">{error_msg ? error_msg : null}</p>
         </div>
       </div>
     </div>

@@ -44,7 +44,7 @@ const PeriodicExpensesTable = (props) => {
   },[getAllPeriodicExpense])
   
 
-  const deletePeriodicExpense=(id)=>{
+  const ondeletePeriodicExpense=(id)=>{
     deletePeriodicExpenses(id)
 
    }
@@ -97,7 +97,7 @@ const PeriodicExpensesTable = (props) => {
                     >
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <AiOutlineDelete onClick={()=>deletePeriodicExpense(eachPeriodicExpense._id)} className="w-8 h-6 cursor-pointer" />
+                    <AiOutlineDelete onClick={()=>ondeletePeriodicExpense(eachPeriodicExpense._id)} className="w-8 h-6 cursor-pointer" />
                   </div>
                 </td>
               </tr>
