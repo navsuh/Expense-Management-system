@@ -86,7 +86,7 @@ const DailyExpensesTableMember = (props) => {
                   <Link to={`/memberuser/dailyexpenses/${eachDailyExpense._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <AiOutlineDelete onClick={()=>ondeleteDailyExpense(eachDailyExpense._id)} className="w-8 h-6" />
+                    <AiOutlineDelete onClick={()=>ondeleteDailyExpense(eachDailyExpense._id)} className="w-8 h-6 cursor-pointer ml-1" />
                   </div>
                 </td>
               </tr>

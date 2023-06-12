@@ -229,7 +229,7 @@ return <Navigate to="/login" replace={true} />
                       className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                       placeholder="Amount"
                     />
-                    <p className="text-red-500">{errors.amount?.message}</p>
+                    <p className="text-red-500">{errors.amount?.message.slice(0,30)}</p>
                   </div>
                 </div>
                 <div className="w-1/3  h-12 mr-2">
@@ -282,8 +282,9 @@ return <Navigate to="/login" replace={true} />
               </label>
 
               <div 
-              // className={`flex mb-4  col-span-2 ${errors.paymentDetails?'h-40':'h-28'} border rounded-lg border-gray-300 px-2`} 
-              className={`flex mb-4  col-span-2 'h-40' border rounded-lg border-gray-300 px-2`}>
+                className={`flex mb-4  col-span-2 ${errors.paymentDetailsAmount ||errors.method ||errors.date?'h-40':'h-28'} border rounded-lg border-gray-300 px-2`}>
+              
+              {/* className={`flex mb-4  col-span-2 'h-40' border rounded-lg border-gray-300 px-2`}> */}
                 <div className="w-1/3  h-12 mr-2">
                   <label htmlFor="paymentDetailsAmount">Amount</label>
 
@@ -297,7 +298,7 @@ return <Navigate to="/login" replace={true} />
                       placeholder="Amounts"
                     />
                     <p className="text-red-500">
-                      {errors.paymentDetailsAmount?.message}
+                      {errors.paymentDetailsAmount?.message.slice(14,45)}
                     </p>
                   </div>
                 </div>
