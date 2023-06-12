@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useBoundStore } from "../../store.js";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
@@ -12,6 +12,8 @@ const UserTable = (props) => {
   const getAllUsers=useBoundStore(store=>store.getAllUsers)
   const softdeleteUser=useBoundStore(store=>store.softdeleteUser)
   const userList=useBoundStore(store=>store.usersData)
+  const [searchQuery, setSearchQuery] = useState("");
+
   // console.log(expenseList);
   useEffect(() => {
     getAllUsers();
@@ -23,7 +25,8 @@ const UserTable = (props) => {
     <>
      <div className="flex flex-row justify-between">
         <div>
-          <SearchInput />
+        <SearchInput onChange={(value) => setSearchQuery(value)} />
+          
         </div>
         {/* <div>
         <Link to={"/admin/userform"}>
@@ -48,7 +51,8 @@ const UserTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {userList.map((eachUser) => (
+            {userList.filter((expense) =>
+                expense.firstName.toLowerCase().includes(searchQuery.toLowerCase())).map((eachUser) => (
               <tr className="border-b bg-gray-50 " key={eachUser._id}>
                 <td className={eachUser.isActive?"px-6 py-4":"px-6 py-4 text-red-400"}>{eachUser.firstName}</td>
                 <td className={eachUser.isActive?"px-6 py-4":"px-6 py-4 text-red-400"}>{eachUser.isActive?"ACTIVE":"INACTIVE"}</td>

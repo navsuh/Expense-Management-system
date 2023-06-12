@@ -4,14 +4,15 @@ import SearchInput from "../searchInput";
 import { IoAddCircle } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useBoundStore } from "../../store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import EditMemberForm from "../Forms/editMembersForm";
 
 // const memberList = [
 //   { _id: "1", household: "household 1", user: "user 1" },
 //   { _id: "2", household: "household 1", user: "user 2" },
 // ];
 
-const MemberTable = (props) => {
+const MemberTable = () => {
   // const {userList}=props
   const getAllMembers = useBoundStore(store=>store.getAllMembers)
   const memberList = useBoundStore(store=>store.memberData)
@@ -26,8 +27,18 @@ const MemberTable = (props) => {
   const onDeleteMember=(id)=>{
     handleDeleteMember(id)
    }
+   const [isModalOpen, setIsModalOpen] = useState(false);
+ const handleModalClose = () => {
+   setIsModalOpen(false);
+ };
+
+//  const handleEdit =()=>{
+//   setIsModalOpen(true)
+//  }
   return (
     <>
+     <EditMemberForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
+
      <div className="flex flex-row justify-between">
           <div>
             <SearchInput />
@@ -62,7 +73,7 @@ const MemberTable = (props) => {
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
                   <Link to={`/primaryuser/members/${eachMember._id}`}>
-                    <AiOutlineEdit className="w-8 h-6" />
+                    <AiOutlineEdit onClick={() => setIsModalOpen(true)}  className="w-8 h-6" />
                     </Link >
                     <AiOutlineDelete onClick={()=>onDeleteMember(eachMember._id)} className="w-8 h-6 ml-1 cursor-pointer" />
                   </div>
