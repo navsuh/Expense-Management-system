@@ -17,6 +17,6 @@ export const userSchema = Joi.object({
     userName: Joi.string().min(5).max(50),
     isActive:Joi.boolean(),
     lastLoggedIn:Joi.string(),
-    updatedBy:Joi.string().min(5).max(50),
+    updatedBy:Joi.string(),
     updatedAt:Joi.string(),
   });

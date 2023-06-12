@@ -73,12 +73,12 @@ const UserForm = () => {
     setValue("isActive",user.isActive)
     
 
-  },[id,setValue])
+  },[id,setValue,userList])
   
 
   const onSubmitHandler = (data) => {
     console.log( data );
-    updateUser({data})
+    updateUser({data},user._id)
     return navigate("/admin/users");
   };
   if(user.role!=="Admin"){

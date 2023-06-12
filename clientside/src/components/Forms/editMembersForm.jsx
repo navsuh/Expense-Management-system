@@ -57,7 +57,7 @@ const EditMemberForm = () => {
     const member = memberList.find((m) => m._id === id);
     const {memberUserId}=member
     // console.log(memberUserId);
-    const newData={...data,memberUserId}
+    const newData={...data,memberUserId,primaryuserId:user._id}
    
     updateMember({newData})
     return navigate("/primaryuser/members");

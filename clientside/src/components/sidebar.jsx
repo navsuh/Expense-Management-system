@@ -11,8 +11,9 @@ const Sidebar = (props) => {
   // const {name}=props
   const navigate = useNavigate();
   const user = useBoundStore((store) => store.user);
+  const lastLoginUser= useBoundStore((store) => store.lastLoginUser);
   const name = user.firstName;
-//  console.log(user);
+ 
 
  const [isModalOpen, setIsModalOpen] = useState(false);
  const handleModalClose = () => {
@@ -114,6 +115,8 @@ const Sidebar = (props) => {
             <li>
               <button
             onClick={()=>{
+              lastLoginUser(user._id)
+              
               sessionStorage.removeItem("token")
               navigate("/login")
             }}

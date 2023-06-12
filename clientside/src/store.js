@@ -15,6 +15,8 @@ import {DailyExpenseSlice} from "./slice/DailyexpenseSlice"
 import {PeriodicExpenseSlice} from "./slice/PeridoicExpenseSlice"
 import { persist } from 'zustand/middleware'
 import { devtools } from 'zustand/middleware'
+import { UserSlice } from './slice/UserSlice'
+
 
 export const useBoundStore = create(devtools (persist((...a) => ({
   ...PrimaryUserSlice(...a),
@@ -27,7 +29,8 @@ export const useBoundStore = create(devtools (persist((...a) => ({
   ...ForgetPasswordSlice(...a),
   ...ResetPasswordSlice(...a),
   ...DailyExpenseSlice(...a),
-  ...PeriodicExpenseSlice(...a)
+  ...PeriodicExpenseSlice(...a),
+  ...UserSlice(...a)
 }),{ name: 'boundstore',
 partialize: (state) =>
 Object.fromEntries(
