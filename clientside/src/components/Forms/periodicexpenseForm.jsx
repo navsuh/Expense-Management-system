@@ -128,8 +128,8 @@ const PeriodicExpenseForm = () => {
       // console.log(newData);
       createPeriodicExpense({newData});
     }
-
-    navigate("/primaryuser/periodicexpenses");
+if(user.role==="Primaryuser") navigate("/primaryuser/periodicexpenses");
+else if(user.role==="member") navigate("/memberuser/periodicexpenses");
   };
   console.log(errors);
   if(user.role==="Admin"){

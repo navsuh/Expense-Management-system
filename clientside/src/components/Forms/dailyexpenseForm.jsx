@@ -103,8 +103,9 @@ const DailyExpenseForm = () => {
         // console.log(newData);
         createDailyExpense({newData});
       }
-  
-      navigate("/primaryuser/dailyexpenses");
+      if(user.role==="Primaryuser") navigate("/primaryuser/dailyexpenses");
+      else if(user.role==="member") navigate("/memberuser/dailyexpenses");
+      
  
   };
   
