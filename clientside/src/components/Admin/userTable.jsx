@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const UserTable = (props) => {
   
   const getAllUsers=useBoundStore(store=>store.getAllUsers)
-  const softdeleteUser=useBoundStore(store=>store.softdeleteExpenseTypes)
+  const softdeleteUser=useBoundStore(store=>store.softdeleteUser)
   const userList=useBoundStore(store=>store.usersData)
   // console.log(expenseList);
   useEffect(() => {
