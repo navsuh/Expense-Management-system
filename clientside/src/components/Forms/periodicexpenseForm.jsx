@@ -57,6 +57,7 @@ const PeriodicExpenseForm = () => {
   const periodicExpenseList=useBoundStore(store=>store.periodicExpense)
   const updatePeriodicExpense=useBoundStore(store=>store.updatePeriodicExpense)
   const getAllExpenseTypes =useBoundStore(store=>store.getAllExpenseTypes)
+  const getAllHouseholds=useBoundStore(store=>store.getAllHouseholds)
   const error_msg = useBoundStore((store) => store.error_msg);
   const { id } = useParams();
   const {
@@ -70,7 +71,8 @@ const PeriodicExpenseForm = () => {
 
   useEffect(()=>{
     getAllExpenseTypes();
-  },[getAllExpenseTypes])
+    getAllHouseholds();
+  },[getAllExpenseTypes,getAllHouseholds])
   
 
   useEffect(() => {

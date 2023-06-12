@@ -9,6 +9,7 @@ import { useBoundStore } from "../store";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "./Forms/ForgetPasswordForm";
+// import { Navigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -47,7 +48,12 @@ const Login = () => {
   useEffect(() => {
     if (!token) return;
     if (!sessionStorage.getItem("token")) return;
-    if (!user.isActive) return;
+    if (!user.isActive) {
+      sessionStorage.removeItem("token")
+       alert("user inActive Contact Admin")
+      //  navigate("/login");
+      return navigate(0)
+    }
     if (user.role === "Admin") {
       alert("login sucessfull");
       navigate("/admin");
@@ -69,7 +75,7 @@ const Login = () => {
     //   progress: undefined,
     //   theme: "light",
     //   });
-  }, [token, navigate, user.role]);
+  }, [token, navigate, user.role,user.isActive]);
   // const customId = "custom-id-yes";
 
   const onSubmitHandler = (data) => {
