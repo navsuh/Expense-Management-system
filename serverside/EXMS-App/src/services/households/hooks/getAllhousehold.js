@@ -17,7 +17,7 @@ export const getAllHousehold =()=>{
             
           }
     })
-    console.log(filteredHouseHolds);
+    
     context.result=filteredHouseHolds
     }
     

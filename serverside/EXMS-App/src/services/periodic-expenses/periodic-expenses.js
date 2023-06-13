@@ -18,6 +18,7 @@ import {
 import { PeriodicExpensesService, getOptions } from './periodic-expenses.class.js'
 import { periodicExpensesPath, periodicExpensesMethods } from './periodic-expenses.shared.js'
 import {getAllPeriodicExpenses} from "./hook/getPeriodicExpense.js"
+
 export * from './periodic-expenses.class.js'
 export * from './periodic-expenses.schema.js'
 
