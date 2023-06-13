@@ -17,10 +17,11 @@ export const getAllHousehold =()=>{
             
           }
     })
-    console.log(filteredHouseHolds);
-    context.result=filteredHouseHolds
+    delete context.result.data
+    context.result.data=filteredHouseHolds
+
     }
-    
+  
     
      return context; 
     }

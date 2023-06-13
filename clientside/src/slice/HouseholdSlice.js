@@ -15,10 +15,10 @@ export const HouseholdSlice = (set) => ({
           Authorization: "Bearer " + token,
         },
       });
-      // const { data } = response.data;
+      const { data } = response.data;
       // console.log(data);
       set(
-        (store) => ({ error_msg: "", households: response.data }),
+        (store) => ({ error_msg: "", households: data }),
         false,
         "getAllHouseholds"
       );

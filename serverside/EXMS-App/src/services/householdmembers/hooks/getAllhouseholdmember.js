@@ -2,8 +2,24 @@
 export const getAllHouseholdMembers =()=>{
     return async(context)=>{
         // console.log(context.result.data);
+        
+
+        
         const householdmembers=context.result.data
+        if(context.params.users){
+            const filteredHouseholds=householdmembers.filter((eachHouseholdMember)=>{
+                return eachHouseholdMember.user.equals(context.params.users._id)
+                        })
+                       
+        
+        const filteredHouseholdMembers=householdmembers.filter((eachHouseholdMember)=>{
+            for (let eachfilteredhousehold of filteredHouseholds){
+                if(eachfilteredhousehold.household.equals(eachHouseholdMember.household) && !eachfilteredhousehold.user.equals(eachHouseholdMember.user)) return true
+            }
+            
+                    })
        
+                    console.log(filteredHouseholdMembers);
         const userService=context.app.service("users")
         const users = await userService.find();
         
@@ -14,7 +30,7 @@ export const getAllHouseholdMembers =()=>{
     //    console.log(users.data);
     //    console.log(households.data);
 // console.log(householdmembers);
-const householdmembersData=householdmembers.map((eachHouseholdmember)=>{
+const householdmembersData=filteredHouseholdMembers.map((eachHouseholdmember)=>{
     let member={_id:eachHouseholdmember._id,householdId:eachHouseholdmember.household,memberUserId:eachHouseholdmember.user}
    
     const household=households.data.find((eachHousehold)=>eachHousehold._id.equals(eachHouseholdmember.household))
@@ -41,8 +57,8 @@ const householdmembersData=householdmembers.map((eachHouseholdmember)=>{
     //  delete context.data.role
     //  context.data.household=household.data[0]._id
     context.result.data=householdmembersData
+        }
 
-        
         
     
      return context; 
