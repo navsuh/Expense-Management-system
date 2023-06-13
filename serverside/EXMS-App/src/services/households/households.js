@@ -15,6 +15,9 @@ import {
 } from './households.schema.js'
 import { HouseholdsService, getOptions } from './households.class.js'
 import { householdsPath, householdsMethods } from './households.shared.js'
+import {getAllHousehold } from './hooks/getAllhousehold.js'
+
+import { createPrimaryUserHouseholdMember } from './hooks/createPrimaryUserHouseholdMember.js'
 
 export * from './households.class.js'
 export * from './households.schema.js'
@@ -57,7 +60,9 @@ export const households = (app) => {
       remove: []
     },
     after: {
-      all: []
+      all: [],
+      find:[getAllHousehold()],
+      create:[createPrimaryUserHouseholdMember()]
     },
     error: {
       all: []

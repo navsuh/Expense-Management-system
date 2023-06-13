@@ -7,6 +7,8 @@ const attrs = {
   city: Joi.string().min(3).max(50).required(),
   state: Joi.string().min(3).max(50).required(),
   zipcode: Joi.number().min(4).required(),
+  primaryuserId:Joi.string()
+
 
 }
 export const householdSchema = Joi.object(attrs)

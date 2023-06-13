@@ -6,9 +6,11 @@ export const householdmembersSchema = Joi.object({
     email: Joi.string().email().required(),
     phone: Joi.string().length(10).required(),
     userName: Joi.string().min(5).max(50).required(),
-    password: Joi.string().min(8).max(255).required(),
+    password: Joi.string().min(8).max(1052).required(),
     householdName:Joi.string().required(),
-    role: Joi.string().min(5).max(50)
+    role: Joi.string().min(5).max(50).required(),
+    householdId: Joi.string(),
+    primaryuserId: Joi.string(),
   });
 
   export const updatehouseholdmembersSchema = Joi.object({
@@ -18,7 +20,8 @@ export const householdmembersSchema = Joi.object({
     phone: Joi.string().length(10),
     userName: Joi.string().min(5).max(50),
     householdName:Joi.string(),
-    
+    memberUserId:Joi.string(),
+    primaryuserId:Joi.string(),
 
 
 

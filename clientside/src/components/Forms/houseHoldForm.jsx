@@ -77,9 +77,7 @@ const error_msg=useBoundStore(store=>store.error_msg)
   },[id,setValue,houseHoldList])
 
   const onSubmitHandler = (data) => {
-    console.log("1");
-    console.log({ data });
-    console.log("2");
+    
     if(data._id){
       console.log("update");
       updateHouseholds({data})

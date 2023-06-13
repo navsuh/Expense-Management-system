@@ -15,10 +15,10 @@ export const HouseholdSlice = (set) => ({
           Authorization: "Bearer " + token,
         },
       });
-      const { data } = response.data;
-      console.log(data);
+      // const { data } = response.data;
+      // console.log(data);
       set(
-        (store) => ({ error_msg: "", households: data }),
+        (store) => ({ error_msg: "", households: response.data }),
         false,
         "getAllHouseholds"
       );
@@ -32,9 +32,10 @@ export const HouseholdSlice = (set) => ({
   createHouseholds: async (userData) => {
     const { data } = userData;
     const token = sessionStorage.getItem("token");
+    
     const {name, addressLine1, addressLine2, area, city, state, zipcode}=data
     const newData={name, addressLine1, addressLine2, area, city, state, zipcode}
-    //    console.log(token);
+       console.log(newData);
     try {
       const response = await axios.post(apiEndPoint, newData, {
         headers: {

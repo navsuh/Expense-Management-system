@@ -2,7 +2,8 @@
 import { authenticate } from '@feathersjs/authentication'
 import { createhouseholdmember } from './hooks/createhouseholdmember.js'
 import validate from 'feathers-validate-joi'
-import { householdmembersSchema, updatehouseholdmembersSchema } from './householdmembers.model.js'
+import { householdmembersSchema } from './householdmembers.model.js'
+import { updatehouseholdmembersSchema } from './householdmembers.model.js'
 import { getAllHouseholdMembers } from './hooks/getAllhouseholdmember.js'
 import { updatehouseholdmember } from './hooks/updatehouseholdmember.js'
 import { deletehouseholdmember } from './hooks/deletehouseholdmember.js'
@@ -49,7 +50,7 @@ export const householdMembers = (app) => {
       find: [],
       get: [],
       create: [
-        validate.form(householdmembersSchema, { abortEarly: false }),
+        // validate.form(householdmembersSchema, { abortEarly: false }),
         createhouseholdmember(),
         schemaHooks.validateData(householdMembersDataValidator),
         schemaHooks.resolveData(householdMembersDataResolver)
