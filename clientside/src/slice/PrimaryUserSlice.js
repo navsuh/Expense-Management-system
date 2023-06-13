@@ -7,7 +7,7 @@ export const PrimaryUserSlice = (set) => ({
     error_msg:"",
     addPrimaryUser: async(userData) =>  {
       const {data}=userData
-      const newData={...data,role:"Primaryuser"}
+      const newData={...data,role:"Primaryuser",isActive:true}
 
       // console.log(newData);
       try {

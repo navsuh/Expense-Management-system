@@ -7,7 +7,8 @@ export const userSchema = Joi.object({
     phone: Joi.string().length(10).required(),
     userName: Joi.string().min(5).max(50).required(),
     password: Joi.string().min(8).max(255).required(),
-    role: Joi.string().min(5).max(50)
+    role: Joi.string().min(5).max(50),
+    isActive:Joi.boolean()
   });
 
   export const userSchemaPatch = Joi.object({
