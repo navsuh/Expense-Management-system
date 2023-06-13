@@ -8,9 +8,11 @@ export const getAllHousehold =()=>{
         const householdmemberservice=context.app.service("householdmembers")
         const householdmembers=await householdmemberservice.find( { query:  { user:context.params.users._id } });
     //  console.log(householdmembers.data);
+    //  console.log(AllHouseHolds);
     const filteredHouseHolds=AllHouseHolds.filter((eachHouseHold)=>{
           for(let eachHouseHoldmember of householdmembers.data){
-            if(eachHouseHoldmember.householdId.equals(eachHouseHold._id)) {
+            
+            if(eachHouseHoldmember.household.equals(eachHouseHold._id)) {
               
               return true
             }
