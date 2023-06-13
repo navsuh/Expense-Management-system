@@ -1,12 +1,12 @@
 import { emailhandler } from '../../../helpers/emailhandler.js'
 export const createPrimaryUserHouseholdMember =()=>{
     return async(context)=>{
-      console.log(context.params.users);
+      // console.log(context.params.users);
       
 
 
       const householdmemberservice=context.app.service("householdmembers")
-      console.log(householdmemberservice);
+      // console.log(householdmemberservice);
      await householdmemberservice.create( {
       firstName: context.params.users.firstName,
       lastName: context.params.users.firstName,

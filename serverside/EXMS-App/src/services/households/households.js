@@ -18,7 +18,7 @@ import { householdsPath, householdsMethods } from './households.shared.js'
 import {getAllHousehold } from './hooks/getAllhousehold.js'
 import { createhousehold } from './hooks/createHousehold.js'
 import { createPrimaryUserHouseholdMember } from './hooks/createPrimaryUserHouseholdMember.js'
-
+import { deletehousehold } from './hooks/deletehousehold.js'
 export * from './households.class.js'
 export * from './households.schema.js'
 
@@ -58,7 +58,7 @@ export const households = (app) => {
         schemaHooks.validateData(householdsPatchValidator),
         schemaHooks.resolveData(householdsPatchResolver)
       ],
-      remove: []
+      remove: [deletehousehold()]
     },
     after: {
       all: [],
