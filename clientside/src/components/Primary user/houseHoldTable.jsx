@@ -4,14 +4,14 @@ import SearchInput from "../searchInput";
 import { IoAddCircle } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useBoundStore } from "../../store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const HouseholdTable = (props) => {
   // const {expenseList}=props
   const getAllHouseholds =useBoundStore(store=>store.getAllHouseholds)
    const houseHoldList =useBoundStore(store=>store.households)
   const deleteHouseholds=useBoundStore(store=>store.deleteHouseholds)
-   
+   const [ searchQuery,setSearchQuery] =useState("")
     // console.log(getAllHouseholds);
   //  console.log(houseHoldList);
   useEffect(()=>{
@@ -25,7 +25,7 @@ const HouseholdTable = (props) => {
     <>
      <div className="flex flex-row justify-between">
           <div>
-            <SearchInput />
+            <SearchInput onChange={(value) =>setSearchQuery(value)} />
           </div>
           <div>
             <Link to={"/primaryuser/householdform"}>
@@ -47,7 +47,7 @@ const HouseholdTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {houseHoldList.map((eachHousehold) => (
+            {houseHoldList.filter(h=>h.name.toLowerCase().includes(searchQuery.toLowerCase())).map((eachHousehold) => (
               <tr className="border-b bg-gray-50 " key={eachHousehold._id}>
                 <td className="px-6 py-4">{eachHousehold.name}</td>
                 <td className="px-6 py-4">

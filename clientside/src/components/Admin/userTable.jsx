@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useBoundStore } from "../../store.js";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-// import { IoAddCircle } from "react-icons/io5";
+import { HiCheckCircle, HiOutlineXCircle } from "react-icons/hi";
 
 import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
@@ -51,18 +51,18 @@ const UserTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {userList.filter((expense) =>
-                expense.firstName.toLowerCase().includes(searchQuery.toLowerCase())).map((eachUser) => (
+            {userList.filter((users) =>
+                users.firstName.toLowerCase().includes(searchQuery.toLowerCase())).map((eachUser) => (
               <tr className="border-b bg-gray-50 " key={eachUser._id}>
                 <td className={eachUser.isActive?"px-6 py-4":"px-6 py-4 text-red-400"}>{eachUser.firstName}</td>
-                <td className={eachUser.isActive?"px-6 py-4":"px-6 py-4 text-red-400"}>{eachUser.isActive?"ACTIVE":"INACTIVE"}</td>
+                <td className={eachUser.isActive?"px-6 py-4":"px-6 py-4 text-red-400"}>{eachUser.isActive? <HiCheckCircle id="Active_Status" className="text-green-600 text-2xl ml-2"/>:<HiOutlineXCircle id="Inactive_Status" className="text-2xl ml-2"/>}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
                   <Link to={`/admin/users/${eachUser._id}`}>
                     <AiOutlineEdit className="w-8 h-6" />
                     
                     </Link>
-                    <AiOutlineDelete onClick={()=>onSoftDeleteuser(eachUser._id)} className="w-8 h-6" />
+                    <AiOutlineDelete onClick={()=>onSoftDeleteuser(eachUser._id)} className="w-8 h-6 cursor-pointer ml-2" />
                   </div>
                 </td>
               </tr>

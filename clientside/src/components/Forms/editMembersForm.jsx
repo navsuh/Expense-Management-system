@@ -73,7 +73,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
     updateMember({newData})
     handleModalClose()
 
-     navigate("/primaryuser/members")
+    //  navigate("/primaryuser/members")
 
   };
 
@@ -88,7 +88,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   <div id="modal-body" onClick={(e) => e.target.id === "modal-body" && handleModalClose()} className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]">
   <div className="w-96 bg-white rounded-md px-6 py-4">
     <div className="flex justify-between">
-    <h2 className="text-3xl font-bold text-center text-orange-500 ml-4">Add Member</h2>
+    <h3 className="text-3xl font-bold text-center text-orange-500 ml-4">Edit Member</h3>
 
       <span onClick={() => handleModalClose()} className="text-red-500 text-2xl cursor-pointer">&times;</span>
     </div>

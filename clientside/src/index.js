@@ -80,7 +80,7 @@ root.render(
         <Route path="/primaryuser/householdform" element={<PrivateRoute><HouseHoldForm/></PrivateRoute>}/>
         <Route path="/primaryuser/household/:id" element={<PrivateRoute><HouseHoldForm/></PrivateRoute>}/>
 
-        <Route path="/primaryuser/memberform" element={<PrivateRoute><CreateMemberForm/></PrivateRoute>}/>
+        {/* <Route path="/primaryuser/memberform" element={<PrivateRoute><CreateMemberForm/></PrivateRoute>}/> */}
         {/* <Route path="/primaryuser" element={<PrivateRoute><PrimaryUser /></PrivateRoute>}>
         </Route> */}
 

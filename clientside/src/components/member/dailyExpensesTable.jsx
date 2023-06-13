@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { IoAddCircle } from "react-icons/io5";
 import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // const dailyExpensesList = [
 //   {
@@ -33,7 +33,9 @@ const DailyExpensesTableMember = (props) => {
   const getAllDailyExpense = useBoundStore(store=>store.getAllDailyExpense)
   const dailyExpensesList = useBoundStore(store=>store.dailyExpense)
   const deleteDailyExpense = useBoundStore(store=>store.deleteDailyExpense)
-  
+   
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(()=>{
     getAllDailyExpense();
   },[getAllDailyExpense])
@@ -46,7 +48,7 @@ const DailyExpensesTableMember = (props) => {
     <>
       <div className="flex flex-row justify-between">
           <div>
-            <SearchInput />
+            <SearchInput onChange={(value)=>setSearchQuery(value)} />
           </div>
           <div className="flex flex-row justify-between">
             
@@ -76,7 +78,9 @@ const DailyExpensesTableMember = (props) => {
             </tr>
           </thead>
           <tbody>
-            {dailyExpensesList.map((eachDailyExpense) => (
+            {dailyExpensesList.filter((expense) =>
+                expense.selectExpense.toLowerCase().includes(searchQuery.toLowerCase()) || expense.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
+              ).map((eachDailyExpense) => (
               <tr className="border-b bg-gray-50 " key={eachDailyExpense._id}>
               <td className="px-6 py-4">{eachDailyExpense.paymentDetails.date}</td>
                 <td className="px-6 py-4">{eachDailyExpense.selectExpense}</td>
