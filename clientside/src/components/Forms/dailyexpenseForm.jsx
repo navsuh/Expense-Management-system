@@ -42,6 +42,7 @@ const DailyExpenseForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -102,6 +103,7 @@ const DailyExpenseForm = () => {
         const newData={...data,paymentDetails,expensetypes:selectExpense}
         // console.log(newData);
         createDailyExpense({newData});
+
       }
       if(user.role==="Primaryuser") navigate("/primaryuser/dailyexpenses");
       else if(user.role==="member") navigate("/memberuser/dailyexpenses");

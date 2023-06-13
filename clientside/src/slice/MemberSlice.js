@@ -60,14 +60,14 @@ export const MemberSlice =(set)=>({
 
    updateMember: async (memberuserData) => {
     const {newData}=memberuserData
-    const { _id } = newData;
+    const { _id ,email,firstName,lastName,household,householdId,memberUserId,phone,userName} = newData;
     
     const token = sessionStorage.getItem("token");
     
     try {
-      await axios.patch(
+      const response=await axios.patch(
         `${apiEndPoint}/${_id}`,
-        newData,
+        {email,firstName,lastName,household,householdId,memberUserId,phone,userName},
         {
           headers: {
             // 'Content-Type': 'application/json',
@@ -76,6 +76,32 @@ export const MemberSlice =(set)=>({
         }
       );
 
+    
+      set(
+        (state) => ({
+          error_msg: "",
+          dailyExpense: state.dailyExpense.map((eachExpense) => {
+            if (eachExpense._id === response.data._id) {
+              return {
+                _id: response.data._id,
+                email: response.data.email,
+                household: response.data.household,
+                householdId: response.data.householdId,
+                firstName: response.data.firstName,
+                lastName: response.data.lastName,
+                memberUserId: response.data.memberUserId,
+                phone: response.data.phone,
+                userName:response.data.userName
+
+              };
+            } else {
+              return eachExpense;
+            }
+          }),
+        }),
+        false,
+        "updateDailyExpense"
+      );
 
    
     } catch (error) {

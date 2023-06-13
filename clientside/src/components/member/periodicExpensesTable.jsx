@@ -3,33 +3,8 @@ import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
 import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
-import { useEffect } from "react";
-// const periodicExpenseList = [
-//   {
-//     _id: 1,
-//     household: "household 1",
-//     frequency: "frequency Name 1",
-//     amount: "amount 1",
-//     dueDate: "expense due date 1",
-//     expensetype: "pediodic expense type 1",
-//     paymentDetails: "details 1",
-//     description: "description 1",
-//     paidThrough: "bank details 1",
-//     paidBy: "user 1 ",
-//   },
-//   {
-//     _id: 2,
-//     household: "household 2",
-//     frequency: "frequency Name 2",
-//     amount: "amount 2",
-//     dueDate: "expense due date 2",
-//     expensetype: "pediodic expense type 2",
-//     paymentDetails: "details 2",
-//     description: "description 2",
-//     paidThrough: "bank details 2",
-//     paidBy: "user 2 ",
-//   },
-// ];
+import { useEffect, useState } from "react";
+
 
 const PeriodicExpensesTableMember = (props) => {
   // const {userList}=props
@@ -37,6 +12,7 @@ const PeriodicExpensesTableMember = (props) => {
   const periodicExpenseList =useBoundStore(store=>store.periodicExpense)
   const deletePeriodicExpenses = useBoundStore(store=>store.deletePeriodicExpense)
 
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(()=>{
     getAllPeriodicExpense();
@@ -51,7 +27,7 @@ const PeriodicExpensesTableMember = (props) => {
     <>
     <div className="flex flex-row justify-between">
         <div>
-          <SearchInput />
+          <SearchInput onChange={(value)=>setSearchQuery(value)} />
         </div>
         <div className="flex flex-row justify-between">
           <FaFilter className="mt-5 mr-20 text-blue-800" />
@@ -81,7 +57,9 @@ const PeriodicExpensesTableMember = (props) => {
             </tr>
           </thead>
           <tbody>
-            {periodicExpenseList.map((eachPeriodicExpense) => (
+            {periodicExpenseList.filter((expense) =>
+                expense.selectExpense.toLowerCase().includes(searchQuery.toLowerCase()) || expense.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
+              ).map((eachPeriodicExpense) => (
               <tr
                 className="border-b bg-gray-50 "
                 key={eachPeriodicExpense._id}
