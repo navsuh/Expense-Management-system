@@ -17,7 +17,7 @@ export const MemberSlice =(set)=>({
         },
       });
       const { data } = response.data;
-   
+  console.log(data);
       set({ error_msg: "", memberData: data },
         false,
         "getAllMembers"
@@ -112,6 +112,7 @@ export const MemberSlice =(set)=>({
   },
 
    deleteMember: async (id) => {
+   
     const token = sessionStorage.getItem("token");
     try {
       const response = await axios.delete(`${apiEndPoint}/${id}`, {

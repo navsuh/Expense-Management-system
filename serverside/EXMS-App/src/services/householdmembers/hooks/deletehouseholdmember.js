@@ -6,7 +6,7 @@ export const deletehouseholdmember =()=>{
         const findhouseholdMember= await householdMemberService.find( { query: { _id:context.id } });
         console.log(findhouseholdMember);
         const userService=context.app.service("users")
-        const finduser = await userService.remove( findhouseholdMember.data[0].memberUserId);
+        const finduser = await userService.remove( findhouseholdMember.data[0].user);
 
       
     
