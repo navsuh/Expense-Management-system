@@ -12,23 +12,7 @@ export const getAllPeriodicExpenses =()=>{
        if(!households) throw new Error("no households found")
 
       
-       if(context.params.users){
-        const householdmemberservice=context.app.service("householdmembers")
-        const householdmembers=await householdmemberservice.find( { query:  { user:context.params.users._id } });
-    //  console.log(householdmembers.data);
-     
-        var filteredHouseHolds=periodicExpenses.filter((eachperiodicExpense)=>{
-          for(let eachHouseHoldmember of householdmembers.data){
-            if(eachHouseHoldmember.householdId.equals(eachperiodicExpense.households)) {
-              
-              return true
-            }
-            
-          }
-    })
-    console.log(filteredHouseHolds);
-
-    }
+       
 
 
  const dailyExpensesData=periodicExpenses.map((eachPeriodicExpense)=>{
