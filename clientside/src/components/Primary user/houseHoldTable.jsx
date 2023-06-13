@@ -47,7 +47,7 @@ const HouseholdTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {houseHoldList.filter(h=>h.name.toLowerCase().includes(searchQuery.toLowerCase())).map((eachHousehold) => (
+            {houseHoldList.map((eachHousehold) => (
               <tr className="border-b bg-gray-50 " key={eachHousehold._id}>
                 <td className="px-6 py-4">{eachHousehold.name}</td>
                 <td className="px-6 py-4">

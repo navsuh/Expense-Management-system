@@ -56,7 +56,7 @@ const PeriodicExpensesTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {periodicExpenseList.filter((p)=>p.selectExpense.toLowerCase().includes(searchQuery.toLowerCase())||p.paidBy.toLowerCase().includes(searchQuery.toLowerCase())).map((eachPeriodicExpense) => (
+            {periodicExpenseList.map((eachPeriodicExpense) => (
               <tr
                 className="border-b bg-gray-50 "
                 key={eachPeriodicExpense._id}
