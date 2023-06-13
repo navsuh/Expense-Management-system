@@ -16,7 +16,7 @@ import {
 import { HouseholdsService, getOptions } from './households.class.js'
 import { householdsPath, householdsMethods } from './households.shared.js'
 import {getAllHousehold } from './hooks/getAllhousehold.js'
-
+import { createhousehold } from './hooks/createHousehold.js'
 import { createPrimaryUserHouseholdMember } from './hooks/createPrimaryUserHouseholdMember.js'
 
 export * from './households.class.js'
@@ -49,6 +49,7 @@ export const households = (app) => {
       get: [],
       create: [
         validate.form(householdSchema,{abortEarly:false}),
+        createhousehold(),
         schemaHooks.validateData(householdsDataValidator),
         schemaHooks.resolveData(householdsDataResolver)
       ],
