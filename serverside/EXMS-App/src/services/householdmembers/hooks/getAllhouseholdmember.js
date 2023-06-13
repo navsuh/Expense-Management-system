@@ -19,7 +19,7 @@ export const getAllHouseholdMembers =()=>{
             
                     })
        
-                    console.log(filteredHouseholdMembers);
+                    // console.log(filteredHouseholdMembers);
         const userService=context.app.service("users")
         const users = await userService.find();
         
