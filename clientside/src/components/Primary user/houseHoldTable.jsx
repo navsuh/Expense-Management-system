@@ -5,6 +5,7 @@ import { IoAddCircle } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
+import HouseHoldForm from "../Forms/houseHoldForm";
 
 const HouseholdTable = (props) => {
   // const {expenseList}=props
@@ -12,6 +13,8 @@ const HouseholdTable = (props) => {
    const houseHoldList =useBoundStore(store=>store.households)
   const deleteHouseholds=useBoundStore(store=>store.deleteHouseholds)
    const [ searchQuery,setSearchQuery] =useState("")
+   const [isModalOpen, setIsModalOpen] = useState(false);
+
     // console.log(getAllHouseholds);
   //  console.log(houseHoldList);
   useEffect(()=>{
@@ -20,17 +23,25 @@ const HouseholdTable = (props) => {
   const deleteHousehold=(id)=>{
     deleteHouseholds(id)
    }
+
+   const handleModalClose = () => {
+    setIsModalOpen(false);
+    
+  };
+  
    
   return (
     <>
+     <HouseHoldForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
+
      <div className="flex flex-row justify-between">
           <div>
             <SearchInput onChange={(value) =>setSearchQuery(value)} />
           </div>
           <div>
-            <Link to={"/primaryuser/householdform"}>
-            <IoAddCircle className="text-blue-800 h-14 w-14" />
-            </Link>
+            <button>
+            <IoAddCircle  onClick={ ()=>setIsModalOpen(true)} className="text-blue-800 h-14 w-14" />
+            </button>
           </div>
         </div>
       <div className="relative  shadow-md sm:rounded-lg">
@@ -54,7 +65,7 @@ const HouseholdTable = (props) => {
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
                   <Link to={`/primaryuser/household/${eachHousehold._id}`}>
-                    <AiOutlineEdit className="w-8 h-6" />
+                    <AiOutlineEdit  onClick={ ()=>setIsModalOpen(true)} className="w-8 h-6" />
                   </Link>
                     <AiOutlineDelete  onClick={()=>deleteHousehold(eachHousehold._id)} className="w-8 h-6 ml-1 cursor-pointer" />
                   </div>

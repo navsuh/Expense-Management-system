@@ -35,6 +35,7 @@ const MemberTable = () => {
   setIsModalOpen(true)
  }
  const handleAdd =()=>{
+  
   setCreateMemberModalOpen(true)
  }
   return (
