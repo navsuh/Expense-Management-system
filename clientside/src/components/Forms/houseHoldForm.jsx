@@ -56,7 +56,6 @@ const error_msg=useBoundStore(store=>store.error_msg)
 
   const onSubmitHandler = (data) => {
     reset()
-    
     if(data._id){
       console.log("update");
       updateHouseholds({data})
@@ -65,12 +64,20 @@ const error_msg=useBoundStore(store=>store.error_msg)
         reset()
     }
     else {
+      reset()
       createHouseholds({data})
       navigate("/primaryuser/household")
       handleModalClose()
     }
 
   };
+
+  const closeAndReset =()=>{
+    navigate("/primaryuser/household")
+    reset()
+    handleModalClose()
+  }
+  
   if(user.role==="Admin"){
     sessionStorage.removeItem("token")
 return <Navigate to="/login" replace={true} />
@@ -79,12 +86,14 @@ return <Navigate to="/login" replace={true} />
   if(!isModalOpen) return null
 
   return (
-    <div id="modal-body" onClick={(e) => e.target.id === "modal-body" && handleModalClose()} className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]">
+    <div id="modal-body" onClick={(e) => e.target.id === "modal-body" && closeAndReset()} className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]">
     <div className="w-96 bg-white rounded-md px-6 py-4">
       <div className="flex justify-between">
       <h3 className="text-3xl font-bold text-center text-orange-500 ml-4">Add Household</h3>
   
-        <span onClick={() => handleModalClose()} className="text-red-500 text-2xl cursor-pointer">&times;</span>
+      <span onClick={() => {
+        closeAndReset()
+        }} className="text-red-500 text-2xl cursor-pointer">&times;</span>
       </div>
   
       <div className="lg:w-full p-4 mt-4">

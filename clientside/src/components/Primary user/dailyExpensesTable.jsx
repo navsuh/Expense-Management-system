@@ -5,6 +5,7 @@ import { IoAddCircle } from "react-icons/io5";
 import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
+import DailyExpenseForm from "../Forms/dailyexpenseForm";
 
 const DailyExpensesTable = (props) => {
   // const {userList}=props
@@ -28,17 +29,26 @@ const DailyExpensesTable = (props) => {
     deleteDailyExpense(id);
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    };
+
   return (
     <>
+     <DailyExpenseForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
+
       <div className="flex flex-row justify-between">
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="flex flex-row justify-between">
           <FaFilter className="mt-5 mr-20 text-blue-800" />
-          <Link to={"/primaryuser/dailyexpenseform"}>
-            <IoAddCircle className="text-blue-800 h-14 w-14" />
-          </Link>
+          <button onClick={ ()=>setIsModalOpen(true)}>
+            <IoAddCircle  className="text-blue-800 h-14 w-14" />
+          </button>
         </div>
       </div>
       <div className="relative shadow-md sm:rounded-lg">
@@ -82,6 +92,7 @@ const DailyExpensesTable = (props) => {
                     <div className="flex flex-between">
                       <Link
                         to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}
+                        onClick={ ()=>setIsModalOpen(true)}
                       >
                         <AiOutlineEdit className="w-8 h-6" />
                       </Link>
