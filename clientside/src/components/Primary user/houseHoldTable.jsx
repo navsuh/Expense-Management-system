@@ -64,8 +64,8 @@ const HouseholdTable = (props) => {
                 <td className="px-6 py-4">{eachHousehold.name}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
-                  <Link to={`/primaryuser/household/${eachHousehold._id}`}>
-                    <AiOutlineEdit  onClick={ ()=>setIsModalOpen(true)} className="w-8 h-6" />
+                  <Link to={`/primaryuser/household/${eachHousehold._id}`} onClick={ ()=>setIsModalOpen(true)} >
+                    <AiOutlineEdit  className="w-8 h-6" />
                   </Link>
                     <AiOutlineDelete  onClick={()=>deleteHousehold(eachHousehold._id)} className="w-8 h-6 ml-1 cursor-pointer" />
                   </div>
