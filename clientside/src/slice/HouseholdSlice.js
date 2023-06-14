@@ -92,12 +92,13 @@ console.log("1");
             if (eachHousehold._id === response.data._id) {
               return {
                 _id: response.data._id,
-                name: response.data._id.name,
-                addressLine1: response.data._id.addressLine1,
-                addressLine2: response.data._id.addressLine2,
-                area: response.data._id.area,
-                city: response.data._id.city,
-                zipcode: response.data._id.zipcode,
+                name: response.data.name,
+                addressLine1: response.data.addressLine1,
+                addressLine2: response.data.addressLine2,
+                area: response.data.area,
+                state: response.data.state,
+                city: response.data.city,
+                zipcode: response.data.zipcode,
               };
             } else {
               return eachHousehold;
