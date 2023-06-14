@@ -55,15 +55,19 @@ root.render(
         <Route path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>}>
           <Route index={true} element={<ExpenseTypeTable />} />
           <Route path="expensetype" element={<ExpenseTypeTable />} />
+          <Route path="expensetype/:id" element={<ExpenseTypeTable />} />
           <Route path="users" element={<UserTable />} />
+          
+          <Route path="users/:id" element={<UserTable />} />
+
           {/* <Route path="expensetypeform" element={<ExpenseTypeForm />} /> */}
         </Route>
         
-        <Route path="/admin/expensetypeform" element={<PrivateRoute><ExpenseTypeForm /></PrivateRoute>} />
-        <Route path="/admin/expensetype/:id" element={<PrivateRoute><ExpenseTypeForm /></PrivateRoute>} />
+        {/* <Route path="/admin/expensetypeform" element={<PrivateRoute><ExpenseTypeForm /></PrivateRoute>} />
+        <Route path="/admin/expensetype/:id" element={<PrivateRoute><ExpenseTypeForm /></PrivateRoute>} /> */}
         
         {/* <Route path="/admin/userform" element={<PrivateRoute><UserForm /></PrivateRoute>} /> */}
-        <Route path="/admin/users/:id" element={<PrivateRoute><UserForm /></PrivateRoute>} />
+        {/* <Route path="/admin/users/:id" element={<PrivateRoute><UserForm /></PrivateRoute>} /> */}
 
 
         <Route path="/primaryuser" element={<PrivateRoute><PrimaryUser /></PrivateRoute>}>
@@ -97,13 +101,16 @@ root.render(
         <Route path="/memberuser" element={<PrivateRoute><MemberUser /></PrivateRoute>}>
           <Route index={true} element={<PeriodicExpensesTableMember  />} />
           <Route path="periodicexpenses" element={<PeriodicExpensesTableMember />} />
+          <Route path="periodicexpenses/:id" element={<PeriodicExpensesTableMember />} />
           <Route path="dailyexpenses" element={<DailyExpensesTableMember />} />
+          <Route path="dailyexpenses/:id" element={<DailyExpensesTableMember />} />
+          
         </Route>
 
         <Route path="/memberuser/periodicexpenses/:id" element={<PrivateRoute><PeriodicExpenseForm/></PrivateRoute>}/>
 
-        <Route path="/memberuser/dailyexpenseform" element={<PrivateRoute><DailyExpenseForm/></PrivateRoute>}/>
-        <Route path="/memberuser/dailyexpenses/:id" element={<PrivateRoute><DailyExpenseForm/></PrivateRoute>}/>
+        {/* <Route path="/memberuser/dailyexpenseform" element={<PrivateRoute><DailyExpenseForm/></PrivateRoute>}/> */}
+        {/* <Route path="/memberuser/dailyexpenses/:id" element={<PrivateRoute><DailyExpenseForm/></PrivateRoute>}/> */}
 
         
         {/* <Route path="/changepassword" element={<PrivateRoute><ChangePasswordForm/></PrivateRoute>}/> */}

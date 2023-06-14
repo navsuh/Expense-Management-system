@@ -99,7 +99,9 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
     else if (user.role === "member") navigate("/memberuser/dailyexpenses");
   };
   const closeAndReset = () => {
-    navigate("/primaryuser/dailyexpenses");
+    if (user.role === "Primaryuser") navigate("/primaryuser/dailyexpenses");
+    else if (user.role === "member") navigate("/memberuser/dailyexpenses");
+
     handleModalClose();
     reset();
   };

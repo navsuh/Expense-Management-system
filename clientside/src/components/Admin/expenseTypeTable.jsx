@@ -7,6 +7,7 @@ import { IoAddCircle } from "react-icons/io5";
 
 import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
+import ExpenseTypeForm from "../Forms/expensetypeForm.jsx";
 
 // const expenseList = [
 //   { _id: "1", name: "Expense type 1" },
@@ -19,6 +20,7 @@ const ExpenseTypeTable = (props) => {
   const expenseList = useBoundStore((store) => store.expenseTypes);
   // console.log(expenseList);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getAllExpenseTypes();
@@ -26,17 +28,24 @@ const ExpenseTypeTable = (props) => {
   const deleteExpenseType = (id) => {
     deleteExpenseTypes(id);
   };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    
+  };
   // const {expenseList}=props
   return (
     <>
+     <ExpenseTypeForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
+
       <div className="flex flex-row justify-between">
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div>
-          <Link to={"/admin/expensetypeform"}>
+          <button onClick={()=>setIsModalOpen(true)}>
             <IoAddCircle className="text-blue-800 h-14 w-14" />
-          </Link>
+          </button>
         </div>
       </div>
 
@@ -63,7 +72,7 @@ const ExpenseTypeTable = (props) => {
                   <td className="px-6 py-4">{eachExpense.name}</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-between">
-                      <Link to={`/admin/expensetype/${eachExpense._id}`}>
+                      <Link to={`/admin/expensetype/${eachExpense._id}`} onClick={()=>setIsModalOpen(true)}>
                         <AiOutlineEdit className="w-8 h-6" />
                       </Link>
                       <AiOutlineDelete

@@ -14,7 +14,7 @@ import { useBoundStore } from "../../store.js";
 const schema = yup.object().shape({
   name: yup.string().min(3).max(50).required(),
 });
-const ExpenseTypeForm = () => {
+const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
   const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -24,6 +24,7 @@ const ExpenseTypeForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -45,74 +46,71 @@ const ExpenseTypeForm = () => {
   }, [id, setValue, expenseList]);
 
   const onSubmitHandler = (data) => {
+    reset()
     if (data._id) {
       // console.log("here");
       updateExpenseTypes({ data });
-      return navigate("/admin/expensetype");
+       navigate("/admin/expensetype");
+       handleModalClose()
+       reset()
     } else {
+      reset()
       createExpenseTypes({ data });
       // console.log("dispatched");
-      return navigate("/admin/expensetype");
+       navigate("/admin/expensetype");
+       handleModalClose()
     }
   };
+
+  const closeAndReset =()=>{
+    navigate("/admin/expensetype")
+    reset()
+    handleModalClose()
+  }
+  
   
   if(user.role!=="Admin"){
     sessionStorage.removeItem("token")
 return <Navigate to="/login" replace={true} />
   }
+  if(!isModalOpen) return null;
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-      <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center items-center flex-1 p-10">
-        <IoArrowBack
-          className="self-start w-8 h-8 cursor-pointer"
-          onClick={() => navigate(-1)}
-        />
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-20">
-          <img
-            src="/assests/images/expenseTypeForm.png"
-            alt="homeimage"
-            style={{ height: "500px", width: "400px" }}
-          />
-        </div>
-
-        <div className="lg:w-1/2  p-6">
-          <div className="flex flex-col justify-center items-center ">
-            {/* <img src="/assests/images/logoexms.png" alt="logoimage" /> */}
-
-            <h1 className="text-xl xl:text-3xl font-bold text-orange-500">
-              ADD EXPENSE TYPE
-            </h1>
-
-            <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <div className="w-full flex-1 mt-8">
-                <div className="mx-auto max-w-xs">
-                  <div>
-                    <label htmlFor="expenseTypeName" className="mb-1">
-                      Expense Type
-                    </label>
-                    <input
-                      id="expenseTypeName"
-                      {...register("name")}
-                      className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="Expense Type"
-                    />
-                    <p>{errors.name?.message}</p>
-                  </div>
-                  <button
-                    type="submit"
-                    className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-                  >
-                    <span className="ml-3">ADD</span>
-                  </button>
-                </div>
-              </div>
-            </form>
-            <p className="text-red-500">{error_msg ? error_msg : null}</p>
-          </div>
+    <div id="modal-body" onClick={(e) => e.target.id === "modal-body" && closeAndReset()} className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]">
+    <div className="w-96 h-72 bg-white rounded-md px-6 py-4">
+      <div className="flex justify-between">
+      <h3 className="text-3xl font-bold text-center text-orange-500 ml-4">Add Expense Type</h3>
+  
+      <span onClick={() => {
+        closeAndReset()
+        }} className="text-red-500 text-2xl cursor-pointer">&times;</span>
+      </div>
+  
+      <div className="lg:w-full p-4 mt-4">
+        <div className="flex flex-col lg:flex-row items-center justify-between">
+          <form onSubmit={handleSubmit(onSubmitHandler)} className="w-full lg:flex-grow">
+            <div className="w-full mt-4">
+            <label htmlFor="name" className="mb-1 mt-2">Expense Type</label>
+                <input
+                  {...register("name")}
+                  className="w-full px-4 mt-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  type="text"
+                  placeholder="name"
+                />
+                <p className="text-red-500">{errors.name?.message}</p>
+            </div>
+  
+            <button
+              type="submit"
+              className="mt-6 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-2 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+            >
+              <span className="ml-3">ADD</span>
+            </button>
+          </form>
+          <p className="text-red-500">{error_msg ? error_msg : null}</p>
         </div>
       </div>
     </div>
+  </div>
   );
 };
 export default ExpenseTypeForm;

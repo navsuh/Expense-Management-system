@@ -5,29 +5,9 @@ import { IoAddCircle } from "react-icons/io5";
 import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
+import DailyExpenseForm from "../Forms/dailyexpenseForm";
 
-// const dailyExpensesList = [
-//   {
-//     _id: 1,
-//     household: "household 1",
-//     dueDate: "expense due date 1",
-//     expensetype: "daily expense type 1",
-//     paymentDetails: "details 1",
-//     description: "description 1",
-//     paidThrough: "bank details 1",
-//     paidBy: "user 1 ",
-//   },
-//   {
-//     _id: 2,
-//     household: "household 2",
-//     dueDate: "expense due date 2",
-//     expensetype: "daily expense type 2",
-//     paymentDetails: "details 2",
-//     description: "description 2",
-//     paidThrough: "bank details 2",
-//     paidBy: "user 2 ",
-//   },
-// ];
+
 const DailyExpensesTableMember = (props) => {
   // const {userList}=props
   const getAllDailyExpense = useBoundStore(store=>store.getAllDailyExpense)
@@ -53,8 +33,14 @@ const DailyExpensesTableMember = (props) => {
     deleteDailyExpense(id)
 
    }
+const [isModalOpen,setIsModalOpen] =useState(false)
+
+const handleModalClose=()=>{
+  setIsModalOpen(false)
+}
   return (
     <>
+    <DailyExpenseForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
       <div className="flex flex-row justify-between">
           <div>
             <SearchInput onChange={(value)=>setSearchQuery(value)} />
@@ -62,9 +48,9 @@ const DailyExpensesTableMember = (props) => {
           <div className="flex flex-row justify-between">
             
             <FaFilter className="mt-5 mr-20 text-blue-800"/>
-            <Link to={"/memberuser/dailyexpenseform"}>
+            <button onClick={()=>setIsModalOpen(true)}>
             <IoAddCircle className="text-blue-800 h-14 w-14" />
-            </Link>
+            </button>
           </div>
         </div>
       <div className="relative  shadow-md sm:rounded-lg">
@@ -96,7 +82,7 @@ const DailyExpensesTableMember = (props) => {
                 <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
-                  <Link to={`/memberuser/dailyexpenses/${eachDailyExpense._id}`}>
+                  <Link to={`/memberuser/dailyexpenses/${eachDailyExpense._id}`} onClick={()=>setIsModalOpen(true)}>
                     <AiOutlineEdit className="w-8 h-6" />
                     </Link>
                     <AiOutlineDelete onClick={()=>ondeleteDailyExpense(eachDailyExpense._id)} className="w-8 h-6 cursor-pointer ml-1" />

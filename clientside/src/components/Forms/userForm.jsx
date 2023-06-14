@@ -1,11 +1,10 @@
-import React , { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
-import { useParams ,useNavigate,Navigate} from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { useBoundStore } from "../../store";
-
 
 // const userList = [
 //   {
@@ -42,148 +41,158 @@ const schema = yup.object().shape({
   // email: yup.string().min(3).max(50).required(),
   phone: yup.string().min(8).max(10).required(),
   userName: yup.string().min(6).max(20).required(),
-  isActive:yup.boolean()
-  
+  isActive: yup.boolean(),
 });
-const UserForm = () => {
+const UserForm = ({ isModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
-    const navigate = useNavigate();
-    const {id}=useParams()
-    const userList=useBoundStore(store=>store.usersData)
-    const updateUser=useBoundStore(store=>store.updateUser)
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const userList = useBoundStore((store) => store.usersData);
+  const updateUser = useBoundStore((store) => store.updateUser);
+  const error_msg = useBoundStore((store) => store.error_msg);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
-  useEffect(()=>{
-    if(!id) return;
+  useEffect(() => {
+    if (!id) return;
     console.log(id);
-    const user=userList.find((u)=>u._id===id)
-    
-    setValue("_id",user._id)
-    setValue("firstName",user.firstName)
-    setValue("lastName",user.lastName)
-    // setValue("email",user.email)
-    setValue("phone",user.phone)
-    setValue("userName",user.userName)
-    setValue("isActive",user.isActive)
-    
+    const user = userList.find((u) => u._id === id);
 
-  },[id,setValue,userList])
-  
+    setValue("_id", user._id);
+    setValue("firstName", user.firstName);
+    setValue("lastName", user.lastName);
+    // setValue("email",user.email)
+    setValue("phone", user.phone);
+    setValue("userName", user.userName);
+    setValue("isActive", user.isActive);
+  }, [id, setValue, userList]);
 
   const onSubmitHandler = (data) => {
-    console.log( data );
-    updateUser({data},user._id)
-    return navigate("/admin/users");
+    console.log(data);
+    updateUser({ data }, user._id);
+     navigate("/admin/users");
+     handleModalClose()
   };
-  if(user.role!=="Admin"){
-    sessionStorage.removeItem("token")
-return <Navigate to="/login" replace={true} />
+  if (user.role !== "Admin") {
+    sessionStorage.removeItem("token");
+    return <Navigate to="/login" replace={true} />;
   }
+  const closeAndReset = () => {
+    handleModalClose();
+    reset();
+  };
+
+  if (!isModalOpen) return null;
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-      <div className="max-w-screen-xl  sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-      <IoArrowBack className="self-start w-8 h-8 cursor-pointer" onClick={()=>navigate(-1)}/>
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
-          <img
-            src="/assests/images/userForm.png"
-            alt="homeimage"
-            style={{ height: "500px",width: "400px" }}
-          />
+    <div
+      id="modal-body"
+      onClick={(e) => e.target.id === "modal-body" && closeAndReset()}
+      className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]"
+    >
+      <div className="w-96 bg-white rounded-md px-6 py-4">
+        <div className="flex justify-between">
+          <h3 className="text-3xl font-bold text-center text-orange-500 ml-4">
+            Edit User
+          </h3>
+
+          <span
+            onClick={() => {
+              closeAndReset();
+            }}
+            className="text-red-500 text-2xl cursor-pointer"
+          >
+            &times;
+          </span>
         </div>
 
-        <div className="lg:w-1/2  p-6">
-          <div className="mt-12 flex flex-col items-center  ">
-          
-
-            <h1 className="text-xl xl:text-3xl font-bold text-orange-500">ADD USER</h1>
-           
-            <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <div className="w-full flex-1 mt-8">
-                <div className="mx-auto max-w-xs">
-                  <div className="mt-5">
-                    <label htmlFor="firstName">First Name</label>
-                    <input
-                    id="firstName"
-                      {...register("firstName")}
-                      className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="First Name"
-                    />
-                    <p>{errors.firstName?.message}</p>
-                  </div>
-                  <div className="mt-5">
-                    <label className="mt-5" htmlFor="Last Name">Last Name</label>
-                    <input
-                    id="Last Name"
-                      {...register("lastName")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="Last Name"
-                    />
-                    <p>{errors.lastName?.message}</p>
-                  </div>
-                  {/* <div className="mt-5">
-                    <label className="mt-5" htmlFor="Email">Email</label>
-                    <input
-                    id="Email"
-                      {...register("email")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="email"
-                      placeholder="Email"
-                    />
-                    <p>{errors.email?.message}</p>
-                  </div> */}
-                  <div className="mt-5">
-                    <label className="mt-5" htmlFor="Phone Number">Phone Number</label>
-                    <input
-                    id="Phone Number"
-                      {...register("phone")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="Phone Number"
-                    />
-                    <p>{errors.phone?.message}</p>
-                  </div>
-                  <div className="mt-5">
-                    <label className="mt-5" htmlFor="UserName">UserName</label>
-                    <input
-                    id="UserName"
-                      {...register("userName")}
-                      className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="text"
-                      placeholder="User Name"
-                    />
-                    <p>{errors.userName?.message}</p>
-                  </div>
-                  <div className="flex">
+        <div className="lg:w-full p-4 mt-4">
+          <div className="flex flex-col lg:flex-row items-center justify-between">
+            <form
+              onSubmit={handleSubmit(onSubmitHandler)}
+              className="w-full lg:flex-grow"
+            >
+              <div className="flex flex-col lg:flex-row justify-between">
+                <div className="w-full lg:w-1/2 mr-3">
+                  <label htmlFor="firstName" className="mb-1">
+                    First Name
+                  </label>
                   <input
-                    id="isActive"
-                      {...register("isActive")}
-                      className="mt-5 mr-1 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      type="checkbox"
-                      defaultValue
-                    
-                    />
-                    <label className="mt-5" htmlFor="isActive">isActive</label>
-                   
-                    
-                  </div>
-                 
-                  <button
-                    type="submit"
-                    className="mt-5 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-                  >
-                    <span className="ml-3">ADD</span>
-                  </button>
+                    {...register("firstName")}
+                    className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    type="text"
+                    placeholder="First Name"
+                  />
+                  <p className="text-red-500">{errors.firstName?.message}</p>
+                </div>
+                <div className="w-full lg:w-1/2">
+                  <label htmlFor="lastName" className="mb-1">
+                    Last Name
+                  </label>
+                  <input
+                    {...register("lastName")}
+                    className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    type="text"
+                    placeholder="Flat No"
+                  />
+                  <p className="text-red-500">{errors.lastName?.message}</p>
                 </div>
               </div>
+              <div className="flex flex-col lg:flex-row justify-between mt-4">
+                <div className="w-full lg:w-1/2 mr-3">
+                  <label htmlFor="phone" className="mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    {...register("phone")}
+                    className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    type="text"
+                    placeholder="000-000-0000"
+                  />
+                  <p className="text-red-500">{errors.phone?.message}</p>
+                </div>
+                <div className="w-full lg:w-1/2">
+                  <label htmlFor="userName" className="mb-1">
+                    User Name
+                  </label>
+                  <input
+                    {...register("userName")}
+                    className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    type="text"
+                    placeholder="userName"
+                  />
+
+                  <p className="text-red-500">{errors.userName?.message}</p>
+                </div>
+              </div>
+
+              <div className="w-full mt-4 flex">
+                  <input
+                    id="isActive"
+                    {...register("isActive")}
+                    className="mt-5 mr-1 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    type="checkbox"
+                    defaultValue
+                  />
+                  <label className="mt-5" htmlFor="isActive">
+                    isActive
+                  </label>
+              </div>
+
+              <button
+                type="submit"
+                className="mt-4 tracking-wide font-semibold bg-blue-500 text-gray-100 w-full py-2 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+              >
+                <span className="ml-3">Update</span>
+              </button>
             </form>
+            <p className="text-red-500">{error_msg ? error_msg : null}</p>
           </div>
         </div>
       </div>
@@ -193,19 +202,3 @@ return <Navigate to="/login" replace={true} />
 export default UserForm;
 
 
-
-
-
-
-
-
-
-
-
-
-
- 
-
-  
-
-         

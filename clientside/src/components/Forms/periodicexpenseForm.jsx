@@ -109,7 +109,9 @@ return <Navigate to="/login" replace={true} />
   }
 
   const closeAndReset = () => {
-    navigate("/primaryuser/periodicexpenses");
+    if(user.role==="Primaryuser") navigate("/primaryuser/periodicexpenses");
+    else if(user.role==="member") navigate("/memberuser/periodicexpenses");
+     
     handleModalClose();
     reset();
   };

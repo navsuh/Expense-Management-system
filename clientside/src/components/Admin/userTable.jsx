@@ -6,6 +6,7 @@ import { HiCheckCircle, HiOutlineXCircle } from "react-icons/hi";
 
 import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
+import UserForm from "../Forms/userForm.jsx";
 
 const UserTable = (props) => {
   
@@ -21,8 +22,16 @@ const filteredUserList=userList.filter((eachUser)=>eachUser.role!=="Admin")
  const onSoftDeleteuser=(id)=>{
   softdeleteUser(id)
  }
+ const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+   const handleModalClose = () => {
+    setIsModalOpen(false);
+    
+  };
   return (
     <>
+    <UserForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
      <div className="flex flex-row justify-between">
         <div>
         <SearchInput onChange={(value) => setSearchQuery(value)} />
@@ -58,7 +67,7 @@ const filteredUserList=userList.filter((eachUser)=>eachUser.role!=="Admin")
                 <td className={eachUser.isActive?"px-6 py-4":"px-6 py-4 text-red-400"}>{eachUser.isActive? <HiCheckCircle id="Active_Status" className="text-green-600 text-2xl ml-2"/>:<HiOutlineXCircle id="Inactive_Status" className="text-2xl ml-2"/>}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
-                  <Link to={`/admin/users/${eachUser._id}`}>
+                  <Link to={`/admin/users/${eachUser._id}`} onClick={()=>setIsModalOpen(true)}>
                     <AiOutlineEdit className="w-8 h-6" />
                     
                     </Link>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
+import PeriodicExpenseForm from "../Forms/periodicexpenseForm";
 
 
 const PeriodicExpensesTableMember = (props) => {
@@ -23,7 +24,12 @@ const PeriodicExpensesTableMember = (props) => {
     getAllPeriodicExpense();
     getAllHouseholds();
   },[getAllPeriodicExpense,getAllHouseholds])
-  
+   
+  const [isModalOpen ,setIsModalOpen] =useState(false)
+
+  const handleModalClose =() =>{
+    setIsModalOpen(false)
+  }
 
   const ondeletePeriodicExpense=(id)=>{
     deletePeriodicExpenses(id)
@@ -31,6 +37,7 @@ const PeriodicExpensesTableMember = (props) => {
    }
   return (
     <>
+    <PeriodicExpenseForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
     <div className="flex flex-row justify-between">
         <div>
           <SearchInput onChange={(value)=>setSearchQuery(value)} />
@@ -77,6 +84,7 @@ const PeriodicExpensesTableMember = (props) => {
                   <div className="flex flex-between">
                   <Link
                       to={`/memberuser/periodicexpenses/${eachPeriodicExpense._id}`}
+                      onClick={()=>setIsModalOpen(true)}
                     >
                     <AiOutlineEdit className="w-8 h-6" />
                     </Link>
