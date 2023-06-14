@@ -15,7 +15,7 @@ export const updatePeriodicExpenseResult =()=>{
     context.result.household =households.data[0].name
     
     // context.result.data=dailyExpensesData      
-    console.log(context.result);
+    // console.log(context.result);
      return context; 
     }
   }

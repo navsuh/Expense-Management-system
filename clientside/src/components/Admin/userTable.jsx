@@ -13,8 +13,8 @@ const UserTable = (props) => {
   const softdeleteUser=useBoundStore(store=>store.softdeleteUser)
   const userList=useBoundStore(store=>store.usersData)
   const [searchQuery, setSearchQuery] = useState("");
-
-  // console.log(expenseList);
+const filteredUserList=userList.filter((eachUser)=>eachUser.role!=="Admin")
+  console.log(userList);
   useEffect(() => {
     getAllUsers();
   }, [getAllUsers]);
@@ -51,7 +51,7 @@ const UserTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {userList.filter((users) =>
+            {filteredUserList.filter((users) =>
                 users.firstName.toLowerCase().includes(searchQuery.toLowerCase())).map((eachUser) => (
               <tr className="border-b bg-gray-50 " key={eachUser._id}>
                 <td className={eachUser.isActive?"px-6 py-4":"px-6 py-4 text-red-400"}>{eachUser.firstName}</td>
@@ -62,7 +62,8 @@ const UserTable = (props) => {
                     <AiOutlineEdit className="w-8 h-6" />
                     
                     </Link>
-                    <AiOutlineDelete onClick={()=>onSoftDeleteuser(eachUser._id)} className="w-8 h-6 cursor-pointer ml-2" />
+                    {eachUser.isActive?<AiOutlineDelete onClick={()=>onSoftDeleteuser(eachUser._id)} className=" w-8 h-6 cursor-pointer ml-2" />:<AiOutlineDelete  className="text-gray-300 w-8 h-6 ml-2" />}
+                    {/* <AiOutlineDelete onClick={()=>onSoftDeleteuser(eachUser._id)} className="text-gray-200 w-8 h-6 cursor-pointer ml-2" /> */}
                   </div>
                 </td>
               </tr>

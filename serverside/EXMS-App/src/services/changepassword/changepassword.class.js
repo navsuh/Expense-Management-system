@@ -14,6 +14,8 @@ export class ChangepasswordService {
     let email = data.email
     let newPassword = data.newPassword
     let confirmedPassword = data.confirmedPassword
+    console.log(newPassword);
+    console.log(confirmedPassword);
     let userService = this.app.service(`users`)
     let userResponse = await userService.find({
       query: {
@@ -21,7 +23,7 @@ export class ChangepasswordService {
       }
     })
     if(!userResponse || userResponse.data.length === 0) throw new Error("please enter the correct email")
-    if(!newPassword !==confirmedPassword) throw new Error("New password and confirm password did not match")
+    if(newPassword.toString() !==confirmedPassword.toString()) throw new Error("New password and confirm password did not match")
 
     if (userResponse && userResponse.data.length > 0) {
       let comparePassword = await bcrypt.compare(data.currentPassword, userResponse.data[0].password)

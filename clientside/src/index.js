@@ -17,7 +17,7 @@ import HouseholdTable from "./components/Primary user/houseHoldTable";
 import MemberTable from "./components/Primary user/memberTable";
 import PeriodicExpensesTable from "./components/Primary user/periodicExpensesTable";
 import DailyExpensesTable from "./components/Primary user/dailyExpensesTable";
-import HouseHoldForm from "./components/Forms/houseHoldForm";
+// import HouseHoldForm from "./components/Forms/houseHoldForm";
 
 
 import MemberUser from "./components/member/member";
@@ -28,14 +28,12 @@ import DailyExpensesTableMember from "./components/member/dailyExpensesTable";
 
 import Register from "./components/Register";
 import Login from "./components/Login ";
-import CreateMemberForm from "./components/Forms/createMembersForm";
-import EditMemberForm from "./components/Forms/editMembersForm";
+// import CreateMemberForm from "./components/Forms/createMembersForm";
+// import EditMemberForm from "./components/Forms/editMembersForm";
 import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
 import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
-// import { ToastContainer} from "react-toastify";
-// import ChangePasswordForm from "./components/Forms/ChangePasswordForm";
-// import ForgotPasswordForm from "./components/Forms/ForgetPasswordForm";
+
 import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
 
 import PrivateRoute from "./components/privateRoute";
@@ -44,7 +42,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    {/* <ToastContainer limit={1}/> */}
+    
       <App />
       <Routes>
 

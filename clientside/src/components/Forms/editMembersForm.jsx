@@ -34,6 +34,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   // console.log(id);
+  const error_msg = useBoundStore((store) => store.error_msg);
   const {
     register,
     handleSubmit,
@@ -186,6 +187,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
             <span className="ml-3">UPDATE</span>
           </button>
         </form>
+        <p className="text-red-500">{error_msg ? error_msg : null}</p>
       </div>
     </div>
   </div>

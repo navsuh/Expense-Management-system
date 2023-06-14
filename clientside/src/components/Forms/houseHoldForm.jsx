@@ -2,7 +2,7 @@ import React , { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { RiArrowDownSLine } from "react-icons/ri";
+// import { RiArrowDownSLine } from "react-icons/ri";
 import { useParams ,useNavigate,Navigate} from "react-router-dom";
 import { useBoundStore } from "../../store";
 
@@ -186,6 +186,7 @@ return <Navigate to="/login" replace={true} />
               <span className="ml-3">ADD</span>
             </button>
           </form>
+          <p className="text-red-500">{error_msg ? error_msg : null}</p>
         </div>
       </div>
     </div>

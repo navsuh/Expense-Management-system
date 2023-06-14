@@ -11,7 +11,7 @@ const PeriodicExpensesTableMember = (props) => {
   const getAllPeriodicExpense =useBoundStore(store=>store.getAllPeriodicExpense)
   const periodicExpenseList =useBoundStore(store=>store.periodicExpense)
   const deletePeriodicExpenses = useBoundStore(store=>store.deletePeriodicExpense)
-
+  const getAllHouseholds =useBoundStore(store=>store.getAllHouseholds)
   const [searchQuery, setSearchQuery] = useState("");
   const houseHoldList = useBoundStore((store) => store.households);
   
@@ -21,7 +21,8 @@ const PeriodicExpensesTableMember = (props) => {
   const filteredPeriodicExpenseList=periodicExpenseList.filter((expense) =>householdNames.includes(expense.household) )
   useEffect(()=>{
     getAllPeriodicExpense();
-  },[getAllPeriodicExpense])
+    getAllHouseholds();
+  },[getAllPeriodicExpense,getAllHouseholds])
   
 
   const ondeletePeriodicExpense=(id)=>{

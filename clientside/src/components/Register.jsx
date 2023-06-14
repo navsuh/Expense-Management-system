@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -32,50 +32,25 @@ const Register = () => {
 
   const addPrimaryUser=useBoundStore(store=>store.addPrimaryUser)
 
-  const primaryUser=useBoundStore(store=>store.primaryUser)
+  // const primaryUser=useBoundStore(store=>store.primaryUser)
 
   const error_msg=useBoundStore(store=>store.error_msg)
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  // useEffect(()=>{
    
-  if(!primaryUser.firstName) return
+  // if(!primaryUser.firstName) return
   
-  // console.log(primaryUser);
-  // toast.success('Registration Successful', {
-  //   position: "top-right",
-  //   autoClose: 5000,
-  //   hideProgressBar: false,
-  //   closeOnClick: true,
-  //   pauseOnHover: true,
-  //   draggable: true,
-  //   progress: undefined,
-  // pauseOnFocusLoss: false,
-  // toastId: "customId",
-  //   theme: "light",
-  //   });    
+  // navigate("/login")
 
-  navigate("/login")
-
-  },[primaryUser,navigate])
+  // },[primaryUser,navigate])
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  // const displayErrorMessage=()=>{
-  //   toast.error(error_msg, {
-  //     position: "top-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "light",
-  //     });
-  // }
+ 
 
  
 
@@ -83,36 +58,7 @@ const Register = () => {
   const onSubmitHandler = (data) => {
     // console.log({ data });
     addPrimaryUser({data})
-    // if(!primaryUser.firstName) {
-    //    toast.success('Registration Successful', {
-    //       position: "top-right",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "light",
-    //       });    
-    //       setTimeout(() => {
-    //         navigate("/login")
-    //       }, 5000);
-       
-
-    // }
-    // else if(error_msg) {
-    //   console.log(error_msg);
-    //   toast.error(error_msg, {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light",
-    //     });
-    // }
+    navigate("/login")
 
   };
   return (
