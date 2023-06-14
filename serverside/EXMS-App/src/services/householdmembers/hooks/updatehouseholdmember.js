@@ -4,7 +4,7 @@ export const updatehouseholdmember =()=>{
         // console.log(context.data);
 
         const {firstName,lastName,phone,userName,householdName,memberUserId,primaryuserId}=context.data
-        // console.log(primaryuserId);
+        // console.log(householdName);
         const updatedBy=primaryuserId
         const updatedAt=new Date().toISOString()
           const userService=context.app.service("users")
@@ -28,6 +28,7 @@ export const updatehouseholdmember =()=>{
      delete context.data.householdName
      delete context.data.memberUserId
      delete context.data.primaryuserId
+     delete context.data.householdId
      context.data.household=household.data[0]._id
      context.data.user=finduser.data[0]._id
 

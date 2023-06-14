@@ -69,10 +69,11 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
 
   
   const onSubmitHandler = (data) => {
-    console.log({ data });
+    // console.log({ data });
     addMember({ data });
+    navigate("/primaryuser/members")
     handleModalClose()
-    // return navigate("/primaryuser/members");
+   
   };
 
   if (user.role !== "Primaryuser") {

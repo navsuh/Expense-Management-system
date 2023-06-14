@@ -69,6 +69,7 @@ const MemberTable = () => {
             </tr>
           </thead>
           <tbody>
+          {/* filter((h)=>h.household.toLowerCase().includes(searchQuery.toLowerCase())||h.firstName.toLowerCase().includes(searchQuery.toLowerCase())) */}
             {memberList.filter((h)=>h.household.toLowerCase().includes(searchQuery.toLowerCase())||h.firstName.toLowerCase().includes(searchQuery.toLowerCase())).map((eachMember) => (
               <tr className="border-b bg-gray-50 " key={eachMember._id}>
                 <td className="px-6 py-4">{eachMember.household}</td>

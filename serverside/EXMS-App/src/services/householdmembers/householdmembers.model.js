@@ -22,6 +22,7 @@ export const householdmembersSchema = Joi.object({
     householdName:Joi.string(),
     memberUserId:Joi.string(),
     primaryuserId:Joi.string(),
+    householdId:Joi.string(),
 
 
 

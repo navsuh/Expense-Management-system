@@ -34,14 +34,14 @@ export const MemberSlice =(set)=>({
     const {email,firstName,householdName,lastName,password,phone,userName}=data
     const newData={firstName,lastName,email,phone,userName,password,role:"member",householdName}
     const token = sessionStorage.getItem("token");
-    console.log(newData);
+    // console.log(newData);
     try {
         const response=await axios.post(apiEndPoint,newData,{
           headers: {
             Authorization: "Bearer " + token,
           },
         })
-        console.log(response.data);
+        
         set(
           (state) => ({
             error_msg: "",
@@ -60,14 +60,15 @@ export const MemberSlice =(set)=>({
 
    updateMember: async (memberuserData) => {
     const {newData}=memberuserData
-    const { _id ,email,firstName,lastName,household,householdId,memberUserId,phone,userName} = newData;
     
+    const { _id ,email,firstName,lastName,householdName,householdId,memberUserId,phone,userName} = newData;
+   
     const token = sessionStorage.getItem("token");
     
     try {
       const response=await axios.patch(
         `${apiEndPoint}/${_id}`,
-        {email,firstName,lastName,household,householdId,memberUserId,phone,userName},
+        {email,firstName,lastName,householdName,householdId,memberUserId,phone,userName},
         {
           headers: {
             // 'Content-Type': 'application/json',
@@ -75,13 +76,12 @@ export const MemberSlice =(set)=>({
           },
         }
       );
-
-    
+      
       set(
         (state) => ({
           error_msg: "",
-          dailyExpense: state.dailyExpense.map((eachExpense) => {
-            if (eachExpense._id === response.data._id) {
+          memberData: state.memberData.map((eachMember) => {
+            if (eachMember._id === response.data._id) {
               return {
                 _id: response.data._id,
                 email: response.data.email,
@@ -95,7 +95,7 @@ export const MemberSlice =(set)=>({
 
               };
             } else {
-              return eachExpense;
+              return eachMember;
             }
           }),
         }),

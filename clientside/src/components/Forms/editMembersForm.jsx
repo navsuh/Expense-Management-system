@@ -61,16 +61,18 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   },[getAllMembers])
   const onSubmitHandler = (data) => {
     // console.log({ data });
-    console.log(id);
-    const members = memberList.find((m) => m._id === id);
-    console.log(memberList);
-    console.log(members);
-    console.log(members.memberUserId);
-    const {memberUserId}=members
-    console.log(memberUserId);
-    const newData={...data,memberUserId,primaryuserId:user._id}
-   
+    // console.log(id);
+    const member = memberList.find((m) => m._id === id);
+    // console.log(memberList);
+    // console.log(members);
+    // console.log(members.memberUserId);
+    console.log(member);
+    const {memberUserId,householdId}=member
+    // console.log(memberUserId);
+    const newData={...data,memberUserId,householdId,primaryuserId:user._id}
+    
     updateMember({newData})
+    navigate("/primaryuser/members")
     handleModalClose()
 
     //  navigate("/primaryuser/members")
@@ -90,7 +92,10 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
     <div className="flex justify-between">
     <h3 className="text-3xl font-bold text-center text-orange-500 ml-4">Edit Member</h3>
 
-      <span onClick={() => handleModalClose()} className="text-red-500 text-2xl cursor-pointer">&times;</span>
+      <span onClick={() => {
+        navigate("/primaryuser/members")
+        handleModalClose()
+        }} className="text-red-500 text-2xl cursor-pointer">&times;</span>
     </div>
 
     <div className="lg:w-full p-4 mt-4">

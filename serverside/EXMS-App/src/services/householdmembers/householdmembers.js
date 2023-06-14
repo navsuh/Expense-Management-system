@@ -4,6 +4,8 @@ import { createhouseholdmember } from './hooks/createhouseholdmember.js'
 import validate from 'feathers-validate-joi'
 import { householdmembersSchema } from './householdmembers.model.js'
 import { updatehouseholdmembersSchema } from './householdmembers.model.js'
+import { getAllHouseholdMembersCreate } from './hooks/gethouseholdmembercreate.js'
+import { getAllHouseholdMembersUpdate } from './hooks/gethouseholdmemberupdate.js'
 import { getAllHouseholdMembers } from './hooks/getAllhouseholdmember.js'
 import { updatehouseholdmember } from './hooks/updatehouseholdmember.js'
 import { deletehouseholdmember } from './hooks/deletehouseholdmember.js'
@@ -66,6 +68,8 @@ export const householdMembers = (app) => {
     after: {
       all: [],
       find: [getAllHouseholdMembers()],
+      create: [getAllHouseholdMembersCreate()],
+      patch:[getAllHouseholdMembersUpdate()]
     },
     error: {
       all: []

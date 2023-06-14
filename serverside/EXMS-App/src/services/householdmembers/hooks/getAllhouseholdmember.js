@@ -6,7 +6,7 @@ export const getAllHouseholdMembers =()=>{
 
         
         const householdmembers=context.result.data
-        if(context.params.users){
+        if(context.params.users ){
             const filteredHouseholds=householdmembers.filter((eachHouseholdMember)=>{
                 return eachHouseholdMember.user.equals(context.params.users._id)
                         })
