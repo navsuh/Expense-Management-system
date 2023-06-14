@@ -13,6 +13,12 @@ const DailyExpensesTable = (props) => {
   const dailyExpensesList = useBoundStore((store) => store.dailyExpense);
   const deleteDailyExpense = useBoundStore((store) => store.deleteDailyExpense);
   const [searchQuery, setSearchQuery] = useState("");
+  const houseHoldList = useBoundStore((store) => store.households);
+ 
+  const householdNames = houseHoldList.map(
+    (eachHouseHold) => eachHouseHold.name
+  );
+  const filteredDailyExpenseList=dailyExpensesList.filter((expense) =>householdNames.includes(expense.household) )
   useEffect(() => {
     getAllDailyExpense();
   }, [getAllDailyExpense]);
@@ -54,7 +60,7 @@ const DailyExpensesTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {dailyExpensesList
+            {filteredDailyExpenseList
               .filter(
                 (m) =>
                   m.selectExpense

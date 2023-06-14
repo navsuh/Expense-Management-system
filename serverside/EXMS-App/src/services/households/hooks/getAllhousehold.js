@@ -2,7 +2,7 @@
 export const getAllHousehold =()=>{
     return async(context)=>{
         // console.log(context.result.data);
-        // console.log(context.params.users)
+        // console.log(context.params)
         const AllHouseHolds=context.result.data
         if(context.params.users){
         const householdmemberservice=context.app.service("householdmembers")

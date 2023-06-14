@@ -8,25 +8,32 @@ import { useEffect, useState } from "react";
 
 const PeriodicExpensesTable = (props) => {
   // const {userList}=prop
-  const getAllPeriodicExpense =useBoundStore(store=>store.getAllPeriodicExpense)
-  const periodicExpenseList =useBoundStore(store=>store.periodicExpense)
-  const deletePeriodicExpenses = useBoundStore(store=>store.deletePeriodicExpense)
- const [searchQuery,setSearchQuery] =useState("");
-
-  useEffect(()=>{
+  const getAllPeriodicExpense = useBoundStore(
+    (store) => store.getAllPeriodicExpense
+  );
+  const periodicExpenseList = useBoundStore((store) => store.periodicExpense);
+  const deletePeriodicExpenses = useBoundStore(
+    (store) => store.deletePeriodicExpense
+  );
+  const houseHoldList = useBoundStore((store) => store.households);
+  const [searchQuery, setSearchQuery] = useState("");
+  const householdNames = houseHoldList.map(
+    (eachHouseHold) => eachHouseHold.name
+  );
+  console.log(householdNames);
+  useEffect(() => {
     getAllPeriodicExpense();
-  },[getAllPeriodicExpense])
-  
+  }, [getAllPeriodicExpense]);
 
-  const ondeletePeriodicExpense=(id)=>{
-    deletePeriodicExpenses(id)
-
-   }
+  const ondeletePeriodicExpense = (id) => {
+    deletePeriodicExpenses(id);
+  };
+  const filteredPeriodicExpenseList=periodicExpenseList.filter((expense) =>householdNames.includes(expense.household) )
   return (
     <>
       <div className="flex flex-row justify-between">
         <div>
-          <SearchInput onChange={(value)=>setSearchQuery(value)}/>
+          <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="flex flex-row justify-between">
           <FaFilter className="mt-5 mr-20 text-blue-800" />
@@ -56,26 +63,45 @@ const PeriodicExpensesTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {periodicExpenseList.map((eachPeriodicExpense) => (
-              <tr
-                className="border-b bg-gray-50 "
-                key={eachPeriodicExpense._id}
-              >
-                <td className="px-6 py-4">{eachPeriodicExpense.dueDate.toString()}</td>
-                <td className="px-6 py-4">{eachPeriodicExpense.selectExpense}</td>
-                <td className="px-6 py-4">{eachPeriodicExpense.paidBy}</td>
-                <td className="px-6 py-4">
-                  <div className="flex flex-between">
-                    <Link
-                      to={`/primaryuser/periodicexpenses/${eachPeriodicExpense._id}`}
-                    >
-                      <AiOutlineEdit className="w-8 h-6" />
-                    </Link>
-                    <AiOutlineDelete onClick={()=>ondeletePeriodicExpense(eachPeriodicExpense._id)} className="w-8 h-6 cursor-pointer" />
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {filteredPeriodicExpenseList
+              .filter(
+                (expense) =>
+                  expense.selectExpense
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  expense.paidBy
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase()) 
+              )
+              .map((eachPeriodicExpense) => (
+                <tr
+                  className="border-b bg-gray-50 "
+                  key={eachPeriodicExpense._id}
+                >
+                  <td className="px-6 py-4">
+                    {eachPeriodicExpense.dueDate.toString()}
+                  </td>
+                  <td className="px-6 py-4">
+                    {eachPeriodicExpense.selectExpense}
+                  </td>
+                  <td className="px-6 py-4">{eachPeriodicExpense.paidBy}</td>
+                  <td className="px-6 py-4">
+                    <div className="flex flex-between">
+                      <Link
+                        to={`/primaryuser/periodicexpenses/${eachPeriodicExpense._id}`}
+                      >
+                        <AiOutlineEdit className="w-8 h-6" />
+                      </Link>
+                      <AiOutlineDelete
+                        onClick={() =>
+                          ondeletePeriodicExpense(eachPeriodicExpense._id)
+                        }
+                        className="w-8 h-6 cursor-pointer"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
