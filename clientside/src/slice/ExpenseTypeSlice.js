@@ -92,7 +92,7 @@ export const ExpenseTypeSlice = (set) => ({
           error_msg: "",
           expenseTypes: state.expenseTypes.map((eachExpense) => {
             if (eachExpense._id === response.data._id) {
-              return { _id: response.data._id, name: response.data._id.name };
+              return { _id: response.data._id, name: response.data.name };
             } else {
               return eachExpense;
             }

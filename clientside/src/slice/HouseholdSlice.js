@@ -82,9 +82,7 @@ export const HouseholdSlice = (set) => ({
       );
       // console.log(response.data.accessToken);
       // console.log(response.data.users.role);
-console.log("1");
-      console.log(response.data);
-      console.log("12");
+
       set(
         (state) => ({
           error_msg: "",

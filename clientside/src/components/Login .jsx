@@ -48,7 +48,7 @@ const Login = () => {
   useEffect(() => {
     if (!token) return;
     if (!sessionStorage.getItem("token")) return;
-    if (!user.isActive) {
+    if (!user.isActive && user.role !== "Admin") {
       sessionStorage.removeItem("token")
        alert("user inActive Contact Admin")
       //  navigate("/login");
