@@ -39,6 +39,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -72,9 +73,10 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
     const newData={...data,memberUserId,householdId,primaryuserId:user._id}
     
     updateMember({newData})
+    reset()
+
     navigate("/primaryuser/members")
     handleModalClose()
-
     //  navigate("/primaryuser/members")
 
   };
