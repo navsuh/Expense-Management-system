@@ -6,9 +6,12 @@ import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import PeriodicExpenseForm from "../Forms/periodicexpenseForm";
+import Filter from "../filter";
+import { sub ,formatISO} from 'date-fns'
 
 const PeriodicExpensesTable = (props) => {
   // const {userList}=prop
+ 
   const getAllPeriodicExpense = useBoundStore(
     (store) => store.getAllPeriodicExpense
   );
@@ -17,7 +20,7 @@ const PeriodicExpensesTable = (props) => {
     (store) => store.deletePeriodicExpense
   );
   const houseHoldList = useBoundStore((store) => store.households);
-  const getAllHouseholds =useBoundStore(store=>store.getAllHouseholds)
+  const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const [searchQuery, setSearchQuery] = useState("");
   const householdNames = houseHoldList.map(
     (eachHouseHold) => eachHouseHold.name
@@ -26,32 +29,51 @@ const PeriodicExpensesTable = (props) => {
   useEffect(() => {
     getAllPeriodicExpense();
     getAllHouseholds();
-  }, [getAllPeriodicExpense,getAllHouseholds]);
+  }, [getAllPeriodicExpense, getAllHouseholds]);
 
   const ondeletePeriodicExpense = (id) => {
     deletePeriodicExpenses(id);
   };
-  const filteredPeriodicExpenseList=periodicExpenseList.filter((expense) =>householdNames.includes(expense.household) )
-
+  const filteredPeriodicExpenseList = periodicExpenseList.filter((expense) =>
+    householdNames.includes(expense.household)
+  );
+  // console.log(showFilter);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showFilter, SetshowFilter] = useState(false);
 
+  const onchecked = (value) => {
+    // console.log(JSON.parse(value));
+    const result = sub(new Date(), JSON.parse(value))
+    const formattedresult = formatISO(result, { representation: 'date' })
+    getAllPeriodicExpense(formattedresult);
+    // console.log(formattedresult);
+  };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    };
+  };
   return (
     <>
-     <PeriodicExpenseForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
+      <PeriodicExpenseForm
+        isModalOpen={isModalOpen}
+        handleModalClose={handleModalClose}
+      />
 
       <div className="flex flex-row justify-between">
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="flex flex-row justify-between">
-          <FaFilter className="mt-5 mr-20 text-blue-800" />
+          <div className="flex flex-row">
+            <FaFilter
+              onClick={() => SetshowFilter(!showFilter)}
+              className="mt-5 mr-20 text-blue-800"
+            />
+            {showFilter ? <Filter className="z-40" handleonchecked={onchecked} /> : null}
+          </div>
 
-          <button onClick={()=>setIsModalOpen(true)}>
+          <button onClick={() => setIsModalOpen(true)}>
             <IoAddCircle className="text-blue-800 h-14 w-14" />
           </button>
         </div>
@@ -84,7 +106,7 @@ const PeriodicExpensesTable = (props) => {
                     .includes(searchQuery.toLowerCase()) ||
                   expense.paidBy
                     .toLowerCase()
-                    .includes(searchQuery.toLowerCase()) 
+                    .includes(searchQuery.toLowerCase())
               )
               .map((eachPeriodicExpense) => (
                 <tr
@@ -102,7 +124,7 @@ const PeriodicExpensesTable = (props) => {
                     <div className="flex flex-between">
                       <Link
                         to={`/primaryuser/periodicexpenses/${eachPeriodicExpense._id}`}
-                        onClick={()=>setIsModalOpen(true)}
+                        onClick={() => setIsModalOpen(true)}
                       >
                         <AiOutlineEdit className="w-8 h-6" />
                       </Link>

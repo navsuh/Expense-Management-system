@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import Sidebar from "../sidebar";
 import Tablist from "../tabList";
 import { useBoundStore } from "../../store.js";
@@ -5,11 +6,11 @@ import { Outlet } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 const tabList = [
   {
-    _id: "1",
+    _id: uuidv4(),
     tabName: "Periodic Expenses",
     tabPath: "/memberuser/periodicexpenses",
   },
-  { _id: "2", tabName: "Daily Expenses", tabPath: "/memberuser/dailyexpenses" },
+  { _id: uuidv4(), tabName: "Daily Expenses", tabPath: "/memberuser/dailyexpenses" },
 ];
 
 const MemberUser = () => {

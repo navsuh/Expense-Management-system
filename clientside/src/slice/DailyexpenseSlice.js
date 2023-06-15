@@ -6,11 +6,12 @@ export const DailyExpenseSlice = (set) => ({
   dailyExpense: [],
   error_msg: "",
 
-  getAllDailyExpense: async () => {
+  getAllDailyExpense: async (querydate) => {
     const token = sessionStorage.getItem("token");
-    //    console.log(token);
+    const NewApiEndPoint=querydate?apiEndPoint+"?paymentDetailsDate="+querydate:apiEndPoint
+    console.log(NewApiEndPoint);
     try {
-      const response = await axios.get(apiEndPoint, {
+      const response = await axios.get(NewApiEndPoint, {
         headers: {
           Authorization: "Bearer " + token,
         },

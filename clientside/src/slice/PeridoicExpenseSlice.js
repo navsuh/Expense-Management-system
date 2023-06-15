@@ -6,11 +6,13 @@ export const PeriodicExpenseSlice = (set) => ({
   periodicExpense: [],
   error_msg: "",
 
-  getAllPeriodicExpense: async () => {
+  getAllPeriodicExpense: async (querydate) => {
     const token = sessionStorage.getItem("token");
-    //    console.log(token);
+       console.log(querydate);
+    const NewApiEndPoint=querydate?apiEndPoint+"?dueDate[$gte]="+querydate:apiEndPoint
+    console.log(NewApiEndPoint);
     try {
-      const response = await axios.get(apiEndPoint, {
+      const response = await axios.get(NewApiEndPoint, {
         headers: {
           Authorization: "Bearer " + token,
         },

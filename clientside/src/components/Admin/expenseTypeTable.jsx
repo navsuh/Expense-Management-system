@@ -9,10 +9,7 @@ import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
 import ExpenseTypeForm from "../Forms/expensetypeForm.jsx";
 
-// const expenseList = [
-//   { _id: "1", name: "Expense type 1" },
-//   { _id: "2", name: "Expense type 2" },
-// ];
+
 
 const ExpenseTypeTable = (props) => {
   const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);

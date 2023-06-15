@@ -1,7 +1,7 @@
 
 export const getAllDailyExpense =()=>{
     return async(context)=>{
-        // console.log(context.result.data);
+     
         const dailyExpenses=context.result.data
         const expensetypeservice=context.app.service("expensetypes")
         const expensetypes = await expensetypeservice.find();
