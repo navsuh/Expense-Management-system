@@ -87,7 +87,7 @@ const Sidebar = (props) => {
 
             <li>
               <a
-                href="/"
+                
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <IoNotifications className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
@@ -96,7 +96,7 @@ const Sidebar = (props) => {
             </li>
             <li>
               <a
-                href="/"
+                
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <AiOutlineSetting className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
@@ -125,7 +125,7 @@ const Sidebar = (props) => {
                 <IoIosLogOut className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Logout</span>
               </button>
-              {/* <button >MOdal</button> */}
+              
             </li>
           </ul>
         </div>
@@ -135,3 +135,6 @@ const Sidebar = (props) => {
 };
 
 export default Sidebar;
+
+
+

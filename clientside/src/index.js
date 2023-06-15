@@ -9,8 +9,8 @@ import reportWebVitals from "./reportWebVitals";
 import Admin from "./components/Admin/Admin";
 import ExpenseTypeTable from "./components/Admin/expenseTypeTable";
 import UserTable from "./components/Admin/userTable";
-import ExpenseTypeForm from "./components/Forms/expensetypeForm";
-import UserForm from "./components/Forms/userForm";
+// import ExpenseTypeForm from "./components/Forms/expensetypeForm";
+// import UserForm from "./components/Forms/userForm";
 
 import PrimaryUser from "./components/Primary user/PrimaryUser";
 import HouseholdTable from "./components/Primary user/houseHoldTable";
@@ -31,12 +31,13 @@ import Login from "./components/Login ";
 // import CreateMemberForm from "./components/Forms/createMembersForm";
 // import EditMemberForm from "./components/Forms/editMembersForm";
 import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
-import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
+// import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
 
 import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
 
 import PrivateRoute from "./components/privateRoute";
+import Error401 from "./components/Errorpage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -115,7 +116,7 @@ root.render(
         
         {/* <Route path="/changepassword" element={<PrivateRoute><ChangePasswordForm/></PrivateRoute>}/> */}
         <Route path="/resetpassword" element={<ResetPasswordForm/>}/>
-        
+        <Route path="*" element={<Error401/>}/>
 
 
       </Routes>

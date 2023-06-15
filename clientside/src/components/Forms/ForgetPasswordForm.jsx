@@ -50,7 +50,10 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose }) => {
       className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]"
     >
       <div className="w-96 bg-white rounded-md px-6 py-6">
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+        <h2 className="text-3xl font-bold text-center text-orange-500">
+            Forgot Password
+          </h2>
           <span
             onClick={() => handleModalClose()}
             className="text-red-500 text-2xl cursor-pointer"
@@ -59,17 +62,12 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose }) => {
           </span>
         </div>
 
-        <div className="my-8">
-          <h2 className="text-3xl font-bold text-center text-orange-500">
-            Forgot Password
-          </h2>
-        </div>
+        
 
         <form onSubmit={handleSubmit(onSubmitHandler)}>
           <div className="flex flex-col space-y-4">
-          <div>
+          <div className="mt-6">
                  <label htmlFor="email">Email</label>
-
                  <div className="mt-1.5">
                  <input
                     {...register("email")}

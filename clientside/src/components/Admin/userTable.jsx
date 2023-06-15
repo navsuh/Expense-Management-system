@@ -7,6 +7,7 @@ import { HiCheckCircle, HiOutlineXCircle } from "react-icons/hi";
 import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
 import UserForm from "../Forms/userForm.jsx";
+import Pagination from "../Pagination.jsx";
 
 const UserTable = (props) => {
   
@@ -14,7 +15,16 @@ const UserTable = (props) => {
   const softdeleteUser=useBoundStore(store=>store.softdeleteUser)
   const userList=useBoundStore(store=>store.usersData)
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage,setCurrentPage] =useState(1);
+  const [dataPerPage] =useState(5);
+  const lastDataIndex = currentPage* dataPerPage;
+  const firstDataIndex =lastDataIndex -dataPerPage
+
+
 const filteredUserList=userList.filter((eachUser)=>eachUser.role!=="Admin")
+console.log(filteredUserList);
+const users =filteredUserList.slice(firstDataIndex,lastDataIndex)
+
   console.log(userList);
   useEffect(() => {
     getAllUsers();
@@ -79,6 +89,12 @@ const filteredUserList=userList.filter((eachUser)=>eachUser.role!=="Admin")
             ))}
           </tbody>
         </table>
+
+        <Pagination
+           total ={users.length}
+           pageSize={dataPerPage}
+           setCurrentPage={setCurrentPage}
+        />
       </div>
     </>
   );

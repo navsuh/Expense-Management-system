@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { IoArrowBack } from "react-icons/io5";
 import { useParams, useNavigate,Navigate } from "react-router-dom";
 import { useBoundStore } from "../../store.js";
 
