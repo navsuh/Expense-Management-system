@@ -5,7 +5,8 @@ import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import PeriodicExpenseForm from "../Forms/periodicexpenseForm";
-
+import Filter from "../filter";
+import { sub ,formatISO} from 'date-fns'
 
 const PeriodicExpensesTableMember = (props) => {
   // const {userList}=props
@@ -26,6 +27,7 @@ const PeriodicExpensesTableMember = (props) => {
   },[getAllPeriodicExpense,getAllHouseholds])
    
   const [isModalOpen ,setIsModalOpen] =useState(false)
+  const [showFilter, SetshowFilter] = useState(false);
 
   const handleModalClose =() =>{
     setIsModalOpen(false)
@@ -33,8 +35,17 @@ const PeriodicExpensesTableMember = (props) => {
 
   const ondeletePeriodicExpense=(id)=>{
     deletePeriodicExpenses(id)
-
    }
+   const onchecked = (value) => {
+    // console.log(JSON.parse(value));
+    const result = sub(new Date(), JSON.parse(value))
+    const formattedresult = formatISO(result, { representation: 'date' })
+    getAllPeriodicExpense(formattedresult);
+    // console.log(formattedresult);
+  };
+
+
+
   return (
     <>
     <PeriodicExpenseForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
@@ -43,8 +54,14 @@ const PeriodicExpensesTableMember = (props) => {
           <SearchInput onChange={(value)=>setSearchQuery(value)} />
         </div>
         <div className="flex flex-row justify-between">
-          <FaFilter className="mt-5 mr-20 text-blue-800" />
-
+          
+          <div className="flex flex-row">
+            <FaFilter
+              onClick={() => SetshowFilter(!showFilter)}
+              className="mt-5 mr-20 text-blue-800"
+            />
+            {showFilter ? <Filter className="z-40" handleonchecked={onchecked} /> : null}
+          </div>
           {/* <Link to={"/primaryuser/periodicexpenseform"}>
             <IoAddCircle className="text-blue-800 h-14 w-14" />
           </Link> */}

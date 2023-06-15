@@ -18,6 +18,7 @@ import {
 import { DailyExpensesService, getOptions } from './daily-expenses.class.js'
 import { dailyExpensesPath, dailyExpensesMethods } from './daily-expenses.shared.js'
 import { getAllDailyExpense } from './hooks/getDailyExpense.js'
+import { getAllDailyExpenseQuery } from './hooks/getDailyExpensequery.js'
 
 
 export * from './daily-expenses.class.js'
@@ -46,7 +47,7 @@ export const dailyExpenses = (app) => {
         schemaHooks.validateQuery(dailyExpensesQueryValidator),
         schemaHooks.resolveQuery(dailyExpensesQueryResolver)
       ],
-      find: [],
+      find: [getAllDailyExpenseQuery()],
         get: [],
        create: [
         validate.form(dailyExpenseSchema,{abortEarly:false}),

@@ -9,10 +9,7 @@ import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
 
-// const memberList = [
-//   { _id: "1", household: "household 1", user: "user 1" },
-//   { _id: "2", household: "household 1", user: "user 2" },
-// ];
+
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -26,7 +23,7 @@ const schema = yup.object().shape({
 const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
   const memberList = useBoundStore((store) => store.memberData);
-  console.log(memberList);
+  // console.log(memberList);
   const houseHoldList = useBoundStore((store) => store.households);
   const updateMember = useBoundStore((store) => store.updateMember);
   const getAllMembers = useBoundStore(store=>store.getAllMembers)

@@ -2,14 +2,11 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { IoArrowBack } from "react-icons/io5";
+// import { IoArrowBack } from "react-icons/io5";
 import { useParams, useNavigate,Navigate } from "react-router-dom";
 import { useBoundStore } from "../../store.js";
 
-// const expenseList = [
-//   { _id: "1", name: "Expense type 1" },
-//   { _id: "2", name: "Expense type 2" },
-// ];
+
 
 const schema = yup.object().shape({
   name: yup.string().min(3).max(50).required(),

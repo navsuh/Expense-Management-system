@@ -2,6 +2,7 @@
 export const getAllPeriodicExpenses =()=>{
     return async(context)=>{
         // console.log(context.result.data);
+        console.log(context.params.query);
         const periodicExpenses=context.result.data
         const expensetypeservice=context.app.service("expensetypes")
         const expensetypes = await expensetypeservice.find();

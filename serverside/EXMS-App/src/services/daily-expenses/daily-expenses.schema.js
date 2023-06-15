@@ -61,9 +61,10 @@ export const dailyExpensesPatchResolver = resolve({})
 export const dailyExpensesQuerySchema = {
   $id: 'DailyExpensesQuery',
   type: 'object',
-  additionalProperties: false,
+  additionalProperties: true,
   properties: {
-    ...querySyntax(dailyExpensesSchema.properties)
+    ...querySyntax(dailyExpensesSchema.properties),
+    paymentDetailsDate:{ type: 'string', format: 'date' }
   }
 }
 export const dailyExpensesQueryValidator = getValidator(dailyExpensesQuerySchema, queryValidator)

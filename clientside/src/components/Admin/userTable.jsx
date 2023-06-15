@@ -15,7 +15,7 @@ const UserTable = (props) => {
   const userList=useBoundStore(store=>store.usersData)
   const [searchQuery, setSearchQuery] = useState("");
 const filteredUserList=userList.filter((eachUser)=>eachUser.role!=="Admin")
-  console.log(userList);
+  // console.log(userList);
   useEffect(() => {
     getAllUsers();
   }, [getAllUsers]);

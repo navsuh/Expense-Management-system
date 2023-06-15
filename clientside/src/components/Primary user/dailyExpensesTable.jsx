@@ -6,6 +6,8 @@ import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import DailyExpenseForm from "../Forms/dailyexpenseForm";
+import Filter from "../filter";
+import { sub ,formatISO} from 'date-fns'
 
 const DailyExpensesTable = (props) => {
   // const {userList}=props
@@ -30,10 +32,18 @@ const DailyExpensesTable = (props) => {
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [showFilter, SetshowFilter] = useState(false);
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    };
+
+    const onchecked = (value) => {
+      // console.log(JSON.parse(value));
+      const result = sub(new Date(), JSON.parse(value))
+      const formattedresult = formatISO(result, { representation: 'date' })
+      getAllDailyExpense(formattedresult);
+      // console.log(formattedresult);
     };
 
   return (
@@ -45,7 +55,13 @@ const DailyExpensesTable = (props) => {
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="flex flex-row justify-between">
-          <FaFilter className="mt-5 mr-20 text-blue-800" />
+        <div className="flex flex-row">
+            <FaFilter
+              onClick={() => SetshowFilter(!showFilter)}
+              className="mt-5 mr-20 text-blue-800"
+            />
+            {showFilter ? <Filter className="z-40" handleonchecked={onchecked} /> : null}
+          </div>
           <button onClick={ ()=>setIsModalOpen(true)}>
             <IoAddCircle  className="text-blue-800 h-14 w-14" />
           </button>

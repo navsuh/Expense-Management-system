@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import Sidebar from "../sidebar";
 import Tablist from "../tabList";
 // import ExpenseTypeTable from './expenseTypeTable';
@@ -7,8 +8,8 @@ import { Outlet } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 
 const tabList = [
-  { _id: "1", tabName: "Expense type", tabPath: "/admin/expensetype" },
-  { _id: "2", tabName: "Users", tabPath: "/admin/users" },
+  { _id: uuidv4(), tabName: "Expense type", tabPath: "/admin/expensetype" },
+  { _id: uuidv4(), tabName: "Users", tabPath: "/admin/users" },
 ];
 
 // const expenseList=[{_id:1,name:"Expense type 1"},{_id:2,name:"Expense type 2"}]
