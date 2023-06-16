@@ -37,7 +37,7 @@ export class ForgotPasswordService {
 
       emailhandler.sendEmail(data,"forgot-password")
       result.status = 200
-            result.msg = 'Link for change password sent to your Email'
+            result.msg = 'Link for reset password sent to your Email Id'
             
             return result
      
