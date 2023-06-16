@@ -41,6 +41,7 @@ const PeriodicExpensesTable = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showFilter, SetshowFilter] = useState(false);
+  const[filterName,setFilterName]=useState("Today");
 
   const onchecked = (value) => {
     // console.log(JSON.parse(value));
@@ -53,6 +54,14 @@ const PeriodicExpensesTable = (props) => {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+  const handleFilterClose=()=>{
+    SetshowFilter(false)
+  }
+  const getFilterName=(value)=>{
+    setFilterName(value)
+  }
+
+
   return (
     <>
       <PeriodicExpenseForm
@@ -64,13 +73,17 @@ const PeriodicExpensesTable = (props) => {
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-row">
+        <div className="flex flex-row justify-between ">
+          <div className="flex flex-col ">
+            <div  onClick={() => SetshowFilter(true)} className="flex flex-row border border-gray-100 rounded-md mr-4 mt-4 p-2">
             <FaFilter
-              onClick={() => SetshowFilter(!showFilter)}
-              className="mt-5 mr-20 text-blue-800"
+             
+              className="mt-5  text-blue-800"
             />
-            {showFilter ? <Filter className="z-40" handleonchecked={onchecked} /> : null}
+            <p className="mt-5 font-medium text-gray-800">{filterName}</p>
+            </div>
+           
+            <Filter  handleonchecked={onchecked} showFilter={showFilter}  handleFilterClose={handleFilterClose} getFilterName={getFilterName}/> 
           </div>
 
           <button onClick={() => setIsModalOpen(true)}>
