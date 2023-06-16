@@ -7,7 +7,8 @@ import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import DailyExpenseForm from "../Forms/dailyexpenseForm";
 import Filter from "../filter";
-import { sub ,formatISO} from 'date-fns'
+import { sub, formatISO } from "date-fns";
+import Pagination from "../Pagination";
 
 const DailyExpensesTable = (props) => {
   // const {userList}=props
@@ -17,15 +18,22 @@ const DailyExpensesTable = (props) => {
   const deleteDailyExpense = useBoundStore((store) => store.deleteDailyExpense);
   const [searchQuery, setSearchQuery] = useState("");
   const houseHoldList = useBoundStore((store) => store.households);
-  const getAllHouseholds =useBoundStore(store=>store.getAllHouseholds)
+  const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const householdNames = houseHoldList.map(
     (eachHouseHold) => eachHouseHold.name
   );
-  const filteredDailyExpenseList=dailyExpensesList.filter((expense) =>householdNames.includes(expense.household) )
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const dataPerPage = 4
+
+  const filteredDailyExpenseList = dailyExpensesList.filter((expense) =>
+    householdNames.includes(expense.household)
+  );
+
   useEffect(() => {
     getAllDailyExpense();
     getAllHouseholds();
-  }, [getAllDailyExpense,getAllHouseholds]);
+  }, [getAllDailyExpense, getAllHouseholds]);
 
   const ondeleteDailyExpense = (id) => {
     deleteDailyExpense(id);
@@ -36,38 +44,61 @@ const DailyExpensesTable = (props) => {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    };
+  };
 
-    const onchecked = (value) => {
-      // console.log(JSON.parse(value));
-      const result = sub(new Date(), JSON.parse(value))
-      const formattedresult = formatISO(result, { representation: 'date' })
-      getAllDailyExpense(formattedresult);
-      // console.log(formattedresult);
-    };
+  const onchecked = (value) => {
+    // console.log(JSON.parse(value));
+    const result = sub(new Date(), JSON.parse(value));
+    const formattedresult = formatISO(result, { representation: "date" });
+    getAllDailyExpense(formattedresult);
+    // console.log(formattedresult);
+  };
+
+  const filteredDailyExpenses = filteredDailyExpenseList.filter(
+    (m) =>
+      m.selectExpense.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      m.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  
+  
+  const lastIndex =dataPerPage *currentPage;
+  const firstIndex = lastIndex - dataPerPage;
+  const currentDailyExpenses = filteredDailyExpenses.slice(firstIndex,lastIndex)
+
+  const onPaginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
 
   return (
     <>
-     <DailyExpenseForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
+      <DailyExpenseForm
+        isModalOpen={isModalOpen}
+        handleModalClose={handleModalClose}
+      />
 
       <div className="flex flex-row justify-between">
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="flex flex-row justify-between">
-        <div className="flex flex-row">
+          <div className="flex flex-row">
             <FaFilter
               onClick={() => SetshowFilter(!showFilter)}
               className="mt-5 mr-20 text-blue-800"
             />
-            {showFilter ? <Filter className="z-40" handleonchecked={onchecked} /> : null}
+            {showFilter ? (
+              <Filter className="z-40" handleonchecked={onchecked} />
+            ) : null}
           </div>
-          <button onClick={ ()=>setIsModalOpen(true)}>
-            <IoAddCircle  className="text-blue-800 h-14 w-14" />
+          <button onClick={() => setIsModalOpen(true)}>
+            <IoAddCircle className="text-blue-800 h-14 w-14" />
           </button>
         </div>
       </div>
       <div className="relative shadow-md sm:rounded-lg">
+        {currentDailyExpenses.length===0 ?(<div className="p-4">No Data Found.</div>):
+        (<>
         <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
             <tr>
@@ -87,43 +118,40 @@ const DailyExpensesTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {filteredDailyExpenseList
-              .filter(
-                (m) =>
-                  m.selectExpense
-                    .toLowerCase()
-                    .includes(searchQuery.toLowerCase()) ||
-                  m.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
-              )
-              .map((eachDailyExpense) => (
-                <tr className="border-b bg-gray-50 " key={eachDailyExpense._id}>
-                  <td className="px-6 py-4">
-                    {eachDailyExpense.paymentDetails.date}
-                  </td>
-                  <td className="px-6 py-4">
-                    {eachDailyExpense.selectExpense}
-                  </td>
-                  <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
-                  <td className="px-6 py-4">
-                    <div className="flex flex-between">
-                      <Link
-                        to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}
-                        onClick={ ()=>setIsModalOpen(true)}
-                      >
-                        <AiOutlineEdit className="w-8 h-6" />
-                      </Link>
-                      <AiOutlineDelete
-                        onClick={() =>
-                          ondeleteDailyExpense(eachDailyExpense._id)
-                        }
-                        className="w-8 h-6 cursor-pointer ml-1"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              ))}
+            {currentDailyExpenses.map((eachDailyExpense) => (
+              <tr className="border-b bg-gray-50 " key={eachDailyExpense._id}>
+                <td className="px-6 py-4">
+                  {eachDailyExpense.paymentDetails.date}
+                </td>
+                <td className="px-6 py-4">{eachDailyExpense.selectExpense}</td>
+                <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
+                <td className="px-6 py-4">
+                  <div className="flex flex-between">
+                    <Link
+                      to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      <AiOutlineEdit className="w-8 h-6" />
+                    </Link>
+                    <AiOutlineDelete
+                      onClick={() => ondeleteDailyExpense(eachDailyExpense._id)}
+                      className="w-8 h-6 cursor-pointer ml-1"
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
+        <Pagination
+        total={filteredDailyExpenseList.length}
+        pageSize={dataPerPage}
+        currentPage={currentPage}
+        onPageChange={onPaginate}
+        setCurrentPage={setCurrentPage}
+        />
+        </>
+        )}
       </div>
     </>
   );
