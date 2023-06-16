@@ -5,10 +5,11 @@ const apiEndPoint = process.env.REACT_APP_API_URL + "users";
 export const AdminUsersSlice = (set) => ({
   usersData: [],
   error_msg: "",
-
+  
   getAllUsers: async () => {
     const token = sessionStorage.getItem("token");
-
+    // const newApiPoint =apiEndPoint+"?$limit="+limit+"&"+"$skip="+skip                  
+    
     try {
       const response = await axios.get(apiEndPoint, {
         headers: {
