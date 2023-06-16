@@ -97,15 +97,15 @@ const Sidebar = (props) => {
               </p>
             </li>
             <li>
-              <button
-                onClick={() => setIsModalOpen(true)}
+              < button
+               onClick={() => setIsModalOpen(true)}
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <MdChangeCircle className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Change Password</span>
               </button>
             </li>
-            <li>
+            <li className="hover:bg-black rounded-lg ">
               <button
                 onClick={() => {
                   lastLoginUser(user._id);
