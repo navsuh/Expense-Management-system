@@ -37,6 +37,7 @@ import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
 import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
 
 import PrivateRoute from "./components/privateRoute";
+import Error401 from "./components/Errorpage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -115,7 +116,7 @@ root.render(
         
         {/* <Route path="/changepassword" element={<PrivateRoute><ChangePasswordForm/></PrivateRoute>}/> */}
         <Route path="/resetpassword" element={<ResetPasswordForm/>}/>
-        
+        <Route path="*" element={<Error401/>}/>
 
 
       </Routes>

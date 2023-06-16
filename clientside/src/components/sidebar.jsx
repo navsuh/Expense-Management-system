@@ -118,7 +118,7 @@ const Sidebar = (props) => {
                 <IoIosLogOut className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Logout</span>
               </button>
-              {/* <button >MOdal</button> */}
+              
             </li>
           </ul>
         </div>
@@ -128,3 +128,6 @@ const Sidebar = (props) => {
 };
 
 export default Sidebar;
+
+
+
