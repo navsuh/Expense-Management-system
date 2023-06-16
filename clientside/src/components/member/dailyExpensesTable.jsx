@@ -7,78 +7,79 @@ import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import DailyExpenseForm from "../Forms/dailyexpenseForm";
 import Filter from "../filter";
-import { sub ,formatISO} from 'date-fns'
+import { sub, formatISO } from "date-fns";
+import Pagination from "../Pagination";
 
 const DailyExpensesTableMember = (props) => {
   // const {userList}=props
-  const getAllDailyExpense = useBoundStore(store=>store.getAllDailyExpense)
-  const dailyExpensesList = useBoundStore(store=>store.dailyExpense)
-  const deleteDailyExpense = useBoundStore(store=>store.deleteDailyExpense)
-  const getAllHouseholds =useBoundStore(store=>store.getAllHouseholds)
+  const getAllDailyExpense = useBoundStore((store) => store.getAllDailyExpense);
+  const dailyExpensesList = useBoundStore((store) => store.dailyExpense);
+  const deleteDailyExpense = useBoundStore((store) => store.deleteDailyExpense);
+  const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const [searchQuery, setSearchQuery] = useState("");
   const houseHoldList = useBoundStore((store) => store.households);
- 
+
   const householdNames = houseHoldList.map(
     (eachHouseHold) => eachHouseHold.name
   );
-  console.log(householdNames)
+  console.log(householdNames);
 
-  const filteredDailyExpenseList=dailyExpensesList.filter((expense) =>householdNames.includes(expense.household) )
+  const filteredDailyExpenseList = dailyExpensesList.filter((expense) =>
+    householdNames.includes(expense.household)
+  );
 
-  useEffect(()=>{
+  const [currentPage, setCurrentPage] = useState(1);
+  const dataPerPage = 3;
+
+  useEffect(() => {
     getAllDailyExpense();
     getAllHouseholds();
-  },[getAllDailyExpense,getAllHouseholds])
-  
-  const ondeleteDailyExpense=(id)=>{
-    deleteDailyExpense(id)
+  }, [getAllDailyExpense, getAllHouseholds]);
 
-   }
-const [isModalOpen,setIsModalOpen] =useState(false)
-const [showFilter, SetshowFilter] = useState(false);
-const [filterName, setFilterName] = useState("Today");
-const handleModalClose=()=>{
-  setIsModalOpen(false)
-}
-const onchecked = (value) => {
-  // console.log(JSON.parse(value));
-  const result = sub(new Date(), JSON.parse(value))
-  const formattedresult = formatISO(result, { representation: 'date' })
-  getAllDailyExpense(formattedresult);
-  // console.log(formattedresult);
-};
+  const ondeleteDailyExpense = (id) => {
+    deleteDailyExpense(id);
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showFilter, SetshowFilter] = useState(false);
+  const [filterName, setFilterName] = useState("Today");
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+  const onchecked = (value) => {
+    // console.log(JSON.parse(value));
+    const result = sub(new Date(), JSON.parse(value));
+    const formattedresult = formatISO(result, { representation: "date" });
+    getAllDailyExpense(formattedresult);
+    // console.log(formattedresult);
+  };
 
-const handleFilterClose = () => {
-  SetshowFilter(false);
-};
-const getFilterName = (value) => {
-  setFilterName(value);
-};
-  return (
-    <>
-    <DailyExpenseForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
-      <div className="flex flex-row justify-between">
-          <div>
-            <SearchInput onChange={(value)=>setSearchQuery(value)} />
-          </div>
-          <div className="flex flex-row justify-between">
-          <div className="flex flex-col ">
-            <div  onClick={() => SetshowFilter(true)} className="flex flex-row border border-gray-100 rounded-md mr-4 mt-4 p-2">
-            <FaFilter
-              onClick={() => SetshowFilter(!showFilter)}
-              className="mt-5  text-blue-800"
-            />
-            <p className="mt-5 font-medium text-gray-800">{filterName}</p>
-            </div>
-           
-            <Filter  handleonchecked={onchecked} showFilter={showFilter}  handleFilterClose={handleFilterClose} getFilterName={getFilterName}/> 
-          </div>
-            <button onClick={()=>setIsModalOpen(true)}>
-            <IoAddCircle className="text-blue-800 h-14 w-14" />
-            </button>
-          </div>
-        </div>
-      <div className="relative  shadow-md sm:rounded-lg">
+  const filteredDailyExpenses = filteredDailyExpenseList.filter(
+    (m) =>
+      m.selectExpense.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      m.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const lastIndex = dataPerPage * currentPage;
+  const firstIndex = lastIndex - dataPerPage;
+  const currentDailyExpenses = filteredDailyExpenses.slice(
+    firstIndex,
+    lastIndex
+  );
+
+  const onPaginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleFilterClose = () => {
+    SetshowFilter(false);
+  };
+  const getFilterName = (value) => {
+    setFilterName(value);
+  };
+
+  const dailyExpenseTable = () => {
+    return (
+      <>
         <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
             <tr>
@@ -98,25 +99,82 @@ const getFilterName = (value) => {
             </tr>
           </thead>
           <tbody>
-            {filteredDailyExpenseList.filter((expense) =>
-                expense.selectExpense.toLowerCase().includes(searchQuery.toLowerCase()) || expense.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
-              ).map((eachDailyExpense) => (
+            {currentDailyExpenses.map((eachDailyExpense) => (
               <tr className="border-b bg-gray-50 " key={eachDailyExpense._id}>
-              <td className="px-6 py-4">{eachDailyExpense.paymentDetails.date}</td>
+                <td className="px-6 py-4">
+                  {eachDailyExpense.paymentDetails.date}
+                </td>
                 <td className="px-6 py-4">{eachDailyExpense.selectExpense}</td>
                 <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
-                  <Link to={`/memberuser/dailyexpenses/${eachDailyExpense._id}`} onClick={()=>setIsModalOpen(true)}>
-                    <AiOutlineEdit className="w-8 h-6" />
+                    <Link
+                      to={`/memberuser/dailyexpenses/${eachDailyExpense._id}`}
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <AiOutlineDelete onClick={()=>ondeleteDailyExpense(eachDailyExpense._id)} className="w-8 h-6 cursor-pointer ml-1" />
+                    <AiOutlineDelete
+                      onClick={() => ondeleteDailyExpense(eachDailyExpense._id)}
+                      className="w-8 h-6 cursor-pointer ml-1"
+                    />
                   </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <Pagination
+          total={filteredDailyExpenseList.length}
+          pageSize={dataPerPage}
+          currentPage={currentPage}
+          onPageChange={onPaginate}
+        />
+      </>
+    );
+  };
+
+  return (
+    <>
+      <DailyExpenseForm
+        isModalOpen={isModalOpen}
+        handleModalClose={handleModalClose}
+      />
+      <div className="flex flex-row justify-between">
+        <div>
+          <SearchInput onChange={(value) => setSearchQuery(value)} />
+        </div>
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-col ">
+            <div
+              onClick={() => SetshowFilter(true)}
+              className="flex flex-row border border-gray-100 rounded-md mr-4 mt-4 p-2"
+            >
+              <FaFilter
+                onClick={() => SetshowFilter(!showFilter)}
+                className="mt-5  text-blue-800"
+              />
+              <p className="mt-5 font-medium text-gray-800">{filterName}</p>
+            </div>
+
+            <Filter
+              handleonchecked={onchecked}
+              showFilter={showFilter}
+              handleFilterClose={handleFilterClose}
+              getFilterName={getFilterName}
+            />
+          </div>
+          <button onClick={() => setIsModalOpen(true)}>
+            <IoAddCircle className="text-blue-800 h-14 w-14" />
+          </button>
+        </div>
+      </div>
+      <div className="relative  shadow-md sm:rounded-lg">
+        {currentDailyExpenses.length === 0 ? (
+          <div className="p-4">No Data Found.</div>
+        ) : (
+          dailyExpenseTable()
+        )}
       </div>
     </>
   );

@@ -101,46 +101,36 @@ const PeriodicExpensesTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {currentPeriodicExpenses
-              .filter(
-                (expense) =>
-                  expense.selectExpense
-                    .toLowerCase()
-                    .includes(searchQuery.toLowerCase()) ||
-                  expense.paidBy
-                    .toLowerCase()
-                    .includes(searchQuery.toLowerCase())
-              )
-              .map((eachPeriodicExpense) => (
-                <tr
-                  className="border-b bg-gray-50 "
-                  key={eachPeriodicExpense._id}
-                >
-                  <td className="px-6 py-4">
-                    {eachPeriodicExpense.dueDate.toString()}
-                  </td>
-                  <td className="px-6 py-4">
-                    {eachPeriodicExpense.selectExpense}
-                  </td>
-                  <td className="px-6 py-4">{eachPeriodicExpense.paidBy}</td>
-                  <td className="px-6 py-4">
-                    <div className="flex flex-between">
-                      <Link
-                        to={`/primaryuser/periodicexpenses/${eachPeriodicExpense._id}`}
-                        onClick={() => setIsModalOpen(true)}
-                      >
-                        <AiOutlineEdit className="w-8 h-6" />
-                      </Link>
-                      <AiOutlineDelete
-                        onClick={() =>
-                          ondeletePeriodicExpense(eachPeriodicExpense._id)
-                        }
-                        className="w-8 h-6 cursor-pointer"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              ))}
+            {currentPeriodicExpenses.map((eachPeriodicExpense) => (
+              <tr
+                className="border-b bg-gray-50 "
+                key={eachPeriodicExpense._id}
+              >
+                <td className="px-6 py-4">
+                  {eachPeriodicExpense.dueDate.toString()}
+                </td>
+                <td className="px-6 py-4">
+                  {eachPeriodicExpense.selectExpense}
+                </td>
+                <td className="px-6 py-4">{eachPeriodicExpense.paidBy}</td>
+                <td className="px-6 py-4">
+                  <div className="flex flex-between">
+                    <Link
+                      to={`/primaryuser/periodicexpenses/${eachPeriodicExpense._id}`}
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      <AiOutlineEdit className="w-8 h-6" />
+                    </Link>
+                    <AiOutlineDelete
+                      onClick={() =>
+                        ondeletePeriodicExpense(eachPeriodicExpense._id)
+                      }
+                      className="w-8 h-6 cursor-pointer"
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <Pagination
