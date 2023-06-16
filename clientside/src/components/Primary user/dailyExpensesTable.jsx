@@ -76,6 +76,63 @@ const DailyExpensesTable = (props) => {
     setFilterName(value);
   };
 
+  const dailyExpenseTable=()=>{
+    return(<>
+      <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
+        <thead className="text-xs text-white uppercase bg-blue-500 ">
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              Date
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Expense Type
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Paid By
+            </th>
+
+            <th scope="col" className="px-6 py-3">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentDailyExpenses.map((eachDailyExpense) => (
+            <tr className="border-b bg-gray-50 " key={eachDailyExpense._id}>
+              <td className="px-6 py-4">
+                {eachDailyExpense.paymentDetails.date}
+              </td>
+              <td className="px-6 py-4">{eachDailyExpense.selectExpense}</td>
+              <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
+              <td className="px-6 py-4">
+                <div className="flex flex-between">
+                  <Link
+                    to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    <AiOutlineEdit className="w-8 h-6" />
+                  </Link>
+                  <AiOutlineDelete
+                    onClick={() => ondeleteDailyExpense(eachDailyExpense._id)}
+                    className="w-8 h-6 cursor-pointer ml-1"
+                  />
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <Pagination
+      total={filteredDailyExpenseList.length}
+      pageSize={dataPerPage}
+      currentPage={currentPage}
+      onPageChange={onPaginate} />
+      </>
+      
+
+    )
+  }
+
   return (
     <>
       <DailyExpenseForm
@@ -107,60 +164,7 @@ const DailyExpensesTable = (props) => {
       </div>
       <div className="relative shadow-md sm:rounded-lg">
         {currentDailyExpenses.length===0 ?(<div className="p-4">No Data Found.</div>):
-        (<>
-        <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
-          <thead className="text-xs text-white uppercase bg-blue-500 ">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Date
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Expense Type
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Paid By
-              </th>
-
-              <th scope="col" className="px-6 py-3">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentDailyExpenses.map((eachDailyExpense) => (
-              <tr className="border-b bg-gray-50 " key={eachDailyExpense._id}>
-                <td className="px-6 py-4">
-                  {eachDailyExpense.paymentDetails.date}
-                </td>
-                <td className="px-6 py-4">{eachDailyExpense.selectExpense}</td>
-                <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
-                <td className="px-6 py-4">
-                  <div className="flex flex-between">
-                    <Link
-                      to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}
-                      onClick={() => setIsModalOpen(true)}
-                    >
-                      <AiOutlineEdit className="w-8 h-6" />
-                    </Link>
-                    <AiOutlineDelete
-                      onClick={() => ondeleteDailyExpense(eachDailyExpense._id)}
-                      className="w-8 h-6 cursor-pointer ml-1"
-                    />
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Pagination
-        total={filteredDailyExpenseList.length}
-        pageSize={dataPerPage}
-        currentPage={currentPage}
-        onPageChange={onPaginate}
-        
-        />
-        </>
-        )}
+        (dailyExpenseTable())}
       </div>
     </>
   );

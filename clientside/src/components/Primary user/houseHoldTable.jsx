@@ -44,29 +44,9 @@ const HouseholdTable = (props) => {
     setIsModalOpen(false);
   };
 
-  return (
-    <>
-      <HouseHoldForm
-        isModalOpen={isModalOpen}
-        handleModalClose={handleModalClose}
-      />
-
-      <div className="flex flex-row justify-between">
-        <div>
-          <SearchInput onChange={(value) => setSearchQuery(value)} />
-        </div>
-        <div>
-          <button>
-            <IoAddCircle
-              onClick={() => setIsModalOpen(true)}
-              className="text-blue-800 h-14 w-14"
-            />
-          </button>
-        </div>
-      </div>
-      <div className="relative  shadow-md sm:rounded-lg">
-        { currentHousholds.length===0 ? (<div>No Page Found.</div>):
-        (<>
+  const houseHoldTable=()=>{
+    return(
+      <>
         <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
             <tr>
@@ -109,7 +89,33 @@ const HouseholdTable = (props) => {
           onPageChange={onPaginate}
           
         />
-        </>)}
+        </>
+    )
+  }
+
+  return (
+    <>
+      <HouseHoldForm
+        isModalOpen={isModalOpen}
+        handleModalClose={handleModalClose}
+      />
+
+      <div className="flex flex-row justify-between">
+        <div>
+          <SearchInput onChange={(value) => setSearchQuery(value)} />
+        </div>
+        <div>
+          <button>
+            <IoAddCircle
+              onClick={() => setIsModalOpen(true)}
+              className="text-blue-800 h-14 w-14"
+            />
+          </button>
+        </div>
+      </div>
+      <div className="relative  shadow-md sm:rounded-lg">
+        { currentHousholds.length===0 ? (<div>No Page Found.</div>):
+        (houseHoldTable())}
       </div>
     </>
   );
