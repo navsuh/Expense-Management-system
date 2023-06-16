@@ -86,22 +86,22 @@ const Sidebar = (props) => {
             </li>
 
             <li>
-              <a
+              <p
                 
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <IoNotifications className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Notification</span>
-              </a>
+              </p>
             </li>
             <li>
-              <a
+              <p
                 
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <AiOutlineSetting className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Settings</span>
-              </a>
+              </p>
             </li>
             <li className="hover:bg-black rounded-lg ">
               < button
