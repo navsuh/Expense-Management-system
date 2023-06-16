@@ -9,6 +9,11 @@ import DailyExpenseForm from "../Forms/dailyexpenseForm";
 import Filter from "../filter";
 import { sub, formatISO } from "date-fns";
 import Pagination from "../Pagination";
+import { AiOutlineAreaChart } from "react-icons/ai";
+
+
+import Chart from "../chart";
+
 
 const DailyExpensesTable = (props) => {
   // const {userList}=props
@@ -38,7 +43,7 @@ const DailyExpensesTable = (props) => {
   const ondeleteDailyExpense = (id) => {
     deleteDailyExpense(id);
   };
-
+  const [showchart, SetshowChart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showFilter, SetshowFilter] = useState(false);
   const [filterName, setFilterName] = useState("Today");
@@ -68,6 +73,10 @@ const DailyExpensesTable = (props) => {
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  const handlechartClose=()=>{
+    SetshowChart(false)
+  }
 
   const handleFilterClose = () => {
     SetshowFilter(false);
@@ -133,6 +142,8 @@ const DailyExpensesTable = (props) => {
     )
   }
 
+  
+
   return (
     <>
       <DailyExpenseForm
@@ -144,12 +155,22 @@ const DailyExpensesTable = (props) => {
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
+        <div className="text-blue-900">
+          <div className="flex">
+          <AiOutlineAreaChart className="h-8 w-8 mt-4" onClick={()=>SetshowChart(true)}/>
+        <p className="mt-5 font-medium text-gray-800">charts</p>
+          </div>
+        
+
+        <Chart data={filteredDailyExpenseList} showchart={showchart} handlechartClose={handlechartClose}/>
+        </div>
+        
         <div className="flex flex-row justify-between">
         <div className="flex flex-col ">
             <div  onClick={() => SetshowFilter(true)} className="flex flex-row border border-gray-100 rounded-md mr-4 mt-4 p-2">
             <FaFilter
               onClick={() => SetshowFilter(!showFilter)}
-              className="mt-5  text-blue-800"
+              className="mt-6  text-blue-800"
             />
            <p className="mt-5 font-medium text-gray-800">{filterName}</p>
             </div>
