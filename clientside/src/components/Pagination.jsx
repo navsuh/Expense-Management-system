@@ -5,13 +5,13 @@ const Pagination = ({
   total,
   pageSize,
   currentPage,
-  setCurrentPage,
+  
   onPageChange,
 }) => {
   const totalPages = Math.ceil(total / pageSize);
 
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+   
     onPageChange(page)
   };
 

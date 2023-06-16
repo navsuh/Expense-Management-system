@@ -157,7 +157,7 @@ const DailyExpensesTable = (props) => {
         pageSize={dataPerPage}
         currentPage={currentPage}
         onPageChange={onPaginate}
-        setCurrentPage={setCurrentPage}
+        
         />
         </>
         )}

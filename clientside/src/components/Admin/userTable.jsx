@@ -119,7 +119,7 @@ const UserTable = (props) => {
           pageSize={dataPerPage}
           currentPage={currentPage}
           onPageChange={onPaginate}
-          setCurrentPage={setCurrentPage}
+          
         />
       </>
     );
