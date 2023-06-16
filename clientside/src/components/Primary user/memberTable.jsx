@@ -25,7 +25,7 @@ const MemberTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreateMemberModalOpen, setCreateMemberModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const dataPerPage = 4;
+  const dataPerPage = 3;
 
   const filteredMembers = memberList.filter(
     (m) =>
@@ -54,7 +54,7 @@ const MemberTable = () => {
   };
 const membersTable=()=>{
   return(<>
-  <table className="w-full text-sm text-left text-gray-500  m-3 rounded-lg">
+  <table className="w-[66rem] text-sm text-left text-gray-500  m-3 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
             <tr>
               <th scope="col" className="px-6 py-3">
