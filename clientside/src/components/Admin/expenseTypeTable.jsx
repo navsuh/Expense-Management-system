@@ -39,12 +39,55 @@ const ExpenseTypeTable = (props) => {
 
   const lastIndex = currentPage * dataPerPage;
   const firstIndex = lastIndex - dataPerPage;
-  const currentExpenses = filteredExpenseList.slice(
-    firstIndex,
-    lastIndex
-  );
+  const currentExpenses = filteredExpenseList.slice(firstIndex, lastIndex);
+  const displayExpenseTypeTable = () => {
+    return (
+      <>
+        <table className="w-[65rem] text-sm text-left text-gray-500 ml-6 rounded-lg">
+          <thead className="text-xs text-white uppercase bg-blue-500">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Expense Type
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentExpenses.map((eachExpense) => (
+              <tr className="border-b bg-gray-50" key={eachExpense._id}>
+                <td className="px-6 py-4">{eachExpense.name}</td>
+                <td className="px-6 py-4">
+                  <div className="flex flex-between">
+                    <Link
+                      to={`/admin/expensetype/${eachExpense._id}`}
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      <AiOutlineEdit className="w-8 h-6" />
+                    </Link>
+                    <AiOutlineDelete
+                      onClick={() => deleteExpenseType(eachExpense._id)}
+                      className="w-8 h-6 ml-1 cursor-pointer"
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-  
+        <Pagination
+          total={filteredExpenseList.length}
+          pageSize={dataPerPage}
+          currentPage={currentPage}
+          onPageChange={onPaginate}
+          setCurrentPage={setCurrentPage}
+        />
+      </>
+    );
+  };
+
   return (
     <>
       <ExpenseTypeForm
@@ -66,53 +109,8 @@ const ExpenseTypeTable = (props) => {
       <div className="relative  shadow-md sm:rounded-lg">
         {currentExpenses.length === 0 ? (
           <div className="p-4">No data found.</div>
-
         ) : (
-          <>
-            <table className="w-full text-sm text-left text-gray-500 ml-6 rounded-lg">
-              <thead className="text-xs text-white uppercase bg-blue-500">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    Expense Type
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                {currentExpenses.map((eachExpense) => (
-                  <tr className="border-b bg-gray-50" key={eachExpense._id}>
-                    <td className="px-6 py-4">{eachExpense.name}</td>
-                    <td className="px-6 py-4">
-                      <div className="flex flex-between">
-                        <Link
-                          to={`/admin/expensetype/${eachExpense._id}`}
-                          onClick={() => setIsModalOpen(true)}
-                        >
-                          <AiOutlineEdit className="w-8 h-6" />
-                        </Link>
-                        <AiOutlineDelete
-                          onClick={() => deleteExpenseType(eachExpense._id)}
-                          className="w-8 h-6 ml-1 cursor-pointer"
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            
-            
-            <Pagination
-              total={filteredExpenseList.length}
-              pageSize={dataPerPage}
-              currentPage={currentPage}
-              onPageChange={onPaginate}
-              setCurrentPage={setCurrentPage}
-            />
-          </>
+          displayExpenseTypeTable()
         )}
       </div>
     </>
