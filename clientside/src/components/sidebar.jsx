@@ -11,18 +11,20 @@ const Sidebar = (props) => {
   // const {name}=props
   const navigate = useNavigate();
   const user = useBoundStore((store) => store.user);
-  const lastLoginUser= useBoundStore((store) => store.lastLoginUser);
+  const lastLoginUser = useBoundStore((store) => store.lastLoginUser);
   const name = user.firstName;
- 
 
- const [isModalOpen, setIsModalOpen] = useState(false);
- const handleModalClose = () => {
-   setIsModalOpen(false);
- };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
-    <ChangePassword isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
+      <ChangePassword
+        isModalOpen={isModalOpen}
+        handleModalClose={handleModalClose}
+      />
       <button
         data-drawer-target="default-sidebar"
         data-drawer-toggle="default-sidebar"
@@ -76,50 +78,41 @@ const Sidebar = (props) => {
 
           <ul className="space-y-2 mt-2 font-small">
             <li>
-              <a
-                href="/"
-                className="flex items-center p-2 text-white rounded-lg  hover:bg-black "
-              >
+              <p className="flex items-center p-2 text-white rounded-lg  hover:bg-black ">
                 <RiDashboardFill className="w-6 h-6 " />
                 <span className="ml-3 text-white">Dashboard</span>
-              </a>
+              </p>
             </li>
 
             <li>
-              <a
-                href="/"
-                className="flex items-center p-2 text-white rounded-lg hover:bg-black"
-              >
+              <p className="flex items-center p-2 text-white rounded-lg hover:bg-black">
                 <IoNotifications className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Notification</span>
-              </a>
+              </p>
             </li>
             <li>
-              <a
-                href="/"
-                className="flex items-center p-2 text-white rounded-lg hover:bg-black"
-              >
+              <p className="flex items-center p-2 text-white rounded-lg hover:bg-black">
                 <AiOutlineSetting className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Settings</span>
-              </a>
+              </p>
             </li>
             <li>
-              < button
-               onClick={() => setIsModalOpen(true)}
+              <button
+                onClick={() => setIsModalOpen(true)}
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <MdChangeCircle className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
-                <span    className="ml-3 text-white">Change Password</span>
+                <span className="ml-3 text-white">Change Password</span>
               </button>
             </li>
             <li>
               <button
-            onClick={()=>{
-              lastLoginUser(user._id)
-              
-              sessionStorage.removeItem("token")
-              navigate("/login")
-            }}
+                onClick={() => {
+                  lastLoginUser(user._id);
+
+                  sessionStorage.removeItem("token");
+                  navigate("/login");
+                }}
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <IoIosLogOut className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />

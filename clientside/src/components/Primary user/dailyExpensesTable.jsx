@@ -7,7 +7,7 @@ import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import DailyExpenseForm from "../Forms/dailyexpenseForm";
 import Filter from "../filter";
-import { sub ,formatISO} from 'date-fns'
+import { sub, formatISO } from "date-fns";
 
 const DailyExpensesTable = (props) => {
   // const {userList}=props
@@ -17,15 +17,17 @@ const DailyExpensesTable = (props) => {
   const deleteDailyExpense = useBoundStore((store) => store.deleteDailyExpense);
   const [searchQuery, setSearchQuery] = useState("");
   const houseHoldList = useBoundStore((store) => store.households);
-  const getAllHouseholds =useBoundStore(store=>store.getAllHouseholds)
+  const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const householdNames = houseHoldList.map(
     (eachHouseHold) => eachHouseHold.name
   );
-  const filteredDailyExpenseList=dailyExpensesList.filter((expense) =>householdNames.includes(expense.household) )
+  const filteredDailyExpenseList = dailyExpensesList.filter((expense) =>
+    householdNames.includes(expense.household)
+  );
   useEffect(() => {
     getAllDailyExpense();
     getAllHouseholds();
-  }, [getAllDailyExpense,getAllHouseholds]);
+  }, [getAllDailyExpense, getAllHouseholds]);
 
   const ondeleteDailyExpense = (id) => {
     deleteDailyExpense(id);
@@ -33,37 +35,52 @@ const DailyExpensesTable = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showFilter, SetshowFilter] = useState(false);
+  const [filterName, setFilterName] = useState("Today");
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    };
+  };
 
-    const onchecked = (value) => {
-      // console.log(JSON.parse(value));
-      const result = sub(new Date(), JSON.parse(value))
-      const formattedresult = formatISO(result, { representation: 'date' })
-      getAllDailyExpense(formattedresult);
-      // console.log(formattedresult);
-    };
+  const onchecked = (value) => {
+    // console.log(JSON.parse(value));
+    const result = sub(new Date(), JSON.parse(value));
+    const formattedresult = formatISO(result, { representation: "date" });
+    getAllDailyExpense(formattedresult);
+    // console.log(formattedresult);
+  };
+
+  const handleFilterClose = () => {
+    SetshowFilter(false);
+  };
+  const getFilterName = (value) => {
+    setFilterName(value);
+  };
 
   return (
     <>
-     <DailyExpenseForm isModalOpen={isModalOpen} handleModalClose={handleModalClose}/>
+      <DailyExpenseForm
+        isModalOpen={isModalOpen}
+        handleModalClose={handleModalClose}
+      />
 
       <div className="flex flex-row justify-between">
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="flex flex-row justify-between">
-        <div className="flex flex-row">
+        <div className="flex flex-col ">
+            <div  onClick={() => SetshowFilter(true)} className="flex flex-row border border-gray-100 rounded-md mr-4 mt-4 p-2">
             <FaFilter
-              onClick={() => SetshowFilter(!showFilter)}
-              className="mt-5 mr-20 text-blue-800"
+             
+              className="mt-5  text-blue-800"
             />
-            {showFilter ? <Filter className="z-40" handleonchecked={onchecked} /> : null}
+            <p className="mt-5 font-medium text-gray-800">{filterName}</p>
+            </div>
+           
+            <Filter  handleonchecked={onchecked} showFilter={showFilter}  handleFilterClose={handleFilterClose} getFilterName={getFilterName}/> 
           </div>
-          <button onClick={ ()=>setIsModalOpen(true)}>
-            <IoAddCircle  className="text-blue-800 h-14 w-14" />
+          <button onClick={() => setIsModalOpen(true)}>
+            <IoAddCircle className="text-blue-800 h-14 w-14" />
           </button>
         </div>
       </div>
@@ -108,7 +125,7 @@ const DailyExpensesTable = (props) => {
                     <div className="flex flex-between">
                       <Link
                         to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}
-                        onClick={ ()=>setIsModalOpen(true)}
+                        onClick={() => setIsModalOpen(true)}
                       >
                         <AiOutlineEdit className="w-8 h-6" />
                       </Link>
