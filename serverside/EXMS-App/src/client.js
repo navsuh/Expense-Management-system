@@ -1,6 +1,8 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/client.html
 import { feathers } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
+import { dueDateNotificationClient } from './services/due-date-notification/due-date-notification.shared.js'
+
 import { changepasswordClient } from './services/changepassword/changepassword.shared.js'
 
 import { resetPasswordClient } from './services/reset-password/reset-password.shared.js'
@@ -51,6 +53,8 @@ export const createClient = (connection, authenticationOptions = {}) => {
   client.configure(resetPasswordClient)
 
   client.configure(changepasswordClient)
+
+  client.configure(dueDateNotificationClient)
 
   return client
 }

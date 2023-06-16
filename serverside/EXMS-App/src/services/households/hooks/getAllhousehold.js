@@ -9,6 +9,7 @@ export const getAllHousehold =()=>{
         const householdmembers=await householdmemberservice.find( { query:  { user:context.params.users._id } });
     //  console.log(householdmembers.data);
     //  console.log(AllHouseHolds);
+    
     const filteredHouseHolds=AllHouseHolds.filter((eachHouseHold)=>{
           for(let eachHouseHoldmember of householdmembers.data){
             

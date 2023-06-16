@@ -63,7 +63,9 @@ export const households = (app) => {
     after: {
       all: [],
       find:[getAllHousehold()],
-      create:[createPrimaryUserHouseholdMember()]
+      create:[createPrimaryUserHouseholdMember()],
+      // remove: [deletehousehold()]
+
     },
     error: {
       all: []
