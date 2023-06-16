@@ -15,7 +15,7 @@ const Pagination = ({
     onPageChange(page)
   };
 
-  // if (totalPages === 1) return null;
+  if (totalPages === 1) return null;
   const pagesArr = _.range(1, totalPages + 1);
 
   return (
