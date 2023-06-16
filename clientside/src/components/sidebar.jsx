@@ -76,13 +76,13 @@ const Sidebar = (props) => {
 
           <ul className="space-y-2 mt-2 font-small">
             <li>
-              <a
-                href="/"
+              <p
+                
                 className="flex items-center p-2 text-white rounded-lg  hover:bg-black "
               >
                 <RiDashboardFill className="w-6 h-6 " />
                 <span className="ml-3 text-white">Dashboard</span>
-              </a>
+              </p>
             </li>
 
             <li>
