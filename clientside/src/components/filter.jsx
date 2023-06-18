@@ -22,7 +22,7 @@ function Filter({
         onClick={(e) =>
           e.target.id === "filter-modal-body" && handleFilterClose()
         }
-        className="fixed z-10 top-6 right-16 w-screen h-screen flex justify-end items-center "
+        className="fixed z-10 top-6 right-16 w-screen h-screen flex justify-end items-center cursor-pointer"
       >
         <ul className="max-w-sm flex flex-col">
           {filterList.map((eachfilterquery) => (
@@ -47,7 +47,7 @@ function Filter({
                 </div>
                 <label
                   htmlFor={eachfilterquery.id}
-                  className="ml-3 block w-full text-sm text-gray-600 dark:text-gray-500"
+                  className="ml-3 block w-full text-sm text-gray-600 dark:text-gray-500 cursor-pointer"
                 >
                   {eachfilterquery.name}
                 </label>

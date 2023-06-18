@@ -156,8 +156,8 @@ const DailyExpensesTable = (props) => {
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="text-blue-900">
-          <div className="flex">
-          <AiOutlineAreaChart className="h-8 w-8 mt-4" onClick={()=>SetshowChart(true)}/>
+          <div className="flex cursor-pointer" onClick={()=>SetshowChart(true)}>
+          <AiOutlineAreaChart className="h-8 w-8 mt-4" />
         <p className="mt-5 font-medium text-gray-800">charts</p>
           </div>
         
@@ -165,11 +165,11 @@ const DailyExpensesTable = (props) => {
         <Chart data={filteredDailyExpenseList} showchart={showchart} handlechartClose={handlechartClose}/>
         </div>
         
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between cursor-pointer">
         <div className="flex flex-col ">
             <div  onClick={() => SetshowFilter(true)} className="flex flex-row border border-gray-100 rounded-md mr-4  p-2">
             <FaFilter
-              onClick={() => SetshowFilter(!showFilter)}
+              // onClick={() => SetshowFilter(!showFilter)}
               className="mt-6  text-blue-800"
             />
            <p className="mt-5 font-medium text-gray-800">{filterName}</p>
