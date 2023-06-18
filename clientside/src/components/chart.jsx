@@ -10,7 +10,7 @@ const Chart=({data,showchart, handlechartClose} )=>{
      <div
       id="modal-body"
       onClick={(e) => e.target.id === "modal-body" && handlechartClose()}
-      className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center ]"
+      className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]"
     >
     <ResponsiveContainer width="60%" height={250}>
       <PieChart>

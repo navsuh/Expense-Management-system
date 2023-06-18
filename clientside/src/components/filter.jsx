@@ -22,7 +22,7 @@ function Filter({
         onClick={(e) =>
           e.target.id === "filter-modal-body" && handleFilterClose()
         }
-        className="fixed z-10 top-8 right-16 w-screen h-screen flex justify-end items-center "
+        className="fixed z-10 top-6 right-16 w-screen h-screen flex justify-end items-center "
       >
         <ul className="max-w-sm flex flex-col">
           {filterList.map((eachfilterquery) => (

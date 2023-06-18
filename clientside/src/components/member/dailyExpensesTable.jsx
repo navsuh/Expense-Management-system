@@ -166,7 +166,7 @@ const DailyExpensesTableMember = (props) => {
           <div className="flex flex-col ">
             <div
               onClick={() => SetshowFilter(true)}
-              className="flex flex-row border border-gray-100 rounded-md mr-4 mt-4 p-2"
+              className="flex flex-row border border-gray-100 rounded-md mr-4 p-2"
             >
               <FaFilter
                 onClick={() => SetshowFilter(!showFilter)}
