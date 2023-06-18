@@ -37,8 +37,19 @@ export const emailhandler = {
           html: `<div> <h4>Hello ${userdata.firstName}</h4> <p>Please click the below link to reset your password</p> <a href='http://localhost:3000/resetpassword'>Reset password</a></div>` // html body
         })
         console.log('Message sent: %s', info.messageId)
-        console.log(userdata);
+        // console.log(userdata);
 
+      }else if(context==="send-due-date-notification"){
+        const message = {
+          from: user,
+          to: userdata.email, 
+          subject: 'Due Date coming', 
+          text: 'The due date for your periodic expense is coming!', 
+          html: `<p>The due date for your periodic expense is coming!</p>`, 
+        };
+        const info = await transporter.sendMail(message)
+        console.log('Message sent: %s', info.messageId)
+        // console.log(userdata);
       }
     
     } catch (err) {

@@ -7,7 +7,7 @@ import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import PeriodicExpenseForm from "../Forms/periodicexpenseForm";
 import Filter from "../filter";
-import { sub, formatISO } from "date-fns";
+import { sub, formatISO,differenceInDays,parseISO } from "date-fns";
 import Pagination from "../Pagination";
 import { AiOutlineAreaChart } from "react-icons/ai";
 
@@ -17,17 +17,28 @@ import Chart from "../chart";
 
 const PeriodicExpensesTable = (props) => {
   // const {userList}=prop
+  const [currentPage, setCurrentPage] = useState(1);
+  const dataPerPage = 3;
+  const [showchart, SetshowChart] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showFilter, SetshowFilter] = useState(false);
+  const [filterName, setFilterName] = useState("Today");
+ 
+  const periodicExpenseList = useBoundStore((store) => store.periodicExpense);
+  const houseHoldList = useBoundStore((store) => store.households);
+  const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
+  const sendDueDateNotification = useBoundStore((store) => store.sendDueDateNotification);
+  
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getAllPeriodicExpense = useBoundStore(
     (store) => store.getAllPeriodicExpense
   );
-  const periodicExpenseList = useBoundStore((store) => store.periodicExpense);
+
   const deletePeriodicExpenses = useBoundStore(
     (store) => store.deletePeriodicExpense
   );
-  const houseHoldList = useBoundStore((store) => store.households);
-  const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
-  const [searchQuery, setSearchQuery] = useState("");
+
   const householdNames = houseHoldList.map(
     (eachHouseHold) => eachHouseHold.name
   );
@@ -43,13 +54,20 @@ const PeriodicExpensesTable = (props) => {
   const filteredPeriodicExpenseList = periodicExpenseList.filter((expense) =>
     householdNames.includes(expense.household)
   );
-  // console.log(showFilter);
-  const [currentPage, setCurrentPage] = useState(1);
-  const dataPerPage = 3;
-  const [showchart, SetshowChart] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showFilter, SetshowFilter] = useState(false);
-  const [filterName, setFilterName] = useState("Today");
+  const filtereddueDateNotificationList=filteredPeriodicExpenseList.filter((eachPeriodicExpense) =>{
+
+  return differenceInDays(parseISO(eachPeriodicExpense.dueDate),new Date())>0 && differenceInDays(parseISO(eachPeriodicExpense.dueDate),new Date())<=15;
+}
+
+);
+if(filtereddueDateNotificationList){
+  for(let eachfiltereddueDateNotification of filtereddueDateNotificationList){
+    sendDueDateNotification(eachfiltereddueDateNotification)
+  }
+  
+}
+  
+ 
   const onchecked = (value) => {
     // console.log(JSON.parse(value));
     const result = sub(new Date(), JSON.parse(value));

@@ -1,4 +1,4 @@
-
+import { sendDueDateNotification } from './send-due-date-notification/send-due-date-notification.js'
 
 import { changepassword } from './changepassword/changepassword.js'
 
@@ -18,7 +18,7 @@ import { expenseTypes } from './expensetypes/expensetypes.js'
 import { users } from './users/users.js'
 
 export const services = (app) => {
-
+  app.configure(sendDueDateNotification)
 
   app.configure(changepassword)
 
