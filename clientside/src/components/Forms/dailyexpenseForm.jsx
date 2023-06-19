@@ -30,7 +30,7 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
   const expenseTypes = useBoundStore((store) => store.expenseTypes);
   const updateDailyExpense = useBoundStore((store) => store.updateDailyExpense);
   const createDailyExpense = useBoundStore((store) => store.createDailyExpense);
-  const error_msg = useBoundStore((store) => store.error_msg);
+  const error_msg = useBoundStore((store) => store.error_msg_daily_expense);
 
   const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
   // const getAllDailyExpense =useBoundStore(store=>store.getAllDailyExpense)

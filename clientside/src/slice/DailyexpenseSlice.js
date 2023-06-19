@@ -4,7 +4,7 @@ const apiEndPoint = process.env.REACT_APP_API_URL + "daily-expenses";
 
 export const DailyExpenseSlice = (set) => ({
   dailyExpense: [],
-  error_msg: "",
+  error_msg_daily_expense: "",
 
   getAllDailyExpense: async (querydate) => {
     const token = sessionStorage.getItem("token");
@@ -19,14 +19,14 @@ export const DailyExpenseSlice = (set) => ({
       const { data } = response.data;
       // console.log(data);
       set(
-        (state) => ({ error_msg: "", dailyExpense: data }),
+        (state) => ({ error_msg_daily_expense: "", dailyExpense: data }),
         false,
         "getAllDailyExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllDailyExpenseErrorMsg");
+      set({ error_msg_daily_expense: data.message }, false, "getAllDailyExpenseErrorMsg");
     }
   },
 
@@ -44,7 +44,7 @@ export const DailyExpenseSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_daily_expense: "",
           dailyExpense: [...state.dailyExpense, response.data],
         }),
         false,
@@ -53,7 +53,7 @@ export const DailyExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "createDailyExpenseErrorMsg");
+      set({ error_msg_daily_expense: data.message }, false, "createDailyExpenseErrorMsg");
     }
   },
 
@@ -85,7 +85,7 @@ export const DailyExpenseSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_daily_expense: "",
           dailyExpense: state.dailyExpense.map((eachExpense) => {
             if (eachExpense._id === response.data._id) {
               return {
@@ -111,7 +111,7 @@ export const DailyExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "updateDailyExpenseErrorMsg");
+      set({ error_msg_daily_expense: data.message }, false, "updateDailyExpenseErrorMsg");
     }
   },
 
@@ -131,7 +131,7 @@ export const DailyExpenseSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_daily_expense: "",
           dailyExpense: state.dailyExpense.filter((eachdailyExpense) => {
             return eachdailyExpense._id !== response.data._id;
           }),
@@ -142,7 +142,7 @@ export const DailyExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "deleteDailyExpenseErrorMsg");
+      set({ error_msg_daily_expense: data.message }, false, "deleteDailyExpenseErrorMsg");
     }
   },
 });

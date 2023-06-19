@@ -4,7 +4,7 @@ const apiEndPoint = process.env.REACT_APP_API_URL + 'forgot-password';
 
 export const ForgetPasswordSlice = (set) => ({
   forgetPasswordResponse: {},
-  error_msg: '',
+  error_msg_forget_password: '',
   forgetPassword: async (userData) => {
     const { data } = userData;
     
@@ -20,18 +20,18 @@ export const ForgetPasswordSlice = (set) => ({
 
         })
         // console.log(response);
-        set({ error_msg:"",forgetPasswordResponse: response.data },false,"forgetPassword")
+        set({ error_msg_forget_password:"",forgetPasswordResponse: response.data },false,"forgetPassword")
      
         
       } catch (error) {
         const {response}=error
         const {data}=response
-        set({ error_msg: data.message},false,"Forget Password Error Message")
+        set({ error_msg_forget_password: data.message},false,"Forget Password Error Message")
       }
     
 },
 forgetPasswordReset: () => {
-  set({ error_msg:"",forgetPasswordResponse: {} },false,"Reset forget Password")
+  set({ error_msg_forget_password:"",forgetPasswordResponse: {} },false,"Reset forget Password")
 },
 
   })

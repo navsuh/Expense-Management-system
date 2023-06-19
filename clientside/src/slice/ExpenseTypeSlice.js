@@ -4,7 +4,7 @@ const apiEndPoint = process.env.REACT_APP_API_URL + "expensetypes";
 
 export const ExpenseTypeSlice = (set) => ({
   expenseTypes: [],
-  error_msg: "",
+  error_msg_expense_type: "",
 
   getAllExpenseTypes: async () => {
     const token = sessionStorage.getItem("token");
@@ -22,14 +22,14 @@ export const ExpenseTypeSlice = (set) => ({
       const { data } = response.data;
       // console.log(data);
       set(
-        (store) => ({ error_msg: "", expenseTypes: data }),
+        (store) => ({ error_msg_expense_type: "", expenseTypes: data }),
         false,
         "getAllExpenseTypes"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllExpenseTypesErrorMsg");
+      set({ error_msg_expense_type: data.message }, false, "getAllExpenseTypesErrorMsg");
     }
   },
 
@@ -50,7 +50,7 @@ export const ExpenseTypeSlice = (set) => ({
       console.log(response.data);
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_expense_type: "",
           expenseTypes: [...state.expenseTypes, response.data],
         }),
         false,
@@ -60,7 +60,7 @@ export const ExpenseTypeSlice = (set) => ({
       const { response } = error;
       console.log(error);
       const { data } = response;
-      set({ error_msg: data.message }, false, "createExpenseTypesErrorMsg");
+      set({ error_msg_expense_type: data.message }, false, "createExpenseTypesErrorMsg");
     }
   },
 
@@ -90,7 +90,7 @@ export const ExpenseTypeSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_expense_type: "",
           expenseTypes: state.expenseTypes.map((eachExpense) => {
             if (eachExpense._id === response.data._id) {
               return { _id: response.data._id, name: response.data.name };
@@ -105,7 +105,7 @@ export const ExpenseTypeSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "updateExpenseTypesErrorMsg");
+      set({ error_msg_expense_type: data.message }, false, "updateExpenseTypesErrorMsg");
     }
   },
   deleteExpenseTypes: async (id) => {
@@ -125,7 +125,7 @@ export const ExpenseTypeSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_expense_type: "",
           expenseTypes: state.expenseTypes.filter((eachExpense) => {
             return eachExpense._id !== response.data._id;
           }),
@@ -136,7 +136,7 @@ export const ExpenseTypeSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "deleteExpenseTypesErrorMsg");
+      set({ error_msg_expense_type: data.message }, false, "deleteExpenseTypesErrorMsg");
     }
   },
 });

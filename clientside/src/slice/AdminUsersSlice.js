@@ -4,7 +4,7 @@ const apiEndPoint = process.env.REACT_APP_API_URL + "users";
 
 export const AdminUsersSlice = (set) => ({
   usersData: [],
-  error_msg: "",
+  error_msg_Admin_user: "",
   
   getAllUsers: async () => {
     const token = sessionStorage.getItem("token");
@@ -23,14 +23,14 @@ export const AdminUsersSlice = (set) => ({
       const { data } = response.data;
 
       set(
-        (state) => ({ error_msg: "", usersData: data }),
+        (state) => ({ error_msg_Admin_user: "", usersData: data }),
         false,
         "getAllUsers"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllUsersErrorMsg");
+      set({ error_msg_Admin_user: data.message }, false, "getAllUsersErrorMsg");
     }
   },
 
@@ -59,7 +59,7 @@ export const AdminUsersSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_Admin_user: "",
           usersData: state.usersData.map((eachUser) => {
             if (eachUser._id === response.data._id) {
               return response.data;
@@ -76,7 +76,7 @@ export const AdminUsersSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "update User ErrorMsg");
+      set({ error_msg_Admin_user: data.message }, false, "update User ErrorMsg");
     }
   },
 
@@ -101,7 +101,7 @@ export const AdminUsersSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_Admin_user: "",
           usersData: state.usersData.map((eachUser) => {
             if (eachUser._id === response.data._id) {
               return response.data;
@@ -116,7 +116,7 @@ export const AdminUsersSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "soft Delete User ErrorMsg");
+      set({ error_msg_Admin_user: data.message }, false, "soft Delete User ErrorMsg");
     }
   },
 });

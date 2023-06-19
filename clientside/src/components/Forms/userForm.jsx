@@ -19,7 +19,7 @@ const UserForm = ({ isModalOpen, handleModalClose }) => {
   const { id } = useParams();
   const userList = useBoundStore((store) => store.usersData);
   const updateUser = useBoundStore((store) => store.updateUser);
-  const error_msg = useBoundStore((store) => store.error_msg);
+  const error_msg = useBoundStore((store) => store.error_msg_Admin_user);
 
   const {
     register,

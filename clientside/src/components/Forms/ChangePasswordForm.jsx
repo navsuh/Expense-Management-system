@@ -14,7 +14,7 @@ const schema = yup.object().shape({
 
 const ChangePassword = ({ isModalOpen, handleModalClose }) => {
   const changePassword = useBoundStore((store) => store.changePassword);
-  const error_msg = useBoundStore((store) => store.error_msg);
+  const error_msg = useBoundStore((store) => store.error_msg_change_password);
   const changePasswordResponse = useBoundStore(
     (store) => store.changePasswordResponse
   );

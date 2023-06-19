@@ -8,7 +8,7 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
 // import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
@@ -32,7 +32,7 @@ const Register = () => {
 
   const addPrimaryUser=useBoundStore(store=>store.addPrimaryUser)
   const primaryUser=useBoundStore(store=>store.primaryUser)
-  const error_msg=useBoundStore(store=>store.error_msg)
+  const error_msg=useBoundStore(store=>store.error_msg_register)
 
   const navigate = useNavigate();
 
@@ -71,12 +71,14 @@ const Register = () => {
             <img src="/assests/images/logoexms.png" alt="logoimage" />
 
             <h1 className="text-xl xl:text-3xl font-bold">Sign Up</h1>
-            <span className="mt-6">
-              Already have an account?{" "}
-              <Link to={"/login"} className="loginspan">
+            <p className="mt-6">
+              Already have an account?
+              <span className="loginspan">
+              <Link to={"/login"} >
                 Log in
-              </Link>{" "}
-            </span>
+              </Link>
+              </span>
+            </p>
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">

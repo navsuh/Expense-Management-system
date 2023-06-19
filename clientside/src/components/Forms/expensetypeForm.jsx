@@ -29,7 +29,7 @@ const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
   // const token=useBoundStore(store=>store.token)
   const updateExpenseTypes = useBoundStore((store) => store.updateExpenseTypes);
 
-  const error_msg = useBoundStore((store) => store.error_msg);
+  const error_msg = useBoundStore((store) => store.error_msg_expense_type);
   useEffect(()=>{
     navigate("/admin/expensetype");
     handleModalClose()

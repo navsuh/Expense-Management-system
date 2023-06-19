@@ -45,7 +45,6 @@ const Login = () => {
   const error_msg = useBoundStore((store) => store.error_msg);
 
   const navigate = useNavigate();
- 
 
   useEffect(() => {
     if (!token) return;
@@ -67,42 +66,17 @@ const Login = () => {
       navigate("/memberuser");
     }
 
-    // toast.success('Registration Successful', {
-    //   position: "top-right",
-    //   autoClose: 5000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    //   });
+   
   }, [token, user.role,user.isActive]);
-  // const customId = "custom-id-yes";
+ 
 
   const onSubmitHandler = (data) => {
     console.log({ data });
-    // toast.success('Success Notification !', {
-    //   position: toast.POSITION.TOP_RIGHT
-    // })
+  
     loginUser({ data });
   };
 
-  // const displayErrorMessage = () => {
-  //   toast.error(error_msg, {
-  //     position: "top-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     toastId: customId,
-  //     limit: 1,
-  //     theme: "light",
-  //   });
-  // };
-
+ 
 const [isModalOpen, setIsModalOpen] = useState(false);
  const handleModalClose = () => {
    setIsModalOpen(false);

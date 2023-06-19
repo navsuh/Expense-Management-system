@@ -14,7 +14,7 @@ const schema = yup.object().shape({
 const ForgotPasswordForm = ({ isModalOpen, handleModalClose }) => {
   const navigate = useNavigate();
     const forgetPassword=useBoundStore(store=>store.forgetPassword)
-    const error_msg=useBoundStore(store=>store.error_msg)
+    const error_msg=useBoundStore(store=>store.error_msg_forget_password)
     const forgetPasswordResponse=useBoundStore(store=>store.forgetPasswordResponse)
     const forgetPasswordReset=useBoundStore(store=>store.forgetPasswordReset)
     
