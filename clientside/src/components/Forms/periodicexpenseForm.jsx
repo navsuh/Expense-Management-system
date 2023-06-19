@@ -50,6 +50,13 @@ const PeriodicExpenseForm =  ({ isModalOpen, handleModalClose })  => {
   },[getAllExpenseTypes,getAllHouseholds])
   
 
+  useEffect(()=>{
+    if(user.role==="Primaryuser") navigate("/primaryuser/periodicexpenses");
+    else if(user.role==="member") navigate("/memberuser/periodicexpenses");
+    handleModalClose()
+
+  },[periodicExpenseList,handleModalClose,navigate,user.role])
+
   useEffect(() => {
     if (!id) return;
     console.log(id);
@@ -83,7 +90,7 @@ const PeriodicExpenseForm =  ({ isModalOpen, handleModalClose })  => {
       const newData={...data,paymentDetails,expensetypes:selectExpense}
       
       updatePeriodicExpense({newData});
-      handleModalClose()
+      // handleModalClose()
       reset()
     } else {
       // console.log(data);
@@ -97,10 +104,10 @@ const PeriodicExpenseForm =  ({ isModalOpen, handleModalClose })  => {
       const newData={...data,paymentDetails,expensetypes:selectExpense}
       // console.log(newData);
       createPeriodicExpense({newData});
-      handleModalClose()
+      // handleModalClose()
     }
-if(user.role==="Primaryuser") navigate("/primaryuser/periodicexpenses");
-else if(user.role==="member") navigate("/memberuser/periodicexpenses");
+// if(user.role==="Primaryuser") navigate("/primaryuser/periodicexpenses");
+// else if(user.role==="member") navigate("/memberuser/periodicexpenses");
   };
   console.log(errors);
   if(user.role==="Admin"){

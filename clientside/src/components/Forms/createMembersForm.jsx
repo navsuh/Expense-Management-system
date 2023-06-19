@@ -10,7 +10,6 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
 
 
-
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
   lastName: yup.string().min(3).max(50).required(),
@@ -44,6 +43,12 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
     getAllMembers()
   },[getAllMembers])
 
+  useEffect(()=>{
+    navigate("/primaryuser/members")
+    handleModalClose()
+   
+  },[addMember,houseHoldList,handleModalClose,navigate])
+
   // const [showPassword, setShowPassword] = useState(false);
 
   // const togglePasswordVisibility = () => {
@@ -70,8 +75,8 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
     // console.log({ data });
     reset()
     addMember({ data });
-    navigate("/primaryuser/members")
-    handleModalClose()
+    // navigate("/primaryuser/members")
+    // handleModalClose()
    
   };
 
@@ -181,6 +186,8 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
                   id="selectHousehold"
                   {...register("householdName")}
                 >
+                <option value="" hidden>Select Household...</option>
+
                   {houseHoldList.map((house) => (
                     <option key={house._id} value={house.name}>
                       {house.name}
