@@ -4,7 +4,7 @@ const apiEndPoint = process.env.REACT_APP_API_URL + "households";
 
 export const HouseholdSlice = (set) => ({
   households: [],
-  error_msg: "",
+  error_msg_household: "",
 
   getAllHouseholds: async () => {
     const token = sessionStorage.getItem("token");
@@ -18,14 +18,14 @@ export const HouseholdSlice = (set) => ({
       const { data } = response.data;
       
       set(
-        (store) => ({ error_msg: "", households: data }),
+        (store) => ({ error_msg_household: "", households: data }),
         false,
         "getAllHouseholds"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllHouseholdsErrorMsg");
+      set({ error_msg_household: data.message }, false, "getAllHouseholdsErrorMsg");
     }
   },
 
@@ -46,7 +46,7 @@ export const HouseholdSlice = (set) => ({
       console.log(response.data);
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_household: "",
           households: [...state.households, response.data],
         }),
         false,
@@ -55,7 +55,7 @@ export const HouseholdSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "createHouseholdsErrorMsg");
+      set({ error_msg_household: data.message }, false, "createHouseholdsErrorMsg");
     }
   },
 
@@ -85,7 +85,7 @@ export const HouseholdSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_household: "",
           households: state.households.map((eachHousehold) => {
             if (eachHousehold._id === response.data._id) {
               return {
@@ -109,7 +109,7 @@ export const HouseholdSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "updatehouseholdsErrorMsg");
+      set({ error_msg_household: data.message }, false, "updatehouseholdsErrorMsg");
     }
   },
 
@@ -129,7 +129,7 @@ export const HouseholdSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_household: "",
           households: state.households.filter((eachHousehold) => {
             return eachHousehold._id !== response.data._id;
           }),
@@ -140,7 +140,7 @@ export const HouseholdSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "deletehouseholdsErrorMsg");
+      set({ error_msg_household: data.message }, false, "deletehouseholdsErrorMsg");
     }
   },
 });

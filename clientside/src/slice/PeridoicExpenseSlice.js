@@ -4,7 +4,7 @@ const apiEndPoint = process.env.REACT_APP_API_URL + "periodic-expenses";
 
 export const PeriodicExpenseSlice = (set) => ({
   periodicExpense: [],
-  error_msg: "",
+  error_msg_periodic_expense: "",
 
   getAllPeriodicExpense: async (querydate) => {
     const token = sessionStorage.getItem("token");
@@ -20,14 +20,14 @@ export const PeriodicExpenseSlice = (set) => ({
       const { data } = response.data;
       console.log(data);
       set(
-        (state) => ({ error_msg: "", periodicExpense: data }),
+        (state) => ({ error_msg_periodic_expense: "", periodicExpense: data }),
         false,
         "getAllPeriodicExpense"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllPeriodicExpenseErrorMsg");
+      set({ error_msg_periodic_expense: data.message }, false, "getAllPeriodicExpenseErrorMsg");
     }
   },
 
@@ -45,7 +45,7 @@ export const PeriodicExpenseSlice = (set) => ({
       console.log(response.data);
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_periodic_expense: "",
           periodicExpense: [...state.periodicExpense, response.data],
         }),
         false,
@@ -54,7 +54,7 @@ export const PeriodicExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "createPeriodicExpenseErrorMsg");
+      set({ error_msg_periodic_expense: data.message }, false, "createPeriodicExpenseErrorMsg");
     }
   },
 
@@ -86,7 +86,7 @@ export const PeriodicExpenseSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_periodic_expense: "",
           periodicExpense: state.periodicExpense.map((eachExpense) => {
             if (eachExpense._id === response.data._id) {
               return {
@@ -114,7 +114,7 @@ export const PeriodicExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "updatePeriodicExpenseErrorMsg");
+      set({ error_msg_periodic_expense: data.message }, false, "updatePeriodicExpenseErrorMsg");
     }
   },
 
@@ -134,7 +134,7 @@ export const PeriodicExpenseSlice = (set) => ({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_periodic_expense: "",
           periodicExpense: state.periodicExpense.filter((eachHousehold) => {
             return eachHousehold._id !== response.data._id;
           }),
@@ -145,7 +145,7 @@ export const PeriodicExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "deletePeriodicExpenseErrorMsg");
+      set({ error_msg_periodic_expense: data.message }, false, "deletePeriodicExpenseErrorMsg");
     }
   },
 
@@ -182,7 +182,7 @@ export const PeriodicExpenseSlice = (set) => ({
       console.log(response.data);
       // set(
       //   (state) => ({
-      //     error_msg: "",
+      //     error_msg_periodic_expense: "",
       //     periodicExpense: [...state.periodicExpense, response.data],
       //   }),
       //   false,
@@ -191,7 +191,7 @@ export const PeriodicExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "sendDueDateNotificationErrorMsg");
+      set({ error_msg_periodic_expense: data.message }, false, "sendDueDateNotificationErrorMsg");
     }
   },
 

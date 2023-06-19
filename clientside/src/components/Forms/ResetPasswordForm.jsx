@@ -16,7 +16,7 @@ const schema = yup.object().shape({
 const ResetPasswordForm = () => {
   const navigate = useNavigate();
   const resetPassword = useBoundStore((store) => store.resetPassword);
-  const error_msg = useBoundStore((store) => store.error_msg);
+  const error_msg = useBoundStore((store) => store.error_msg_reset_pasword);
   const resetPasswordResponse = useBoundStore(
     (store) => store.resetPasswordResponse
   );

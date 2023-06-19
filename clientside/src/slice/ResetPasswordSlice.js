@@ -4,7 +4,7 @@ const apiEndPoint = process.env.REACT_APP_API_URL + 'reset-password';
 
 export const ResetPasswordSlice = (set) => ({
   resetPasswordResponse: {},
-  error_msg: '',
+  error_msg_reset_pasword: '',
   resetPassword: async (userData) => {
     const { data } = userData;
     
@@ -20,18 +20,18 @@ export const ResetPasswordSlice = (set) => ({
 
         })
         // console.log(response);
-        set({ error_msg:"",resetPasswordResponse: response.data },false,"resetPassword")
+        set({ error_msg_reset_pasword:"",resetPasswordResponse: response.data },false,"resetPassword")
      
         
       } catch (error) {
         const {response}=error
         const {data}=response
-        set({ error_msg: data.message},false,"Reset Password Error Message")
+        set({ error_msg_reset_pasword: data.message},false,"Reset Password Error Message")
       }
     
 },
 resetPasswordReset: () => {
-  set({ error_msg:"",resetPasswordResponse: {} },false,"Reset reset Password State")
+  set({ error_msg_reset_pasword:"",resetPasswordResponse: {} },false,"Reset reset Password State")
 },
 
   })

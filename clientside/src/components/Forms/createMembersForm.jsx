@@ -25,7 +25,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
   const houseHoldList = useBoundStore((store) => store.households);
   const addMember = useBoundStore((store) => store.addMember);
   const navigate = useNavigate();
-  const error_msg = useBoundStore((store) => store.error_msg);
+  const error_msg = useBoundStore((store) => store.error_msg_member);
   const getAllMembers = useBoundStore(store=>store.getAllMembers)
 
   // const {id}=useParams()

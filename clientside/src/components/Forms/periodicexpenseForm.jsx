@@ -32,7 +32,7 @@ const PeriodicExpenseForm =  ({ isModalOpen, handleModalClose })  => {
   const updatePeriodicExpense=useBoundStore(store=>store.updatePeriodicExpense)
   const getAllExpenseTypes =useBoundStore(store=>store.getAllExpenseTypes)
   const getAllHouseholds=useBoundStore(store=>store.getAllHouseholds)
-  const error_msg = useBoundStore((store) => store.error_msg);
+  const error_msg = useBoundStore((store) => store.error_msg_periodic_expense);
   const { id } = useParams();
   const {
     register,

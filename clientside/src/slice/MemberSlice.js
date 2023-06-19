@@ -5,7 +5,7 @@ const apiEndPoint = process.env.REACT_APP_API_URL+"householdmembers"
 
 export const MemberSlice =(set)=>({
    memberData:[],
-   error_msg:"",
+   error_msg_member:"",
   
   getAllMembers:async()=>{
     const token = sessionStorage.getItem("token");
@@ -18,14 +18,14 @@ export const MemberSlice =(set)=>({
       });
       const { data } = response.data;
   console.log(data);
-      set({ error_msg: "", memberData: data },
+      set({ error_msg_member: "", memberData: data },
         false,
         "getAllMembers"
       );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "getAllMembersErrorMsg");
+      set({ error_msg_member: data.message }, false, "getAllMembersErrorMsg");
     }
   },
 
@@ -44,7 +44,7 @@ export const MemberSlice =(set)=>({
         
         set(
           (state) => ({
-            error_msg: "",
+            error_msg_member: "",
             memberData: [...state.memberData, response.data],
           }),
           false,
@@ -54,7 +54,7 @@ export const MemberSlice =(set)=>({
       } catch (error) {
         const {response}=error
         const {data}=response
-        set({ error_msg: data.message},false,"addMemberErrorMsg")
+        set({ error_msg_member: data.message},false,"addMemberErrorMsg")
       }
    },
 
@@ -79,7 +79,7 @@ export const MemberSlice =(set)=>({
       
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_member: "",
           memberData: state.memberData.map((eachMember) => {
             if (eachMember._id === response.data._id) {
               return {
@@ -107,7 +107,7 @@ export const MemberSlice =(set)=>({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "updateMemberErrorMsg");
+      set({ error_msg_member: data.message }, false, "updateMemberErrorMsg");
     }
   },
 
@@ -128,7 +128,7 @@ export const MemberSlice =(set)=>({
 
       set(
         (state) => ({
-          error_msg: "",
+          error_msg_member: "",
           memberData: state.memberData.filter((eachMemberData) => {
             return eachMemberData._id !== response.data._id;
           }),
@@ -139,7 +139,7 @@ export const MemberSlice =(set)=>({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg: data.message }, false, "deleteMemberErrorMsg");
+      set({ error_msg_member: data.message }, false, "deleteMemberErrorMsg");
     }
   },
 

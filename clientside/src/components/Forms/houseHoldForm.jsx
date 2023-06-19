@@ -33,7 +33,7 @@ const HouseHoldForm = ({ isModalOpen, handleModalClose }) => {
 console.log(houseHoldList);
 const createHouseholds = useBoundStore(store=>store.createHouseholds)
 const updateHouseholds =useBoundStore(store=>store.updateHouseholds)
-const error_msg=useBoundStore(store=>store.error_msg)
+const error_msg=useBoundStore(store=>store.error_msg_household)
 
 
   useEffect(()=>{

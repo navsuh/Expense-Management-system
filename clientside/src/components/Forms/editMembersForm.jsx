@@ -31,7 +31,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   // console.log(id);
-  const error_msg = useBoundStore((store) => store.error_msg);
+  const error_msg = useBoundStore((store) => store.error_msg_member);
   const {
     register,
     handleSubmit,
