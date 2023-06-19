@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const apiEndPoint=process.env.REACT_APP_API_URL+"users"
 
-export const PrimaryUserSlice = (set) => ({
+export const RegisterPrimaryUserSlice = (set) => ({
     primaryUser: {},
     error_msg:"",
     addPrimaryUser: async(userData) =>  {
@@ -22,7 +22,7 @@ export const PrimaryUserSlice = (set) => ({
       } catch (error) {
         const {response}=error
         const {data}=response
-        set({ error_msg: data.message},false,"addPrimaryUserErrorMsg")
+        set({ error_msg: data.message,primaryUser: {}},false,"addPrimaryUserErrorMsg")
       }
     
 },

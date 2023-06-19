@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { PrimaryUserSlice } from './slice/PrimaryUserSlice'
+import { RegisterPrimaryUserSlice } from './slice/RegisterPrimaryUserSlice'
 
 import { UserLoginSlice } from './slice/UserLoginSlice'
 
@@ -19,7 +19,7 @@ import { UserSlice } from './slice/UserSlice'
 
 
 export const useBoundStore = create(devtools (persist((...a) => ({
-  ...PrimaryUserSlice(...a),
+  ...RegisterPrimaryUserSlice(...a),
   ...UserLoginSlice(...a),
   ...ExpenseTypeSlice(...a),
   ...AdminUsersSlice(...a),

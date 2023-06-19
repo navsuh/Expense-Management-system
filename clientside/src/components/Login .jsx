@@ -45,6 +45,7 @@ const Login = () => {
   const error_msg = useBoundStore((store) => store.error_msg);
 
   const navigate = useNavigate();
+ 
 
   useEffect(() => {
     if (!token) return;
@@ -76,7 +77,7 @@ const Login = () => {
     //   progress: undefined,
     //   theme: "light",
     //   });
-  }, [token, navigate, user.role,user.isActive]);
+  }, [token, user.role,user.isActive]);
   // const customId = "custom-id-yes";
 
   const onSubmitHandler = (data) => {

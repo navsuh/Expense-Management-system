@@ -60,12 +60,12 @@ const PeriodicExpensesTable = (props) => {
 }
 
 );
-if(filtereddueDateNotificationList){
-  for(let eachfiltereddueDateNotification of filtereddueDateNotificationList){
-    sendDueDateNotification(eachfiltereddueDateNotification)
-  }
+// if(filtereddueDateNotificationList){
+//   for(let eachfiltereddueDateNotification of filtereddueDateNotificationList){
+//     sendDueDateNotification(eachfiltereddueDateNotification)
+//   }
   
-}
+// }
   
  
   const onchecked = (value) => {

@@ -36,9 +36,12 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  // useEffect(()=>{
+  useEffect(()=>{
     
-  // },[primaryUser,addPrimaryUser,navigate])
+    if(primaryUser) return
+    navigate("/login")
+    
+  },[primaryUser])
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -48,8 +51,8 @@ const Register = () => {
   const onSubmitHandler = (data) => {
     // console.log({ data });
     addPrimaryUser({data})
-    navigate("/login")
-
+    
+    
   };
   
   return (
@@ -85,7 +88,7 @@ const Register = () => {
                       type="text"
                       placeholder="First Name"
                     />
-                    <p>{errors.firstName?.message}</p>
+                    <p className="text-red-500">{errors.firstName?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="lastName">Last Name</label>
@@ -95,7 +98,7 @@ const Register = () => {
                       type="text"
                       placeholder="Last Name"
                     />
-                    <p>{errors.lastName?.message}</p>
+                    <p className="text-red-500">{errors.lastName?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="email">Email</label>
@@ -105,7 +108,7 @@ const Register = () => {
                       type="email"
                       placeholder="Email"
                     />
-                    <p>{errors.email?.message}</p>
+                    <p className="text-red-500">{errors.email?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="phone">Phone Number</label>
@@ -115,7 +118,7 @@ const Register = () => {
                       type="text"
                       placeholder="Phone Number"
                     />
-                    <p>{errors.phone?.message}</p>
+                    <p className="text-red-500">{errors.phone?.message}</p>
                   </div>
                   <div className="mt-5">
                     <label htmlFor="userName">UserName</label>
@@ -125,7 +128,7 @@ const Register = () => {
                       type="text"
                       placeholder="User Name"
                     />
-                    <p>{errors.userName?.message}</p>
+                    <p className="text-red-500">{errors.userName?.message}</p>
                   </div>
                   <div className="relative mt-5">
                     <label htmlFor="password">Password</label>
@@ -145,7 +148,7 @@ const Register = () => {
                         <AiFillEyeInvisible className="h-6 w-6 " />
                       )}
                     </span>
-                    <p>{errors.password?.message}</p>
+                    <p className="text-red-500">{errors.password?.message}</p>
                   </div>
                   <button
                     type="submit"
@@ -157,8 +160,7 @@ const Register = () => {
               </div>
             </form>
             <p className="text-red-500">{error_msg ? error_msg : null}</p>
-            {/* {error_msg?displayErrorMessage():null} */}
-            {/* <ToastContainer/> */}
+          
           </div>
         </div>
       </div>
