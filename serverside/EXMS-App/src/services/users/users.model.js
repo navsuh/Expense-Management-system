@@ -12,6 +12,7 @@ export const userSchema = Joi.object({
   });
 
   export const userSchemaPatch = Joi.object({
+    _id:Joi.string(),
     firstName: Joi.string().min(5).max(50),
     lastName: Joi.string().min(5).max(50),
     phone: Joi.string().length(10),

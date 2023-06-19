@@ -30,6 +30,11 @@ const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
   const updateExpenseTypes = useBoundStore((store) => store.updateExpenseTypes);
 
   const error_msg = useBoundStore((store) => store.error_msg);
+  useEffect(()=>{
+    navigate("/admin/expensetype");
+    handleModalClose()
+    reset()
+  },[expenseList])
 
   useEffect(() => {
     if (!id) return;
@@ -46,15 +51,13 @@ const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
     if (data._id) {
       // console.log("here");
       updateExpenseTypes({ data });
-       navigate("/admin/expensetype");
-       handleModalClose()
-       reset()
+      
     } else {
       reset()
       createExpenseTypes({ data });
       // console.log("dispatched");
-       navigate("/admin/expensetype");
-       handleModalClose()
+      //  navigate("/admin/expensetype");
+      //  handleModalClose()
     }
   };
 

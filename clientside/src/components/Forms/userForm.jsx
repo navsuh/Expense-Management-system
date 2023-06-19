@@ -67,6 +67,7 @@ useEffect(()=>{
     return <Navigate to="/login" replace={true} />;
   }
   const closeAndReset = () => {
+    navigate("/admin/users")
     handleModalClose();
     reset();
   };

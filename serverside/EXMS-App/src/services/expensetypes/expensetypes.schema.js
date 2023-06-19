@@ -11,7 +11,8 @@ export const expenseTypesSchema = {
   required: ['_id', 'name'],
   properties: {
     _id: ObjectIdSchema(),
-    name: { type: 'string' }
+    name: { type: 'string',"minLength": 3},
+    
   }
 }
 export const expenseTypesValidator = getValidator(expenseTypesSchema, dataValidator)

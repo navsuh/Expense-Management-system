@@ -44,7 +44,7 @@ export const AdminUsersSlice = (set) => ({
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        { firstName, isActive, lastName, phone, userName,updatedBy:AdminUserId,updatedAt:new Date() },
+        {  _id,firstName, isActive, lastName, phone, userName,updatedBy:AdminUserId,updatedAt:new Date() },
         {
           headers: {
             // 'Content-Type': 'application/json',

@@ -58,6 +58,7 @@ export const ExpenseTypeSlice = (set) => ({
       );
     } catch (error) {
       const { response } = error;
+      console.log(error);
       const { data } = response;
       set({ error_msg: data.message }, false, "createExpenseTypesErrorMsg");
     }
