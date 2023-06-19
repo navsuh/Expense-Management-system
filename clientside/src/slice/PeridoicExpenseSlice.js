@@ -5,6 +5,7 @@ const apiEndPoint = process.env.REACT_APP_API_URL + "periodic-expenses";
 export const PeriodicExpenseSlice = (set) => ({
   periodicExpense: [],
   error_msg_periodic_expense: "",
+  dueDateNotificationIds:[],
 
   getAllPeriodicExpense: async (querydate) => {
     const token = sessionStorage.getItem("token");
@@ -135,8 +136,11 @@ export const PeriodicExpenseSlice = (set) => ({
       set(
         (state) => ({
           error_msg_periodic_expense: "",
-          periodicExpense: state.periodicExpense.filter((eachHousehold) => {
-            return eachHousehold._id !== response.data._id;
+          periodicExpense: state.periodicExpense.filter((eachPeriodicExpense) => {
+            return eachPeriodicExpense._id !== response.data._id;
+          }),
+          dueDateNotificationIds: state.dueDateNotificationIds.filter((eachdueDateNotificationId) => {
+            return eachdueDateNotificationId._id !== response.data._id;
           }),
         }),
         false,
@@ -160,9 +164,7 @@ export const PeriodicExpenseSlice = (set) => ({
       paidThrough,
       paymentDetails}=userData
     const token = sessionStorage.getItem("token");
-    console.log("1");
-       console.log(userData);
-       console.log("1");
+    
     const sendNotificationApiEndPoint=process.env.REACT_APP_API_URL+"send-due-date-notification"
     try {
       const response = await axios.post(sendNotificationApiEndPoint, {amount,
@@ -180,18 +182,18 @@ export const PeriodicExpenseSlice = (set) => ({
       });
 
       console.log(response.data);
-      // set(
-      //   (state) => ({
-      //     error_msg_periodic_expense: "",
-      //     periodicExpense: [...state.periodicExpense, response.data],
-      //   }),
-      //   false,
-      //   "createPeriodicExpense"
-      // );
+      set(
+        (state) => ({
+          error_msg_periodic_expense: "",
+          dueDateNotificationIds: [...state.dueDateNotificationIds, userData._id],
+        }),
+        false,
+        "createPeriodicExpense"
+      );
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_periodic_expense: data.message }, false, "sendDueDateNotificationErrorMsg");
+      set({ error_msg_periodic_expense: data.message, }, false, "sendDueDateNotificationErrorMsg");
     }
   },
 

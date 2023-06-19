@@ -44,10 +44,10 @@ const PeriodicExpenseForm =  ({ isModalOpen, handleModalClose })  => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(()=>{
-    getAllExpenseTypes();
-    getAllHouseholds();
-  },[getAllExpenseTypes,getAllHouseholds])
+  // useEffect(()=>{
+  //   getAllExpenseTypes();
+  //   getAllHouseholds();
+  // },[getAllExpenseTypes,getAllHouseholds])
   
 
   useEffect(()=>{
@@ -109,7 +109,7 @@ const PeriodicExpenseForm =  ({ isModalOpen, handleModalClose })  => {
 // if(user.role==="Primaryuser") navigate("/primaryuser/periodicexpenses");
 // else if(user.role==="member") navigate("/memberuser/periodicexpenses");
   };
-  console.log(errors);
+  // console.log(errors);
   if(user.role==="Admin"){
     sessionStorage.removeItem("token")
 return <Navigate to="/login" replace={true} />

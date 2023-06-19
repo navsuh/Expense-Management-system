@@ -28,6 +28,7 @@ const PeriodicExpensesTable = (props) => {
   const houseHoldList = useBoundStore((store) => store.households);
   const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const sendDueDateNotification = useBoundStore((store) => store.sendDueDateNotification);
+  const dueDateNotificationIds=useBoundStore((store) => store.dueDateNotificationIds);
   
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -45,8 +46,8 @@ const PeriodicExpensesTable = (props) => {
   console.log(householdNames);
   useEffect(() => {
     getAllPeriodicExpense();
-    getAllHouseholds();
-  }, [getAllPeriodicExpense, getAllHouseholds]);
+    // getAllHouseholds();
+  }, []);
 
   const ondeletePeriodicExpense = (id) => {
     deletePeriodicExpenses(id);
@@ -60,12 +61,20 @@ const PeriodicExpensesTable = (props) => {
 }
 
 );
-// if(filtereddueDateNotificationList){
-//   for(let eachfiltereddueDateNotification of filtereddueDateNotificationList){
-//     sendDueDateNotification(eachfiltereddueDateNotification)
-//   }
+
+
+if(filtereddueDateNotificationList){
+  for(let eachfiltereddueDateNotification of filtereddueDateNotificationList){
+    
+  if(!dueDateNotificationIds.includes(eachfiltereddueDateNotification._id))
+  {
+    sendDueDateNotification(eachfiltereddueDateNotification)
   
-// }
+  }
+    
+  }
+  
+}
   
  
   const onchecked = (value) => {
@@ -217,7 +226,7 @@ const PeriodicExpensesTable = (props) => {
         </div>
       </div>
       <div className="relative  shadow-md sm:rounded-lg ">
-        {currentPeriodicExpenses.length === 0 ? (
+        {filteredPeriodicExpenses.length === 0 ? (
           <div className="p-4">No Data Found.</div>
         ) : (
           periodicExpenseTable()

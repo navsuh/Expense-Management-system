@@ -95,7 +95,7 @@ const HouseholdTable = (props) => {
 
   return (
     <>
-      <HouseHoldForm
+     <HouseHoldForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
