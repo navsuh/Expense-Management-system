@@ -66,10 +66,15 @@ const PeriodicExpensesTable = (props) => {
 if(filtereddueDateNotificationList){
   for(let eachfiltereddueDateNotification of filtereddueDateNotificationList){
     
-  if(!dueDateNotificationIds.includes(eachfiltereddueDateNotification._id))
+  if( dueDateNotificationIds.length===0)
   {
     sendDueDateNotification(eachfiltereddueDateNotification)
   
+  }else if (dueDateNotificationIds.length>0){
+    if(!dueDateNotificationIds.includes(eachfiltereddueDateNotification._id)){
+      sendDueDateNotification(eachfiltereddueDateNotification)
+    }
+   
   }
     
   }
