@@ -17,7 +17,7 @@ export const UserLoginSlice = (set) => ({
             'Content-Type': 'application/json'
           }
         })
-        console.log(response.data)
+        console.log(response)
         // console.log(response.data.users.role);
         sessionStorage.setItem("token",response.data.accessToken)
         set({error_msg: "", token: response.data.accessToken,user:response.data.users},false,"loginUser")
