@@ -30,7 +30,7 @@ const HouseHoldForm = ({ isModalOpen, handleModalClose }) => {
   });
  const houseHoldList =useBoundStore(store=>store.households)
 
-console.log(houseHoldList);
+// console.log(houseHoldList);
 const createHouseholds = useBoundStore(store=>store.createHouseholds)
 const updateHouseholds =useBoundStore(store=>store.updateHouseholds)
 const error_msg=useBoundStore(store=>store.error_msg_household)
@@ -40,7 +40,7 @@ const error_msg=useBoundStore(store=>store.error_msg_household)
     if(!id) return;
     // console.log(id);
     const houseHold=houseHoldList.find((h)=>h._id===id)
-    console.log(houseHold);
+    // console.log(houseHold);
     setValue("_id",houseHold._id)
     setValue("name",houseHold.name)
     setValue("addressLine1",houseHold.addressLine1)
@@ -61,7 +61,7 @@ const error_msg=useBoundStore(store=>store.error_msg_household)
   const onSubmitHandler = (data) => {
     reset()
     if(data._id){
-      console.log("update");
+      // console.log("update");
       updateHouseholds({data})
         reset()
     }

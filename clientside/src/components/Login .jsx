@@ -42,7 +42,7 @@ const Login = () => {
   const token = useBoundStore((store) => store.token);
   const user = useBoundStore((store) => store.user);
 
-  const error_msg = useBoundStore((store) => store.error_msg);
+  const error_msg = useBoundStore((store) => store.error_msg_login);
 
   const navigate = useNavigate();
 
