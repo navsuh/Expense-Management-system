@@ -30,6 +30,16 @@ const UserForm = ({ isModalOpen, handleModalClose }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+useEffect(()=>{
+   navigate("/admin/users");
+    handleModalClose()
+},[userList])
+// useEffect(()=>{
+//   navigate("/admin/users");
+//    handleModalClose()
+// },[userList])
+
   useEffect(() => {
     if (!id) return;
     console.log(id);
@@ -47,8 +57,10 @@ const UserForm = ({ isModalOpen, handleModalClose }) => {
   const onSubmitHandler = (data) => {
     console.log(data);
     updateUser({ data }, user._id);
-     navigate("/admin/users");
-     handleModalClose()
+    // if(!error_msg){
+    // navigate("/admin/users");
+    // handleModalClose()
+    // }
   };
   if (user.role !== "Admin") {
     sessionStorage.removeItem("token");
@@ -161,8 +173,9 @@ const UserForm = ({ isModalOpen, handleModalClose }) => {
               >
                 <span className="ml-3">Update</span>
               </button>
+              <p className="text-red-500">{error_msg ? error_msg : null}</p>
             </form>
-            <p className="text-red-500">{error_msg ? error_msg : null}</p>
+           
           </div>
         </div>
       </div>

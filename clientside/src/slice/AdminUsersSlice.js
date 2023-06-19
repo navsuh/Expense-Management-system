@@ -71,6 +71,8 @@ export const AdminUsersSlice = (set) => ({
         false,
         "Update User"
       );
+      
+      
     } catch (error) {
       const { response } = error;
       const { data } = response;

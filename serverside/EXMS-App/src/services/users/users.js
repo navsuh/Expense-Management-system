@@ -5,6 +5,7 @@ import { userSchema,userSchemaPatch } from './users.model.js'
 import { Admin} from './hooks/Admin.js'
 import {Primaryuser } from './hooks/primaryuser.js'
 import { Memberuser } from './hooks/memberuser.js'
+import { EditUser } from './hooks/editingUser.js'
 
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
@@ -53,7 +54,7 @@ export const users = (app) => {
         Primaryuser(),
         Memberuser(),
         schemaHooks.validateData(usersDataValidator), schemaHooks.resolveData(usersDataResolver)],
-      patch: [validate.form(userSchemaPatch, { abortEarly: false }),schemaHooks.validateData(usersPatchValidator), schemaHooks.resolveData(usersPatchResolver)],
+      patch: [validate.form(userSchemaPatch, { abortEarly: false }),EditUser(),schemaHooks.validateData(usersPatchValidator), schemaHooks.resolveData(usersPatchResolver)],
       remove: []
     },
     after: {
