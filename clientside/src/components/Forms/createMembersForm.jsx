@@ -45,9 +45,9 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
 
   useEffect(()=>{
     navigate("/primaryuser/members")
-    handleModalClose()
+    // handleModalClose()
    
-  },[addMember,houseHoldList])
+  },[houseHoldList])
 
   // const [showPassword, setShowPassword] = useState(false);
 
@@ -76,7 +76,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
     reset()
     addMember({ data });
     // navigate("/primaryuser/members")
-    // handleModalClose()
+    handleModalClose()
    
   };
 
