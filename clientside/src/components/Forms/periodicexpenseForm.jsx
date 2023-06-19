@@ -14,7 +14,7 @@ const schema = yup.object().shape({
   amount: yup.number().min(1).required(),
   dueDate: yup.string().required(),
   // paymentDetails: yup.object().shape({
-    paymentDetailsAmount: yup.number().min(1).max(350).required(),
+    paymentDetailsAmount: yup.number().min(1).required(),
     date: yup.string().required(),
     method: yup.string().min(3).max(50).required(),
   // }),
@@ -268,7 +268,7 @@ return <Navigate to="/login" replace={true} />
                     type="number"
                     placeholder="Amount"
                   />
-                  <p className="text-red-500">{errors.paymentDetailsAmount?.message.slice(0,25)}</p>
+                  <p className="text-red-500">{errors.paymentDetailsAmount?.message.slice(14,)}</p>
                 </div>
                 <div className="w-full lg:w-1/2">
                   <label htmlFor="date" className="mb-1">
