@@ -90,6 +90,7 @@ const ExpenseTypeTable = (props) => {
 
   return (
     <>
+ 
       <ExpenseTypeForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}

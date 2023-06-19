@@ -47,6 +47,7 @@ const UserTable = (props) => {
   const firstIndex = lastIndex - dataPerPage;
   const currentUsers = filterUsers.slice(firstIndex, lastIndex);
   const displayUserTable = () => {
+    
     return (
       <>
         <table className="w-[66rem] text-sm text-left text-gray-500  m-3 rounded-lg">
@@ -127,6 +128,7 @@ const UserTable = (props) => {
 
   return (
     <>
+    
       <UserForm isModalOpen={isModalOpen} handleModalClose={handleModalClose} />
       <div className="flex flex-row justify-between">
         <div>
