@@ -47,7 +47,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
     navigate("/primaryuser/members")
     handleModalClose()
    
-  },[addMember,houseHoldList,handleModalClose,navigate])
+  },[addMember,houseHoldList])
 
   // const [showPassword, setShowPassword] = useState(false);
 

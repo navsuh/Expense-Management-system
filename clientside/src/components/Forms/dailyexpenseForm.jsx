@@ -70,7 +70,7 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
     if (user.role === "Primaryuser") navigate("/primaryuser/dailyexpenses");
     else if (user.role === "member") navigate("/memberuser/dailyexpenses");
     handleModalClose()
-  },[dailyExpensesList,handleModalClose,navigate,user.role])
+  },[dailyExpensesList])
 
   const onSubmitHandler = (data) => {
     reset();

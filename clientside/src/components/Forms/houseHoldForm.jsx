@@ -56,7 +56,7 @@ const error_msg=useBoundStore(store=>store.error_msg)
   useEffect(()=>{
     navigate("/primaryuser/household")
       handleModalClose()
-  },[houseHoldList,handleModalClose,navigate])
+  },[houseHoldList])
 
   const onSubmitHandler = (data) => {
     reset()

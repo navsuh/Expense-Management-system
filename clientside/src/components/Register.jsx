@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -31,20 +31,14 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const addPrimaryUser=useBoundStore(store=>store.addPrimaryUser)
-
-  // const primaryUser=useBoundStore(store=>store.primaryUser)
-
+  const primaryUser=useBoundStore(store=>store.primaryUser)
   const error_msg=useBoundStore(store=>store.error_msg)
 
   const navigate = useNavigate();
 
   // useEffect(()=>{
-   
-  // if(!primaryUser.firstName) return
-  
-  // navigate("/login")
-
-  // },[primaryUser,navigate])
+    
+  // },[primaryUser,addPrimaryUser,navigate])
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -57,6 +51,7 @@ const Register = () => {
     navigate("/login")
 
   };
+  
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">

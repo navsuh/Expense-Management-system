@@ -55,7 +55,7 @@ const PeriodicExpenseForm =  ({ isModalOpen, handleModalClose })  => {
     else if(user.role==="member") navigate("/memberuser/periodicexpenses");
     handleModalClose()
 
-  },[periodicExpenseList,handleModalClose,navigate,user.role])
+  },[periodicExpenseList])
 
   useEffect(() => {
     if (!id) return;
