@@ -20,12 +20,12 @@ const UserTable = (props) => {
   const filteredUserList = userList.filter(
     (eachUser) => eachUser.role !== "Admin"
   );
-  console.log(filteredUserList);
+  // console.log(filteredUserList);
 
-  console.log(userList);
+  // console.log(userList);
   useEffect(() => {
     getAllUsers();
-  }, [getAllUsers]);
+  }, []);
   const onSoftDeleteuser = (id) => {
     softdeleteUser(id);
   };

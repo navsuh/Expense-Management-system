@@ -40,6 +40,8 @@ const ExpenseTypeTable = (props) => {
   const lastIndex = currentPage * dataPerPage;
   const firstIndex = lastIndex - dataPerPage;
   const currentExpenses = filteredExpenseList.slice(firstIndex, lastIndex);
+
+  
   const displayExpenseTypeTable = () => {
     return (
       <>

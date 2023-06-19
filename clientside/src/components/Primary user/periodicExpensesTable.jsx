@@ -1,3 +1,4 @@
+import React from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
 import { Link } from "react-router-dom";
@@ -15,7 +16,7 @@ import { AiOutlineAreaChart } from "react-icons/ai";
 import Chart from "../chart";
 
 
-const PeriodicExpensesTable = (props) => {
+const PeriodicExpensesTable = React.memo((props) => {
   // const {userList}=prop
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 3;
@@ -239,6 +240,6 @@ if(filtereddueDateNotificationList){
       </div>
     </>
   );
-};
+});
 
 export default PeriodicExpensesTable;
