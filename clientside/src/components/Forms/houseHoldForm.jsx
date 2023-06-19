@@ -36,7 +36,6 @@ const updateHouseholds =useBoundStore(store=>store.updateHouseholds)
 const error_msg=useBoundStore(store=>store.error_msg)
 
 
-
   useEffect(()=>{
     if(!id) return;
     // console.log(id);
@@ -54,20 +53,22 @@ const error_msg=useBoundStore(store=>store.error_msg)
 
   },[id,setValue,houseHoldList])
 
+  useEffect(()=>{
+    navigate("/primaryuser/household")
+      handleModalClose()
+  },[houseHoldList,handleModalClose,navigate])
+
   const onSubmitHandler = (data) => {
     reset()
     if(data._id){
       console.log("update");
       updateHouseholds({data})
-       navigate("/primaryuser/household")
-        handleModalClose()
         reset()
     }
     else {
       reset()
       createHouseholds({data})
-      navigate("/primaryuser/household")
-      handleModalClose()
+
     }
 
   };

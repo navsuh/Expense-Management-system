@@ -58,6 +58,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   useEffect(()=>{
     getAllMembers()
   },[getAllMembers])
+  
   const onSubmitHandler = (data) => {
     // console.log({ data });
     // console.log(id);
@@ -183,10 +184,11 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
           >
             <span className="ml-3">UPDATE</span>
           </button>
-        <p className="text-red-500">{error_msg ? error_msg : null}</p>
           
         </form>
       </div>
+      <p className="text-red-500">{error_msg ? error_msg : null}</p>
+
     </div>
   </div>
 </div>

@@ -65,6 +65,13 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
     setValue("method", dailyExpense.paymentDetails.method);
   }, [id, setValue, dailyExpensesList]);
 
+
+  useEffect(()=>{
+    if (user.role === "Primaryuser") navigate("/primaryuser/dailyexpenses");
+    else if (user.role === "member") navigate("/memberuser/dailyexpenses");
+    handleModalClose()
+  },[dailyExpensesList,handleModalClose,navigate,user.role])
+
   const onSubmitHandler = (data) => {
     reset();
 
@@ -77,7 +84,7 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
       delete data.selectExpense;
       const newData = { ...data, paymentDetails, expensetypes: selectExpense };
       updateDailyExpense({ newData });
-      handleModalClose()
+      // handleModalClose()
      reset();
 
     } else {
@@ -93,10 +100,10 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
       const newData = { ...data, paymentDetails, expensetypes: selectExpense };
       // console.log(newData);
       createDailyExpense({ newData });
-      handleModalClose()
+      // handleModalClose()
     }
-    if (user.role === "Primaryuser") navigate("/primaryuser/dailyexpenses");
-    else if (user.role === "member") navigate("/memberuser/dailyexpenses");
+    // if (user.role === "Primaryuser") navigate("/primaryuser/dailyexpenses");
+    // else if (user.role === "member") navigate("/memberuser/dailyexpenses");
   };
   const closeAndReset = () => {
     if (user.role === "Primaryuser") navigate("/primaryuser/dailyexpenses");

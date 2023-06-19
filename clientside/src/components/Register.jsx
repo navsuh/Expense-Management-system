@@ -51,10 +51,6 @@ const Register = () => {
   };
 
  
-
- 
-
-
   const onSubmitHandler = (data) => {
     // console.log({ data });
     addPrimaryUser({data})
