@@ -150,8 +150,8 @@ const ResetPasswordForm = () => {
               </div>
             </div>
           </form>
-          <p className="text-red-500">{error_msg ? error_msg : null}</p>
         </div>
+        <p className="text-red-500">{error_msg ? error_msg : null}</p>
       </div>
     </div>
   );

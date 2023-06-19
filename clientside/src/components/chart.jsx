@@ -6,6 +6,7 @@ const colors= ['aqua', 'blue', 'fuchsia', 'gray', 'green',
 const Chart=({data,showchart, handlechartClose} )=>{
  
     if (!showchart) return null;
+    if(data.length===0) return null
     return(<>
      <div
       id="modal-body"

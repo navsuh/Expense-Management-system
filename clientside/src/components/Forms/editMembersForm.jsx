@@ -183,8 +183,9 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
           >
             <span className="ml-3">UPDATE</span>
           </button>
-        </form>
         <p className="text-red-500">{error_msg ? error_msg : null}</p>
+          
+        </form>
       </div>
     </div>
   </div>

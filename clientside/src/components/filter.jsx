@@ -28,7 +28,7 @@ function Filter({
           {filterList.map((eachfilterquery) => (
             <li
               key={eachfilterquery.id}
-              className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+              className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg "
             >
               <div className="relative flex items-start w-full">
                 <div className="flex items-center h-5">
@@ -37,7 +37,7 @@ function Filter({
                     name="hs-list-group-item-radio"
                     type="radio"
                     value={eachfilterquery.value}
-                    className="border-gray-200 rounded-full dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                    className="border-gray-200 rounded-full "
                     onChange={(e) => {
                       handleonchecked(e.target.value);
                       getFilterName(eachfilterquery.name);
@@ -47,7 +47,7 @@ function Filter({
                 </div>
                 <label
                   htmlFor={eachfilterquery.id}
-                  className="ml-3 block w-full text-sm text-gray-600 dark:text-gray-500 cursor-pointer"
+                  className="ml-3 block w-full text-sm text-gray-600 "
                 >
                   {eachfilterquery.name}
                 </label>

@@ -91,7 +91,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
         <span onClick={() => handleModalClose()} className="text-red-500 text-2xl cursor-pointer">&times;</span>
       </div>
   
-      <div className="lg:w-full p-4 mt-4">
+      <div className="lg:w-full p-4 mt-4 ">
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <form onSubmit={handleSubmit(onSubmitHandler)} className="w-full lg:flex-grow">
             <div className="flex flex-col lg:flex-row justify-between">
@@ -202,9 +202,13 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
             >
               <span className="ml-3">ADD</span>
             </button>
+
           </form>
-          <p className="text-red-500">{error_msg ? error_msg : null}</p>
+
         </div>
+        
+        <p className="text-red-500">{error_msg ? error_msg : null}</p>
+       
       </div>
     </div>
   </div>

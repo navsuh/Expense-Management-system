@@ -162,8 +162,8 @@ const UserForm = ({ isModalOpen, handleModalClose }) => {
                 <span className="ml-3">Update</span>
               </button>
             </form>
-            <p className="text-red-500">{error_msg ? error_msg : null}</p>
           </div>
+          <p className="text-red-500">{error_msg ? error_msg : null}</p>
         </div>
       </div>
     </div>
