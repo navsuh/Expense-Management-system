@@ -24,7 +24,7 @@ const Error401 = () => {
                   <h3 className="h1 text-5xl mb-5">
                     {/* Oooh You are not Authorised
                      */}
-                     Page Not Found
+                    Page Not Found
                   </h3>
 
                   <p className="text-xl">
@@ -33,7 +33,6 @@ const Error401 = () => {
 
                   <Link
                     to={"/login"}
-            
                     className="link_401"
                     style={{
                       color: "#fff!important",

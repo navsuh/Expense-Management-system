@@ -31,7 +31,6 @@ const ResetPasswordForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    // setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -39,7 +38,7 @@ const ResetPasswordForm = () => {
   useEffect(() => {
     if (resetPasswordResponse.status === 200) {
       alert(resetPasswordResponse.msg);
-      // sessionStorage.removeItem("token")
+
       resetPasswordReset();
       navigate("/login");
     }

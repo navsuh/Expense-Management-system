@@ -29,8 +29,8 @@ const HouseholdTable = (props) => {
   const firstIndex = lastIndex - dataPerPage;
   const currentHousholds = filteredHouseholdList.slice(firstIndex, lastIndex);
 
-  if(currentHousholds.length===0 && currentPage!==1){
-    setCurrentPage((prevState)=>prevState-1)
+  if (currentHousholds.length === 0 && currentPage !== 1) {
+    setCurrentPage((prevState) => prevState - 1);
   }
 
   const onPaginate = (pageNumber) => {
@@ -38,8 +38,7 @@ const HouseholdTable = (props) => {
   };
 
   const navigate = useNavigate();
-  // console.log(getAllHouseholds);
-  //  console.log(houseHoldList);
+ 
   useEffect(() => {
     getAllHouseholds();
   }, [getAllHouseholds]);
@@ -69,7 +68,7 @@ const HouseholdTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {/* filter((h)=>h.name.toLowerCase().includes(searchQuery.toLowerCase())) */}
+            
             {currentHousholds.map((eachHousehold) => (
               <tr className="border-b bg-gray-50 " key={eachHousehold._id}>
                 <td className="px-6 py-4">{eachHousehold.name}</td>

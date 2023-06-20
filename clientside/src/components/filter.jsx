@@ -52,11 +52,10 @@ function Filter({
                   {eachfilterquery.name}
                 </label>
               </div>
-              </li>
+            </li>
           ))}
         </ul>
       </div>
-    
     </>
   );
 }

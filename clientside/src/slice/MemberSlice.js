@@ -1,15 +1,14 @@
 import axios from "axios";
 
+const apiEndPoint = process.env.REACT_APP_API_URL + "householdmembers";
 
-const apiEndPoint = process.env.REACT_APP_API_URL+"householdmembers"
+export const MemberSlice = (set) => ({
+  memberData: [],
+  error_msg_member: "",
 
-export const MemberSlice =(set)=>({
-   memberData:[],
-   error_msg_member:"",
-  
-  getAllMembers:async()=>{
+  getAllMembers: async () => {
     const token = sessionStorage.getItem("token");
-      //  console.log(token);
+    //  console.log(token);
     try {
       const response = await axios.get(apiEndPoint, {
         headers: {
@@ -17,11 +16,8 @@ export const MemberSlice =(set)=>({
         },
       });
       const { data } = response.data;
-  console.log(data);
-      set({ error_msg_member: "", memberData: data },
-        false,
-        "getAllMembers"
-      );
+      console.log(data);
+      set({ error_msg_member: "", memberData: data }, false, "getAllMembers");
     } catch (error) {
       const { response } = error;
       const { data } = response;
@@ -29,48 +25,85 @@ export const MemberSlice =(set)=>({
     }
   },
 
-   addMember:async(userData)=>{
-    const {data} =userData
-    const {email,firstName,householdName,lastName,password,phone,userName}=data
-    const newData={firstName,lastName,email,phone,userName,password,role:"member",householdName}
+  addMember: async (userData) => {
+    const { data } = userData;
+    const {
+      email,
+      firstName,
+      householdName,
+      lastName,
+      password,
+      phone,
+      userName,
+    } = data;
+    const newData = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      userName,
+      password,
+      role: "member",
+      householdName,
+    };
     const token = sessionStorage.getItem("token");
     // console.log(newData);
     try {
-        const response=await axios.post(apiEndPoint,newData,{
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        
-        set(
-          (state) => ({
-            error_msg_member: "",
-            memberData: [...state.memberData, response.data],
-          }),
-          false,
-          "addMember"
-        );
-        
-      } catch (error) {
-        const {response}=error
-        const {data}=response
-        set({ error_msg_member: data.message},false,"addMemberErrorMsg")
-      }
-   },
+      const response = await axios.post(apiEndPoint, newData, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
-   updateMember: async (memberuserData) => {
-    const {newData}=memberuserData
+      set(
+        (state) => ({
+          error_msg_member: "",
+          memberData: [...state.memberData, response.data],
+        }),
+        false,
+        "addMember"
+      );
+    } catch (error) {
+      const { response } = error;
+      const { data } = response;
+      set({ error_msg_member: data.message }, false, "addMemberErrorMsg");
+    }
+  },
+
+  updateMember: async (memberuserData) => {
+    const { newData } = memberuserData;
     // console.log("1");
     // console.log(memberuserData);
     // console.log("1");
-    const { _id ,email,firstName,lastName,householdName,householdId,memberUserId,primaryuserId,phone,userName} = newData;
-   
+    const {
+      _id,
+      email,
+      firstName,
+      lastName,
+      householdName,
+      householdId,
+      memberUserId,
+      primaryuserId,
+      phone,
+      userName,
+    } = newData;
+
     const token = sessionStorage.getItem("token");
-    
+
     try {
-      const response=await axios.patch(
+      const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        {email,firstName,lastName,householdName,householdId,memberUserId,phone,userName,primaryuserId},
+        {
+          email,
+          firstName,
+          lastName,
+          householdName,
+          householdId,
+          memberUserId,
+          phone,
+          userName,
+          primaryuserId,
+        },
         {
           headers: {
             // 'Content-Type': 'application/json',
@@ -78,7 +111,7 @@ export const MemberSlice =(set)=>({
           },
         }
       );
-      
+
       set(
         (state) => ({
           error_msg_member: "",
@@ -93,8 +126,7 @@ export const MemberSlice =(set)=>({
                 lastName: response.data.lastName,
                 memberUserId: response.data.memberUserId,
                 phone: response.data.phone,
-                userName:response.data.userName
-
+                userName: response.data.userName,
               };
             } else {
               return eachMember;
@@ -104,8 +136,6 @@ export const MemberSlice =(set)=>({
         false,
         "updateDailyExpense"
       );
-
-   
     } catch (error) {
       const { response } = error;
       const { data } = response;
@@ -113,8 +143,7 @@ export const MemberSlice =(set)=>({
     }
   },
 
-   deleteMember: async (id) => {
-   
+  deleteMember: async (id) => {
     const token = sessionStorage.getItem("token");
     try {
       const response = await axios.delete(`${apiEndPoint}/${id}`, {
@@ -144,5 +173,4 @@ export const MemberSlice =(set)=>({
       set({ error_msg_member: data.message }, false, "deleteMemberErrorMsg");
     }
   },
-
-})
+});

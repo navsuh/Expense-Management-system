@@ -15,28 +15,28 @@ const ExpenseTypeTable = (props) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [deleteId, setDeleteId]= useState("")
-  const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
+  const [deleteId, setDeleteId] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
   const dataPerPage = 4;
- 
-  
+
   useEffect(() => {
     getAllExpenseTypes();
+    return () => {
+      console.log("cleaned up getAll ExpenseTypes");
+    };
   }, [getAllExpenseTypes]);
 
   const deleteExpenseType = (id) => {
     deleteExpenseTypes(id);
-    console.log(id);
-  
   };
 
-   const navigate = useNavigate()
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setIsDeleteModalOpen(false)
-    navigate("/admin/expensetype")
+    setIsDeleteModalOpen(false);
+    navigate("/admin/expensetype");
   };
 
   // const handleDeleteModalClose = () => {
@@ -51,16 +51,14 @@ const ExpenseTypeTable = (props) => {
     expense.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  
   const lastIndex = currentPage * dataPerPage;
   const firstIndex = lastIndex - dataPerPage;
   const currentExpenses = filteredExpenseList.slice(firstIndex, lastIndex);
 
+  if (currentExpenses.length === 0 && currentPage !== 1) {
+    setCurrentPage((prevState) => prevState - 1);
+  }
 
-if(currentExpenses.length===0 && currentPage!==1){
-  setCurrentPage((prevState)=>prevState-1)
-}
-  
   const displayExpenseTypeTable = () => {
     return (
       <>
@@ -87,17 +85,15 @@ if(currentExpenses.length===0 && currentPage!==1){
                     >
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    {/* <Link */}
-                      {/* // to={`/admin/expensetype/delete/${eachExpense._id}`} */}
-                    {/* > */}
+
                     <AiOutlineDelete
-                      onClick={() => {setIsDeleteModalOpen(true); setDeleteId(eachExpense._id)}}
+                      onClick={() => {
+                        setIsDeleteModalOpen(true);
+                        setDeleteId(eachExpense._id);
+                      }}
                       className="w-8 h-6 ml-1 cursor-pointer"
                     />
-                    {/* </Link> */}
-                  
                   </div>
-
                 </td>
               </tr>
             ))}
@@ -109,7 +105,6 @@ if(currentExpenses.length===0 && currentPage!==1){
           pageSize={dataPerPage}
           currentPage={currentPage}
           onPageChange={onPaginate}
-         
         />
       </>
     );
@@ -117,12 +112,17 @@ if(currentExpenses.length===0 && currentPage!==1){
 
   return (
     <>
- 
+      {console.log("rendered")}
       <ExpenseTypeForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
-       <ConfirmDelete isModalOpen={isDeleteModalOpen} handleModalClose={handleModalClose} deleteRecord={deleteExpenseType} deleteId={deleteId}/>
+      <ConfirmDelete
+        isModalOpen={isDeleteModalOpen}
+        handleModalClose={handleModalClose}
+        deleteRecord={deleteExpenseType}
+        deleteId={deleteId}
+      />
 
       <div className="flex flex-row justify-between">
         <div>

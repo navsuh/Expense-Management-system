@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
 // import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -30,31 +30,26 @@ const Register = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const addPrimaryUser=useBoundStore(store=>store.addPrimaryUser)
-  const primaryUser=useBoundStore(store=>store.primaryUser)
-  const error_msg=useBoundStore(store=>store.error_msg_register)
+  const addPrimaryUser = useBoundStore((store) => store.addPrimaryUser);
+  const primaryUser = useBoundStore((store) => store.primaryUser);
+  const error_msg = useBoundStore((store) => store.error_msg_register);
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    
-    if(primaryUser) return
-    navigate("/login")
-    
-  },[primaryUser])
+  useEffect(() => {
+    if (primaryUser) return;
+    navigate("/login");
+  }, [primaryUser]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
- 
   const onSubmitHandler = (data) => {
     // console.log({ data });
-    addPrimaryUser({data})
-    
-    
+    addPrimaryUser({ data });
   };
-  
+
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl  sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
@@ -74,9 +69,7 @@ const Register = () => {
             <p className="mt-6">
               Already have an account?
               <span className="loginspan">
-              <Link to={"/login"} >
-                Log in
-              </Link>
+                <Link to={"/login"}>Log in</Link>
               </span>
             </p>
             <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -162,7 +155,6 @@ const Register = () => {
               </div>
             </form>
             <p className="text-red-500">{error_msg ? error_msg : null}</p>
-          
           </div>
         </div>
       </div>

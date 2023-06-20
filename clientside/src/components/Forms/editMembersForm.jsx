@@ -58,11 +58,13 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   useEffect(()=>{
     navigate("/primaryuser/members")
     handleModalClose()
+  
 
   },[memberList])
 
   useEffect(()=>{
     getAllMembers()
+   
   },[getAllMembers])
   
   const onSubmitHandler = (data) => {

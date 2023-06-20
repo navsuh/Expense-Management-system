@@ -15,10 +15,14 @@ const schema = yup.object().shape({
 const ChangePassword = ({ isModalOpen, handleModalClose }) => {
   const changePassword = useBoundStore((store) => store.changePassword);
   const error_msg = useBoundStore((store) => store.error_msg_change_password);
+  const navigate = useNavigate();
+
   const changePasswordResponse = useBoundStore(
     (store) => store.changePasswordResponse
   );
-  const changePasswordReset = useBoundStore((store) => store.changePasswordReset);
+  const changePasswordReset = useBoundStore(
+    (store) => store.changePasswordReset
+  );
   const {
     register,
     handleSubmit,
@@ -26,7 +30,7 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     if (changePasswordResponse.status === 200) {
@@ -52,7 +56,7 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
     >
       <div className="w-96 bg-white rounded-md px-6 py-6">
         <div className="flex justify-between">
-        <h3 className="text-3xl font-bold text-center text-orange-500">
+          <h3 className="text-3xl font-bold text-center text-orange-500">
             Change Password
           </h3>
           <span
@@ -63,12 +67,12 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
           </span>
         </div>
 
-        
-
         <form onSubmit={handleSubmit(onSubmitHandler)}>
           <div className="flex flex-col space-y-4 mt-8">
             <div className="flex">
-              <label htmlFor="email" className="w-24">Email</label>
+              <label htmlFor="email" className="w-24">
+                Email
+              </label>
               <div className="flex-grow">
                 <input
                   {...register("email")}
@@ -82,7 +86,9 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
               </div>
             </div>
             <div className="flex">
-              <label htmlFor="currentPassword" className="w-24">Current Password</label>
+              <label htmlFor="currentPassword" className="w-24">
+                Current Password
+              </label>
               <div className="flex-grow">
                 <input
                   {...register("currentPassword")}
@@ -98,7 +104,9 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
               </div>
             </div>
             <div className="flex">
-              <label htmlFor="newPassword" className="w-24">New Password</label>
+              <label htmlFor="newPassword" className="w-24">
+                New Password
+              </label>
               <div className="flex-grow">
                 <input
                   {...register("newPassword")}
@@ -112,7 +120,9 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
               </div>
             </div>
             <div className="flex">
-              <label htmlFor="confirmedPassword" className="w-24">Confirm Password</label>
+              <label htmlFor="confirmedPassword" className="w-24">
+                Confirm Password
+              </label>
               <div className="flex-grow">
                 <input
                   {...register("confirmedPassword")}
@@ -138,10 +148,8 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
             </div>
           </div>
         </form>
-
       </div>
       <p className="text-red-500">{error_msg ? error_msg : null}</p>
-
     </div>
   );
 };

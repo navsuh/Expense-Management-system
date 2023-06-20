@@ -5,7 +5,7 @@ import Tablist from "../tabList";
 import { useBoundStore } from "../../store.js";
 
 import { Outlet } from "react-router-dom";
-// import { useEffect } from "react";
+
 import { Navigate } from "react-router-dom";
 
 const tabList = [
@@ -16,16 +16,18 @@ const tabList = [
     tabName: "Periodic Expenses",
     tabPath: "/primaryuser/periodicexpenses",
   },
-  { _id: uuidv4(), tabName: "Daily Expenses", tabPath: "/primaryuser/dailyexpenses" },
+  {
+    _id: uuidv4(),
+    tabName: "Daily Expenses",
+    tabPath: "/primaryuser/dailyexpenses",
+  },
 ];
-
-
 
 const PrimaryUser = () => {
   const user = useBoundStore((store) => store.user);
-  if(user.role!=="Primaryuser"){
-    sessionStorage.removeItem("token")
-return <Navigate to="/login" replace={true} />
+  if (user.role !== "Primaryuser") {
+    sessionStorage.removeItem("token");
+    return <Navigate to="/login" replace={true} />;
   }
   return (
     <>
@@ -34,7 +36,6 @@ return <Navigate to="/login" replace={true} />
         <h1 className="ml-7 font-semibold text-2xl">Dashboard</h1>
         <Tablist tabList={tabList} />
         <Outlet />
-      
       </div>
     </>
   );

@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 
-const ConfirmDelete = ({ isModalOpen, handleModalClose, deleteRecord ,deleteId}) => {
+const ConfirmDelete = ({
+  isModalOpen,
+  handleModalClose,
+  deleteRecord,
+  deleteId,
+}) => {
 
-   
- 
-  // console.log(id);
   if (!isModalOpen) return null;
 
   return (
@@ -19,7 +21,9 @@ const ConfirmDelete = ({ isModalOpen, handleModalClose, deleteRecord ,deleteId})
             Are You Sure?
           </h2>
           <span
-            onClick={() => {handleModalClose(); }}
+            onClick={() => {
+              handleModalClose();
+            }}
             className="text-red-500 text-2xl cursor-pointer"
           >
             &times;
@@ -37,20 +41,21 @@ const ConfirmDelete = ({ isModalOpen, handleModalClose, deleteRecord ,deleteId})
             onClick={() => {
               deleteRecord(deleteId);
               handleModalClose();
-            
             }}
           >
             Delete
           </button>
-          <button className="bg-gray-400  px-2 py-3 text-white rounded-lg"
-            onClick={() => {handleModalClose(); }}
-          
+          <button
+            className="bg-gray-400  px-2 py-3 text-white rounded-lg"
+            onClick={() => {
+              handleModalClose();
+            }}
           >
             Cancel
           </button>
         </div>
       </div>
-      {/* <p className="text-red-500">{error_msg ? error_msg : null}</p> */}
+     
     </div>
   );
 };

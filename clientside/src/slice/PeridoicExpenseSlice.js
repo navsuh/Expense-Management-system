@@ -5,12 +5,14 @@ const apiEndPoint = process.env.REACT_APP_API_URL + "periodic-expenses";
 export const PeriodicExpenseSlice = (set) => ({
   periodicExpense: [],
   error_msg_periodic_expense: "",
-  dueDateNotificationIds:[],
+  dueDateNotificationIds: [],
 
   getAllPeriodicExpense: async (querydate) => {
     const token = sessionStorage.getItem("token");
-       console.log(querydate);
-    const NewApiEndPoint=querydate?apiEndPoint+"?dueDate[$gte]="+querydate:apiEndPoint
+    console.log(querydate);
+    const NewApiEndPoint = querydate
+      ? apiEndPoint + "?dueDate[$gte]=" + querydate
+      : apiEndPoint;
     console.log(NewApiEndPoint);
     try {
       const response = await axios.get(NewApiEndPoint, {
@@ -28,14 +30,18 @@ export const PeriodicExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_periodic_expense: data.message }, false, "getAllPeriodicExpenseErrorMsg");
+      set(
+        { error_msg_periodic_expense: data.message },
+        false,
+        "getAllPeriodicExpenseErrorMsg"
+      );
     }
   },
 
   createPeriodicExpense: async (userData) => {
     const { newData } = userData;
     const token = sessionStorage.getItem("token");
-       console.log(newData);
+    console.log(newData);
     try {
       const response = await axios.post(apiEndPoint, newData, {
         headers: {
@@ -55,15 +61,29 @@ export const PeriodicExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_periodic_expense: data.message }, false, "createPeriodicExpenseErrorMsg");
+      set(
+        { error_msg_periodic_expense: data.message },
+        false,
+        "createPeriodicExpenseErrorMsg"
+      );
     }
   },
 
   updatePeriodicExpense: async (userData) => {
     const { newData } = userData;
 
-    const { households, expensetypes, description, paidThrough, paidBy, paymentDetails,frequency,amount,dueDate } =newData;
-  //   //   console.log(data);
+    const {
+      households,
+      expensetypes,
+      description,
+      paidThrough,
+      paidBy,
+      paymentDetails,
+      frequency,
+      amount,
+      dueDate,
+    } = newData;
+    //   //   console.log(data);
     const { _id } = newData;
 
     const token = sessionStorage.getItem("token");
@@ -71,8 +91,18 @@ export const PeriodicExpenseSlice = (set) => ({
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        { households, expensetypes, description, paidThrough, paidBy, paymentDetails,frequency,amount,dueDate },
-        
+        {
+          households,
+          expensetypes,
+          description,
+          paidThrough,
+          paidBy,
+          paymentDetails,
+          frequency,
+          amount,
+          dueDate,
+        },
+
         {
           headers: {
             // 'Content-Type': 'application/json',
@@ -97,12 +127,12 @@ export const PeriodicExpenseSlice = (set) => ({
                 description: response.data.description,
                 paidThrough: response.data.paidThrough,
                 paidBy: response.data.paidBy,
-                frequency:response.data.frequency,
-                amount:response.data.amount,
-                dueDate:response.data.dueDate,
+                frequency: response.data.frequency,
+                amount: response.data.amount,
+                dueDate: response.data.dueDate,
                 paymentDetails: response.data.paymentDetails,
-                selectExpense:response.data.selectExpense,
-                household:response.data.household
+                selectExpense: response.data.selectExpense,
+                household: response.data.household,
               };
             } else {
               return eachExpense;
@@ -115,7 +145,11 @@ export const PeriodicExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_periodic_expense: data.message }, false, "updatePeriodicExpenseErrorMsg");
+      set(
+        { error_msg_periodic_expense: data.message },
+        false,
+        "updatePeriodicExpenseErrorMsg"
+      );
     }
   },
 
@@ -136,12 +170,16 @@ export const PeriodicExpenseSlice = (set) => ({
       set(
         (state) => ({
           error_msg_periodic_expense: "",
-          periodicExpense: state.periodicExpense.filter((eachPeriodicExpense) => {
-            return eachPeriodicExpense._id !== response.data._id;
-          }),
-          dueDateNotificationIds: state.dueDateNotificationIds.filter((eachdueDateNotificationId) => {
-            return eachdueDateNotificationId._id !== response.data._id;
-          }),
+          periodicExpense: state.periodicExpense.filter(
+            (eachPeriodicExpense) => {
+              return eachPeriodicExpense._id !== response.data._id;
+            }
+          ),
+          dueDateNotificationIds: state.dueDateNotificationIds.filter(
+            (eachdueDateNotificationId) => {
+              return eachdueDateNotificationId._id !== response.data._id;
+            }
+          ),
         }),
         false,
         "deletePeriodicExpense"
@@ -149,12 +187,17 @@ export const PeriodicExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_periodic_expense: data.message }, false, "deletePeriodicExpenseErrorMsg");
+      set(
+        { error_msg_periodic_expense: data.message },
+        false,
+        "deletePeriodicExpenseErrorMsg"
+      );
     }
   },
 
   sendDueDateNotification: async (userData) => {
-    const {amount,
+    const {
+      amount,
       description,
       dueDate,
       expensetypes,
@@ -162,30 +205,41 @@ export const PeriodicExpenseSlice = (set) => ({
       households,
       paidBy,
       paidThrough,
-      paymentDetails}=userData
+      paymentDetails,
+    } = userData;
     const token = sessionStorage.getItem("token");
-    
-    const sendNotificationApiEndPoint=process.env.REACT_APP_API_URL+"send-due-date-notification"
+
+    const sendNotificationApiEndPoint =
+      process.env.REACT_APP_API_URL + "send-due-date-notification";
     try {
-      const response = await axios.post(sendNotificationApiEndPoint, {amount,
-        description,
-        dueDate,
-        expensetypes,
-        frequency,
-        households,
-        paidBy,
-        paidThrough,
-        paymentDetails}, {
-        headers: {
-          Authorization: "Bearer " + token,
+      const response = await axios.post(
+        sendNotificationApiEndPoint,
+        {
+          amount,
+          description,
+          dueDate,
+          expensetypes,
+          frequency,
+          households,
+          paidBy,
+          paidThrough,
+          paymentDetails,
         },
-      });
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
 
       console.log(response.data);
       set(
         (state) => ({
           error_msg_periodic_expense: "",
-          dueDateNotificationIds: [...state.dueDateNotificationIds, userData._id],
+          dueDateNotificationIds: [
+            ...state.dueDateNotificationIds,
+            userData._id,
+          ],
         }),
         false,
         "createPeriodicExpense"
@@ -193,8 +247,11 @@ export const PeriodicExpenseSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_periodic_expense: data.message, }, false, "sendDueDateNotificationErrorMsg");
+      set(
+        { error_msg_periodic_expense: data.message },
+        false,
+        "sendDueDateNotificationErrorMsg"
+      );
     }
   },
-
 });

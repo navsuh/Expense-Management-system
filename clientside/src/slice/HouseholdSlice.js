@@ -16,7 +16,7 @@ export const HouseholdSlice = (set) => ({
         },
       });
       const { data } = response.data;
-      
+
       set(
         (store) => ({ error_msg_household: "", households: data }),
         false,
@@ -25,17 +25,30 @@ export const HouseholdSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_household: data.message }, false, "getAllHouseholdsErrorMsg");
+      set(
+        { error_msg_household: data.message },
+        false,
+        "getAllHouseholdsErrorMsg"
+      );
     }
   },
 
   createHouseholds: async (userData) => {
     const { data } = userData;
     const token = sessionStorage.getItem("token");
-    
-    const {name, addressLine1, addressLine2, area, city, state, zipcode}=data
-    const newData={name, addressLine1, addressLine2, area, city, state, zipcode}
-       console.log(newData);
+
+    const { name, addressLine1, addressLine2, area, city, state, zipcode } =
+      data;
+    const newData = {
+      name,
+      addressLine1,
+      addressLine2,
+      area,
+      city,
+      state,
+      zipcode,
+    };
+    console.log(newData);
     try {
       const response = await axios.post(apiEndPoint, newData, {
         headers: {
@@ -55,14 +68,19 @@ export const HouseholdSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_household: data.message }, false, "createHouseholdsErrorMsg");
+      set(
+        { error_msg_household: data.message },
+        false,
+        "createHouseholdsErrorMsg"
+      );
     }
   },
 
   updateHouseholds: async (userData) => {
     const { data } = userData;
 
-    const { name, addressLine1, addressLine2, area, city, state, zipcode } =data;
+    const { name, addressLine1, addressLine2, area, city, state, zipcode } =
+      data;
     //   console.log(data);
     const { _id } = data;
 
@@ -72,7 +90,7 @@ export const HouseholdSlice = (set) => ({
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
         { name, addressLine1, addressLine2, area, city, state, zipcode },
-        
+
         {
           headers: {
             // 'Content-Type': 'application/json',
@@ -109,7 +127,11 @@ export const HouseholdSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_household: data.message }, false, "updatehouseholdsErrorMsg");
+      set(
+        { error_msg_household: data.message },
+        false,
+        "updatehouseholdsErrorMsg"
+      );
     }
   },
 
@@ -140,7 +162,11 @@ export const HouseholdSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_household: data.message }, false, "deletehouseholdsErrorMsg");
+      set(
+        { error_msg_household: data.message },
+        false,
+        "deletehouseholdsErrorMsg"
+      );
     }
   },
 });

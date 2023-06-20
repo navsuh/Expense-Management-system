@@ -34,6 +34,9 @@ const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
     navigate("/admin/expensetype");
     handleModalClose()
     reset()
+    return () => {
+      console.log("cleaned up getAll ExpenseTypes Form useeffect1");
+    };
   },[expenseList])
 
   useEffect(() => {
@@ -44,6 +47,9 @@ const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
     // console.log(expensetype);
     setValue("_id", expensetype._id);
     setValue("name", expensetype.name);
+    return () => {
+      console.log("cleaned up getAll ExpenseTypes Form useeffect2");
+    };
   }, [id, setValue, expenseList]);
 
   const onSubmitHandler = (data) => {

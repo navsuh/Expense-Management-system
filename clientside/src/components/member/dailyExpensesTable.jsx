@@ -11,13 +11,10 @@ import { sub, formatISO } from "date-fns";
 import Pagination from "../Pagination";
 import { AiOutlineAreaChart } from "react-icons/ai";
 
-
 import Chart from "../chart";
 import ConfirmDelete from "../Forms/deleteConfirm";
 
-
 const DailyExpensesTableMember = (props) => {
-  // const {userList}=props
   const getAllDailyExpense = useBoundStore((store) => store.getAllDailyExpense);
   const dailyExpensesList = useBoundStore((store) => store.dailyExpense);
   const deleteDailyExpense = useBoundStore((store) => store.deleteDailyExpense);
@@ -53,14 +50,12 @@ const DailyExpensesTableMember = (props) => {
   const [filterName, setFilterName] = useState("Today");
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setIsDeleteModalOpen(false)
+    setIsDeleteModalOpen(false);
   };
   const onchecked = (value) => {
-    // console.log(JSON.parse(value));
     const result = sub(new Date(), JSON.parse(value));
     const formattedresult = formatISO(result, { representation: "date" });
     getAllDailyExpense(formattedresult);
-    // console.log(formattedresult);
   };
 
   const filteredDailyExpenses = filteredDailyExpenseList.filter(
@@ -76,15 +71,15 @@ const DailyExpensesTableMember = (props) => {
     lastIndex
   );
 
-  if(currentDailyExpenses.length===0 && currentPage!==1){
-    setCurrentPage((prevState)=>prevState-1)
+  if (currentDailyExpenses.length === 0 && currentPage !== 1) {
+    setCurrentPage((prevState) => prevState - 1);
   }
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  const handlechartClose=()=>{
-    SetshowChart(false)
-  }
+  const handlechartClose = () => {
+    SetshowChart(false);
+  };
 
   const handleFilterClose = () => {
     SetshowFilter(false);
@@ -159,7 +154,7 @@ const DailyExpensesTableMember = (props) => {
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
-       <ConfirmDelete
+      <ConfirmDelete
         isModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={ondeleteDailyExpense}
@@ -170,13 +165,19 @@ const DailyExpensesTableMember = (props) => {
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="text-blue-900">
-          <div className="flex cursor-pointer" onClick={()=>SetshowChart(true)}>
-          <AiOutlineAreaChart className="h-8 w-8 mt-4" />
-        <p className="mt-5 font-medium text-gray-800">charts</p>
+          <div
+            className="flex cursor-pointer"
+            onClick={() => SetshowChart(true)}
+          >
+            <AiOutlineAreaChart className="h-8 w-8 mt-4" />
+            <p className="mt-5 font-medium text-gray-800">charts</p>
           </div>
-        
 
-        <Chart data={filteredDailyExpenseList} showchart={showchart} handlechartClose={handlechartClose}/>
+          <Chart
+            data={filteredDailyExpenseList}
+            showchart={showchart}
+            handlechartClose={handlechartClose}
+          />
         </div>
         <div className="flex flex-row justify-between cursor-pointer">
           <div className="flex flex-col ">
@@ -184,10 +185,7 @@ const DailyExpensesTableMember = (props) => {
               onClick={() => SetshowFilter(true)}
               className="flex flex-row border border-gray-100 rounded-md mr-4 p-2"
             >
-              <FaFilter
-                // onClick={() => SetshowFilter(!showFilter)}
-                className="mt-6  text-blue-800"
-              />
+              <FaFilter className="mt-6  text-blue-800" />
               <p className="mt-5 font-medium text-gray-800">{filterName}</p>
             </div>
 

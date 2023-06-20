@@ -5,11 +5,11 @@ const apiEndPoint = process.env.REACT_APP_API_URL + "users";
 export const AdminUsersSlice = (set) => ({
   usersData: [],
   error_msg_Admin_user: "",
-  
+
   getAllUsers: async () => {
     const token = sessionStorage.getItem("token");
-    // const newApiPoint =apiEndPoint+"?$limit="+limit+"&"+"$skip="+skip                  
-    
+    // const newApiPoint =apiEndPoint+"?$limit="+limit+"&"+"$skip="+skip
+
     try {
       const response = await axios.get(apiEndPoint, {
         headers: {
@@ -34,19 +34,26 @@ export const AdminUsersSlice = (set) => ({
     }
   },
 
-  updateUser: async (userData,AdminUserId) => {
+  updateUser: async (userData, AdminUserId) => {
     const { data } = userData;
 
     const { _id } = data;
-    console.log("1");
-    console.log(userData);
-    console.log("2fsdf");
+  
     const token = sessionStorage.getItem("token");
     const { firstName, isActive, lastName, phone, userName } = data;
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        {  memberUserId:_id,firstName, isActive, lastName, phone, userName,updatedBy:AdminUserId,updatedAt:new Date() },
+        {
+          memberUserId: _id,
+          firstName,
+          isActive,
+          lastName,
+          phone,
+          userName,
+          updatedBy: AdminUserId,
+          updatedAt: new Date(),
+        },
         {
           headers: {
             // 'Content-Type': 'application/json',
@@ -54,10 +61,7 @@ export const AdminUsersSlice = (set) => ({
           },
         }
       );
-      // console.log(response.data.accessToken);
-      // console.log(response.data.users.role);
 
-      // console.log(response.data);
 
       set(
         (state) => ({
@@ -73,12 +77,14 @@ export const AdminUsersSlice = (set) => ({
         false,
         "Update User"
       );
-      
-      
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_Admin_user: data.message }, false, "update User ErrorMsg");
+      set(
+        { error_msg_Admin_user: data.message },
+        false,
+        "update User ErrorMsg"
+      );
     }
   },
 
@@ -118,7 +124,11 @@ export const AdminUsersSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_Admin_user: data.message }, false, "soft Delete User ErrorMsg");
+      set(
+        { error_msg_Admin_user: data.message },
+        false,
+        "soft Delete User ErrorMsg"
+      );
     }
   },
 });

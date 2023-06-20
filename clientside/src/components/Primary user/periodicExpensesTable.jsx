@@ -15,7 +15,7 @@ import Chart from "../chart";
 import ConfirmDelete from "../Forms/deleteConfirm";
 
 const PeriodicExpensesTable = (props) => {
-  // const {userList}=prop
+  
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 3;
   const [showchart, SetshowChart] = useState(false);
@@ -101,8 +101,8 @@ const PeriodicExpensesTable = (props) => {
     firstIndex,
     lastIndex
   );
-  if(currentPeriodicExpenses.length===0 && currentPage!==1){
-    setCurrentPage((prevState)=>prevState-1)
+  if (currentPeriodicExpenses.length === 0 && currentPage !== 1) {
+    setCurrentPage((prevState) => prevState - 1);
   }
   const handlechartClose = () => {
     SetshowChart(false);

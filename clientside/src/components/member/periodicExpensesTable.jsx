@@ -10,11 +10,8 @@ import { sub, formatISO } from "date-fns";
 import Pagination from "../Pagination";
 import { AiOutlineAreaChart } from "react-icons/ai";
 
-
 import Chart from "../chart";
 import ConfirmDelete from "../Forms/deleteConfirm";
-
-
 
 const PeriodicExpensesTableMember = (props) => {
   // const {userList}=props
@@ -59,32 +56,29 @@ const PeriodicExpensesTableMember = (props) => {
     firstIndex,
     lastIndex
   );
-  if(currentPeriodicExpenses.length===0 && currentPage!==1){
-    setCurrentPage((prevState)=>prevState-1)
+  if (currentPeriodicExpenses.length === 0 && currentPage !== 1) {
+    setCurrentPage((prevState) => prevState - 1);
   }
 
-
-  const handlechartClose=()=>{
-    SetshowChart(false)
-  }
+  const handlechartClose = () => {
+    SetshowChart(false);
+  };
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setIsDeleteModalOpen(false)
+    setIsDeleteModalOpen(false);
   };
 
   const ondeletePeriodicExpense = (id) => {
     deletePeriodicExpenses(id);
   };
   const onchecked = (value) => {
-    // console.log(JSON.parse(value));
     const result = sub(new Date(), JSON.parse(value));
     const formattedresult = formatISO(result, { representation: "date" });
     getAllPeriodicExpense(formattedresult);
-    // console.log(formattedresult);
   };
 
   const handleFilterClose = () => {
@@ -174,13 +168,16 @@ const PeriodicExpensesTableMember = (props) => {
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="text-blue-900 cursor-pointer">
-          <div className="flex" onClick={()=>SetshowChart(true)}>
-          <AiOutlineAreaChart className="h-8 w-8 mt-4" />
-        <p className="mt-5 font-medium text-gray-800">charts</p>
+          <div className="flex" onClick={() => SetshowChart(true)}>
+            <AiOutlineAreaChart className="h-8 w-8 mt-4" />
+            <p className="mt-5 font-medium text-gray-800">charts</p>
           </div>
-        
 
-        <Chart data={filteredPeriodicExpenseList} showchart={showchart} handlechartClose={handlechartClose}/>
+          <Chart
+            data={filteredPeriodicExpenseList}
+            showchart={showchart}
+            handlechartClose={handlechartClose}
+          />
         </div>
         <div className="flex flex-row justify-between mr-16 cursor-pointer">
           <div className="flex flex-col ">
@@ -202,9 +199,6 @@ const PeriodicExpensesTableMember = (props) => {
               getFilterName={getFilterName}
             />
           </div>
-          {/* <Link to={"/primaryuser/periodicexpenseform"}>
-            <IoAddCircle className="text-blue-800 h-14 w-14" />
-          </Link> */}
         </div>
       </div>
       <div className="relative  shadow-md sm:rounded-lg">

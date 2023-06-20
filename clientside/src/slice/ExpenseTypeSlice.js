@@ -29,7 +29,11 @@ export const ExpenseTypeSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_expense_type: data.message }, false, "getAllExpenseTypesErrorMsg");
+      set(
+        { error_msg_expense_type: data.message },
+        false,
+        "getAllExpenseTypesErrorMsg"
+      );
     }
   },
 
@@ -60,7 +64,11 @@ export const ExpenseTypeSlice = (set) => ({
       const { response } = error;
       console.log(error);
       const { data } = response;
-      set({ error_msg_expense_type: data.message }, false, "createExpenseTypesErrorMsg");
+      set(
+        { error_msg_expense_type: data.message },
+        false,
+        "createExpenseTypesErrorMsg"
+      );
     }
   },
 
@@ -105,7 +113,11 @@ export const ExpenseTypeSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_expense_type: data.message }, false, "updateExpenseTypesErrorMsg");
+      set(
+        { error_msg_expense_type: data.message },
+        false,
+        "updateExpenseTypesErrorMsg"
+      );
     }
   },
   deleteExpenseTypes: async (id) => {
@@ -136,7 +148,11 @@ export const ExpenseTypeSlice = (set) => ({
     } catch (error) {
       const { response } = error;
       const { data } = response;
-      set({ error_msg_expense_type: data.message }, false, "deleteExpenseTypesErrorMsg");
+      set(
+        { error_msg_expense_type: data.message },
+        false,
+        "deleteExpenseTypesErrorMsg"
+      );
     }
   },
 });

@@ -31,40 +31,34 @@ const UserForm = ({ isModalOpen, handleModalClose }) => {
     resolver: yupResolver(schema),
   });
 
-useEffect(()=>{
-   navigate("/admin/users");
-    handleModalClose()
-},[userList])
-// useEffect(()=>{
-//   navigate("/admin/users");
-//    handleModalClose()
-// },[userList])
+  useEffect(() => {
+    navigate("/admin/users");
+    handleModalClose();
+  }, [userList]);
 
   useEffect(() => {
     if (!id) return;
-    // console.log(id);
+
     const user = userList.find((u) => u._id === id);
 
     setValue("_id", user._id);
     setValue("firstName", user.firstName);
     setValue("lastName", user.lastName);
-    // setValue("email",user.email)
+
     setValue("phone", user.phone);
     setValue("userName", user.userName);
     setValue("isActive", user.isActive);
   }, [id, setValue, userList]);
 
   const onSubmitHandler = (data) => {
-   
     updateUser({ data }, user._id);
-   
   };
   if (user.role !== "Admin") {
     sessionStorage.removeItem("token");
     return <Navigate to="/login" replace={true} />;
   }
   const closeAndReset = () => {
-    navigate("/admin/users")
+    navigate("/admin/users");
     handleModalClose();
     reset();
   };
@@ -153,16 +147,16 @@ useEffect(()=>{
               </div>
 
               <div className="w-full mt-4 flex">
-                  <input
-                    id="isActive"
-                    {...register("isActive")}
-                    className="mt-5 mr-1 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    type="checkbox"
-                    defaultValue
-                  />
-                  <label className="mt-5" htmlFor="isActive">
-                    isActive
-                  </label>
+                <input
+                  id="isActive"
+                  {...register("isActive")}
+                  className="mt-5 mr-1 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  type="checkbox"
+                  defaultValue
+                />
+                <label className="mt-5" htmlFor="isActive">
+                  isActive
+                </label>
               </div>
 
               <button
@@ -171,9 +165,7 @@ useEffect(()=>{
               >
                 <span className="ml-3">Update</span>
               </button>
-              
             </form>
-           
           </div>
           <p className="text-red-500">{error_msg ? error_msg : null}</p>
         </div>
@@ -182,5 +174,3 @@ useEffect(()=>{
   );
 };
 export default UserForm;
-
-

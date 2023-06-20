@@ -20,9 +20,7 @@ const UserTable = (props) => {
   const filteredUserList = userList.filter(
     (eachUser) => eachUser.role !== "Admin"
   );
-  // console.log(filteredUserList);
 
-  // console.log(userList);
   useEffect(() => {
     getAllUsers();
   }, []);
@@ -46,13 +44,11 @@ const UserTable = (props) => {
   const lastIndex = currentPage * dataPerPage;
   const firstIndex = lastIndex - dataPerPage;
   const currentUsers = filterUsers.slice(firstIndex, lastIndex);
-  if(currentUsers.length===0 && currentPage!==1){
-    setCurrentPage((prevState)=>prevState-1)
+  if (currentUsers.length === 0 && currentPage !== 1) {
+    setCurrentPage((prevState) => prevState - 1);
   }
 
-
   const displayUserTable = () => {
-    
     return (
       <>
         <table className="w-[66rem] text-sm text-left text-gray-500  m-3 rounded-lg">
@@ -125,7 +121,6 @@ const UserTable = (props) => {
           pageSize={dataPerPage}
           currentPage={currentPage}
           onPageChange={onPaginate}
-          
         />
       </>
     );
@@ -133,7 +128,6 @@ const UserTable = (props) => {
 
   return (
     <>
-    
       <UserForm isModalOpen={isModalOpen} handleModalClose={handleModalClose} />
       <div className="flex flex-row justify-between">
         <div>
