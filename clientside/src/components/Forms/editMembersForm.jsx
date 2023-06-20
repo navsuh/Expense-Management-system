@@ -56,26 +56,28 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   }, [id, setValue, memberList]);
 
   useEffect(()=>{
+    navigate("/primaryuser/members")
+    handleModalClose()
+
+  },[memberList])
+
+  useEffect(()=>{
     getAllMembers()
   },[getAllMembers])
   
   const onSubmitHandler = (data) => {
-    // console.log({ data });
-    // console.log(id);
+    
     const member = memberList.find((m) => m._id === id);
-    // console.log(memberList);
-    // console.log(members);
-    // console.log(members.memberUserId);
-    console.log(member);
+    
     const {memberUserId,householdId}=member
     // console.log(memberUserId);
     const newData={...data,memberUserId,householdId,primaryuserId:user._id}
     
+   
     updateMember({newData})
-    reset()
+    // reset()
 
-    navigate("/primaryuser/members")
-    handleModalClose()
+    
     //  navigate("/primaryuser/members")
 
   };

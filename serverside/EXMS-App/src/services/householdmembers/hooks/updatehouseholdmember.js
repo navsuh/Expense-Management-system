@@ -9,10 +9,10 @@ export const updatehouseholdmember =()=>{
         const updatedAt=new Date().toISOString()
           const userService=context.app.service("users")
         const finduser = await userService.find( { query: { _id:memberUserId } });
-        const updateuser = await userService.patch( finduser.data[0]._id,{firstName,lastName,phone,userName,updatedBy,updatedAt});
+        const updateuser = await userService.patch( finduser.data[0]._id,{firstName,lastName,phone,userName,updatedBy,updatedAt,memberUserId});
         // console.log(finduser);
     
-       if (!finduser.total) throw new Error ("user with given email or username already exist");
+      //  if (!finduser.total) throw new Error ("user with given email or username already exist");
  
         const householdservice=context.app.service("households")
      const household = await householdservice.find( { query: {name:householdName} });

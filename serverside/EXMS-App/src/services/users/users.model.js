@@ -22,4 +22,5 @@ export const userSchema = Joi.object({
     lastLoggedIn:Joi.string(),
     updatedBy:Joi.string(),
     updatedAt:Joi.string(),
+    memberUserId:Joi.string(),
   });

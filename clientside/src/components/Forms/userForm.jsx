@@ -42,7 +42,7 @@ useEffect(()=>{
 
   useEffect(() => {
     if (!id) return;
-    console.log(id);
+    // console.log(id);
     const user = userList.find((u) => u._id === id);
 
     setValue("_id", user._id);
@@ -55,12 +55,9 @@ useEffect(()=>{
   }, [id, setValue, userList]);
 
   const onSubmitHandler = (data) => {
-    console.log(data);
+   
     updateUser({ data }, user._id);
-    // if(!error_msg){
-    // navigate("/admin/users");
-    // handleModalClose()
-    // }
+   
   };
   if (user.role !== "Admin") {
     sessionStorage.removeItem("token");

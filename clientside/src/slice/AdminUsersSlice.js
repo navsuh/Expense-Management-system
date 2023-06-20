@@ -38,13 +38,15 @@ export const AdminUsersSlice = (set) => ({
     const { data } = userData;
 
     const { _id } = data;
-    console.log(data);
+    console.log("1");
+    console.log(userData);
+    console.log("2fsdf");
     const token = sessionStorage.getItem("token");
     const { firstName, isActive, lastName, phone, userName } = data;
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        {  _id,firstName, isActive, lastName, phone, userName,updatedBy:AdminUserId,updatedAt:new Date() },
+        {  memberUserId:_id,firstName, isActive, lastName, phone, userName,updatedBy:AdminUserId,updatedAt:new Date() },
         {
           headers: {
             // 'Content-Type': 'application/json',
@@ -55,7 +57,7 @@ export const AdminUsersSlice = (set) => ({
       // console.log(response.data.accessToken);
       // console.log(response.data.users.role);
 
-      console.log(response.data);
+      // console.log(response.data);
 
       set(
         (state) => ({

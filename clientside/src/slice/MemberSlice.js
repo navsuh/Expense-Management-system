@@ -60,15 +60,17 @@ export const MemberSlice =(set)=>({
 
    updateMember: async (memberuserData) => {
     const {newData}=memberuserData
-    
-    const { _id ,email,firstName,lastName,householdName,householdId,memberUserId,phone,userName} = newData;
+    // console.log("1");
+    // console.log(memberuserData);
+    // console.log("1");
+    const { _id ,email,firstName,lastName,householdName,householdId,memberUserId,primaryuserId,phone,userName} = newData;
    
     const token = sessionStorage.getItem("token");
     
     try {
       const response=await axios.patch(
         `${apiEndPoint}/${_id}`,
-        {email,firstName,lastName,householdName,householdId,memberUserId,phone,userName},
+        {email,firstName,lastName,householdName,householdId,memberUserId,phone,userName,primaryuserId},
         {
           headers: {
             // 'Content-Type': 'application/json',
