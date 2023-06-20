@@ -57,6 +57,8 @@ root.render(
           <Route index={true} element={<ExpenseTypeTable />} />
           <Route path="expensetype" element={<ExpenseTypeTable />} />
           <Route path="expensetype/:id" element={<ExpenseTypeTable />} />
+          <Route path="expensetype/delete/:id" element={<ExpenseTypeTable />} />
+
           <Route path="users" element={<UserTable />} />
           
           <Route path="users/:id" element={<UserTable />} />
@@ -75,12 +77,16 @@ root.render(
           <Route index={true} element={<HouseholdTable />} />
           <Route path="household" element={<HouseholdTable />} />
           <Route path="household/:id" element={<HouseholdTable/>}/>
+          <Route path="household/delete/:id" element={<HouseholdTable />} />
           <Route path="members" element={<MemberTable />} />
          <Route path="members/:id" element={<MemberTable />} />
           <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />
           <Route path="periodicexpenses/:id" element={<PeriodicExpensesTable />} />
+          <Route path="periodicexpenses/delete/:id" element={<PeriodicExpensesTable />} />
           <Route path="dailyexpenses" element={<DailyExpensesTable />} />
           <Route path="dailyexpenses/:id" element={<DailyExpensesTable />} />
+          <Route path="dailyexpenses/delete/:id" element={<DailyExpensesTable />} />
+
 
         </Route>
         

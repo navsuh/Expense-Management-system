@@ -1,11 +1,12 @@
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
 import { IoAddCircle } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import HouseHoldForm from "../Forms/houseHoldForm";
 import Pagination from "../Pagination";
+import ConfirmDelete from "../Forms/deleteConfirm";
 
 const HouseholdTable = (props) => {
   // const {expenseList}=props
@@ -14,6 +15,7 @@ const HouseholdTable = (props) => {
   const deleteHouseholds = useBoundStore((store) => store.deleteHouseholds);
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
 
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 4
@@ -30,7 +32,7 @@ const HouseholdTable = (props) => {
     setCurrentPage(pageNumber);
   };
 
-
+    const navigate =useNavigate()
   // console.log(getAllHouseholds);
   //  console.log(houseHoldList);
   useEffect(() => {
@@ -42,6 +44,9 @@ const HouseholdTable = (props) => {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setIsDeleteModalOpen(false)
+    navigate("/primaryuser/household")
+    
   };
 
   const houseHoldTable=()=>{
@@ -72,10 +77,15 @@ const HouseholdTable = (props) => {
                     >
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
+                    <Link
+                      to={`/primaryuser/household/delete/${eachHousehold._id}`}
+                      onClick={() => setIsDeleteModalOpen(true)}
+                    >
                     <AiOutlineDelete
-                      onClick={() => deleteHousehold(eachHousehold._id)}
+                      // onClick={() => deleteExpenseType(eachHousehold._id)}
                       className="w-8 h-6 ml-1 cursor-pointer"
                     />
+                    </Link>
                   </div>
                 </td>
               </tr>
@@ -99,6 +109,7 @@ const HouseholdTable = (props) => {
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
+       <ConfirmDelete isModalOpen={isDeleteModalOpen} handleModalClose={handleModalClose} deleteRecord={deleteHousehold}/>
 
       <div className="flex flex-row justify-between">
         <div>
