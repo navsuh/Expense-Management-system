@@ -11,10 +11,8 @@ import { sub, formatISO } from "date-fns";
 import Pagination from "../Pagination";
 import { AiOutlineAreaChart } from "react-icons/ai";
 
-
 import Chart from "../chart";
 import ConfirmDelete from "../Forms/deleteConfirm";
-
 
 const DailyExpensesTable = (props) => {
   // const {userList}=props
@@ -25,12 +23,19 @@ const DailyExpensesTable = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const houseHoldList = useBoundStore((store) => store.households);
   const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
+  const [showchart, SetshowChart] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [showFilter, SetshowFilter] = useState(false);
+  const [filterName, setFilterName] = useState("Today");
+  const navigate = useNavigate();
+
   const householdNames = houseHoldList.map(
     (eachHouseHold) => eachHouseHold.name
   );
 
   const [currentPage, setCurrentPage] = useState(1);
-  const dataPerPage = 3
+  const dataPerPage = 3;
 
   const filteredDailyExpenseList = dailyExpensesList.filter((expense) =>
     householdNames.includes(expense.household)
@@ -44,17 +49,13 @@ const DailyExpensesTable = (props) => {
   const ondeleteDailyExpense = (id) => {
     deleteDailyExpense(id);
   };
-  const [showchart, SetshowChart] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
-  const [showFilter, SetshowFilter] = useState(false);
-  const [filterName, setFilterName] = useState("Today");
+  
 
-  const navigate =useNavigate()
+  
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setIsDeleteModalOpen(false)
-    navigate("/primaryuser/dailyexpenses")
+    setIsDeleteModalOpen(false);
+    navigate("/primaryuser/dailyexpenses");
   };
 
   const onchecked = (value) => {
@@ -70,19 +71,21 @@ const DailyExpensesTable = (props) => {
       m.selectExpense.toLowerCase().includes(searchQuery.toLowerCase()) ||
       m.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  
-  
-  const lastIndex =dataPerPage *currentPage;
+
+  const lastIndex = dataPerPage * currentPage;
   const firstIndex = lastIndex - dataPerPage;
-  const currentDailyExpenses = filteredDailyExpenses.slice(firstIndex,lastIndex)
+  const currentDailyExpenses = filteredDailyExpenses.slice(
+    firstIndex,
+    lastIndex
+  );
 
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const handlechartClose=()=>{
-    SetshowChart(false)
-  }
+  const handlechartClose = () => {
+    SetshowChart(false);
+  };
 
   const handleFilterClose = () => {
     SetshowFilter(false);
@@ -91,69 +94,65 @@ const DailyExpensesTable = (props) => {
     setFilterName(value);
   };
 
-  const dailyExpenseTable=()=>{
-    return(<>
-      <table className="w-[66rem] text-sm text-left text-gray-500  m-3 rounded-lg">
-        <thead className="text-xs text-white uppercase bg-blue-500 ">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              Date
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Expense Type
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Paid By
-            </th>
+  const dailyExpenseTable = () => {
+    return (
+      <>
+        <table className="w-[66rem] text-sm text-left text-gray-500  m-3 rounded-lg">
+          <thead className="text-xs text-white uppercase bg-blue-500 ">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Date
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Expense Type
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Paid By
+              </th>
 
-            <th scope="col" className="px-6 py-3">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentDailyExpenses.map((eachDailyExpense) => (
-            <tr className="border-b bg-gray-50 " key={eachDailyExpense._id}>
-              <td className="px-6 py-4">
-                {eachDailyExpense.paymentDetails.date}
-              </td>
-              <td className="px-6 py-4">{eachDailyExpense.selectExpense}</td>
-              <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
-              <td className="px-6 py-4">
-                <div className="flex flex-between">
-                  <Link
-                    to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}
-                    onClick={() => setIsModalOpen(true)}
-                  >
-                    <AiOutlineEdit className="w-8 h-6" />
-                  </Link>
-
-                  <Link
-                    to={`/primaryuser/dailyexpenses/delete/${eachDailyExpense._id}`}
-                    onClick={() => setIsDeleteModalOpen(true)}
-                  >
-                    <AiOutlineDelete className="w-8 h-6 cursor-pointer ml-1"/>
-                  </Link>
-                  
-                
-                </div>
-              </td>
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <Pagination
-      total={filteredDailyExpenseList.length}
-      pageSize={dataPerPage}
-      currentPage={currentPage}
-      onPageChange={onPaginate} />
+          </thead>
+          <tbody>
+            {currentDailyExpenses.map((eachDailyExpense) => (
+              <tr className="border-b bg-gray-50 " key={eachDailyExpense._id}>
+                <td className="px-6 py-4">
+                  {eachDailyExpense.paymentDetails.date}
+                </td>
+                <td className="px-6 py-4">{eachDailyExpense.selectExpense}</td>
+                <td className="px-6 py-4">{eachDailyExpense.paidBy}</td>
+                <td className="px-6 py-4">
+                  <div className="flex flex-between">
+                    <Link
+                      to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      <AiOutlineEdit className="w-8 h-6" />
+                    </Link>
+
+                    <Link
+                      to={`/primaryuser/dailyexpenses/delete/${eachDailyExpense._id}`}
+                      onClick={() => setIsDeleteModalOpen(true)}
+                    >
+                      <AiOutlineDelete className="w-8 h-6 cursor-pointer ml-1" />
+                    </Link>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <Pagination
+          total={filteredDailyExpenseList.length}
+          pageSize={dataPerPage}
+          currentPage={currentPage}
+          onPageChange={onPaginate}
+        />
       </>
-      
-
-    )
-  }
-
-  
+    );
+  };
 
   return (
     <>
@@ -172,36 +171,52 @@ const DailyExpensesTable = (props) => {
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="text-blue-900">
-          <div className="flex cursor-pointer" onClick={()=>SetshowChart(true)}>
-          <AiOutlineAreaChart className="h-8 w-8 mt-4" />
-        <p className="mt-5 font-medium text-gray-800">charts</p>
+          <div
+            className="flex cursor-pointer"
+            onClick={() => SetshowChart(true)}
+          >
+            <AiOutlineAreaChart className="h-8 w-8 mt-4" />
+            <p className="mt-5 font-medium text-gray-800">charts</p>
           </div>
-        
 
-        <Chart data={filteredDailyExpenseList} showchart={showchart} handlechartClose={handlechartClose}/>
+          <Chart
+            data={filteredDailyExpenseList}
+            showchart={showchart}
+            handlechartClose={handlechartClose}
+          />
         </div>
-        
+
         <div className="flex flex-row justify-between cursor-pointer">
-        <div className="flex flex-col ">
-            <div  onClick={() => SetshowFilter(true)} className="flex flex-row border border-gray-100 rounded-md mr-4  p-2">
-            <FaFilter
-              // onClick={() => SetshowFilter(!showFilter)}
-              className="mt-6  text-blue-800"
-            />
-           <p className="mt-5 font-medium text-gray-800">{filterName}</p>
+          <div className="flex flex-col ">
+            <div
+              onClick={() => SetshowFilter(true)}
+              className="flex flex-row border border-gray-100 rounded-md mr-4  p-2"
+            >
+              <FaFilter
+                // onClick={() => SetshowFilter(!showFilter)}
+                className="mt-6  text-blue-800"
+              />
+              <p className="mt-5 font-medium text-gray-800">{filterName}</p>
             </div>
-           
-            <Filter  handleonchecked={onchecked} showFilter={showFilter}  handleFilterClose={handleFilterClose} getFilterName={getFilterName}/> 
-        
+
+            <Filter
+              handleonchecked={onchecked}
+              showFilter={showFilter}
+              handleFilterClose={handleFilterClose}
+              getFilterName={getFilterName}
+            />
           </div>
           <button onClick={() => setIsModalOpen(true)}>
             <IoAddCircle className="text-blue-800 h-14 w-14" />
-            </button>
+          </button>
         </div>
       </div>
       <div className="relative shadow-md sm:rounded-lg">
-        {currentDailyExpenses.length===0 ?(<div className="p-4">No Data Found.</div>):
-        (dailyExpenseTable())}
+        {currentDailyExpenses.length === 0 ? (
+          <div className="p-4">No Data Found.</div>
+        ) : (
+          dailyExpenseTable()
+        )}
       </div>
     </>
   );

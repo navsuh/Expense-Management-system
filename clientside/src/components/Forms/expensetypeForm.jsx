@@ -52,6 +52,7 @@ const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
       // console.log("here");
       updateExpenseTypes({ data });
       
+      
     } else {
       reset()
       createExpenseTypes({ data });
