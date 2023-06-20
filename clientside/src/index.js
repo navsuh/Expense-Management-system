@@ -8,15 +8,12 @@ import reportWebVitals from "./reportWebVitals";
 import Admin from "./components/Admin/Admin";
 import ExpenseTypeTable from "./components/Admin/expenseTypeTable";
 import UserTable from "./components/Admin/userTable";
-// import ExpenseTypeForm from "./components/Forms/expensetypeForm";
-// import UserForm from "./components/Forms/userForm";
 
 import PrimaryUser from "./components/Primary user/PrimaryUser";
 import HouseholdTable from "./components/Primary user/houseHoldTable";
 import MemberTable from "./components/Primary user/memberTable";
 import PeriodicExpensesTable from "./components/Primary user/periodicExpensesTable";
 import DailyExpensesTable from "./components/Primary user/dailyExpensesTable";
-// import HouseHoldForm from "./components/Forms/houseHoldForm";
 
 import MemberUser from "./components/member/member";
 import PeriodicExpensesTableMember from "./components/member/periodicExpensesTable";
@@ -24,15 +21,16 @@ import DailyExpensesTableMember from "./components/member/dailyExpensesTable";
 
 import Register from "./components/Register";
 import Login from "./components/Login ";
-// import CreateMemberForm from "./components/Forms/createMembersForm";
-// import EditMemberForm from "./components/Forms/editMembersForm";
+
 import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
-// import DailyExpenseForm from "./components/Forms/dailyexpenseForm";
 
 import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
 
 import PrivateRoute from "./components/privateRoute";
 import Error401 from "./components/Errorpage";
+
+import OTPFORM from "./components/OTPForm";
+import PrivateRouteResetPassword from "./components/privateRouteResetPassword";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -43,7 +41,6 @@ root.render(
         <Route index={true} element={<Login />} />
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-       
 
         <Route
           path="/admin"
@@ -59,7 +56,6 @@ root.render(
           <Route path="users" element={<UserTable />} />
           <Route path="users/:id" element={<UserTable />} />
         </Route>
-
 
         <Route
           path="/primaryuser"
@@ -115,10 +111,9 @@ root.render(
             </PrivateRoute>
           }
         />
-
-    
-        <Route path="/resetpassword" element={<ResetPasswordForm />} />
-        <Route path="*" element={<Error401 />} />
+        <Route path="/otpform" element={<OTPFORM />} />
+        <Route path="/resetpassword" element={<PrivateRouteResetPassword><ResetPasswordForm /></PrivateRouteResetPassword>} />
+        {/* <Route path="*" element={<Error401 />} /> */}
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -5,11 +5,9 @@ import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
-// import { toast,ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "./Forms/ForgetPasswordForm";
-// import { Navigate } from "react-router-dom";
+
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -25,11 +23,7 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  //   const showToastMessage = () => {
-  //     toast.success('Successfully Login !', {
-  //         position: toast.POSITION.TOP_RIGHT
-  //     });
-  // };
+
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -52,7 +46,7 @@ const Login = () => {
     if (!user.isActive && user.role !== "Admin") {
       sessionStorage.removeItem("token");
       alert("user inActive Contact Admin");
-      //  navigate("/login");
+   
       return navigate(0);
     }
     if (user.role === "Admin") {
@@ -66,41 +60,14 @@ const Login = () => {
       navigate("/memberuser");
     }
 
-    // toast.success('Registration Successful', {
-    //   position: "top-right",
-    //   autoClose: 5000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    //   });
   }, [token, navigate, user.role, user.isActive]);
-  // const customId = "custom-id-yes";
+  
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
-    // toast.success('Success Notification !', {
-    //   position: toast.POSITION.TOP_RIGHT
-    // })
     loginUser({ data });
   };
 
-  // const displayErrorMessage = () => {
-  //   toast.error(error_msg, {
-  //     position: "top-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     toastId: customId,
-  //     limit: 1,
-  //     theme: "light",
-  //   });
-  // };
+  
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalClose = () => {

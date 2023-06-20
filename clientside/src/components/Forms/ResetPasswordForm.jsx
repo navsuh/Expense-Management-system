@@ -38,7 +38,7 @@ const ResetPasswordForm = () => {
   useEffect(() => {
     if (resetPasswordResponse.status === 200) {
       alert(resetPasswordResponse.msg);
-
+      sessionStorage.removeItem("OTP")
       resetPasswordReset();
       navigate("/login");
     }

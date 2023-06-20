@@ -32,13 +32,14 @@ export class ForgotPasswordService {
     })
     if (userResponse && userResponse.data.length > 0) {
       // console.log("data1");
-      // console.log(data);
+      console.log(userResponse.data);
       // console.log("data2");
-
-      emailhandler.sendEmail(data,"forgot-password")
+      const OTP=String(Math.floor((Math.random() * 10)*100000+Math.random() * 1000)).substring(0,4);
+const newData={...userResponse.data[0],OTP}
+      emailhandler.sendEmail(newData,"forgot-password")
       result.status = 200
-            result.msg = 'Link for reset password sent to your Email Id'
-            
+            result.msg = 'OTP generated successfully.check your registered email'
+            result.OTP=OTP
             return result
      
     } else{

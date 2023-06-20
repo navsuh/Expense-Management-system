@@ -32,10 +32,10 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose }) => {
   useEffect(() => {
     if (forgetPasswordResponse.status === 200) {
       alert(forgetPasswordResponse.msg);
-      forgetPasswordReset();
-      navigate("/resetpassword");
+      // forgetPasswordReset();
+      navigate("/otpform");
     }
-  }, [forgetPasswordResponse, navigate, forgetPasswordReset]);
+  }, [forgetPasswordResponse]);
 
   const onSubmitHandler = (data) => {
     console.log({ data });

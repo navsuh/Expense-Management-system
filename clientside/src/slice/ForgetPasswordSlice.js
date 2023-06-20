@@ -18,7 +18,7 @@ export const ForgetPasswordSlice = (set) => ({
           // "Authorization": "Bearer "+token
         },
       });
-      // console.log(response);
+      console.log(response);
       set(
         {
           error_msg_forget_password: "",

@@ -74,7 +74,7 @@ const UserTable = (props) => {
                     eachUser.isActive ? "px-6 py-4" : "px-6 py-4 text-gray-300"
                   }
                 >
-                  {eachUser.firstName}
+                  {eachUser.firstName+" "+eachUser.lastName}
                 </td>
                 <td
                   className={
