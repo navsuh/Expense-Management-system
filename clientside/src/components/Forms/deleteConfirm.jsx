@@ -24,7 +24,7 @@ const ConfirmDelete = ({
             onClick={() => {
               handleModalClose();
             }}
-            className="text-red-500 text-2xl cursor-pointer"
+            className="text-red-500 text-2xl cursor-pointer hover:text-red-600 hover:scale-150"
           >
             &times;
           </span>
@@ -37,7 +37,7 @@ const ConfirmDelete = ({
 
         <div className="mt-5 flex justify-center">
           <button
-            className="bg-red-500 mr-4 px-2 py-3 text-white rounded-lg"
+            className="bg-red-500 mr-4 px-3 py-3 text-white rounded-lg hover:bg-red-600"
             onClick={() => {
               deleteRecord(deleteId);
               handleModalClose();
@@ -46,7 +46,7 @@ const ConfirmDelete = ({
             Delete
           </button>
           <button
-            className="bg-gray-400  px-2 py-3 text-white rounded-lg"
+            className="bg-gray-400  px-3 py-3 text-white rounded-lg hover:bg-gray-500"
             onClick={() => {
               handleModalClose();
             }}

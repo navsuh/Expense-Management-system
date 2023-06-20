@@ -126,10 +126,10 @@ const PeriodicExpensesTableMember = (props) => {
                       to={`/memberuser/periodicexpenses/${eachPeriodicExpense._id}`}
                       onClick={() => setIsModalOpen(true)}
                     >
-                      <AiOutlineEdit className="w-8 h-6" />
+                      <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
                     <AiOutlineDelete
-                      className="w-8 h-6 ml-1 cursor-pointer"
+                      className="w-8 h-6 ml-1 cursor-pointer hover:text-red-500"
                       onClick={() => {
                         setIsDeleteModalOpen(true);
                         setDeleteId(eachPeriodicExpense._id);

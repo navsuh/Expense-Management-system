@@ -80,8 +80,7 @@ const MemberTable = () => {
             </tr>
           </thead>
           <tbody>
-            {/* filter((h)=>h.household.toLowerCase().includes(searchQuery.toLowerCase())||h.firstName.toLowerCase().includes(searchQuery.toLowerCase())) */}
-            {currentMembers.map((eachMember) => (
+              {currentMembers.map((eachMember) => (
               <tr className="border-b bg-gray-50 " key={eachMember._id}>
                 <td className="px-6 py-4">{eachMember.household}</td>
                 <td className="px-6 py-4">{eachMember.firstName}</td>
@@ -90,12 +89,12 @@ const MemberTable = () => {
                     <Link to={`/primaryuser/members/${eachMember._id}`}>
                       <AiOutlineEdit
                         onClick={() => handleEdit()}
-                        className="w-8 h-6"
+                        className="w-8 h-6 hover:text-blue-500"
                       />
                     </Link>
 
                     <AiOutlineDelete
-                      className="w-8 h-6 ml-1 cursor-pointer"
+                      className="w-8 h-6 ml-1 cursor-pointer hover:text-red-500"
                       onClick={() => {
                         setIsDeleteModalOpen(true);
                         setDeleteId(eachMember._id);
@@ -142,7 +141,7 @@ const MemberTable = () => {
           <Link to={"/primaryuser/members"}>
             <IoAddCircle
               onClick={() => handleAdd()}
-              className="text-blue-800 h-14 w-14"
+              className="text-blue-800 h-14 w-14 hover:text-blue-600"
             />
           </Link>
         </div>

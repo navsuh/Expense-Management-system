@@ -123,10 +123,10 @@ const DailyExpensesTableMember = (props) => {
                       to={`/memberuser/dailyexpenses/${eachDailyExpense._id}`}
                       onClick={() => setIsModalOpen(true)}
                     >
-                      <AiOutlineEdit className="w-8 h-6" />
+                      <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
                     <AiOutlineDelete
-                      className="w-8 h-6 cursor-pointer ml-1"
+                      className="w-8 h-6 cursor-pointer ml-1 hover:text-red-500"
                       onClick={() => {
                         setIsDeleteModalOpen(true);
                         setDeleteId(eachDailyExpense._id);
@@ -197,7 +197,7 @@ const DailyExpensesTableMember = (props) => {
             />
           </div>
           <button onClick={() => setIsModalOpen(true)}>
-            <IoAddCircle className="text-blue-800 h-14 w-14" />
+            <IoAddCircle className="text-blue-800 h-14 w-14 hover:text-blue-600" />
           </button>
         </div>
       </div>
