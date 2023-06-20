@@ -61,7 +61,7 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
           </h3>
           <span
             onClick={() => handleModalClose()}
-            className="text-red-500 text-2xl cursor-pointer"
+            className="text-red-500 text-2xl cursor-pointer hover:text-red-600 hover:scale-150"
           >
             &times;
           </span>

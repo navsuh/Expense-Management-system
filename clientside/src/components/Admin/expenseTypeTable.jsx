@@ -8,6 +8,7 @@ import ExpenseTypeForm from "../Forms/expensetypeForm.jsx";
 import Pagination from "../Pagination.jsx";
 import ConfirmDelete from "../Forms/deleteConfirm.jsx";
 
+
 const ExpenseTypeTable = (props) => {
   const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
   const deleteExpenseTypes = useBoundStore((store) => store.deleteExpenseTypes);
@@ -62,6 +63,7 @@ const ExpenseTypeTable = (props) => {
   const displayExpenseTypeTable = () => {
     return (
       <>
+      
         <table className="w-[65rem] text-sm text-left text-gray-500 ml-6 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500">
             <tr>
@@ -83,7 +85,7 @@ const ExpenseTypeTable = (props) => {
                       to={`/admin/expensetype/${eachExpense._id}`}
                       onClick={() => setIsModalOpen(true)}
                     >
-                      <AiOutlineEdit className="w-8 h-6" />
+                      <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
 
                     <AiOutlineDelete
@@ -91,7 +93,7 @@ const ExpenseTypeTable = (props) => {
                         setIsDeleteModalOpen(true);
                         setDeleteId(eachExpense._id);
                       }}
-                      className="w-8 h-6 ml-1 cursor-pointer"
+                      className="w-8 h-6 ml-1 cursor-pointer hover:text-red-500"
                     />
                   </div>
                 </td>
@@ -130,7 +132,7 @@ const ExpenseTypeTable = (props) => {
         </div>
         <div>
           <button onClick={() => setIsModalOpen(true)}>
-            <IoAddCircle className="text-blue-800 h-14 w-14" />
+            <IoAddCircle className="text-blue-800 h-14 w-14 hover:text-blue-600" />
           </button>
         </div>
       </div>
