@@ -12,6 +12,7 @@ import { AiOutlineAreaChart } from "react-icons/ai";
 
 
 import Chart from "../chart";
+import ConfirmDelete from "../Forms/deleteConfirm";
 
 
 
@@ -42,6 +43,8 @@ const PeriodicExpensesTableMember = (props) => {
   }, [getAllPeriodicExpense, getAllHouseholds]);
   const [showchart, SetshowChart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
   const [showFilter, SetshowFilter] = useState(false);
   const [filterName, setFilterName] = useState("Today");
   const filteredPeriodicExpenses = filteredPeriodicExpenseList.filter(
@@ -65,6 +68,7 @@ const PeriodicExpensesTableMember = (props) => {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setIsDeleteModalOpen(false)
   };
 
   const ondeletePeriodicExpense = (id) => {
@@ -126,10 +130,11 @@ const PeriodicExpensesTableMember = (props) => {
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
                     <AiOutlineDelete
-                      onClick={() =>
-                        ondeletePeriodicExpense(eachPeriodicExpense._id)
-                      }
-                      className="w-8 h-6"
+                      className="w-8 h-6 ml-1 cursor-pointer"
+                      onClick={() => {
+                        setIsDeleteModalOpen(true);
+                        setDeleteId(eachPeriodicExpense._id);
+                      }}
                     />
                   </div>
                 </td>
@@ -152,6 +157,12 @@ const PeriodicExpensesTableMember = (props) => {
       <PeriodicExpenseForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
+      />
+      <ConfirmDelete
+        isModalOpen={isDeleteModalOpen}
+        handleModalClose={handleModalClose}
+        deleteRecord={ondeletePeriodicExpense}
+        deleteId={deleteId}
       />
       <div className="flex flex-row justify-between">
         <div>

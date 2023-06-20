@@ -1,4 +1,3 @@
-import React from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,31 +7,34 @@ import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import PeriodicExpenseForm from "../Forms/periodicexpenseForm";
 import Filter from "../filter";
-import { sub, formatISO,differenceInDays,parseISO } from "date-fns";
+import { sub, formatISO, differenceInDays, parseISO } from "date-fns";
 import Pagination from "../Pagination";
 import { AiOutlineAreaChart } from "react-icons/ai";
-
 
 import Chart from "../chart";
 import ConfirmDelete from "../Forms/deleteConfirm";
 
-
-const PeriodicExpensesTable = React.memo((props) => {
+const PeriodicExpensesTable = (props) => {
   // const {userList}=prop
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 3;
   const [showchart, SetshowChart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
   const [showFilter, SetshowFilter] = useState(false);
   const [filterName, setFilterName] = useState("Today");
- 
+
   const periodicExpenseList = useBoundStore((store) => store.periodicExpense);
   const houseHoldList = useBoundStore((store) => store.households);
   const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
-  const sendDueDateNotification = useBoundStore((store) => store.sendDueDateNotification);
-  const dueDateNotificationIds=useBoundStore((store) => store.dueDateNotificationIds);
-  const navigate =useNavigate()
+  const sendDueDateNotification = useBoundStore(
+    (store) => store.sendDueDateNotification
+  );
+  const dueDateNotificationIds = useBoundStore(
+    (store) => store.dueDateNotificationIds
+  );
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
   const getAllPeriodicExpense = useBoundStore(
@@ -58,33 +60,27 @@ const PeriodicExpensesTable = React.memo((props) => {
   const filteredPeriodicExpenseList = periodicExpenseList.filter((expense) =>
     householdNames.includes(expense.household)
   );
-  const filtereddueDateNotificationList=filteredPeriodicExpenseList.filter((eachPeriodicExpense) =>{
-
-  return differenceInDays(parseISO(eachPeriodicExpense.dueDate),new Date())>0 && differenceInDays(parseISO(eachPeriodicExpense.dueDate),new Date())<=15;
-}
-
-);
-
-
-if(filtereddueDateNotificationList){
-  for(let eachfiltereddueDateNotification of filtereddueDateNotificationList){
-    
-  if( dueDateNotificationIds.length===0)
-  {
-    sendDueDateNotification(eachfiltereddueDateNotification)
-  
-  }else if (dueDateNotificationIds.length>0){
-    if(!dueDateNotificationIds.includes(eachfiltereddueDateNotification._id)){
-      sendDueDateNotification(eachfiltereddueDateNotification)
+  const filtereddueDateNotificationList = filteredPeriodicExpenseList.filter(
+    (eachPeriodicExpense) => {
+      return (
+        differenceInDays(parseISO(eachPeriodicExpense.dueDate), new Date()) >
+          0 &&
+        differenceInDays(parseISO(eachPeriodicExpense.dueDate), new Date()) <=
+          15
+      );
     }
-   
+  );
+
+  if (filtereddueDateNotificationList) {
+    for (let eachfiltereddueDateNotification of filtereddueDateNotificationList) {
+      if (
+        !dueDateNotificationIds.includes(eachfiltereddueDateNotification._id)
+      ) {
+        sendDueDateNotification(eachfiltereddueDateNotification);
+      }
+    }
   }
-    
-  }
-  
-}
-  
- 
+
   const onchecked = (value) => {
     // console.log(JSON.parse(value));
     const result = sub(new Date(), JSON.parse(value));
@@ -106,19 +102,18 @@ if(filtereddueDateNotificationList){
     lastIndex
   );
 
-  const handlechartClose=()=>{
-    SetshowChart(false)
-  }
+  const handlechartClose = () => {
+    SetshowChart(false);
+  };
 
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setIsDeleteModalOpen(false)
-    navigate("/primaryuser/periodicexpenses")
+    setIsDeleteModalOpen(false);
+    navigate("/primaryuser/periodicexpenses");
   };
   const handleFilterClose = () => {
     SetshowFilter(false);
@@ -168,14 +163,14 @@ if(filtereddueDateNotificationList){
                     >
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <Link
-                      to={`/primaryuser/periodicexpenses/delete/${eachPeriodicExpense._id}`}
-                      onClick={() => setIsDeleteModalOpen(true)}
-                    >
+
                     <AiOutlineDelete
                       className="w-8 h-6 ml-1 cursor-pointer"
+                      onClick={() => {
+                        setIsDeleteModalOpen(true);
+                        setDeleteId(eachPeriodicExpense._id);
+                      }}
                     />
-                    </Link>
                   </div>
                 </td>
               </tr>
@@ -198,20 +193,31 @@ if(filtereddueDateNotificationList){
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
-       <ConfirmDelete isModalOpen={isDeleteModalOpen} handleModalClose={handleModalClose} deleteRecord={ondeletePeriodicExpense}/>
+      <ConfirmDelete
+        isModalOpen={isDeleteModalOpen}
+        handleModalClose={handleModalClose}
+        deleteRecord={ondeletePeriodicExpense}
+        deleteId={deleteId}
+      />
 
       <div className="flex flex-row justify-between">
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div className="text-blue-900">
-          <div className="flex cursor-pointer" onClick={()=>SetshowChart(true)}>
-          <AiOutlineAreaChart className="h-8 w-8 mt-4" />
-        <p className="mt-5 font-medium text-gray-800">charts</p>
+          <div
+            className="flex cursor-pointer"
+            onClick={() => SetshowChart(true)}
+          >
+            <AiOutlineAreaChart className="h-8 w-8 mt-4" />
+            <p className="mt-5 font-medium text-gray-800">charts</p>
           </div>
-        
 
-        <Chart data={filteredPeriodicExpenseList} showchart={showchart} handlechartClose={handlechartClose}/>
+          <Chart
+            data={filteredPeriodicExpenseList}
+            showchart={showchart}
+            handlechartClose={handlechartClose}
+          />
         </div>
         <div className="flex flex-row justify-between cursor-pointer">
           <div className="flex flex-col ">
@@ -248,6 +254,6 @@ if(filtereddueDateNotificationList){
       </div>
     </>
   );
-});
+};
 
 export default PeriodicExpensesTable;

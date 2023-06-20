@@ -15,7 +15,7 @@ const ExpenseTypeTable = (props) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [deleteId, setDeleteId]= useState("")
   const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -83,15 +83,14 @@ const ExpenseTypeTable = (props) => {
                     >
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <Link
-                      to={`/admin/expensetype/delete/${eachExpense._id}`}
-                      onClick={() => setIsDeleteModalOpen(true)}
-                    >
+                    {/* <Link */}
+                      {/* // to={`/admin/expensetype/delete/${eachExpense._id}`} */}
+                    {/* > */}
                     <AiOutlineDelete
-                      // onClick={() => deleteExpenseType(eachExpense._id)}
+                      onClick={() => {setIsDeleteModalOpen(true); setDeleteId(eachExpense._id)}}
                       className="w-8 h-6 ml-1 cursor-pointer"
                     />
-                    </Link>
+                    {/* </Link> */}
                   
                   </div>
 
@@ -119,7 +118,7 @@ const ExpenseTypeTable = (props) => {
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
-       <ConfirmDelete isModalOpen={isDeleteModalOpen} handleModalClose={handleModalClose} deleteRecord={deleteExpenseType}/>
+       <ConfirmDelete isModalOpen={isDeleteModalOpen} handleModalClose={handleModalClose} deleteRecord={deleteExpenseType} deleteId={deleteId}/>
 
       <div className="flex flex-row justify-between">
         <div>

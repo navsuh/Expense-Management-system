@@ -26,6 +26,7 @@ const DailyExpensesTable = (props) => {
   const [showchart, SetshowChart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
   const [showFilter, SetshowFilter] = useState(false);
   const [filterName, setFilterName] = useState("Today");
   const navigate = useNavigate();
@@ -49,9 +50,7 @@ const DailyExpensesTable = (props) => {
   const ondeleteDailyExpense = (id) => {
     deleteDailyExpense(id);
   };
-  
 
-  
   const handleModalClose = () => {
     setIsModalOpen(false);
     setIsDeleteModalOpen(false);
@@ -132,12 +131,18 @@ const DailyExpensesTable = (props) => {
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
 
-                    <Link
+                    {/* <Link
                       to={`/primaryuser/dailyexpenses/delete/${eachDailyExpense._id}`}
-                      onClick={() => setIsDeleteModalOpen(true)}
-                    >
-                      <AiOutlineDelete className="w-8 h-6 cursor-pointer ml-1" />
-                    </Link>
+                    > */}
+
+                    <AiOutlineDelete
+                      className="w-8 h-6 cursor-pointer ml-1"
+                      onClick={() => {
+                        setIsDeleteModalOpen(true);
+                        setDeleteId(eachDailyExpense._id);
+                      }}
+                    />
+                    {/* </Link> */}
                   </div>
                 </td>
               </tr>
@@ -164,6 +169,7 @@ const DailyExpensesTable = (props) => {
         isModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={ondeleteDailyExpense}
+        deleteId={deleteId}
       />
 
       <div className="flex flex-row justify-between">

@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
 
-const ConfirmDelete = ({ isModalOpen, handleModalClose, deleteRecord }) => {
-  const { id } = useParams();
+const ConfirmDelete = ({ isModalOpen, handleModalClose, deleteRecord ,deleteId}) => {
 
-  const {reset} =useForm()
-  console.log(id);
+   
+ 
+  // console.log(id);
   if (!isModalOpen) return null;
 
   return (
@@ -21,7 +19,7 @@ const ConfirmDelete = ({ isModalOpen, handleModalClose, deleteRecord }) => {
             Are You Sure?
           </h2>
           <span
-            onClick={() => {handleModalClose(); reset()}}
+            onClick={() => {handleModalClose(); }}
             className="text-red-500 text-2xl cursor-pointer"
           >
             &times;
@@ -37,15 +35,15 @@ const ConfirmDelete = ({ isModalOpen, handleModalClose, deleteRecord }) => {
           <button
             className="bg-red-500 mr-4 px-2 py-3 text-white rounded-lg"
             onClick={() => {
-              deleteRecord(id);
+              deleteRecord(deleteId);
               handleModalClose();
-              reset()
+            
             }}
           >
             Delete
           </button>
           <button className="bg-gray-400  px-2 py-3 text-white rounded-lg"
-            onClick={() => {handleModalClose(); reset()}}
+            onClick={() => {handleModalClose(); }}
           
           >
             Cancel

@@ -13,6 +13,7 @@ import { AiOutlineAreaChart } from "react-icons/ai";
 
 
 import Chart from "../chart";
+import ConfirmDelete from "../Forms/deleteConfirm";
 
 
 const DailyExpensesTableMember = (props) => {
@@ -46,10 +47,13 @@ const DailyExpensesTableMember = (props) => {
   };
   const [showchart, SetshowChart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
   const [showFilter, SetshowFilter] = useState(false);
   const [filterName, setFilterName] = useState("Today");
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setIsDeleteModalOpen(false)
   };
   const onchecked = (value) => {
     // console.log(JSON.parse(value));
@@ -124,8 +128,11 @@ const DailyExpensesTableMember = (props) => {
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
                     <AiOutlineDelete
-                      onClick={() => ondeleteDailyExpense(eachDailyExpense._id)}
                       className="w-8 h-6 cursor-pointer ml-1"
+                      onClick={() => {
+                        setIsDeleteModalOpen(true);
+                        setDeleteId(eachDailyExpense._id);
+                      }}
                     />
                   </div>
                 </td>
@@ -148,6 +155,12 @@ const DailyExpensesTableMember = (props) => {
       <DailyExpenseForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
+      />
+       <ConfirmDelete
+        isModalOpen={isDeleteModalOpen}
+        handleModalClose={handleModalClose}
+        deleteRecord={ondeleteDailyExpense}
+        deleteId={deleteId}
       />
       <div className="flex flex-row justify-between">
         <div>

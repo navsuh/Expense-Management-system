@@ -15,24 +15,25 @@ const HouseholdTable = (props) => {
   const deleteHouseholds = useBoundStore((store) => store.deleteHouseholds);
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
-
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
+  // const [state,setState]
   const [currentPage, setCurrentPage] = useState(1);
-  const dataPerPage = 4
+  const dataPerPage = 4;
 
   const filteredHouseholdList = houseHoldList.filter((h) =>
     h.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const lastIndex =dataPerPage *currentPage;
+  const lastIndex = dataPerPage * currentPage;
   const firstIndex = lastIndex - dataPerPage;
-  const currentHousholds = filteredHouseholdList.slice(firstIndex,lastIndex)
+  const currentHousholds = filteredHouseholdList.slice(firstIndex, lastIndex);
 
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-    const navigate =useNavigate()
+  const navigate = useNavigate();
   // console.log(getAllHouseholds);
   //  console.log(houseHoldList);
   useEffect(() => {
@@ -44,13 +45,12 @@ const HouseholdTable = (props) => {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setIsDeleteModalOpen(false)
-    navigate("/primaryuser/household")
-    
+    setIsDeleteModalOpen(false);
+    navigate("/primaryuser/household");
   };
 
-  const houseHoldTable=()=>{
-    return(
+  const houseHoldTable = () => {
+    return (
       <>
         <table className="w-[66rem] text-sm text-left text-gray-500  m-3 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
@@ -77,15 +77,13 @@ const HouseholdTable = (props) => {
                     >
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
-                    <Link
-                      to={`/primaryuser/household/delete/${eachHousehold._id}`}
-                      onClick={() => setIsDeleteModalOpen(true)}
-                    >
                     <AiOutlineDelete
-                      // onClick={() => deleteExpenseType(eachHousehold._id)}
+                      onClick={() => {
+                        setIsDeleteModalOpen(true);
+                        setDeleteId(eachHousehold._id);
+                      }}
                       className="w-8 h-6 ml-1 cursor-pointer"
                     />
-                    </Link>
                   </div>
                 </td>
               </tr>
@@ -97,19 +95,23 @@ const HouseholdTable = (props) => {
           pageSize={dataPerPage}
           currentPage={currentPage}
           onPageChange={onPaginate}
-          
         />
-        </>
-    )
-  }
+      </>
+    );
+  };
 
   return (
     <>
-     <HouseHoldForm
+      <HouseHoldForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
-       <ConfirmDelete isModalOpen={isDeleteModalOpen} handleModalClose={handleModalClose} deleteRecord={deleteHousehold}/>
+      <ConfirmDelete
+        isModalOpen={isDeleteModalOpen}
+        handleModalClose={handleModalClose}
+        deleteRecord={deleteHousehold}
+        deleteId={deleteId}
+      />
 
       <div className="flex flex-row justify-between">
         <div>
@@ -125,8 +127,11 @@ const HouseholdTable = (props) => {
         </div>
       </div>
       <div className="relative  shadow-md sm:rounded-lg">
-        { currentHousholds.length===0 ? (<div>No Page Found.</div>):
-        (houseHoldTable())}
+        {currentHousholds.length === 0 ? (
+          <div>No Page Found.</div>
+        ) : (
+          houseHoldTable()
+        )}
       </div>
     </>
   );
