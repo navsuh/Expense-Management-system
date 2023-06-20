@@ -1,3 +1,4 @@
+import React from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,7 +17,7 @@ import Chart from "../chart";
 import ConfirmDelete from "../Forms/deleteConfirm";
 
 
-const PeriodicExpensesTable = (props) => {
+const PeriodicExpensesTable = React.memo((props) => {
   // const {userList}=prop
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 3;
@@ -68,10 +69,15 @@ const PeriodicExpensesTable = (props) => {
 if(filtereddueDateNotificationList){
   for(let eachfiltereddueDateNotification of filtereddueDateNotificationList){
     
-  if(!dueDateNotificationIds.includes(eachfiltereddueDateNotification._id))
+  if( dueDateNotificationIds.length===0)
   {
     sendDueDateNotification(eachfiltereddueDateNotification)
   
+  }else if (dueDateNotificationIds.length>0){
+    if(!dueDateNotificationIds.includes(eachfiltereddueDateNotification._id)){
+      sendDueDateNotification(eachfiltereddueDateNotification)
+    }
+   
   }
     
   }
@@ -242,6 +248,6 @@ if(filtereddueDateNotificationList){
       </div>
     </>
   );
-};
+});
 
 export default PeriodicExpensesTable;

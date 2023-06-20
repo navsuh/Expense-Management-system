@@ -40,8 +40,8 @@ const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
     if (!id) return;
     console.log(id);
     const expensetype = expenseList.find((e) => e._id === id);
-    console.log(typeof id);
-    console.log(expensetype);
+    // console.log(typeof id);
+    // console.log(expensetype);
     setValue("_id", expensetype._id);
     setValue("name", expensetype.name);
   }, [id, setValue, expenseList]);

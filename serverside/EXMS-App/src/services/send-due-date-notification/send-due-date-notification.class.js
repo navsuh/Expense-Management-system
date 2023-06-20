@@ -11,7 +11,7 @@ export class SendDueDateNotificationService {
   async create(data) {
     let result = {}
    const {households}=data
-    console.log(data);
+    // console.log(data);
     let householdMembersService = this.app.service(`householdmembers`)
     const householdMembers=await householdMembersService.find({query:{household:households}})
     // console.log(householdMembers);
