@@ -78,6 +78,10 @@ const DailyExpensesTable = (props) => {
     lastIndex
   );
 
+  if(currentDailyExpenses.length===0 && currentPage!==1){
+    setCurrentPage((prevState)=>prevState-1)
+  }
+
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

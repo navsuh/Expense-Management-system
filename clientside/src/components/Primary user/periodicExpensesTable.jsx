@@ -101,7 +101,9 @@ const PeriodicExpensesTable = (props) => {
     firstIndex,
     lastIndex
   );
-
+  if(currentPeriodicExpenses.length===0 && currentPage!==1){
+    setCurrentPage((prevState)=>prevState-1)
+  }
   const handlechartClose = () => {
     SetshowChart(false);
   };

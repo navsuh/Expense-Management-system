@@ -56,6 +56,10 @@ const ExpenseTypeTable = (props) => {
   const firstIndex = lastIndex - dataPerPage;
   const currentExpenses = filteredExpenseList.slice(firstIndex, lastIndex);
 
+
+if(currentExpenses.length===0 && currentPage!==1){
+  setCurrentPage((prevState)=>prevState-1)
+}
   
   const displayExpenseTypeTable = () => {
     return (
@@ -132,7 +136,7 @@ const ExpenseTypeTable = (props) => {
       </div>
 
       <div className="relative  shadow-md sm:rounded-lg">
-        {currentExpenses.length === 0 ? (
+        {filteredExpenseList.length === 0 ? (
           <div className="p-4">No data found.</div>
         ) : (
           displayExpenseTypeTable()

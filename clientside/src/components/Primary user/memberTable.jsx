@@ -40,6 +40,10 @@ const MemberTable = () => {
   const firstIndex = lastIndex - dataPerPage;
   const currentMembers = filteredMembers.slice(firstIndex, lastIndex);
 
+  if(currentMembers.length===0 && currentPage!==1){
+    setCurrentPage((prevState)=>prevState-1)
+  }
+
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

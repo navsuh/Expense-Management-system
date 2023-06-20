@@ -29,6 +29,10 @@ const HouseholdTable = (props) => {
   const firstIndex = lastIndex - dataPerPage;
   const currentHousholds = filteredHouseholdList.slice(firstIndex, lastIndex);
 
+  if(currentHousholds.length===0 && currentPage!==1){
+    setCurrentPage((prevState)=>prevState-1)
+  }
+
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

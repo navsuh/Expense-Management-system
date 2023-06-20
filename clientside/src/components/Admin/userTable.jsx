@@ -46,6 +46,11 @@ const UserTable = (props) => {
   const lastIndex = currentPage * dataPerPage;
   const firstIndex = lastIndex - dataPerPage;
   const currentUsers = filterUsers.slice(firstIndex, lastIndex);
+  if(currentUsers.length===0 && currentPage!==1){
+    setCurrentPage((prevState)=>prevState-1)
+  }
+
+
   const displayUserTable = () => {
     
     return (
