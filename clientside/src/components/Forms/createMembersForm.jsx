@@ -21,7 +21,7 @@ const schema = yup.object().shape({
 });
 const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
-  // const memberList = useBoundStore(store=>store.memberData)
+  const memberList = useBoundStore(store=>store.memberData)
   const houseHoldList = useBoundStore((store) => store.households);
   const addMember = useBoundStore((store) => store.addMember);
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
     navigate("/primaryuser/members")
     handleModalClose()
    
-  },[houseHoldList])
+  },[memberList])
 
   // const [showPassword, setShowPassword] = useState(false);
 
