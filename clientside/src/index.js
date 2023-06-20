@@ -80,6 +80,7 @@ root.render(
           <Route path="household/delete/:id" element={<HouseholdTable />} />
           <Route path="members" element={<MemberTable />} />
          <Route path="members/:id" element={<MemberTable />} />
+         <Route path="members/delete/:id" element={<MemberTable />} />
           <Route path="periodicexpenses" element={<PeriodicExpensesTable />} />
           <Route path="periodicexpenses/:id" element={<PeriodicExpensesTable />} />
           <Route path="periodicexpenses/delete/:id" element={<PeriodicExpensesTable />} />

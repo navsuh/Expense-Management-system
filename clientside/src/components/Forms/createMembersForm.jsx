@@ -45,7 +45,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
 
   useEffect(()=>{
     navigate("/primaryuser/members")
-    // handleModalClose()
+    handleModalClose()
    
   },[houseHoldList])
 
@@ -76,7 +76,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
     reset()
     addMember({ data });
     // navigate("/primaryuser/members")
-    handleModalClose()
+    // handleModalClose()
    
   };
 

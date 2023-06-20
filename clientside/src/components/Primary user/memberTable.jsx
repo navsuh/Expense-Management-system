@@ -1,12 +1,13 @@
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
 import { IoAddCircle } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import EditMemberForm from "../Forms/editMembersForm";
 import CreateMemberForm from "../Forms/createMembersForm";
 import Pagination from "../Pagination";
+import ConfirmDelete from "../Forms/deleteConfirm";
 
 const MemberTable = () => {
   // const {userList}=props
@@ -23,10 +24,11 @@ const MemberTable = () => {
     handleDeleteMember(id);
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
   const [isCreateMemberModalOpen, setCreateMemberModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 3;
-
+ const navigate =useNavigate()
   const filteredMembers = memberList.filter(
     (m) =>
       m.household.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -41,9 +43,12 @@ const MemberTable = () => {
     setCurrentPage(pageNumber);
   };
 
+  
   const handleModalClose = () => {
     setIsModalOpen(false);
     setCreateMemberModalOpen(false);
+    setIsDeleteModalOpen(false)
+    navigate("/primaryuser/members")
   };
 
   const handleEdit = () => {
@@ -83,10 +88,14 @@ const membersTable=()=>{
                         className="w-8 h-6"
                       />
                     </Link>
+                    <Link
+                      to={`/primaryuser/members/delete/${eachMember._id}`}
+                      onClick={() => setIsDeleteModalOpen(true)}
+                    >
                     <AiOutlineDelete
-                      onClick={() => onDeleteMember(eachMember._id)}
                       className="w-8 h-6 ml-1 cursor-pointer"
                     />
+                    </Link>
                   </div>
                 </td>
               </tr>
@@ -111,6 +120,8 @@ const membersTable=()=>{
         isModalOpen={isCreateMemberModalOpen}
         handleModalClose={handleModalClose}
       />
+       <ConfirmDelete isModalOpen={isDeleteModalOpen} handleModalClose={handleModalClose} deleteRecord={onDeleteMember}/>
+
       <div className="flex flex-row justify-between">
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
