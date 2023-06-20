@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoAddCircle } from "react-icons/io5";
 import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
@@ -14,6 +14,7 @@ import { AiOutlineAreaChart } from "react-icons/ai";
 
 
 import Chart from "../chart";
+import ConfirmDelete from "../Forms/deleteConfirm";
 
 
 const PeriodicExpensesTable = React.memo((props) => {
@@ -22,6 +23,7 @@ const PeriodicExpensesTable = React.memo((props) => {
   const dataPerPage = 3;
   const [showchart, SetshowChart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
   const [showFilter, SetshowFilter] = useState(false);
   const [filterName, setFilterName] = useState("Today");
  
@@ -30,7 +32,7 @@ const PeriodicExpensesTable = React.memo((props) => {
   const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const sendDueDateNotification = useBoundStore((store) => store.sendDueDateNotification);
   const dueDateNotificationIds=useBoundStore((store) => store.dueDateNotificationIds);
-  
+  const navigate =useNavigate()
   const [searchQuery, setSearchQuery] = useState("");
 
   const getAllPeriodicExpense = useBoundStore(
@@ -112,8 +114,11 @@ if(filtereddueDateNotificationList){
     setCurrentPage(pageNumber);
   };
 
+  
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setIsDeleteModalOpen(false)
+    navigate("/primaryuser/periodicexpenses")
   };
   const handleFilterClose = () => {
     SetshowFilter(false);
@@ -163,12 +168,14 @@ if(filtereddueDateNotificationList){
                     >
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
+                    <Link
+                      to={`/primaryuser/periodicexpenses/delete/${eachPeriodicExpense._id}`}
+                      onClick={() => setIsDeleteModalOpen(true)}
+                    >
                     <AiOutlineDelete
-                      onClick={() =>
-                        ondeletePeriodicExpense(eachPeriodicExpense._id)
-                      }
-                      className="w-8 h-6 cursor-pointer"
+                      className="w-8 h-6 ml-1 cursor-pointer"
                     />
+                    </Link>
                   </div>
                 </td>
               </tr>
@@ -191,6 +198,7 @@ if(filtereddueDateNotificationList){
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
+       <ConfirmDelete isModalOpen={isDeleteModalOpen} handleModalClose={handleModalClose} deleteRecord={ondeletePeriodicExpense}/>
 
       <div className="flex flex-row justify-between">
         <div>

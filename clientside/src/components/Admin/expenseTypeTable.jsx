@@ -3,9 +3,10 @@ import { useBoundStore } from "../../store.js";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { IoAddCircle } from "react-icons/io5";
 import SearchInput from "../searchInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ExpenseTypeForm from "../Forms/expensetypeForm.jsx";
 import Pagination from "../Pagination.jsx";
+import ConfirmDelete from "../Forms/deleteConfirm.jsx";
 
 const ExpenseTypeTable = (props) => {
   const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
@@ -14,20 +15,33 @@ const ExpenseTypeTable = (props) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
+
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 4;
-
+ 
+  
   useEffect(() => {
     getAllExpenseTypes();
   }, [getAllExpenseTypes]);
 
   const deleteExpenseType = (id) => {
     deleteExpenseTypes(id);
+    console.log(id);
+  
   };
 
+   const navigate = useNavigate()
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setIsDeleteModalOpen(false)
+    navigate("/admin/expensetype")
   };
+
+  // const handleDeleteModalClose = () => {
+  //   setIsDeleteModalOpen(false);
+  // };
 
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -37,6 +51,7 @@ const ExpenseTypeTable = (props) => {
     expense.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  
   const lastIndex = currentPage * dataPerPage;
   const firstIndex = lastIndex - dataPerPage;
   const currentExpenses = filteredExpenseList.slice(firstIndex, lastIndex);
@@ -68,11 +83,18 @@ const ExpenseTypeTable = (props) => {
                     >
                       <AiOutlineEdit className="w-8 h-6" />
                     </Link>
+                    <Link
+                      to={`/admin/expensetype/delete/${eachExpense._id}`}
+                      onClick={() => setIsDeleteModalOpen(true)}
+                    >
                     <AiOutlineDelete
-                      onClick={() => deleteExpenseType(eachExpense._id)}
+                      // onClick={() => deleteExpenseType(eachExpense._id)}
                       className="w-8 h-6 ml-1 cursor-pointer"
                     />
+                    </Link>
+                  
                   </div>
+
                 </td>
               </tr>
             ))}
@@ -97,6 +119,7 @@ const ExpenseTypeTable = (props) => {
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
+       <ConfirmDelete isModalOpen={isDeleteModalOpen} handleModalClose={handleModalClose} deleteRecord={deleteExpenseType}/>
 
       <div className="flex flex-row justify-between">
         <div>

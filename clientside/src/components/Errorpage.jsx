@@ -17,12 +17,14 @@ const Error401 = () => {
                     backgroundPosition: "center",
                   }}
                 >
-                  <h1 className="text-center text-[80px]">401</h1>
+                  <h1 className="text-center text-[80px]">404</h1>
                 </div>
 
                 <div className="contant_box_404 -mt-[50px]">
                   <h3 className="h1 text-5xl mb-5">
-                    Oooh You are not Authorised
+                    {/* Oooh You are not Authorised
+                     */}
+                     Page Not Found
                   </h3>
 
                   <p className="text-xl">

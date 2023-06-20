@@ -49,7 +49,6 @@ const error_msg=useBoundStore(store=>store.error_msg_household)
     setValue("city",houseHold.city)
     setValue("state",houseHold.state)
     setValue("zipcode",houseHold.zipcode)
-    
 
   },[id,setValue,houseHoldList])
 
@@ -68,14 +67,13 @@ const error_msg=useBoundStore(store=>store.error_msg_household)
     else {
       reset()
       createHouseholds({data})
-
     }
 
   };
 
   const closeAndReset =()=>{
-    navigate("/primaryuser/household")
     reset()
+    navigate("/primaryuser/household")
     handleModalClose()
   }
   

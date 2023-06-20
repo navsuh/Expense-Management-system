@@ -1,6 +1,6 @@
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import SearchInput from "../searchInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoAddCircle } from "react-icons/io5";
 import { FaFilter } from "react-icons/fa";
 import { useBoundStore } from "../../store";
@@ -13,6 +13,7 @@ import { AiOutlineAreaChart } from "react-icons/ai";
 
 
 import Chart from "../chart";
+import ConfirmDelete from "../Forms/deleteConfirm";
 
 
 const DailyExpensesTable = (props) => {
@@ -45,10 +46,15 @@ const DailyExpensesTable = (props) => {
   };
   const [showchart, SetshowChart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen,setIsDeleteModalOpen] =useState(false)
   const [showFilter, SetshowFilter] = useState(false);
   const [filterName, setFilterName] = useState("Today");
+
+  const navigate =useNavigate()
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setIsDeleteModalOpen(false)
+    navigate("/primaryuser/dailyexpenses")
   };
 
   const onchecked = (value) => {
@@ -121,10 +127,15 @@ const DailyExpensesTable = (props) => {
                   >
                     <AiOutlineEdit className="w-8 h-6" />
                   </Link>
-                  <AiOutlineDelete
-                    onClick={() => ondeleteDailyExpense(eachDailyExpense._id)}
-                    className="w-8 h-6 cursor-pointer ml-1"
-                  />
+
+                  <Link
+                    to={`/primaryuser/dailyexpenses/delete/${eachDailyExpense._id}`}
+                    onClick={() => setIsDeleteModalOpen(true)}
+                  >
+                    <AiOutlineDelete className="w-8 h-6 cursor-pointer ml-1"/>
+                  </Link>
+                  
+                
                 </div>
               </td>
             </tr>
@@ -149,6 +160,11 @@ const DailyExpensesTable = (props) => {
       <DailyExpenseForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
+      />
+      <ConfirmDelete
+        isModalOpen={isDeleteModalOpen}
+        handleModalClose={handleModalClose}
+        deleteRecord={ondeleteDailyExpense}
       />
 
       <div className="flex flex-row justify-between">

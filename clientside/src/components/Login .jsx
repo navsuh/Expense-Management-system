@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
-// import { toast } from "react-toastify";
+// import { toast,ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "./Forms/ForgetPasswordForm";
@@ -66,17 +66,42 @@ const Login = () => {
       navigate("/memberuser");
     }
 
-   
-  }, [token, user.role,user.isActive]);
- 
+    // toast.success('Registration Successful', {
+    //   position: "top-right",
+    //   autoClose: 5000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    //   });
+  }, [token, navigate, user.role,user.isActive]);
+  // const customId = "custom-id-yes";
 
   const onSubmitHandler = (data) => {
     console.log({ data });
-  
-    loginUser({ data });
+    // toast.success('Success Notification !', {
+    //   position: toast.POSITION.TOP_RIGHT
+    // })
+    loginUser({ data })
   };
 
- 
+  // const displayErrorMessage = () => {
+  //   toast.error(error_msg, {
+  //     position: "top-right",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     toastId: customId,
+  //     limit: 1,
+  //     theme: "light",
+  //   });
+  // };
+
 const [isModalOpen, setIsModalOpen] = useState(false);
  const handleModalClose = () => {
    setIsModalOpen(false);
