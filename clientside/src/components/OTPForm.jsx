@@ -11,7 +11,7 @@ const schema = yup.object().shape({
   OTPFourthDigit: yup.number().min(0).max(9).required(),
 });
 
-const OTPFORM = ({modalClose,setModalOpen}) => {
+const OTPFORM = ({modal,modalClose,setModalOpen}) => {
     
     const forgetPasswordResponse = useBoundStore(
         (store) => store.forgetPasswordResponse
@@ -45,6 +45,9 @@ const OTPFORM = ({modalClose,setModalOpen}) => {
         else{alert('invalid otp')
       forgetPasswordReset()}
       };
+
+      if (!modal) return null;
+ 
   return (
     <>
       <div id="modal-body"   onClick={(e) => e.target.id === "modal-body" } className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]" >

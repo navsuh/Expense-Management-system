@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "./Forms/ForgetPasswordForm";
 import OTPFORM from "./OTPForm";
 
-import { toast,ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const customIdErrorMsg = "customIdErrorMsg";
 const customIdInActive = "customIdInActive";
 const customIdloginSuccess = "customIdloginSuccess";
@@ -29,8 +29,6 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-
-  
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -53,8 +51,8 @@ const Login = () => {
     if (!user.isActive && user.role !== "Admin") {
       sessionStorage.removeItem("token");
       // alert("user inActive Contact Admin");
-      
-      toast.error('user inActive Contact Admin', {
+
+      toast.error("user inActive Contact Admin", {
         toastId: customIdInActive,
         position: "top-right",
         autoClose: 5000,
@@ -64,13 +62,13 @@ const Login = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
-   
+      });
+
       return navigate(0);
     }
     if (user.role === "Admin") {
       // alert("login sucessfull");
-      toast.success('login sucessfull', {
+      toast.success("login sucessfull", {
         toastId: customIdloginSuccess,
         position: "top-right",
         autoClose: 5000,
@@ -80,11 +78,11 @@ const Login = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
       navigate("/admin");
     } else if (user.role === "Primaryuser") {
       // alert("login sucessfull");
-      toast.success('login sucessfull', {
+      toast.success("login sucessfull", {
         toastId: customIdloginSuccess,
         position: "top-right",
         autoClose: 5000,
@@ -94,11 +92,11 @@ const Login = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
       navigate("/primaryuser");
     } else if (user.role === "member") {
       // alert("login sucessfull");
-      toast.success('login sucessfull', {
+      toast.success("login sucessfull", {
         toastId: customIdloginSuccess,
         position: "top-right",
         autoClose: 5000,
@@ -108,53 +106,48 @@ const Login = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
       navigate("/memberuser");
     }
-
-
   }, [token, navigate, user.role, user.isActive]);
-  
-  if(error_msg){
-   
-      toast.error(`${error_msg}` , {
-        toastId: customIdErrorMsg,
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-         })
-         ResetErrorMsg()
+
+  if (error_msg) {
+    toast.error(`${error_msg}`, {
+      toastId: customIdErrorMsg,
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    ResetErrorMsg();
   }
 
   const onSubmitHandler = (data) => {
     loginUser({ data });
   };
 
-  
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modal,setModal] =useState(false)
+  const [modal, setModal] = useState(false);
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
-  const modalClose =() =>{
-    setModal(false)
-  }
+  const modalClose = () => {
+    setModal(false);
+  };
 
-  const setModalOpen =() =>{
+  const setModalOpen = () => {
     setIsModalOpen(true);
-  }
+  };
 
-  const setOtpModal=()=>{
-    setModal(true)
-  }
+  const setOtpModal = () => {
+    setModal(true);
+  };
   return (
     <>
       <ForgotPasswordForm
@@ -164,7 +157,11 @@ const Login = () => {
         modalClose={modalClose}
         setModalOpen={setModalOpen}
       />
-      <OTPFORM modal={modal} modalClose={modalClose} setModalOpen={setModalOpen}/>
+      <OTPFORM
+        modal={modal}
+        modalClose={modalClose}
+        setModalOpen={setModalOpen}
+      />
       <div className="min-h-fit bg-gray-100 text-gray-900 flex justify-center">
         <div className="max-w-screen-xl  sm:m-10 bg-white shadow-xl sm:rounded-lg flex justify-center flex-1 p-6">
           <div className="flex-1 text-center hidden lg:flex ml-20">
@@ -230,14 +227,16 @@ const Login = () => {
                   </div>
                 </div>
               </form>
-           
+
               <button
-                onClick={() => {setIsModalOpen(true);modalClose()}}
+                onClick={() => {
+                  setIsModalOpen(true);
+                  modalClose();
+                }}
                 className="text-blue-600 hover:text-blue-800 underline-offset-2 mt-2"
               >
                 Forgot Password?
               </button>
-              
             </div>
           </div>
         </div>
