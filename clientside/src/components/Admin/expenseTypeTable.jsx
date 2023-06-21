@@ -114,12 +114,11 @@ const ExpenseTypeTable = (props) => {
 
   return (
     <>
-      {console.log("rendered")}
       <ExpenseTypeForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
-      <ConfirmDelete
+    <ConfirmDelete
         isModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={deleteExpenseType}

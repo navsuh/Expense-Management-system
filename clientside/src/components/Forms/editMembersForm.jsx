@@ -8,7 +8,11 @@ import * as yup from "yup";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const customIdErrorMsg = "customIdErrorMsg";
+const customIdloginSuccess = "customIdloginSuccess";
 
 
 const schema = yup.object().shape({
@@ -74,14 +78,8 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
     const {memberUserId,householdId}=member
     // console.log(memberUserId);
     const newData={...data,memberUserId,householdId,primaryuserId:user._id}
-    
-   
     updateMember({newData})
-    // reset()
-
-    
-    //  navigate("/primaryuser/members")
-
+  
   };
 
   if (user.role !== "Primaryuser") {
@@ -97,6 +95,25 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
 
 
   if (!isModalOpen) return null;
+
+  if(error_msg){
+   
+    toast.error(`${error_msg}` , {
+      toastId: customIdErrorMsg,
+       position: "top-right",
+       autoClose: 5000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "light",
+       })
+    
+   
+}
+
+
   return (
    
   <div id="modal-body" onClick={(e) => e.target.id === "modal-body" && closeAndReset()} className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]">

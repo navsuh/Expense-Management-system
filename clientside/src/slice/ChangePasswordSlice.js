@@ -6,13 +6,13 @@ export const changepasswordSlice = (set) => ({
   changePasswordResponse: {},
   error_msg_change_password: "",
   changePassword: async (userData) => {
-    const { data } = userData;
+    const { newData } = userData;
 
-    console.log(data);
+    console.log(newData);
 
     const token = sessionStorage.getItem("token");
     try {
-      const response = await axios.post(apiEndPoint, data, {
+      const response = await axios.post(apiEndPoint, newData, {
         headers: {
           // 'Content-Type': 'application/json'
           Authorization: "Bearer " + token,

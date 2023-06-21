@@ -4,9 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const customIdErrorMsg = "customIdErrorMsg";
+const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
+  // email: yup.string().email().required(),
   currentPassword: yup.string().min(8).max(32).required(),
   newPassword: yup.string().min(8).max(32).required(),
   confirmedPassword: yup.string().min(8).max(32).required(),
@@ -15,6 +20,7 @@ const schema = yup.object().shape({
 const ChangePassword = ({ isModalOpen, handleModalClose }) => {
   const changePassword = useBoundStore((store) => store.changePassword);
   const error_msg = useBoundStore((store) => store.error_msg_change_password);
+  const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
 
   const changePasswordResponse = useBoundStore(
@@ -34,7 +40,18 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
 
   useEffect(() => {
     if (changePasswordResponse.status === 200) {
-      alert(changePasswordResponse.msg);
+      // alert(changePasswordResponse.msg);
+      toast.success(`${changePasswordResponse.msg}`, {
+        toastId: customIdloginSuccess,
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       sessionStorage.removeItem("token");
       changePasswordReset();
       navigate("/login");
@@ -42,11 +59,31 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
   }, [changePasswordResponse, navigate, changePasswordReset]);
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
-    changePassword({ data });
+    // console.log({ data });
+   
+    const {email}=user
+    const newData={...data,email}
+   
+    changePassword({ newData });
   };
 
   if (!isModalOpen) return null;
+   if(error_msg){
+   
+      toast.error(`${error_msg}` , {
+        toastId: customIdErrorMsg,
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+         })
+         changePasswordReset();
+     
+  }
 
   return (
     <div
@@ -69,7 +106,7 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
 
         <form onSubmit={handleSubmit(onSubmitHandler)}>
           <div className="flex flex-col space-y-4 mt-8">
-            <div className="flex">
+            {/* <div className="flex">
               <label htmlFor="email" className="w-24">
                 Email
               </label>
@@ -84,7 +121,7 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
                 />
                 <p className="text-red-500">{errors.email?.message}</p>
               </div>
-            </div>
+            </div> */}
             <div className="flex">
               <label htmlFor="currentPassword" className="w-24">
                 Current Password

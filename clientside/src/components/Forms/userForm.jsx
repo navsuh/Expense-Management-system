@@ -5,6 +5,12 @@ import * as yup from "yup";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { useBoundStore } from "../../store";
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const customIdErrorMsg = "customIdErrorMsg";
+const customIdloginSuccess = "customIdloginSuccess";
+
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
   lastName: yup.string().min(3).max(50).required(),
@@ -64,6 +70,23 @@ const UserForm = ({ isModalOpen, handleModalClose }) => {
   };
 
   if (!isModalOpen) return null;
+
+  if(error_msg){
+   
+    toast.error(`${error_msg}` , {
+      toastId: customIdErrorMsg,
+       position: "top-right",
+       autoClose: 5000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "light",
+       })
+    
+   
+}
   return (
     <div
       id="modal-body"
