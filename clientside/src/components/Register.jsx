@@ -10,6 +10,10 @@ import { useBoundStore } from "../store";
 import "react-toastify/dist/ReactToastify.css";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const customIdErrorMsg = "customIdErrorMsg";
+const customIdRegistrationSuccess = "customIdRegistrationSuccess";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -32,12 +36,25 @@ const Register = () => {
 
   const addPrimaryUser = useBoundStore((store) => store.addPrimaryUser);
   const primaryUser = useBoundStore((store) => store.primaryUser);
+  const PrimaryUserReset = useBoundStore((store) => store.PrimaryUserReset);
   const error_msg = useBoundStore((store) => store.error_msg_register);
-
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsg);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (primaryUser) return;
+    if (!Object.keys(primaryUser).length) return;
+    toast.success('Registration successfull', {
+      toastId: customIdRegistrationSuccess,
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+      PrimaryUserReset()
     navigate("/login");
   }, [primaryUser]);
 
@@ -49,6 +66,20 @@ const Register = () => {
     // console.log({ data });
     addPrimaryUser({ data });
   };
+  if(error_msg){
+    toast.error(`${error_msg}`, {
+      toastId: customIdErrorMsg,
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+      ResetErrorMsg()
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">

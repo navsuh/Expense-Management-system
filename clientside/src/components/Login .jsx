@@ -9,6 +9,11 @@ import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "./Forms/ForgetPasswordForm";
 import OTPFORM from "./OTPForm";
 
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const customIdErrorMsg = "customIdErrorMsg";
+const customIdInActive = "customIdInActive";
+const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -25,7 +30,7 @@ const Login = () => {
   });
 
 
-
+  
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -38,6 +43,7 @@ const Login = () => {
   const user = useBoundStore((store) => store.user);
 
   const error_msg = useBoundStore((store) => store.error_msg_login);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsg);
 
   const navigate = useNavigate();
 
@@ -46,23 +52,84 @@ const Login = () => {
     if (!sessionStorage.getItem("token")) return;
     if (!user.isActive && user.role !== "Admin") {
       sessionStorage.removeItem("token");
-      alert("user inActive Contact Admin");
+      // alert("user inActive Contact Admin");
+      
+      toast.error('user inActive Contact Admin', {
+        toastId: customIdInActive,
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
    
       return navigate(0);
     }
     if (user.role === "Admin") {
-      alert("login sucessfull");
+      // alert("login sucessfull");
+      toast.success('login sucessfull', {
+        toastId: customIdloginSuccess,
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       navigate("/admin");
     } else if (user.role === "Primaryuser") {
-      alert("login sucessfull");
+      // alert("login sucessfull");
+      toast.success('login sucessfull', {
+        toastId: customIdloginSuccess,
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       navigate("/primaryuser");
     } else if (user.role === "member") {
-      alert("login sucessfull");
+      // alert("login sucessfull");
+      toast.success('login sucessfull', {
+        toastId: customIdloginSuccess,
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       navigate("/memberuser");
     }
 
+
   }, [token, navigate, user.role, user.isActive]);
   
+  if(error_msg){
+   
+      toast.error(`${error_msg}` , {
+        toastId: customIdErrorMsg,
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+         })
+         ResetErrorMsg()
+  }
 
   const onSubmitHandler = (data) => {
     loginUser({ data });
@@ -163,13 +230,14 @@ const Login = () => {
                   </div>
                 </div>
               </form>
-              <p className="text-red-500">{error_msg ? error_msg : null}</p>
+           
               <button
                 onClick={() => {setIsModalOpen(true);modalClose()}}
                 className="text-blue-600 hover:text-blue-800 underline-offset-2 mt-2"
               >
                 Forgot Password?
               </button>
+              
             </div>
           </div>
         </div>

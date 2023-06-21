@@ -6,6 +6,11 @@ import * as yup from "yup";
 import { useNavigate, Navigate } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const customIdErrorMsg = "customIdErrorMsg";
+const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -23,6 +28,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
   const addMember = useBoundStore((store) => store.addMember);
   const navigate = useNavigate();
   const error_msg = useBoundStore((store) => store.error_msg_member);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgMember);
   const getAllMembers = useBoundStore((store) => store.getAllMembers);
 
   const {
@@ -54,6 +60,22 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
   }
 
   if (!isModalOpen) return null;
+  if(error_msg){
+   
+    toast.error(`${error_msg}` , {
+      toastId: customIdErrorMsg,
+       position: "top-right",
+       autoClose: 5000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "light",
+       })
+       ResetErrorMsg()
+   
+}
   return (
     <div
       id="modal-body"

@@ -176,4 +176,11 @@ export const DailyExpenseSlice = (set) => ({
       );
     }
   },
+  ResetErrorMsgDailyExpense: () => {
+    set(
+      { error_msg_daily_expense: "" },
+      false,
+      "ResetErrorMsgDailyExpense"
+    );
+  },
 });

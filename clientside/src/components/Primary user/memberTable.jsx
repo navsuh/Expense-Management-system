@@ -118,7 +118,7 @@ const MemberTable = () => {
 
   return (
     <>
-      <EditMemberForm
+    <EditMemberForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />

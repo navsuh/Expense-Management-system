@@ -157,7 +157,7 @@ const PeriodicExpensesTableMember = (props) => {
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
-      <ConfirmDelete
+    <ConfirmDelete
         isModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={ondeletePeriodicExpense}

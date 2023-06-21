@@ -131,4 +131,11 @@ export const AdminUsersSlice = (set) => ({
       );
     }
   },
+  ResetErrorMsgAdminUser: () => {
+    set(
+      { error_msg_Admin_user: "" },
+      false,
+      "ResetErrorMsgAdminUser"
+    );
+  },
 });

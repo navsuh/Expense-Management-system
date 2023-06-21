@@ -173,4 +173,12 @@ export const MemberSlice = (set) => ({
       set({ error_msg_member: data.message }, false, "deleteMemberErrorMsg");
     }
   },
+  ResetErrorMsgMember: () => {
+    set(
+      { error_msg_member: "" },
+      false,
+      "ResetErrorMsg"
+    );
+  },
+
 });

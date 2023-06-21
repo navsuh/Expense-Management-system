@@ -5,20 +5,20 @@ import { useBoundStore } from "../store";
 import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
-    OTPFirstDigit: yup.number().min(0).max(9).required(),
-    OTPSecondDigit: yup.number().min(0).max(9).required(),
-    OTPThirdDigit: yup.number().min(0).max(9).required(),
-    OTPFourthDigit: yup.number().min(0).max(9).required(),
-  });
+  OTPFirstDigit: yup.number().min(0).max(9).required(),
+  OTPSecondDigit: yup.number().min(0).max(9).required(),
+  OTPThirdDigit: yup.number().min(0).max(9).required(),
+  OTPFourthDigit: yup.number().min(0).max(9).required(),
+});
 
-const OTPFORM = ({modal,modalClose,setModalOpen}) => {
+const OTPFORM = () => {
+    
     const forgetPasswordResponse = useBoundStore(
         (store) => store.forgetPasswordResponse
       );
       const forgetPasswordReset = useBoundStore(
         (store) => store.forgetPasswordReset
       );
-
       const navigate = useNavigate();
     const {
         register,
@@ -28,12 +28,12 @@ const OTPFORM = ({modal,modalClose,setModalOpen}) => {
         resolver: yupResolver(schema),
       });
 
-    //   useEffect(()=>{
-    //     console.log(forgetPasswordResponse.OTP);
-    //     console.log(OTP);
-    //     forgetPasswordResponse.OTP===OTP?navigate("/resetpassword"):alert('invalid otp')
-    //   forgetPasswordReset()
-    //   },[forgetPasswordResponse,OTP])
+  //   useEffect(()=>{
+  //     console.log(forgetPasswordResponse.OTP);
+  //     console.log(OTP);
+  //     forgetPasswordResponse.OTP===OTP?navigate("/resetpassword"):alert('invalid otp')
+  //   forgetPasswordReset()
+  //   },[forgetPasswordResponse,OTP])
 
       const onSubmitHandler = (data) => {
         console.log(data);
@@ -45,9 +45,6 @@ const OTPFORM = ({modal,modalClose,setModalOpen}) => {
         else{alert('invalid otp')
       forgetPasswordReset()}
       };
-
-  if (!modal) return null;
-
   return (
     <>
       <div id="modal-body"   onClick={(e) => e.target.id === "modal-body" } className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]" >
@@ -67,14 +64,13 @@ const OTPFORM = ({modal,modalClose,setModalOpen}) => {
                   <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                     <div className="w-16 h-16 ">
                       <input
-                       {...register("OTPFirstDigit")}
+                        {...register("OTPFirstDigit")}
                         className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                         type="numeric"
                         // name="OTP1"
                         // id="OTP1"
                         maxLength={1}
                       />
-                      
                     </div>
                     <div className="w-16 h-16 ">
                       <input
@@ -85,7 +81,6 @@ const OTPFORM = ({modal,modalClose,setModalOpen}) => {
                         // id="OTP2"
                         maxLength={1}
                       />
-                      
                     </div>
                     <div className="w-16 h-16 ">
                       <input
@@ -96,7 +91,6 @@ const OTPFORM = ({modal,modalClose,setModalOpen}) => {
                         // id="OTP3"
                         maxLength={1}
                       />
-                      
                     </div>
                     <div className="w-16 h-16 ">
                       <input
@@ -105,15 +99,17 @@ const OTPFORM = ({modal,modalClose,setModalOpen}) => {
                         type="numeric"
                         // name="OTP4"
                         // id="OTP4"
-                       
+
                         maxLength={1}
                       />
-                      
                     </div>
                   </div>
                   <div className="flex flex-col space-y-5">
                     <div>
-                      <button type="submit" className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
+                      <button
+                        type="submit"
+                        className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
+                      >
                         Verify Account
                       </button>
                     </div>

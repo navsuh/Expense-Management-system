@@ -7,6 +7,12 @@ import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const customIdErrorMsg = "customIdErrorMsg";
+const customIdloginSuccess = "customIdloginSuccess";
+
 const schema = yup.object().shape({
   households: yup.string().required(),
   selectExpense: yup.string().required(),
@@ -29,7 +35,7 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
   const updateDailyExpense = useBoundStore((store) => store.updateDailyExpense);
   const createDailyExpense = useBoundStore((store) => store.createDailyExpense);
   const error_msg = useBoundStore((store) => store.error_msg_daily_expense);
-
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgDailyExpense);
   const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
   // const getAllDailyExpense =useBoundStore(store=>store.getAllDailyExpense)
 
@@ -45,7 +51,7 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
 
   useEffect(() => {
     getAllExpenseTypes();
-  }, [getAllExpenseTypes]);
+  }, []);
 
   useEffect(() => {
     if (!id) return;
@@ -109,6 +115,23 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
   }
 
   if (!isModalOpen) return null;
+  if(error_msg){
+   
+    toast.error(`${error_msg}` , {
+      toastId: customIdErrorMsg,
+       position: "top-right",
+       autoClose: 5000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "light",
+       })
+       ResetErrorMsg()
+}
+
+
   return (
     <div
       id="modal-body"

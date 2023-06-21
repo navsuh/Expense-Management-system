@@ -162,7 +162,7 @@ const DailyExpensesTable = (props) => {
 
   return (
     <>
-      <DailyExpenseForm
+     <DailyExpenseForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />

@@ -21,7 +21,7 @@ const Sidebar = (props) => {
 
   return (
     <>
-      <ChangePassword
+    <ChangePassword
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />

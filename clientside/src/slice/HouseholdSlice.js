@@ -169,4 +169,11 @@ export const HouseholdSlice = (set) => ({
       );
     }
   },
+  ResetErrorMsgHouseHold: () => {
+    set(
+      { error_msg_household: "" },
+      false,
+      "ResetErrorMsg"
+    );
+  },
 });

@@ -109,7 +109,7 @@ const HouseholdTable = (props) => {
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
       />
-      <ConfirmDelete
+    <ConfirmDelete
         isModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={deleteHousehold}

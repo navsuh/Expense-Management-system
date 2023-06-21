@@ -35,4 +35,11 @@ export const UserLoginSlice = (set) => ({
       set({ error_msg_login: data.message }, false, "loginUserErrorMsg");
     }
   },
+  ResetErrorMsg: () => {
+    set(
+      { error_msg_login: "" },
+      false,
+      "ResetErrorMsg"
+    );
+  },
 });

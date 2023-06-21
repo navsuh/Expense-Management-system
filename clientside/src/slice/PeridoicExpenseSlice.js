@@ -254,4 +254,11 @@ export const PeriodicExpenseSlice = (set) => ({
       );
     }
   },
+  ResetErrorMsgPeriodicExpense: () => {
+    set(
+      { error_msg_periodic_expense: "" },
+      false,
+      "ResetErrorMsg"
+    );
+  },
 });
