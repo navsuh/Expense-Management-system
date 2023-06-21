@@ -41,6 +41,7 @@ const Login = () => {
   const user = useBoundStore((store) => store.user);
 
   const error_msg = useBoundStore((store) => store.error_msg_login);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsg);
 
   const navigate = useNavigate();
 
@@ -125,7 +126,7 @@ const Login = () => {
          progress: undefined,
          theme: "light",
          })
-     
+         ResetErrorMsg()
   }
 
   const onSubmitHandler = (data) => {

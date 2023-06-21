@@ -38,4 +38,11 @@ export const RegisterPrimaryUserSlice = (set) => ({
       "changePasswordReset"
     );
   },
+  ResetErrorMsg: () => {
+    set(
+      { error_msg_register: "" },
+      false,
+      "ResetErrorMsg"
+    );
+  },
 });

@@ -28,6 +28,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
   const addMember = useBoundStore((store) => store.addMember);
   const navigate = useNavigate();
   const error_msg = useBoundStore((store) => store.error_msg_member);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsg);
   const getAllMembers = useBoundStore((store) => store.getAllMembers);
 
   const {
@@ -72,7 +73,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
        progress: undefined,
        theme: "light",
        })
-       
+       ResetErrorMsg()
    
 }
   return (

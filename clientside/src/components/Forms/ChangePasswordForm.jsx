@@ -20,6 +20,7 @@ const schema = yup.object().shape({
 const ChangePassword = ({ isModalOpen, handleModalClose }) => {
   const changePassword = useBoundStore((store) => store.changePassword);
   const error_msg = useBoundStore((store) => store.error_msg_change_password);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsg);
   const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
 
@@ -81,7 +82,7 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
          progress: undefined,
          theme: "light",
          })
-         changePasswordReset();
+         ResetErrorMsg()
      
   }
 

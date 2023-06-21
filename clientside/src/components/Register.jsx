@@ -38,7 +38,7 @@ const Register = () => {
   const primaryUser = useBoundStore((store) => store.primaryUser);
   const PrimaryUserReset = useBoundStore((store) => store.PrimaryUserReset);
   const error_msg = useBoundStore((store) => store.error_msg_register);
-
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsg);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,6 +78,7 @@ const Register = () => {
       progress: undefined,
       theme: "light",
       });
+      ResetErrorMsg()
   }
 
   return (
