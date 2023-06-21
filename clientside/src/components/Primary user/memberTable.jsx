@@ -147,7 +147,7 @@ const MemberTable = () => {
         </div>
       </div>
       <div className="relative  shadow-md sm:rounded-lg">
-        {currentMembers.length === 0 ? (
+        {filteredMembers.length === 0 ? (
           <div className="p-4">No Data Found.</div>
         ) : (
           membersTable()
