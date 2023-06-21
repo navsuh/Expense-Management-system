@@ -8,7 +8,6 @@ import ExpenseTypeForm from "../Forms/expensetypeForm.jsx";
 import Pagination from "../Pagination.jsx";
 import ConfirmDelete from "../Forms/deleteConfirm.jsx";
 
-
 const ExpenseTypeTable = (props) => {
   const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
   const deleteExpenseTypes = useBoundStore((store) => store.deleteExpenseTypes);
@@ -63,7 +62,6 @@ const ExpenseTypeTable = (props) => {
   const displayExpenseTypeTable = () => {
     return (
       <>
-      
         <table className="w-[65rem] text-sm text-left text-gray-500 ml-6 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500">
             <tr>
@@ -118,7 +116,7 @@ const ExpenseTypeTable = (props) => {
         isExpenseTypeModalOpen={isExpenseTypeModalOpen}
         handleModalClose={handleModalClose}
       />
-    <ConfirmDelete
+      <ConfirmDelete
         isDeleteModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={deleteExpenseType}
