@@ -135,7 +135,7 @@ const UserTable = (props) => {
         </div>
       </div>
       <div className="relative  shadow-md sm:rounded-lg">
-        {currentUsers.length === 0 ? (
+        {filterUsers.length === 0 ? (
           <div className="p-4">No data found.</div>
         ) : (
           displayUserTable()

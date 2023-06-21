@@ -130,7 +130,7 @@ const HouseholdTable = (props) => {
         </div>
       </div>
       <div className="relative  shadow-md sm:rounded-lg">
-        {currentHousholds.length === 0 ? (
+        {filteredHouseholdList.length === 0 ? (
           <div>No Page Found.</div>
         ) : (
           houseHoldTable()
