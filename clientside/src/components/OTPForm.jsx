@@ -162,6 +162,7 @@ const OTPFORM = ({ modal, modalOtpClose, setModalOpen }) => {
                       onClick={() => {
                         modalOtpClose();
                         setModalOpen();
+                        forgetPasswordReset()
                       }}
                     >
                       Go Back

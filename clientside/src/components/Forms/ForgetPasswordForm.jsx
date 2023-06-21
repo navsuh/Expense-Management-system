@@ -54,6 +54,7 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalOtp
       });
       // forgetPasswordReset();
       // navigate("/otpform");
+      setOtpModal()
       handleModalClose()
     }
   }, [forgetPasswordResponse]);
@@ -70,10 +71,8 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalOtp
   // }
   const onSubmitHandler = (data) => {
     console.log({ data });
-    forgetPassword({ data }); 
-     
+    forgetPassword({ data });  
     // setOtpModal()
-    error_msg?modalOtpClose():setOtpModal()
     reset()
   };
 
@@ -95,6 +94,7 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalOtp
        ResetErrorMsg()
    
 }
+
 
   return (
     <>
