@@ -44,9 +44,9 @@ export const emailhandler = {
         const message = {
           from: user,
           to: userdata.email, 
-          subject: 'Due Date coming', 
+          subject: 'Due Date Periodic Expense', 
           text: 'The due date for your periodic expense is coming!', 
-          html: `<p>The due date for your periodic expense is coming!</p>`, 
+          html: `<p>The due date for your periodic expense is near!</p>`, 
         };
         const info = await transporter.sendMail(message)
         console.log('Message sent: %s', info.messageId)
