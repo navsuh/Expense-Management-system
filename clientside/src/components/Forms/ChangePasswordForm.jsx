@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 const customIdErrorMsg = "customIdErrorMsg";
 const customIdloginSuccess = "customIdloginSuccess";
@@ -37,6 +38,24 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+
+  const toggleCurrentPasswordVisibility = () => {
+    setShowCurrentPassword(!showCurrentPassword);
+
+  };
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+
+  };
   
 
   useEffect(() => {
@@ -130,12 +149,22 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
               <div className="flex-grow">
                 <input
                   {...register("currentPassword")}
-                  type="password"
                   name="currentPassword"
+                  type={showCurrentPassword ? "text" : "password"}
                   id="currentPassword"
                   className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   placeholder="Current Password"
-                />
+                />  
+                <span
+                        className="absolute top-1/3  transform -translate-y-1/2 cursor-pointer mt-9 -ml-8"
+                        onClick={toggleCurrentPasswordVisibility}
+                      >
+                        {showCurrentPassword ? (
+                          <AiFillEye className="h-6 w-6 " />
+                        ) : (
+                          <AiFillEyeInvisible className="h-6 w-6 " />
+                        )}
+                      </span>
                 <p className="text-red-500">
                   {errors.currentPassword?.message}
                 </p>
@@ -148,12 +177,22 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
               <div className="flex-grow">
                 <input
                   {...register("newPassword")}
-                  type="password"
+                  type={showNewPassword ? "text" : "password"}
                   name="newPassword"
                   id="newPassword"
                   className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   placeholder="New Password"
                 />
+                <span
+                        className="absolute top-1/2  transform -translate-y-1/2 cursor-pointer  -ml-8"
+                        onClick={toggleNewPasswordVisibility}
+                      >
+                        {showNewPassword ? (
+                          <AiFillEye className="h-6 w-6 " />
+                        ) : (
+                          <AiFillEyeInvisible className="h-6 w-6 " />
+                        )}
+                      </span>
                 <p className="text-red-500">{errors.newPassword?.message}</p>
               </div>
             </div>
@@ -164,12 +203,22 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
               <div className="flex-grow">
                 <input
                   {...register("confirmedPassword")}
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   name="confirmedPassword"
                   id="confirmedPassword"
                   className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   placeholder="Confirm Password"
                 />
+                <span
+                        className="absolute top-1/2  transform -translate-y-1/2 cursor-pointer mt-16 -ml-8"
+                        onClick={toggleConfirmPasswordVisibility}
+                      >
+                        {showConfirmPassword ? (
+                          <AiFillEye className="h-6 w-6 " />
+                        ) : (
+                          <AiFillEyeInvisible className="h-6 w-6 " />
+                        )}
+                      </span>
                 <p className="text-red-500">
                   {errors.confirmedPassword?.message}
                 </p>

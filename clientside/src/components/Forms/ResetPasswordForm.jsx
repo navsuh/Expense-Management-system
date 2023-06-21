@@ -28,13 +28,18 @@ const ResetPasswordForm = () => {
   );
   const resetPasswordReset = useBoundStore((store) => store.resetPasswordReset);
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const forgetPasswordReset = useBoundStore(
     (store) => store.forgetPasswordReset
   );
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
   const {
     register,
@@ -130,7 +135,7 @@ const ResetPasswordForm = () => {
 
                   <input
                     {...register("newPassword")}
-                    type={showPassword ? "text" : "password"}
+                    type={showNewPassword ? "text" : "password"}
                     name="newPassword"
                     id="newPassword"
                     // className="block w-full px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -139,9 +144,9 @@ const ResetPasswordForm = () => {
                   />
                   <span
                     className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer mt-3"
-                    onClick={togglePasswordVisibility}
+                    onClick={toggleNewPasswordVisibility}
                   >
-                    {showPassword ? (
+                    {showNewPassword ? (
                       <AiFillEye className="h-6 w-6 " />
                     ) : (
                       <AiFillEyeInvisible className="h-6 w-6 " />
@@ -154,7 +159,7 @@ const ResetPasswordForm = () => {
 
                   <input
                     {...register("confirmedPassword")}
-                    type={showPassword ? "text" : "password"}
+                    type={showConfirmPassword ? "text" : "password"}
                     name="confirmedPassword"
                     id="confirmedPassword"
                     className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -162,9 +167,9 @@ const ResetPasswordForm = () => {
                   />
                   <span
                     className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer mt-3"
-                    onClick={togglePasswordVisibility}
+                    onClick={toggleConfirmPasswordVisibility}
                   >
-                    {showPassword ? (
+                    {showConfirmPassword ? (
                       <AiFillEye className="h-6 w-6 " />
                     ) : (
                       <AiFillEyeInvisible className="h-6 w-6 " />
