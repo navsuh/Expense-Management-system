@@ -26,7 +26,7 @@ const UserForm = ({ isModalOpen, handleModalClose }) => {
   const userList = useBoundStore((store) => store.usersData);
   const updateUser = useBoundStore((store) => store.updateUser);
   const error_msg = useBoundStore((store) => store.error_msg_Admin_user);
-  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsg);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgAdminUser);
   const {
     register,
     handleSubmit,

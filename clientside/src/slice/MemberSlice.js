@@ -173,7 +173,7 @@ export const MemberSlice = (set) => ({
       set({ error_msg_member: data.message }, false, "deleteMemberErrorMsg");
     }
   },
-  ResetErrorMsg: () => {
+  ResetErrorMsgMember: () => {
     set(
       { error_msg_member: "" },
       false,

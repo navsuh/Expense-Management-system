@@ -155,4 +155,11 @@ export const ExpenseTypeSlice = (set) => ({
       );
     }
   },
+  ResetErrorMsgExpenseType: () => {
+    set(
+      { error_msg_expense_type: "" },
+      false,
+      "ResetErrorMsg"
+    );
+  },
 });

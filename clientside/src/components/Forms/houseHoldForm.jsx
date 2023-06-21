@@ -39,7 +39,7 @@ const HouseHoldForm = ({ isModalOpen, handleModalClose }) => {
   const createHouseholds = useBoundStore((store) => store.createHouseholds);
   const updateHouseholds = useBoundStore((store) => store.updateHouseholds);
   const error_msg = useBoundStore((store) => store.error_msg_household);
-
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgHouseHold);
   useEffect(() => {
     if (!id) return;
     const houseHold = houseHoldList.find((h) => h._id === id);
@@ -96,7 +96,7 @@ const HouseHoldForm = ({ isModalOpen, handleModalClose }) => {
        theme: "light",
        })
     
-   
+       ResetErrorMsg()
 }
 
   return (

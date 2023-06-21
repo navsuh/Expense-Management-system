@@ -41,6 +41,7 @@ const PeriodicExpenseForm = ({ isModalOpen, handleModalClose }) => {
   const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
   const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const error_msg = useBoundStore((store) => store.error_msg_periodic_expense);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgPeriodicExpense);
   const { id } = useParams();
   const {
     register,
@@ -139,7 +140,7 @@ const PeriodicExpenseForm = ({ isModalOpen, handleModalClose }) => {
        progress: undefined,
        theme: "light",
        })
-    
+       ResetErrorMsg()
    
 }
 

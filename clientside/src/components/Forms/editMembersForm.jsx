@@ -36,6 +36,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   const { id } = useParams();
   // console.log(id);
   const error_msg = useBoundStore((store) => store.error_msg_member);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgMember);
   const {
     register,
     handleSubmit,
@@ -109,7 +110,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
        progress: undefined,
        theme: "light",
        })
-    
+       ResetErrorMsg()
    
 }
 

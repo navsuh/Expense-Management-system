@@ -131,11 +131,11 @@ export const AdminUsersSlice = (set) => ({
       );
     }
   },
-  ResetErrorMsg: () => {
+  ResetErrorMsgAdminUser: () => {
     set(
       { error_msg_Admin_user: "" },
       false,
-      "ResetErrorMsg"
+      "ResetErrorMsgAdminUser"
     );
   },
 });

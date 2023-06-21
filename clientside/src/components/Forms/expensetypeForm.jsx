@@ -34,6 +34,7 @@ const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
   const updateExpenseTypes = useBoundStore((store) => store.updateExpenseTypes);
 
   const error_msg = useBoundStore((store) => store.error_msg_expense_type);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgExpenseType);
   useEffect(()=>{
     navigate("/admin/expensetype");
     handleModalClose()
@@ -95,7 +96,7 @@ return <Navigate to="/login" replace={true} />
        progress: undefined,
        theme: "light",
        })
-    
+       ResetErrorMsg()
    
 }
 

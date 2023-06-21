@@ -44,11 +44,11 @@ export const changepasswordSlice = (set) => ({
       "changePasswordReset"
     );
   },
-  ResetErrorMsg: () => {
+  ResetErrorMsgChangePassword: () => {
     set(
       { error_msg_change_password: "" },
       false,
-      "ResetErrorMsg"
+      "ResetErrorMsgChangePassword"
     );
   },
 });

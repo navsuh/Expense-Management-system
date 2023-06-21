@@ -35,7 +35,7 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
   const updateDailyExpense = useBoundStore((store) => store.updateDailyExpense);
   const createDailyExpense = useBoundStore((store) => store.createDailyExpense);
   const error_msg = useBoundStore((store) => store.error_msg_daily_expense);
-
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgDailyExpense);
   const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
   // const getAllDailyExpense =useBoundStore(store=>store.getAllDailyExpense)
 
@@ -128,7 +128,7 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
        progress: undefined,
        theme: "light",
        })
-      
+       ResetErrorMsg()
 }
 
 
