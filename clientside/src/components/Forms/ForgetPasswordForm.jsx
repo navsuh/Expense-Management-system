@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store.js";
+import OTPFORM from "../OTPForm.jsx";
+
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
 });
 
-const ForgotPasswordForm = ({ isModalOpen, handleModalClose }) => {
+const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalClose,setModalOpen }) => {
   const navigate = useNavigate();
   const forgetPassword = useBoundStore((store) => store.forgetPassword);
   const error_msg = useBoundStore((store) => store.error_msg_forget_password);
+
   const forgetPasswordResponse = useBoundStore(
     (store) => store.forgetPasswordResponse
   );
@@ -25,26 +28,44 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose }) => {
     handleSubmit,
     formState: { errors },
     // setValue,
+    reset
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   useEffect(() => {
     if (forgetPasswordResponse.status === 200) {
-      alert(forgetPasswordResponse.msg);
-      // forgetPasswordReset();
-      navigate("/otpform");
+      // alert(forgetPasswordResponse.msg);
+      forgetPasswordReset();
+      // navigate("/otpform");
     }
   }, [forgetPasswordResponse]);
 
+//  useEffect(()=>{
+//   handleModalClose()
+//  },[!error_msg])
+
+ useEffect(()=>{
+  modalClose()
+  // setModalOpen()
+ },[error_msg])
+
+  // const closeModal =()=>{
+  //   if(err)
+  // }
   const onSubmitHandler = (data) => {
     console.log({ data });
-    forgetPassword({ data });
+    forgetPassword({ data }); 
+    handleModalClose() 
+    // setOtpModal()
+    error_msg?modalClose():setOtpModal()
+    reset()
   };
 
   if (!isModalOpen) return null;
 
   return (
+    <>
     <div
       id="modal-body"
       onClick={(e) => e.target.id === "modal-body" && handleModalClose()}
@@ -56,7 +77,7 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose }) => {
             Forgot Password
           </h2>
           <span
-            onClick={() => handleModalClose()}
+            onClick={() => {handleModalClose(); reset()}}
             className="text-red-500 text-2xl cursor-pointer hover:text-red-600 hover:scale-150"
           >
             &times;
@@ -67,7 +88,7 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose }) => {
           <div className="flex flex-col space-y-4">
             <div className="mt-6">
               <label htmlFor="email">Email</label>
-              <div className="mt-1.5">
+              <div className="mta-1.5">
                 <input
                   {...register("email")}
                   type="email"
@@ -83,17 +104,23 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose }) => {
             <div className="mt-8">
               <button
                 type="submit"
+              
                 className="w-full py-4 font-semibold mt-3 bg-blue-500 text-gray-100 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out focus:shadow-outline focus:outline-none"
               >
                 Forgot
               </button>
             </div>
           </div>
+      <p className="text-red-500">{error_msg ? error_msg : null}</p>
+
         </form>
       </div>
-      <p className="text-red-500">{error_msg ? error_msg : null}</p>
     </div>
+    </>
   );
 };
 
 export default ForgotPasswordForm;
+
+
+

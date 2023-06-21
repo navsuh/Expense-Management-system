@@ -7,6 +7,7 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "./Forms/ForgetPasswordForm";
+import OTPFORM from "./OTPForm";
 
 
 const schema = yup.object().shape({
@@ -70,15 +71,33 @@ const Login = () => {
   
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modal,setModal] =useState(false)
+
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
+  const modalClose =() =>{
+    setModal(false)
+  }
+
+  const setModalOpen =() =>{
+    setIsModalOpen(true);
+  }
+
+  const setOtpModal=()=>{
+    setModal(true)
+  }
   return (
     <>
       <ForgotPasswordForm
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
+        setOtpModal={setOtpModal}
+        modalClose={modalClose}
+        setModalOpen={setModalOpen}
       />
+      <OTPFORM modal={modal} modalClose={modalClose} setModalOpen={setModalOpen}/>
       <div className="min-h-fit bg-gray-100 text-gray-900 flex justify-center">
         <div className="max-w-screen-xl  sm:m-10 bg-white shadow-xl sm:rounded-lg flex justify-center flex-1 p-6">
           <div className="flex-1 text-center hidden lg:flex ml-20">
@@ -146,7 +165,7 @@ const Login = () => {
               </form>
               <p className="text-red-500">{error_msg ? error_msg : null}</p>
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => {setIsModalOpen(true);modalClose()}}
                 className="text-blue-600 hover:text-blue-800 underline-offset-2 mt-2"
               >
                 Forgot Password?

@@ -111,7 +111,7 @@ root.render(
             </PrivateRoute>
           }
         />
-        <Route path="/otpform" element={<OTPFORM />} />
+        {/* <Route path="/otpform" element={<OTPFORM />} /> */}
         <Route path="/resetpassword" element={<PrivateRouteResetPassword><ResetPasswordForm /></PrivateRouteResetPassword>} />
         {/* <Route path="*" element={<Error401 />} /> */}
       </Routes>

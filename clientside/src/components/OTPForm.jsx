@@ -2,8 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useBoundStore } from "../store";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
     OTPFirstDigit: yup.number().min(0).max(9).required(),
@@ -12,14 +11,14 @@ const schema = yup.object().shape({
     OTPFourthDigit: yup.number().min(0).max(9).required(),
   });
 
-const OTPFORM = () => {
-    
+const OTPFORM = ({modal,modalClose,setModalOpen}) => {
     const forgetPasswordResponse = useBoundStore(
         (store) => store.forgetPasswordResponse
       );
       const forgetPasswordReset = useBoundStore(
         (store) => store.forgetPasswordReset
       );
+
       const navigate = useNavigate();
     const {
         register,
@@ -46,22 +45,25 @@ const OTPFORM = () => {
         else{alert('invalid otp')
       forgetPasswordReset()}
       };
+
+  if (!modal) return null;
+
   return (
     <>
-      <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
-        <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
-          <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
+      <div id="modal-body"   onClick={(e) => e.target.id === "modal-body" } className="fixed z-10 top-0 left-0 w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.5)]" >
+        {/* <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl"> */}
+          <div className="w-[28rem] bg-white rounded-md px-6 py-8">
             <div className="flex flex-col items-center justify-center text-center space-y-2">
               <div className="font-semibold text-3xl">
                 <p>Email Verification</p>
               </div>
               <div className="flex flex-row text-sm font-medium text-gray-400">
-                <p>We have sent a code to your email ba**@dipainhouse.com</p>
-              </div>
+                <p>We have sent a code to your email {forgetPasswordResponse.email}</p> 
+          </div>
             </div>
             <div>
               <form onSubmit={handleSubmit(onSubmitHandler)}>
-                <div className="flex flex-col space-y-16">
+                <div className="flex flex-col space-y-16 mt-2">
                   <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                     <div className="w-16 h-16 ">
                       <input
@@ -116,15 +118,16 @@ const OTPFORM = () => {
                       </button>
                     </div>
                     <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                      <p>Didn't recieve code?</p>
+                      <p>Didn't recieve code? </p>
                       <a
-                        className="flex flex-row items-center text-blue-600"
-                        href="http://"
+                        className="flex flex-row items-center text-blue-600 cursor-pointer"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={()=>{modalClose();setModalOpen()}}
                       >
-                        Resend
+                        Go Back 
                       </a>
+                      <p> and try again</p>
                     </div>
                   </div>
                 </div>
@@ -134,7 +137,7 @@ const OTPFORM = () => {
               <p className="text-red-500">{errors.OTPThirdDigit?.message}</p>
               <p className="text-red-500">{errors.OTPFourthDigit?.message}</p>
             </div>
-          </div>
+          {/* </div> */}
         </div>
       </div>
     </>
@@ -142,3 +145,6 @@ const OTPFORM = () => {
 };
 
 export default OTPFORM;
+
+
+
