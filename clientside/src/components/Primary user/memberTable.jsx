@@ -23,7 +23,7 @@ const MemberTable = () => {
   const onDeleteMember = (id) => {
     handleDeleteMember(id);
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   const [isCreateMemberModalOpen, setCreateMemberModalOpen] = useState(false);
@@ -49,14 +49,14 @@ const MemberTable = () => {
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsEditModalOpen(false);
     setCreateMemberModalOpen(false);
     setIsDeleteModalOpen(false);
     navigate("/primaryuser/members");
   };
 
   const handleEdit = () => {
-    setIsModalOpen(true);
+    setIsEditModalOpen(true);
   };
   const handleAdd = () => {
     setCreateMemberModalOpen(true);
@@ -119,15 +119,15 @@ const MemberTable = () => {
   return (
     <>
     <EditMemberForm
-        isModalOpen={isModalOpen}
+        isEditModalOpen={isEditModalOpen}
         handleModalClose={handleModalClose}
       />
       <CreateMemberForm
-        isModalOpen={isCreateMemberModalOpen}
+        isCreateMemberModalOpen={isCreateMemberModalOpen}
         handleModalClose={handleModalClose}
       />
       <ConfirmDelete
-        isModalOpen={isDeleteModalOpen}
+        isDeleteModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={onDeleteMember}
         deleteId={deleteId}

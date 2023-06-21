@@ -20,7 +20,7 @@ const schema = yup.object().shape({
   state: yup.string().min(3).max(50).required(),
   zipcode: yup.number().min(4).required(),
 });
-const HouseHoldForm = ({ isModalOpen, handleModalClose }) => {
+const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -80,7 +80,7 @@ const HouseHoldForm = ({ isModalOpen, handleModalClose }) => {
     return <Navigate to="/login" replace={true} />;
   }
 
-  if (!isModalOpen) return null;
+  if (!isHouseholdModalOpen) return null;
 
   if(error_msg){
    

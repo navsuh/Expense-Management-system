@@ -17,7 +17,7 @@ const schema = yup.object().shape({
   confirmedPassword: yup.string().min(8).max(32).required(),
 });
 
-const ChangePassword = ({ isModalOpen, handleModalClose }) => {
+const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
   const changePassword = useBoundStore((store) => store.changePassword);
   const error_msg = useBoundStore((store) => store.error_msg_change_password);
   const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgChangePassword);
@@ -68,7 +68,7 @@ const ChangePassword = ({ isModalOpen, handleModalClose }) => {
     changePassword({ newData });
   };
 
-  if (!isModalOpen) return null;
+  if (!isChangePasswordModalOpen) return null;
    if(error_msg){
    
       toast.error(`${error_msg}` , {

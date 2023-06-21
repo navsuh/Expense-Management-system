@@ -14,7 +14,7 @@ const Sidebar = (props) => {
   const lastLoginUser = useBoundStore((store) => store.lastLoginUser);
   const name = user.firstName;
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isChangePasswordModalOpen, setIsModalOpen] = useState(false);
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
@@ -22,7 +22,7 @@ const Sidebar = (props) => {
   return (
     <>
     <ChangePassword
-        isModalOpen={isModalOpen}
+        isChangePasswordModalOpen={isChangePasswordModalOpen}
         handleModalClose={handleModalClose}
       />
       <button

@@ -15,7 +15,7 @@ const schema = yup.object().shape({
   email: yup.string().email().required(),
 });
 
-const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalOtpClose,setModalOpen }) => {
+const ForgotPasswordForm = ({ isForgotPasswordModalOpen, handleModalClose,setOtpModal,modalOtpClose }) => {
   const navigate = useNavigate();
   const forgetPassword = useBoundStore((store) => store.forgetPassword);
   const error_msg = useBoundStore((store) => store.error_msg_forget_password);
@@ -76,7 +76,7 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalOtp
     reset()
   };
 
-  if (!isModalOpen) return null;
+  if (!isForgotPasswordModalOpen) return null;
 
   if(error_msg){
    

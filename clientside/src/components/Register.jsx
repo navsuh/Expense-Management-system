@@ -82,9 +82,9 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-      <div className="max-w-screen-xl  sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1 p-10">
-        <div className="flex-1 text-center hidden lg:flex ml-20 mt-40">
+    <div className="min-h-screen b text-gray-900 flex justify-center">
+      <div className="max-w-screen-xl  bg-white  flex justify-center flex-1 p-10">
+        <div className="flex-1 text-center hidden lg:flex ml-20 mt-20">
           <img
             src="/assests/images/homeimgae.png"
             alt="homeimage"
@@ -93,7 +93,7 @@ const Register = () => {
         </div>
 
         <div className="lg:w-1/2  p-6">
-          <div className="mt-12 flex flex-col items-center  ">
+          <div className=" flex flex-col items-center  ">
             <img src="/assests/images/logoexms.png" alt="logoimage" />
 
             <h1 className="text-xl xl:text-3xl font-bold">Sign Up</h1>

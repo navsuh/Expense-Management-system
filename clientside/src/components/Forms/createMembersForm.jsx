@@ -21,7 +21,7 @@ const schema = yup.object().shape({
   password: yup.string().min(8).max(32).required(),
   householdName: yup.string().required(),
 });
-const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
+const CreateMemberForm = ({ isCreateMemberModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
   const memberList = useBoundStore((store) => store.memberData);
   const houseHoldList = useBoundStore((store) => store.households);
@@ -59,7 +59,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
     return <Navigate to="/login" replace={true} />;
   }
 
-  if (!isModalOpen) return null;
+  if (!isCreateMemberModalOpen) return null;
   if(error_msg){
    
     toast.error(`${error_msg}` , {

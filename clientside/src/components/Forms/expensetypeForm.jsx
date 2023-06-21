@@ -10,11 +10,10 @@ import 'react-toastify/dist/ReactToastify.css';
 const customIdErrorMsg = "customIdErrorMsg";
 const customIdloginSuccess = "customIdloginSuccess";
 
-
 const schema = yup.object().shape({
   name: yup.string().min(3).max(50).required(),
 });
-const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
+const ExpenseTypeForm = ({ isExpenseTypeModalOpen, handleModalClose })  => {
   const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -82,7 +81,7 @@ const ExpenseTypeForm = ({ isModalOpen, handleModalClose })  => {
     sessionStorage.removeItem("token")
 return <Navigate to="/login" replace={true} />
   }
-  if(!isModalOpen) return null;
+  if(!isExpenseTypeModalOpen) return null;
   if(error_msg){
    
     toast.error(`${error_msg}` , {

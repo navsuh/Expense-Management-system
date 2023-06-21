@@ -14,7 +14,7 @@ const HouseholdTable = (props) => {
   const houseHoldList = useBoundStore((store) => store.households);
   const deleteHouseholds = useBoundStore((store) => store.deleteHouseholds);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isHouseholdModalOpen, setIsHouseholdModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   // const [state,setState]
@@ -47,7 +47,7 @@ const HouseholdTable = (props) => {
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsHouseholdModalOpen(false);
     setIsDeleteModalOpen(false);
     navigate("/primaryuser/household");
   };
@@ -76,7 +76,7 @@ const HouseholdTable = (props) => {
                   <div className="flex flex-between">
                     <Link
                       to={`/primaryuser/household/${eachHousehold._id}`}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => setIsHouseholdModalOpen(true)}
                     >
                       <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
@@ -106,11 +106,11 @@ const HouseholdTable = (props) => {
   return (
     <>
       <HouseHoldForm
-        isModalOpen={isModalOpen}
+        isHouseholdModalOpen={isHouseholdModalOpen}
         handleModalClose={handleModalClose}
       />
     <ConfirmDelete
-        isModalOpen={isDeleteModalOpen}
+        isDeleteModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={deleteHousehold}
         deleteId={deleteId}
@@ -123,7 +123,7 @@ const HouseholdTable = (props) => {
         <div>
           <button>
             <IoAddCircle
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => setIsHouseholdModalOpen(true)}
               className="text-blue-800 h-14 w-14 hover:text-blue-600"
             />
           </button>

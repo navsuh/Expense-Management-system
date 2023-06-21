@@ -27,10 +27,10 @@ const UserTable = (props) => {
   const onSoftDeleteuser = (id) => {
     softdeleteUser(id);
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsEditModalOpen(false);
   };
 
   const onPaginate = (pageNumber) => {
@@ -97,7 +97,7 @@ const UserTable = (props) => {
                   <div className="flex flex-between">
                     <Link
                       to={`/admin/users/${eachUser._id}`}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => setIsEditModalOpen(true)}
                     >
                       <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
@@ -128,7 +128,7 @@ const UserTable = (props) => {
 
   return (
     <>
-      <UserForm isModalOpen={isModalOpen} handleModalClose={handleModalClose} />
+      <UserForm isEditModalOpen={isEditModalOpen} handleModalClose={handleModalClose} />
       <div className="flex flex-row justify-between">
         <div>
           <SearchInput onChange={(value) => setSearchQuery(value)} />
