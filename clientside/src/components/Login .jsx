@@ -137,7 +137,7 @@ const Login = () => {
     setIsModalOpen(false);
   };
 
-  const modalClose = () => {
+  const modalOtpClose = () => {
     setModal(false);
   };
 
@@ -154,12 +154,12 @@ const Login = () => {
         isModalOpen={isModalOpen}
         handleModalClose={handleModalClose}
         setOtpModal={setOtpModal}
-        modalClose={modalClose}
+        modalOtpClose={modalOtpClose}
         setModalOpen={setModalOpen}
       />
       <OTPFORM
         modal={modal}
-        modalClose={modalClose}
+        modalOtpClose={modalOtpClose}
         setModalOpen={setModalOpen}
       />
       <div className="min-h-fit bg-gray-100 text-gray-900 flex justify-center">
@@ -231,7 +231,7 @@ const Login = () => {
               <button
                 onClick={() => {
                   setIsModalOpen(true);
-                  modalClose();
+                  modalOtpClose();
                 }}
                 className="text-blue-600 hover:text-blue-800 underline-offset-2 mt-2"
               >

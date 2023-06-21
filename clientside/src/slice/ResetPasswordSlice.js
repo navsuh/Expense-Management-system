@@ -41,4 +41,11 @@ export const ResetPasswordSlice = (set) => ({
       "Reset reset Password State"
     );
   },
+  ResetErrorMsgResetPassword: () => {
+    set(
+      { error_msg_reset_pasword: "" },
+      false,
+      "ResetErrorMsgResetPassword"
+    );
+  },
 });

@@ -5,16 +5,21 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store.js";
 import OTPFORM from "../OTPForm.jsx";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const customIdErrorMsg = "customIdErrorMsg";
+const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
 });
 
-const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalClose,setModalOpen }) => {
+const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalOtpClose,setModalOpen }) => {
   const navigate = useNavigate();
   const forgetPassword = useBoundStore((store) => store.forgetPassword);
   const error_msg = useBoundStore((store) => store.error_msg_forget_password);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgForgetPassword);
 
   const forgetPasswordResponse = useBoundStore(
     (store) => store.forgetPasswordResponse
@@ -36,17 +41,27 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalClo
   useEffect(() => {
     if (forgetPasswordResponse.status === 200) {
       // alert(forgetPasswordResponse.msg);
-      forgetPasswordReset();
+      toast.success(`${forgetPasswordResponse.msg}`, {
+        toastId: customIdloginSuccess,
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // forgetPasswordReset();
       // navigate("/otpform");
+      handleModalClose()
     }
   }, [forgetPasswordResponse]);
 
-//  useEffect(()=>{
-//   handleModalClose()
-//  },[!error_msg])
+
 
  useEffect(()=>{
-  modalClose()
+  modalOtpClose()
   // setModalOpen()
  },[error_msg])
 
@@ -56,13 +71,30 @@ const ForgotPasswordForm = ({ isModalOpen, handleModalClose,setOtpModal,modalClo
   const onSubmitHandler = (data) => {
     console.log({ data });
     forgetPassword({ data }); 
-    handleModalClose() 
+     
     // setOtpModal()
-    error_msg?modalClose():setOtpModal()
+    error_msg?modalOtpClose():setOtpModal()
     reset()
   };
 
   if (!isModalOpen) return null;
+
+  if(error_msg){
+   
+    toast.error(`${error_msg}` , {
+      toastId: customIdErrorMsg,
+       position: "top-right",
+       autoClose: 5000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "light",
+       })
+       ResetErrorMsg()
+   
+}
 
   return (
     <>

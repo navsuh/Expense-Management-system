@@ -6,6 +6,11 @@ import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store.js";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const customIdErrorMsg = "customIdErrorMsg";
+const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -17,12 +22,16 @@ const ResetPasswordForm = () => {
   const navigate = useNavigate();
   const resetPassword = useBoundStore((store) => store.resetPassword);
   const error_msg = useBoundStore((store) => store.error_msg_reset_pasword);
+  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgResetPassword);
   const resetPasswordResponse = useBoundStore(
     (store) => store.resetPasswordResponse
   );
   const resetPasswordReset = useBoundStore((store) => store.resetPasswordReset);
 
   const [showPassword, setShowPassword] = useState(false);
+  const forgetPasswordReset = useBoundStore(
+    (store) => store.forgetPasswordReset
+  );
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -37,13 +46,40 @@ const ResetPasswordForm = () => {
 
   useEffect(() => {
     if (resetPasswordResponse.status === 200) {
-      alert(resetPasswordResponse.msg);
+      // alert(resetPasswordResponse.msg);
+      toast.success(`${resetPasswordResponse.msg}`, {
+        toastId: customIdloginSuccess,
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       sessionStorage.removeItem("OTP")
       resetPasswordReset();
+      forgetPasswordReset();
       navigate("/login");
     }
   }, [resetPasswordResponse, navigate, resetPasswordReset]);
-
+  if(error_msg){
+   
+    toast.error(`${error_msg}` , {
+      toastId: customIdErrorMsg,
+       position: "top-right",
+       autoClose: 5000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "light",
+       })
+       ResetErrorMsg()
+   
+}
   const onSubmitHandler = (data) => {
     console.log({ data });
     resetPassword({ data });

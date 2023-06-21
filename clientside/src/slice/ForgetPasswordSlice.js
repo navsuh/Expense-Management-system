@@ -44,6 +44,13 @@ export const ForgetPasswordSlice = (set) => ({
       "Reset forget Password"
     );
   },
+  ResetErrorMsgForgetPassword: () => {
+    set(
+      { error_msg_forget_password: "" },
+      false,
+      "ResetErrorMsgForgetPassword"
+    );
+  },
 
 
 });
