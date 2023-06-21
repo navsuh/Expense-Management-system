@@ -11,7 +11,7 @@ const schema = yup.object().shape({
   OTPFourthDigit: yup.number().min(0).max(9).required(),
 });
 
-const OTPFORM = () => {
+const OTPFORM = ({modalClose,setModalOpen}) => {
     
     const forgetPasswordResponse = useBoundStore(
         (store) => store.forgetPasswordResponse
