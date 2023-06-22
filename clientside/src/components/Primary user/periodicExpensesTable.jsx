@@ -35,7 +35,7 @@ const PeriodicExpensesTable = (props) => {
 
   const periodicExpenseList = useBoundStore((store) => store.periodicExpense);
   const houseHoldList = useBoundStore((store) => store.households);
-  const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
+  // const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const sendDueDateNotification = useBoundStore(
     (store) => store.sendDueDateNotification
   );
@@ -145,7 +145,7 @@ const PeriodicExpensesTable = (props) => {
   const filteredPeriodicExpenses = filteredPeriodicExpenseList.filter(
     (m) =>
       m.selectExpense.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      m.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
+      m.paidBy[m.paidBy.length-1].toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const lastIndex = dataPerPage * currentPage;

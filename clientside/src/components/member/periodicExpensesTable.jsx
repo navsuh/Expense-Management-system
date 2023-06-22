@@ -47,7 +47,7 @@ const PeriodicExpensesTableMember = (props) => {
   const filteredPeriodicExpenses = filteredPeriodicExpenseList.filter(
     (m) =>
       m.selectExpense.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      m.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
+      m.paidBy[m.paidBy.length-1].toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const lastIndex = dataPerPage * currentPage;

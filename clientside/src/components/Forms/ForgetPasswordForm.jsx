@@ -16,7 +16,7 @@ const schema = yup.object().shape({
 });
 
 const ForgotPasswordForm = ({ isForgotPasswordModalOpen, handleModalClose,setOtpModal,modalOtpClose }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const forgetPassword = useBoundStore((store) => store.forgetPassword);
   const error_msg = useBoundStore((store) => store.error_msg_forget_password);
   const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgForgetPassword);
