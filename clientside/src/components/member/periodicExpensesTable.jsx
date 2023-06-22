@@ -39,7 +39,7 @@ const PeriodicExpensesTableMember = (props) => {
     getAllHouseholds();
   }, [getAllPeriodicExpense, getAllHouseholds]);
   const [showchart, SetshowChart] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPeriodicExpenseModalOpen, setIsPeridoicExpenseModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   const [showFilter, SetshowFilter] = useState(false);
@@ -68,7 +68,7 @@ const PeriodicExpensesTableMember = (props) => {
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsPeridoicExpenseModalOpen(false);
     setIsDeleteModalOpen(false);
   };
 
@@ -124,7 +124,7 @@ const PeriodicExpensesTableMember = (props) => {
                   <div className="flex flex-between">
                     <Link
                       to={`/memberuser/periodicexpenses/${eachPeriodicExpense._id}`}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => setIsPeridoicExpenseModalOpen(true)}
                     >
                       <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
@@ -154,11 +154,11 @@ const PeriodicExpensesTableMember = (props) => {
   return (
     <>
       <PeriodicExpenseForm
-        isModalOpen={isModalOpen}
+        isPeriodicExpenseModalOpen={isPeriodicExpenseModalOpen}
         handleModalClose={handleModalClose}
       />
     <ConfirmDelete
-        isModalOpen={isDeleteModalOpen}
+        isDeleteModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={ondeletePeriodicExpense}
         deleteId={deleteId}
