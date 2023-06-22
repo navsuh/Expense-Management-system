@@ -70,6 +70,8 @@ const PeriodicExpenseForm = ({ isPeriodicExpenseModalOpen, handleModalClose }) =
     const periodicExpense = periodicExpenseList.find((p) => p._id === id);
     console.log(periodicExpense);
     const lenghtOfPaymentDetails=periodicExpense.paymentDetails.length
+    const lenghtOfpaidThrough=periodicExpense.paidThrough.length
+    const lenghtOfpaidBy=periodicExpense.paidBy.length
 console.log(lenghtOfPaymentDetails);
     setValue("_id", periodicExpense._id);
     setValue("households", periodicExpense.household);
@@ -81,8 +83,8 @@ console.log(lenghtOfPaymentDetails);
     setValue("amount", periodicExpense.amount);
     setValue("dueDate", periodicExpense.dueDate);
     setValue("description", periodicExpense.description);
-    setValue("paidThrough", periodicExpense.paidThrough);
-    setValue("paidBy", periodicExpense.paidBy);
+    setValue("paidThrough", periodicExpense.paidThrough[lenghtOfpaidThrough-1]);
+    setValue("paidBy", periodicExpense.paidBy[lenghtOfpaidBy-1]);
   }, [id, setValue, periodicExpenseList]);
 
   const onSubmitHandler = (data) => {
