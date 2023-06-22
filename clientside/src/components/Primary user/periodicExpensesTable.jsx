@@ -35,7 +35,7 @@ const PeriodicExpensesTable = (props) => {
 
   const periodicExpenseList = useBoundStore((store) => store.periodicExpense);
   const houseHoldList = useBoundStore((store) => store.households);
-  const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
+  // const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const sendDueDateNotification = useBoundStore(
     (store) => store.sendDueDateNotification
   );
@@ -145,7 +145,9 @@ const PeriodicExpensesTable = (props) => {
   const filteredPeriodicExpenses = filteredPeriodicExpenseList.filter(
     (m) =>
       m.selectExpense.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      m.paidBy.toLowerCase().includes(searchQuery.toLowerCase())
+      m.paidBy[m.paidBy.length - 1]
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
   );
 
   const lastIndex = dataPerPage * currentPage;
@@ -209,18 +211,24 @@ const PeriodicExpensesTable = (props) => {
                 <td className="px-6 py-4">
                   {eachPeriodicExpense.selectExpense}
                 </td>
-                <td className="px-6 py-4">{eachPeriodicExpense.paidBy[eachPeriodicExpense.paidBy.length-1]}</td>
+                <td className="px-6 py-4">
+                  {
+                    eachPeriodicExpense.paidBy[
+                      eachPeriodicExpense.paidBy.length - 1
+                    ]
+                  }
+                </td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
                     <Link
                       to={`/primaryuser/periodicexpenses/${eachPeriodicExpense._id}`}
                       onClick={() => setIsPeridoicExpenseModalOpen(true)}
                     >
-                      <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
+                      <AiOutlineEdit className="w-8 h-8 p-1 hover:text-white hover:bg-blue-500 bg-gray-200 rounded-3xl text-blue-500" />
                     </Link>
 
                     <AiOutlineDelete
-                      className="w-8 h-6 ml-1 cursor-pointer hover:text-red-500"
+                      className="w-8 h-8 p-1 ml-2 cursor-pointer text-red-500 bg-gray-200 hover:text-white rounded-3xl hover:bg-red-500 "
                       onClick={() => {
                         setIsDeleteModalOpen(true);
                         setDeleteId(eachPeriodicExpense._id);

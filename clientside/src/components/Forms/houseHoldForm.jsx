@@ -58,21 +58,21 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
     handleModalClose();
   }, [houseHoldList]);
 
-  const onSubmitHandler = (data) => {
-    reset();
-    if (data._id) {
-      updateHouseholds({ data });
-      reset();
-    } else {
-      reset();
-      createHouseholds({ data });
-    }
-  };
-
+  
   const closeAndReset = () => {
     reset();
     navigate("/primaryuser/household");
     handleModalClose();
+  };
+
+  const onSubmitHandler = (data) => {
+    if (data._id) {
+      updateHouseholds({ data });
+      closeAndReset()
+    } else {
+      reset();
+      createHouseholds({ data });
+    }
   };
 
   if (user.role === "Admin") {

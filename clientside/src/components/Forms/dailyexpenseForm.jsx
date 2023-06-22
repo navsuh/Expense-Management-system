@@ -75,6 +75,13 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
     handleModalClose();
   }, [dailyExpensesList]);
 
+  const closeAndReset = () => {
+    if (user.role === "Primaryuser") navigate("/primaryuser/dailyexpenses");
+    else if (user.role === "member") navigate("/memberuser/dailyexpenses");
+    handleModalClose();
+    reset();
+  };
+
   const onSubmitHandler = (data) => {
     reset();
 
@@ -87,8 +94,7 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
       delete data.selectExpense;
       const newData = { ...data, paymentDetails, expensetypes: selectExpense };
       updateDailyExpense({ newData });
-
-      reset();
+      closeAndReset()
     } else {
       reset();
       const { amount, date, method, selectExpense } = data;
@@ -102,12 +108,7 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
       createDailyExpense({ newData });
     }
   };
-  const closeAndReset = () => {
-    if (user.role === "Primaryuser") navigate("/primaryuser/dailyexpenses");
-    else if (user.role === "member") navigate("/memberuser/dailyexpenses");
-    handleModalClose();
-    reset();
-  };
+  
 
   if (user.role === "Admin") {
     sessionStorage.removeItem("token");

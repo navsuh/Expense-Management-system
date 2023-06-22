@@ -27,9 +27,9 @@ import PeriodicExpenseForm from "./components/Forms/periodicexpenseForm";
 import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
 
 import PrivateRoute from "./components/privateRoute";
-import Error401 from "./components/Errorpage";
+// import Error401 from "./components/Errorpage";
 
-import OTPFORM from "./components/OTPForm";
+// import OTPFORM from "./components/OTPForm";
 import PrivateRouteResetPassword from "./components/privateRouteResetPassword";
 
 import { toast,ToastContainer } from 'react-toastify';
