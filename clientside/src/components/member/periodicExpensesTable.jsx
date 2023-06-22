@@ -119,7 +119,7 @@ const PeriodicExpensesTableMember = (props) => {
                 <td className="px-6 py-4">
                   {eachPeriodicExpense.selectExpense}
                 </td>
-                <td className="px-6 py-4">{eachPeriodicExpense.paidBy}</td>
+                <td className="px-6 py-4">{eachPeriodicExpense.paidBy[eachPeriodicExpense.paidBy.length-1]}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-between">
                     <Link
