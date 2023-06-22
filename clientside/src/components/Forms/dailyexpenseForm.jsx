@@ -24,7 +24,7 @@ const schema = yup.object().shape({
   paidBy: yup.string().min(3).max(50).required(),
 });
 
-const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
+const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -114,7 +114,7 @@ const DailyExpenseForm = ({ isModalOpen, handleModalClose }) => {
     return <Navigate to="/login" replace={true} />;
   }
 
-  if (!isModalOpen) return null;
+  if (!isDailyExpenseModalOpen) return null;
   if(error_msg){
    
     toast.error(`${error_msg}` , {

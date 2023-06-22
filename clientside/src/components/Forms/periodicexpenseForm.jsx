@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const customIdErrorMsg = "customIdErrorMsg";
-const customIdloginSuccess = "customIdloginSuccess";
+// const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   households: yup.string().required(),
@@ -22,11 +22,11 @@ const schema = yup.object().shape({
   date: yup.string().required(),
   method: yup.string().min(3).max(50).required(),
   // }),
-  description: yup.string().min(5).max(50).required(),
+  description: yup.string().min(5).max(100).required(),
   paidThrough: yup.string().min(3).max(20).required(),
   paidBy: yup.string().min(3).max(20).required(),
 });
-const PeriodicExpenseForm = ({ isModalOpen, handleModalClose }) => {
+const PeriodicExpenseForm = ({ isPeriodicExpenseModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
   const houseHoldsOptions = useBoundStore((store) => store.households);
@@ -126,7 +126,7 @@ const PeriodicExpenseForm = ({ isModalOpen, handleModalClose }) => {
     reset();
   };
 
-  if (!isModalOpen) return null;
+  if (!isPeriodicExpenseModalOpen) return null;
   if(error_msg){
    
     toast.error(`${error_msg}` , {

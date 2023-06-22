@@ -24,7 +24,7 @@ const DailyExpensesTable = (props) => {
   const houseHoldList = useBoundStore((store) => store.households);
   const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const [showchart, SetshowChart] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDailyExpenseModalOpen, setIsDailyExpenseModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   const [showFilter, SetshowFilter] = useState(false);
@@ -52,7 +52,7 @@ const DailyExpensesTable = (props) => {
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsDailyExpenseModalOpen(false);
     setIsDeleteModalOpen(false);
     navigate("/primaryuser/dailyexpenses");
   };
@@ -130,7 +130,7 @@ const DailyExpensesTable = (props) => {
                   <div className="flex flex-between">
                     <Link
                       to={`/primaryuser/dailyexpenses/${eachDailyExpense._id}`}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => setIsDailyExpenseModalOpen(true)}
                     >
                       <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
@@ -163,11 +163,11 @@ const DailyExpensesTable = (props) => {
   return (
     <>
      <DailyExpenseForm
-        isModalOpen={isModalOpen}
+        isDailyExpenseModalOpen={isDailyExpenseModalOpen}
         handleModalClose={handleModalClose}
       />
       <ConfirmDelete
-        isModalOpen={isDeleteModalOpen}
+        isDeleteModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={ondeleteDailyExpense}
         deleteId={deleteId}
@@ -213,13 +213,13 @@ const DailyExpensesTable = (props) => {
               getFilterName={getFilterName}
             />
           </div>
-          <button onClick={() => setIsModalOpen(true)}>
+          <button onClick={() => setIsDailyExpenseModalOpen(true)}>
             <IoAddCircle className="text-blue-800 h-14 w-14 hover:text-blue-600" />
           </button>
         </div>
       </div>
       <div className="relative shadow-md sm:rounded-lg">
-        {currentDailyExpenses.length === 0 ? (
+        {filteredDailyExpenses.length === 0 ? (
           <div className="p-4">No Data Found.</div>
         ) : (
           dailyExpenseTable()

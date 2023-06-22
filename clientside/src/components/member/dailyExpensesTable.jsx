@@ -202,7 +202,7 @@ const DailyExpensesTableMember = (props) => {
         </div>
       </div>
       <div className="relative  shadow-md sm:rounded-lg">
-        {currentDailyExpenses.length === 0 ? (
+        {filteredDailyExpenses.length === 0 ? (
           <div className="p-4">No Data Found.</div>
         ) : (
           dailyExpenseTable()

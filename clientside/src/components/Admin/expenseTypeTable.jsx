@@ -8,14 +8,13 @@ import ExpenseTypeForm from "../Forms/expensetypeForm.jsx";
 import Pagination from "../Pagination.jsx";
 import ConfirmDelete from "../Forms/deleteConfirm.jsx";
 
-
 const ExpenseTypeTable = (props) => {
   const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
   const deleteExpenseTypes = useBoundStore((store) => store.deleteExpenseTypes);
   const expenseList = useBoundStore((store) => store.expenseTypes);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpenseTypeModalOpen, setIsExpenseTypeModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -35,7 +34,7 @@ const ExpenseTypeTable = (props) => {
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsExpenseTypeModalOpen(false);
     setIsDeleteModalOpen(false);
     navigate("/admin/expensetype");
   };
@@ -63,7 +62,6 @@ const ExpenseTypeTable = (props) => {
   const displayExpenseTypeTable = () => {
     return (
       <>
-      
         <table className="w-[65rem] text-sm text-left text-gray-500 ml-6 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500">
             <tr>
@@ -83,7 +81,7 @@ const ExpenseTypeTable = (props) => {
                   <div className="flex flex-between">
                     <Link
                       to={`/admin/expensetype/${eachExpense._id}`}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => setIsExpenseTypeModalOpen(true)}
                     >
                       <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
@@ -115,11 +113,11 @@ const ExpenseTypeTable = (props) => {
   return (
     <>
       <ExpenseTypeForm
-        isModalOpen={isModalOpen}
+        isExpenseTypeModalOpen={isExpenseTypeModalOpen}
         handleModalClose={handleModalClose}
       />
-    <ConfirmDelete
-        isModalOpen={isDeleteModalOpen}
+      <ConfirmDelete
+        isDeleteModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={deleteExpenseType}
         deleteId={deleteId}
@@ -130,7 +128,7 @@ const ExpenseTypeTable = (props) => {
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div>
-          <button onClick={() => setIsModalOpen(true)}>
+          <button onClick={() => setIsExpenseTypeModalOpen(true)}>
             <IoAddCircle className="text-blue-800 h-14 w-14 hover:text-blue-600" />
           </button>
         </div>

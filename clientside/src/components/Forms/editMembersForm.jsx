@@ -19,12 +19,12 @@ const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
   lastName: yup.string().min(3).max(50).required(),
   // email: yup.string().min(3).max(50).required(),
-  phone: yup.string().min(8).max(10).required(),
-  userName: yup.string().min(6).max(20).required(),
+  phone: yup.string().max(10).required(),
+  userName: yup.string().min(6).max(50).required(),
   // password: yup.string().min(8).max(32).required(),
   householdName: yup.string().required(),
 });
-const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
+const EditMemberForm = ({ isEditModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
   const memberList = useBoundStore((store) => store.memberData);
   // console.log(memberList);
@@ -95,7 +95,7 @@ const EditMemberForm = ({ isModalOpen, handleModalClose }) => {
   }
 
 
-  if (!isModalOpen) return null;
+  if (!isEditModalOpen) return null;
 
   if(error_msg){
    

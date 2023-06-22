@@ -17,7 +17,7 @@ export const getAllHouseholdMembersCreate = () => {
     delete context.result
     context.result = {
       _id: _id,
-      householdId: household,
+      householdId: household,  
       memberUserId: user,
       firstName: userData.data[0].firstName,
       lastName: userData.data[0].lastName,

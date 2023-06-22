@@ -19,7 +19,7 @@ const PeriodicExpensesTable = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 3;
   const [showchart, SetshowChart] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPeriodicExpenseModalOpen, setIsPeridoicExpenseModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   const [showFilter, SetshowFilter] = useState(false);
@@ -71,15 +71,20 @@ const PeriodicExpensesTable = (props) => {
     }
   );
 
-  if (filtereddueDateNotificationList) {
-    for (let eachfiltereddueDateNotification of filtereddueDateNotificationList) {
-      if (
-        !dueDateNotificationIds.includes(eachfiltereddueDateNotification._id)
-      ) {
-        sendDueDateNotification(eachfiltereddueDateNotification);
+  useEffect(() => {
+ 
+  
+    if (filtereddueDateNotificationList) {
+      for (let eachfiltereddueDateNotification of filtereddueDateNotificationList) {
+        if (
+          !dueDateNotificationIds.includes(eachfiltereddueDateNotification._id)
+        ) {
+          sendDueDateNotification(eachfiltereddueDateNotification);
+        }
       }
     }
-  }
+  }, [filtereddueDateNotificationList]);
+  
 
   const onchecked = (value) => {
     // console.log(JSON.parse(value));
@@ -113,7 +118,7 @@ const PeriodicExpensesTable = (props) => {
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsPeridoicExpenseModalOpen(false);
     setIsDeleteModalOpen(false);
     navigate("/primaryuser/periodicexpenses");
   };
@@ -161,7 +166,7 @@ const PeriodicExpensesTable = (props) => {
                   <div className="flex flex-between">
                     <Link
                       to={`/primaryuser/periodicexpenses/${eachPeriodicExpense._id}`}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => setIsPeridoicExpenseModalOpen(true)}
                     >
                       <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
@@ -192,11 +197,11 @@ const PeriodicExpensesTable = (props) => {
   return (
     <>
       <PeriodicExpenseForm
-        isModalOpen={isModalOpen}
+        isPeriodicExpenseModalOpen={isPeriodicExpenseModalOpen}
         handleModalClose={handleModalClose}
       />
     <ConfirmDelete
-        isModalOpen={isDeleteModalOpen}
+        isDeleteModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={ondeletePeriodicExpense}
         deleteId={deleteId}
@@ -242,7 +247,7 @@ const PeriodicExpensesTable = (props) => {
             />
           </div>
 
-          <button onClick={() => setIsModalOpen(true)}>
+          <button onClick={() => setIsPeridoicExpenseModalOpen(true)}>
             <IoAddCircle className="text-blue-800 h-14 w-14 hover:text-blue-600" />
           </button>
         </div>

@@ -16,7 +16,7 @@ const schema = yup.object().shape({
   OTPFourthDigit: yup.number().min(0).max(9).required(),
 });
 
-const OTPFORM = ({ modal, modalOtpClose, setModalOpen }) => {
+const OTPFORM = ({ isOtpModal, modalOtpClose, setModalOpen }) => {
   const forgetPasswordResponse = useBoundStore(
     (store) => store.forgetPasswordResponse
   );
@@ -77,7 +77,7 @@ const OTPFORM = ({ modal, modalOtpClose, setModalOpen }) => {
     }
   };
 
-  if (!modal) return null;
+  if (!isOtpModal) return null;
 
   return (
     <>
@@ -100,12 +100,12 @@ const OTPFORM = ({ modal, modalOtpClose, setModalOpen }) => {
           </div>
           <div>
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <div className="flex flex-col space-y-16 mt-2">
+              <div className="flex flex-col space-y-10 mt-5">
                 <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                   <div className="w-16 h-16 ">
                     <input
                       {...register("OTPFirstDigit")}
-                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-500 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="numeric"
                       // name="OTP1"
                       // id="OTP1"
@@ -115,7 +115,7 @@ const OTPFORM = ({ modal, modalOtpClose, setModalOpen }) => {
                   <div className="w-16 h-16 ">
                     <input
                       {...register("OTPSecondDigit")}
-                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-500 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="numeric"
                       // name="OTP2"
                       // id="OTP2"
@@ -125,7 +125,7 @@ const OTPFORM = ({ modal, modalOtpClose, setModalOpen }) => {
                   <div className="w-16 h-16 ">
                     <input
                       {...register("OTPThirdDigit")}
-                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-500 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="numeric"
                       // name="OTP3"
                       // id="OTP3"
@@ -135,7 +135,7 @@ const OTPFORM = ({ modal, modalOtpClose, setModalOpen }) => {
                   <div className="w-16 h-16 ">
                     <input
                       {...register("OTPFourthDigit")}
-                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-500 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="numeric"
                       // name="OTP4"
                       // id="OTP4"
@@ -144,7 +144,7 @@ const OTPFORM = ({ modal, modalOtpClose, setModalOpen }) => {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col space-y-5">
+                <div className="flex flex-col space-y-3">
                   <div>
                     <button
                       type="submit"

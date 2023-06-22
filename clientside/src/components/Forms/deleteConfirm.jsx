@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 
 const ConfirmDelete = ({
-  isModalOpen,
+  isDeleteModalOpen,
   handleModalClose,
   deleteRecord,
   deleteId,
 }) => {
 
-  if (!isModalOpen) return null;
+  if (!isDeleteModalOpen) return null;
 
   return (
     <div

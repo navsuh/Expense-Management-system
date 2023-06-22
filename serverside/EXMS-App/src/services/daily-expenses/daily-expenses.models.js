@@ -11,7 +11,7 @@ export const dailyExpenseSchema = Joi.object({
   paymentDetails: Joi.object({
       amount: Joi.number().min(0).required(),
       date: Joi.string().required(),
-      method: Joi.string().required()
+      method: Joi.string().min(3).max(50).required()
     }).required()
 })
 

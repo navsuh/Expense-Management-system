@@ -17,7 +17,7 @@ const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
-  password: yup.string().min(8).max(32).required(),
+  password: yup.string().min(8).max(255).required(),
 });
 
 const Login = () => {
@@ -68,7 +68,7 @@ const Login = () => {
     }
     if (user.role === "Admin") {
       // alert("login sucessfull");
-      toast.success("login sucessfull", {
+      toast.success("Login Sucessfull", {
         toastId: customIdloginSuccess,
         position: "top-right",
         autoClose: 5000,
@@ -82,7 +82,7 @@ const Login = () => {
       navigate("/admin");
     } else if (user.role === "Primaryuser") {
       // alert("login sucessfull");
-      toast.success("login sucessfull", {
+      toast.success("Login Sucessfull", {
         toastId: customIdloginSuccess,
         position: "top-right",
         autoClose: 5000,
@@ -96,7 +96,7 @@ const Login = () => {
       navigate("/primaryuser");
     } else if (user.role === "member") {
       // alert("login sucessfull");
-      toast.success("login sucessfull", {
+      toast.success("Login Sucessfull", {
         toastId: customIdloginSuccess,
         position: "top-right",
         autoClose: 5000,
@@ -130,40 +130,40 @@ const Login = () => {
     loginUser({ data });
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] = useState(false);
+  const [isOtpModal, setIsOtpModal] = useState(false);
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsForgotPasswordModalOpen(false);
   };
 
   const modalOtpClose = () => {
-    setModal(false);
+    setIsOtpModal(false);
   };
 
   const setModalOpen = () => {
-    setIsModalOpen(true);
+    setIsForgotPasswordModalOpen(true);
   };
 
   const setOtpModal = () => {
-    setModal(true);
+    setIsOtpModal(true);
   };
   return (
     <>
       <ForgotPasswordForm
-        isModalOpen={isModalOpen}
+        isForgotPasswordModalOpen={isForgotPasswordModalOpen}
         handleModalClose={handleModalClose}
         setOtpModal={setOtpModal}
         modalOtpClose={modalOtpClose}
         setModalOpen={setModalOpen}
       />
       <OTPFORM
-        modal={modal}
+        isOtpModal={isOtpModal}
         modalOtpClose={modalOtpClose}
         setModalOpen={setModalOpen}
       />
-      <div className="min-h-fit bg-gray-100 text-gray-900 flex justify-center">
-        <div className="max-w-screen-xl  sm:m-10 bg-white shadow-xl sm:rounded-lg flex justify-center flex-1 p-6">
+      <div className="min-h-fit bg-white text-gray-900 flex justify-center">
+        <div className="max-w-screen-xl   bg-white sm:rounded-lg flex justify-center flex-1 ">
           <div className="flex-1 text-center hidden lg:flex ml-20">
             <img src="/assests/images/homeimgae.png" alt="homeimage" />
           </div>
@@ -230,7 +230,7 @@ const Login = () => {
 
               <button
                 onClick={() => {
-                  setIsModalOpen(true);
+                  setIsForgotPasswordModalOpen(true);
                   modalOtpClose();
                 }}
                 className="text-blue-600 hover:text-blue-800 underline-offset-2 mt-2"

@@ -10,18 +10,18 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const customIdErrorMsg = "customIdErrorMsg";
-const customIdloginSuccess = "customIdloginSuccess";
+// const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
   lastName: yup.string().min(3).max(50).required(),
-  email: yup.string().min(3).max(50).required(),
-  phone: yup.string().min(8).max(10).required(),
-  userName: yup.string().min(6).max(20).required(),
-  password: yup.string().min(8).max(32).required(),
+  email: yup.string().email().required(),
+  phone: yup.string().max(10).required(),
+  userName: yup.string().min(5).max(50).required(),
+  password: yup.string().min(8).max(255).required(),
   householdName: yup.string().required(),
 });
-const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
+const CreateMemberForm = ({ isCreateMemberModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
   const memberList = useBoundStore((store) => store.memberData);
   const houseHoldList = useBoundStore((store) => store.households);
@@ -59,7 +59,7 @@ const CreateMemberForm = ({ isModalOpen, handleModalClose }) => {
     return <Navigate to="/login" replace={true} />;
   }
 
-  if (!isModalOpen) return null;
+  if (!isCreateMemberModalOpen) return null;
   if(error_msg){
    
     toast.error(`${error_msg}` , {

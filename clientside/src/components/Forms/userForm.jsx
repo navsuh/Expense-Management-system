@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const customIdErrorMsg = "customIdErrorMsg";
-const customIdloginSuccess = "customIdloginSuccess";
+// const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(50).required(),
@@ -19,7 +19,7 @@ const schema = yup.object().shape({
   userName: yup.string().min(6).max(20).required(),
   isActive: yup.boolean(),
 });
-const UserForm = ({ isModalOpen, handleModalClose }) => {
+const UserForm = ({ isEditModalOpen, handleModalClose }) => {
   const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -69,7 +69,7 @@ const UserForm = ({ isModalOpen, handleModalClose }) => {
     reset();
   };
 
-  if (!isModalOpen) return null;
+  if (!isEditModalOpen) return null;
 
   if(error_msg){
    
