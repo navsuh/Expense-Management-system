@@ -19,6 +19,7 @@ export const periodicExpenseSchema = Joi.object({
 })
 
 export const updateperiodicExpenseSchema = Joi.object({
+  _id:Joi.string(),
   households:Joi.string().min(5).max(100),
   expensetypes:Joi.string().min(5).max(100),
   frequency:Joi.string().min(3).max(50),

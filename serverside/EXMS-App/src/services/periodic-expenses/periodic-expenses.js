@@ -18,6 +18,7 @@ import {
 import { PeriodicExpensesService, getOptions } from './periodic-expenses.class.js'
 import { periodicExpensesPath, periodicExpensesMethods } from './periodic-expenses.shared.js'
 import {getAllPeriodicExpenses} from "./hook/getPeriodicExpense.js"
+import { updatePeriodicExpense } from './hook/updatePeriodicExpenses.js'
 // import { duedatesend } from "./hook/duedatemail.js"
 
 export * from './periodic-expenses.class.js'
@@ -57,8 +58,8 @@ export const periodicExpenses = (app) => {
       ],
       patch: [
         validate.form(updateperiodicExpenseSchema,{abortEarly:false}),
-        periodicexpense(),
         // duedatesend(),
+        updatePeriodicExpense(),
         schemaHooks.validateData(periodicExpensesPatchValidator),
         schemaHooks.resolveData(periodicExpensesPatchResolver)
       ],

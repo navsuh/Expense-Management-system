@@ -2,7 +2,7 @@ export const periodicexpense =()=>{
     return async(context)=>{
      console.log(context.data);
      const {households,
-     expensetypes,
+     expensetypes,paymentDetails
      }=context.data
      
      const expensetypeservice=context.app.service("expensetypes")
@@ -14,6 +14,7 @@ export const periodicexpense =()=>{
     //  console.log(household.data[0]._id);
      context.data.households=household.data[0]._id
      context.data.expensetypes=expensetype.data[0]._id
+     context.data.paymentDetails=[paymentDetails]
      return context; 
     }
   }

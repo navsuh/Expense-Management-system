@@ -7,7 +7,7 @@ import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import PeriodicExpenseForm from "../Forms/periodicexpenseForm";
 import Filter from "../filter";
-import { sub, formatISO, differenceInDays, parseISO } from "date-fns";
+import { sub, formatISO, differenceInDays, parseISO,addMonths,addQuarters,addYears} from "date-fns";
 import Pagination from "../Pagination";
 import { AiOutlineAreaChart } from "react-icons/ai";
 
@@ -34,6 +34,9 @@ const PeriodicExpensesTable = (props) => {
   const dueDateNotificationIds = useBoundStore(
     (store) => store.dueDateNotificationIds
   );
+  const updatePeriodicExpenseDueDate=useBoundStore(
+    (store) => store.updatePeriodicExpenseDueDate
+  );
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -54,12 +57,16 @@ const PeriodicExpensesTable = (props) => {
     // getAllHouseholds();
   }, []);
 
+ 
+
+
   const ondeletePeriodicExpense = (id) => {
     deletePeriodicExpenses(id);
   };
   const filteredPeriodicExpenseList = periodicExpenseList.filter((expense) =>
     householdNames.includes(expense.household)
   );
+
   const filtereddueDateNotificationList = filteredPeriodicExpenseList.filter(
     (eachPeriodicExpense) => {
       return (
@@ -84,6 +91,46 @@ const PeriodicExpensesTable = (props) => {
       }
     }
   }, [filtereddueDateNotificationList]);
+
+  const filteredOverdueDateList = filteredPeriodicExpenseList.filter(
+    (eachPeriodicExpense) => {
+      return (
+        differenceInDays(parseISO(eachPeriodicExpense.dueDate), new Date()) <
+          0 
+      );
+    }
+  );
+  // useEffect(() => {
+    if(filteredOverdueDateList){
+      for(let overdueList of filteredOverdueDateList){
+        let newdueDate=overdueList.dueDate
+        switch (overdueList.frequency) {
+          case "Monthly":
+            newdueDate=addMonths(parseISO(overdueList.dueDate), 1)
+            break;
+            case "Quaterly":
+              newdueDate=addQuarters(parseISO(overdueList.dueDate), 1)
+            break;
+            case "Half-Yearly":
+              newdueDate=addMonths(parseISO(overdueList.dueDate), 6)
+            break;
+            case "Yearly":
+              newdueDate=addYears(parseISO(overdueList.dueDate), 6)
+            break;
+        
+          default:
+            break;
+        }
+
+updatePeriodicExpenseDueDate({_id:overdueList._id,dueDate:formatISO(newdueDate, { representation: 'date' })})
+      }
+    }
+   
+  // }, [filteredOverdueDateList]);
+  // console.log(filteredOverdueDateList);
+
+
+
   
 
   const onchecked = (value) => {

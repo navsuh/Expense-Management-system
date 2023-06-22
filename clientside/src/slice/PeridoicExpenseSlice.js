@@ -85,13 +85,12 @@ export const PeriodicExpenseSlice = (set) => ({
     } = newData;
     //   //   console.log(data);
     const { _id } = newData;
-
     const token = sessionStorage.getItem("token");
 
     try {
       const response = await axios.patch(
         `${apiEndPoint}/${_id}`,
-        {
+        { _id,
           households,
           expensetypes,
           description,
@@ -100,7 +99,7 @@ export const PeriodicExpenseSlice = (set) => ({
           paymentDetails,
           frequency,
           amount,
-          dueDate,
+          dueDate
         },
 
         {
@@ -260,5 +259,70 @@ export const PeriodicExpenseSlice = (set) => ({
       false,
       "ResetErrorMsg"
     );
+  },
+  updatePeriodicExpenseDueDate: async (userData) => {
+    const {
+      _id,
+      dueDate
+    } = userData;
+
+    
+    const token = sessionStorage.getItem("token");
+
+    try {
+      const response = await axios.patch(
+        `${apiEndPoint}/${_id}`,
+        { _id,
+          dueDate
+        },
+
+        {
+          headers: {
+            // 'Content-Type': 'application/json',
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      // console.log(response.data.accessToken);
+      // console.log(response.data.users.role);
+
+      console.log(response.data);
+
+      set(
+        (state) => ({
+          error_msg_periodic_expense: "",
+          periodicExpense: state.periodicExpense.map((eachExpense) => {
+            if (eachExpense._id === response.data._id) {
+              return {
+                _id: response.data._id,
+                households: response.data.households,
+                expensetypes: response.data.expensetypes,
+                description: response.data.description,
+                paidThrough: response.data.paidThrough,
+                paidBy: response.data.paidBy,
+                frequency: response.data.frequency,
+                amount: response.data.amount,
+                dueDate: response.data.dueDate,
+                paymentDetails: response.data.paymentDetails,
+                selectExpense: response.data.selectExpense,
+                household: response.data.household,
+              };
+            } else {
+              return eachExpense;
+            }
+          }),
+        }),
+        false,
+        "updatePeriodicExpenseDueDate"
+      );
+    } catch (error) {
+      const { response } = error;
+      const { data } = response;
+      set(
+        { error_msg_periodic_expense: data.message },
+        false,
+        "updatePeriodicExpenseErrorMsg"
+      );
+    }
   },
 });

@@ -69,12 +69,14 @@ const PeriodicExpenseForm = ({ isPeriodicExpenseModalOpen, handleModalClose }) =
     console.log(id);
     const periodicExpense = periodicExpenseList.find((p) => p._id === id);
     console.log(periodicExpense);
+    const lenghtOfPaymentDetails=periodicExpense.paymentDetails.length
+console.log(lenghtOfPaymentDetails);
     setValue("_id", periodicExpense._id);
     setValue("households", periodicExpense.household);
     setValue("selectExpense", periodicExpense.selectExpense);
-    setValue("paymentDetailsAmount", periodicExpense.paymentDetails.amount);
-    setValue("date", periodicExpense.paymentDetails.date);
-    setValue("method", periodicExpense.paymentDetails.method);
+    setValue("paymentDetailsAmount", periodicExpense.paymentDetails[lenghtOfPaymentDetails-1].amount);
+    setValue("date", periodicExpense.paymentDetails[lenghtOfPaymentDetails-1].date);
+    setValue("method", periodicExpense.paymentDetails[lenghtOfPaymentDetails-1].method);
     setValue("frequency", periodicExpense.frequency);
     setValue("amount", periodicExpense.amount);
     setValue("dueDate", periodicExpense.dueDate);
@@ -273,8 +275,9 @@ const PeriodicExpenseForm = ({ isPeriodicExpenseModalOpen, handleModalClose }) =
                       <option value="" hidden>
                         Select
                       </option>
-                      <option value="Weekly">Weekly</option>
                       <option value="Monthly">Monthly</option>
+                      <option value="Quaterly">Quaterly</option>
+                      <option value="Half-Yearly">Half-Yearly</option>
                       <option value="Yearly">Yearly</option>
                     </select>
                     <div className="pointer-events-none absolute right-0 top-0 bottom-0 flex items-center px-2 text-gray-700 ">
