@@ -187,9 +187,10 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
 
               <div className="flex flex-col lg:flex-row justify-between mt-4">
                 <div className="w-full lg:w-1/2 mr-3">
-                  <label htmlFor="city" className="mb-1"> <label htmlFor="" className="text-red-700">*</label>
+                  <label htmlFor="city" className="mb-1">
                     City
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("city")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
