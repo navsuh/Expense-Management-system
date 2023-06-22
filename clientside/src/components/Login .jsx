@@ -185,8 +185,8 @@ const Login = () => {
                 <div className="w-full flex-1 mt-8">
                   <div className="mx-auto max-w-xs">
                     <div>
-                      <label htmlFor="email">Username</label>
-                      <input
+                      <label htmlFor="email">Username</label>  <label htmlFor="" className="text-red-700"> *</label>
+                      <input 
                         {...register("email")}
                         className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                         type="email"
@@ -195,7 +195,7 @@ const Login = () => {
                       <p className="text-red-600">{errors.email?.message}</p>
                     </div>
                     <div className="relative mt-5">
-                      <label htmlFor="password">Password</label>
+                      <label htmlFor="password">Password</label> <label htmlFor="" className="text-red-700"> *</label>
                       <input
                         {...register("password")}
                         className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"

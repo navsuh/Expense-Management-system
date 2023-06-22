@@ -115,7 +115,7 @@ const ResetPasswordForm = () => {
             <div className="w-full flex-1 mt-8">
               <div className="mx-auto max-w-xs">
                 <div>
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">Email</label> <label htmlFor="" className="text-red-700">*</label>
 
                   <div className="mt-1.5">
                     <input
@@ -131,7 +131,7 @@ const ResetPasswordForm = () => {
                 </div>
 
                 <div className="relative mt-5">
-                  <label htmlFor="newPassword">New Password</label>
+                  <label htmlFor="newPassword">New Password</label> <label htmlFor="" className="text-red-700">*</label>
 
                   <input
                     {...register("newPassword")}
@@ -155,7 +155,7 @@ const ResetPasswordForm = () => {
                   <p className="text-red-500">{errors.newPassword?.message}</p>
                 </div>
                 <div className="relative mt-5">
-                  <label htmlFor="confirmedPassword">Confirm Password</label>
+                  <label htmlFor="confirmedPassword">Confirm Password</label> <label htmlFor="" className="text-red-700">*</label>
 
                   <input
                     {...register("confirmedPassword")}
