@@ -107,6 +107,7 @@ const CreateMemberForm = ({ isCreateMemberModalOpen, handleModalClose }) => {
                   <label htmlFor="firstName" className="mb-1">
                     First Name
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("firstName")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -133,6 +134,7 @@ const CreateMemberForm = ({ isCreateMemberModalOpen, handleModalClose }) => {
                   <label htmlFor="email" className="mb-1">
                     Email Id
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("email")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -161,6 +163,7 @@ const CreateMemberForm = ({ isCreateMemberModalOpen, handleModalClose }) => {
                   <label htmlFor="phone" className="mb-1">
                     Phone Number
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("phone")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -187,6 +190,7 @@ const CreateMemberForm = ({ isCreateMemberModalOpen, handleModalClose }) => {
                 <label htmlFor="selectHousehold" className="mb-1">
                   Select House
                 </label>
+                <label htmlFor="" className="text-red-700">*</label>
                 <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200">
                   <select
                     className="appearance-none w-full py-2 px-4 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"

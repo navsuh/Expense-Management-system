@@ -2,9 +2,6 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-// import { IoArrowBack } from "react-icons/io5";
-
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useBoundStore } from "../../store";
@@ -12,7 +9,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const customIdErrorMsg = "customIdErrorMsg";
-const customIdloginSuccess = "customIdloginSuccess";
+// const customIdloginSuccess = "customIdloginSuccess";
 
 
 const schema = yup.object().shape({
@@ -132,7 +129,7 @@ const EditMemberForm = ({ isEditModalOpen, handleModalClose }) => {
         <form onSubmit={handleSubmit(onSubmitHandler)} className="w-full lg:flex-grow">
           <div className="flex flex-col lg:flex-row justify-between">
             <div className="w-full lg:w-1/2 mr-3">
-              <label htmlFor="firstName" className="mb-1">First Name</label>
+              <label htmlFor="firstName" className="mb-1">First Name</label> <label htmlFor="" className="text-red-700">*</label>
               <input
                 {...register("firstName")}
                 className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -142,7 +139,7 @@ const EditMemberForm = ({ isEditModalOpen, handleModalClose }) => {
               <p className="text-red-500">{errors.firstName?.message}</p>
             </div>
             <div className="w-full lg:w-1/2">
-              <label htmlFor="lastName" className="mb-1">Last Name</label>
+              <label htmlFor="lastName" className="mb-1">Last Name</label> <label htmlFor="" className="text-red-700">*</label>
               <input
                 {...register("lastName")}
                 className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -155,7 +152,7 @@ const EditMemberForm = ({ isEditModalOpen, handleModalClose }) => {
 
           <div className="flex flex-col lg:flex-row justify-between mt-4">
             <div className="w-full lg:w-1/2 mr-3">
-              <label htmlFor="phone" className="mb-1">Phone Number</label>
+              <label htmlFor="phone" className="mb-1">Phone Number</label> <label htmlFor="" className="text-red-700">*</label>
               <input
                 {...register("phone")}
                 className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -165,7 +162,7 @@ const EditMemberForm = ({ isEditModalOpen, handleModalClose }) => {
               <p className="text-red-500">{errors.phone?.message}</p>
             </div>
             <div className="w-full lg:w-1/2">
-              <label htmlFor="userName" className="mb-1">UserName</label>
+              <label htmlFor="userName" className="mb-1">UserName</label> <label htmlFor="" className="text-red-700">*</label>
               <input
                 {...register("userName")}
                 className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -177,7 +174,7 @@ const EditMemberForm = ({ isEditModalOpen, handleModalClose }) => {
           </div>
 
           <div className="w-full mt-4">
-            <label htmlFor="selectHousehold" className="mb-1">Select House</label>
+            <label htmlFor="selectHousehold" className="mb-1">Select House</label> <label htmlFor="" className="text-red-700">*</label>
             <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200">
               <select
                 className="appearance-none w-full py-2 px-4 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"

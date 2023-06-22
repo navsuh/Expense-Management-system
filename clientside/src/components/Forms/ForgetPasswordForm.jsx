@@ -119,7 +119,7 @@ const ForgotPasswordForm = ({ isForgotPasswordModalOpen, handleModalClose,setOtp
         <form onSubmit={handleSubmit(onSubmitHandler)}>
           <div className="flex flex-col space-y-4">
             <div className="mt-6">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email</label> <label htmlFor="" className="text-red-700">*</label>
               <div className="mta-1.5">
                 <input
                   {...register("email")}

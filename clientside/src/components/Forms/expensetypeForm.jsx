@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const customIdErrorMsg = "customIdErrorMsg";
-const customIdloginSuccess = "customIdloginSuccess";
+// const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   name: yup.string().min(3).max(50).required(),
@@ -115,7 +115,7 @@ return <Navigate to="/login" replace={true} />
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <form onSubmit={handleSubmit(onSubmitHandler)} className="w-full lg:flex-grow">
             <div className="w-full mt-4">
-            <label htmlFor="name" className="mb-1 mt-2">Expense Type</label>
+            <label htmlFor="name" className="mb-1 mt-2">Expense Type</label> <label htmlFor="" className="text-red-700">*</label>
                 <input
                   {...register("name")}
                   className="w-full px-4 mt-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"

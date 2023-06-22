@@ -132,6 +132,7 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
                   <label htmlFor="name" className="mb-1">
                     Household Name
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("name")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -144,6 +145,7 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
                   <label htmlFor="addressLine1" className="mb-1">
                     Address Line 1
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("addressLine1")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -158,6 +160,7 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
                   <label htmlFor="addressLine2" className="mb-1">
                     Address Line 2
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("addressLine2")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -170,6 +173,7 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
                   <label htmlFor="area" className="mb-1">
                     Area
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("area")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -183,7 +187,7 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
 
               <div className="flex flex-col lg:flex-row justify-between mt-4">
                 <div className="w-full lg:w-1/2 mr-3">
-                  <label htmlFor="city" className="mb-1">
+                  <label htmlFor="city" className="mb-1"> <label htmlFor="" className="text-red-700">*</label>
                     City
                   </label>
                   <input
@@ -198,6 +202,7 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
                   <label htmlFor="State" className="mb-1">
                     State
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("state")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -212,6 +217,7 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
                 <label htmlFor="zipcode" className="mb-1">
                   Zipcode
                 </label>
+                <label htmlFor="" className="text-red-700">*</label>
                 <input
                   {...register("zipcode")}
                   className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"

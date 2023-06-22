@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const customIdErrorMsg = "customIdErrorMsg";
-const customIdloginSuccess = "customIdloginSuccess";
+// const customIdloginSuccess = "customIdloginSuccess";
 
 const schema = yup.object().shape({
   households: yup.string().required(),
@@ -169,6 +169,7 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
                   <label htmlFor="households" className="mb-1">
                     HouseHold
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200">
                     <select
                       className="appearance-none w-full py-2 px-4 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -197,6 +198,7 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
                   <label htmlFor="selectExpense" className="mb-1">
                     Expensetype
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200">
                     <select
                       className="appearance-none w-full py-2 px-4 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -229,6 +231,7 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
                   <label htmlFor="amount" className="mb-1">
                     Amount
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("amount")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -243,6 +246,7 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
                   <label htmlFor="date" className="mb-1">
                     Date
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("date")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -254,6 +258,7 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
                   <label htmlFor="method" className="mb-1">
                     Method
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("method")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -268,6 +273,7 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
                 <label htmlFor="description" className="mb-1">
                   Description
                 </label>
+                <label htmlFor="" className="text-red-700">*</label>
                 <textarea
                   {...register("description")}
                   className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -280,8 +286,9 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
               <div className="flex flex-col lg:flex-row justify-between mt-2">
                 <div className="w-full lg:w-1/2 mr-3">
                   <label htmlFor="paidThrough" className="mb-1">
-                    Paid Through{" "}
+                    Paid Through
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("paidThrough")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -294,6 +301,7 @@ const DailyExpenseForm = ({ isDailyExpenseModalOpen, handleModalClose }) => {
                   <label htmlFor="paidBy" className="mb-1">
                     Paid By
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("paidBy")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"

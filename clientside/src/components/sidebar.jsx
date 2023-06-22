@@ -96,23 +96,26 @@ const Sidebar = (props) => {
                 <span className="ml-3 text-white">Settings</span>
               </p>
             </li>
-            <li className="hover:bg-black rounded-lg ">
-              <button
+            <li className="hover:bg-black rounded-lg "
                 onClick={() => setIsModalOpen(true)}
+            
+            >
+              <button
                 className="flex items-center p-2 text-white  "
               >
                 <MdChangeCircle className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />
                 <span className="ml-3 text-white">Change Password</span>
               </button>
             </li>
-            <li className="hover:bg-black rounded-lg ">
-              <button
-                onClick={() => {
-                  lastLoginUser(user._id);
+            <li className="hover:bg-black rounded-lg "
+             onClick={() => {
+              lastLoginUser(user._id);
 
-                  sessionStorage.removeItem("token");
-                  navigate("/login");
-                }}
+              sessionStorage.removeItem("token");
+              navigate("/login");
+            }}>
+              <button
+               
                 className="flex items-center p-2 text-white rounded-lg hover:bg-black"
               >
                 <IoIosLogOut className="w-6 h-6 text-white transition duration-75 dark:text-white-400 group-hover:text-white-900 dark:group-hover:text-white" />

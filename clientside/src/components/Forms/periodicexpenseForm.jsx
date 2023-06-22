@@ -38,8 +38,8 @@ const PeriodicExpenseForm = ({ isPeriodicExpenseModalOpen, handleModalClose }) =
   const updatePeriodicExpense = useBoundStore(
     (store) => store.updatePeriodicExpense
   );
-  const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
-  const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
+  // const getAllExpenseTypes = useBoundStore((store) => store.getAllExpenseTypes);
+  // const getAllHouseholds = useBoundStore((store) => store.getAllHouseholds);
   const error_msg = useBoundStore((store) => store.error_msg_periodic_expense);
   const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgPeriodicExpense);
   const { id } = useParams();
@@ -180,6 +180,7 @@ console.log(lenghtOfPaymentDetails);
                   <label htmlFor="households" className="mb-1">
                     HouseHold
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200">
                     <select
                       className="appearance-none w-full py-2 px-4 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -208,6 +209,7 @@ console.log(lenghtOfPaymentDetails);
                   <label htmlFor="selectExpense" className="mb-1">
                     Expensetype
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200">
                     <select
                       className="appearance-none w-full py-2 px-4 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -240,6 +242,7 @@ console.log(lenghtOfPaymentDetails);
                   <label htmlFor="amount" className="mb-1">
                     Amount
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("amount")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -254,6 +257,7 @@ console.log(lenghtOfPaymentDetails);
                   <label htmlFor="dueDate" className="mb-1">
                     Due Date
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("dueDate")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -265,6 +269,7 @@ console.log(lenghtOfPaymentDetails);
                   <label htmlFor="frequency" className="mb-1">
                     Frequency
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <div className="relative border rounded-lg border-gray-300 text-gray-800 bg-gray-200">
                     <select
                       className="appearance-none w-full py-2 px-4 rounded-lg bg-gray-100 focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -294,12 +299,14 @@ console.log(lenghtOfPaymentDetails);
                 <label htmlFor="amount" className="mb-1">
                   PaymentDetails
                 </label>
+                <label htmlFor="" className="text-red-700">*</label>
 
                 <div className="flex flex-col lg:flex-row justify-between mt-1">
                   <div className="w-full lg:w-1/2 mr-3">
                     <label htmlFor="paymentDetailsAmount" className="mb-1">
                       Amount
                     </label>
+                    <label htmlFor="" className="text-red-700">*</label>
                     <input
                       {...register("paymentDetailsAmount")}
                       className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -314,6 +321,7 @@ console.log(lenghtOfPaymentDetails);
                     <label htmlFor="date" className="mb-1">
                       Date
                     </label>
+                    <label htmlFor="" className="text-red-700">*</label>
                     <input
                       {...register("date")}
                       className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -325,6 +333,7 @@ console.log(lenghtOfPaymentDetails);
                     <label htmlFor="method" className="mb-1">
                       Method
                     </label>
+                    <label htmlFor="" className="text-red-700">*</label>
                     <input
                       {...register("method")}
                       className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -339,6 +348,7 @@ console.log(lenghtOfPaymentDetails);
                 <label htmlFor="description" className="mb-1">
                   Description
                 </label>
+                <label htmlFor="" className="text-red-700">*</label>
                 <textarea
                   {...register("description")}
                   className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -351,8 +361,9 @@ console.log(lenghtOfPaymentDetails);
               <div className="flex flex-col lg:flex-row justify-between mt-2">
                 <div className="w-full lg:w-1/2 mr-3">
                   <label htmlFor="paidThrough" className="mb-1">
-                    Paid Through{" "}
+                    Paid Through
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("paidThrough")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -365,6 +376,7 @@ console.log(lenghtOfPaymentDetails);
                   <label htmlFor="paidBy" className="mb-1">
                     Paid By
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
                   <input
                     {...register("paidBy")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"

@@ -146,6 +146,7 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
               <label htmlFor="currentPassword" className="w-24">
                 Current Password
               </label>
+            
               <div className="flex-grow">
                 <input
                   {...register("currentPassword")}
@@ -174,6 +175,7 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
               <label htmlFor="newPassword" className="w-24">
                 New Password
               </label>
+          
               <div className="flex-grow">
                 <input
                   {...register("newPassword")}
@@ -200,6 +202,7 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
               <label htmlFor="confirmedPassword" className="w-24">
                 Confirm Password
               </label>
+              
               <div className="flex-grow">
                 <input
                   {...register("confirmedPassword")}
