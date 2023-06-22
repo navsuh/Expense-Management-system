@@ -1,6 +1,6 @@
 export const periodicexpense =()=>{
     return async(context)=>{
-    //  console.log(context.data);
+     console.log(context.data);
      const {households,
      expensetypes,
      }=context.data

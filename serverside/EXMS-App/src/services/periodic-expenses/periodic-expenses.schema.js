@@ -31,13 +31,19 @@ export const periodicExpensesSchema = {
     paidBy: { type: 'string' },
 
     paymentDetails: {
-      type: 'object',
+      type: 'array',
+      items: {
+        type: 'object',
       properties: {
         amount: { type: 'number' },
         date: { type: 'string' ,  format:"date"},
         method: { type: 'string' }
       }
+      }
     }
+    
+      
+    
   }
 }
 export const periodicExpensesValidator = getValidator(periodicExpensesSchema, dataValidator)
