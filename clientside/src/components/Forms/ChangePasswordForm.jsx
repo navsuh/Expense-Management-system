@@ -157,7 +157,7 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
                   placeholder="Current Password"
                 />  
                 <span
-                        className="absolute top-1/3  transform -translate-y-1/2 cursor-pointer mt-9 -ml-8"
+                        className="absolute top-1/3  transform -translate-y-1/2 cursor-pointer mt-10 -ml-8"
                         onClick={toggleCurrentPasswordVisibility}
                       >
                         {showCurrentPassword ? (
