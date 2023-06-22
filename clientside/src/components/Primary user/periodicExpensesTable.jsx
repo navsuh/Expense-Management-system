@@ -7,7 +7,15 @@ import { useBoundStore } from "../../store";
 import { useEffect, useState } from "react";
 import PeriodicExpenseForm from "../Forms/periodicexpenseForm";
 import Filter from "../filter";
-import { sub, formatISO, differenceInDays, parseISO,addMonths,addQuarters,addYears} from "date-fns";
+import {
+  sub,
+  formatISO,
+  differenceInDays,
+  parseISO,
+  addMonths,
+  addQuarters,
+  addYears,
+} from "date-fns";
 import Pagination from "../Pagination";
 import { AiOutlineAreaChart } from "react-icons/ai";
 
@@ -15,11 +23,11 @@ import Chart from "../chart";
 import ConfirmDelete from "../Forms/deleteConfirm";
 
 const PeriodicExpensesTable = (props) => {
-  
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 3;
   const [showchart, SetshowChart] = useState(false);
-  const [isPeriodicExpenseModalOpen, setIsPeridoicExpenseModalOpen] = useState(false);
+  const [isPeriodicExpenseModalOpen, setIsPeridoicExpenseModalOpen] =
+    useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   const [showFilter, SetshowFilter] = useState(false);
@@ -34,7 +42,7 @@ const PeriodicExpensesTable = (props) => {
   const dueDateNotificationIds = useBoundStore(
     (store) => store.dueDateNotificationIds
   );
-  const updatePeriodicExpenseDueDate=useBoundStore(
+  const updatePeriodicExpenseDueDate = useBoundStore(
     (store) => store.updatePeriodicExpenseDueDate
   );
   const navigate = useNavigate();
@@ -57,9 +65,6 @@ const PeriodicExpensesTable = (props) => {
     // getAllHouseholds();
   }, []);
 
- 
-
-
   const ondeletePeriodicExpense = (id) => {
     deletePeriodicExpenses(id);
   };
@@ -79,8 +84,6 @@ const PeriodicExpensesTable = (props) => {
   );
 
   useEffect(() => {
- 
-  
     if (filtereddueDateNotificationList) {
       for (let eachfiltereddueDateNotification of filtereddueDateNotificationList) {
         if (
@@ -95,43 +98,41 @@ const PeriodicExpensesTable = (props) => {
   const filteredOverdueDateList = filteredPeriodicExpenseList.filter(
     (eachPeriodicExpense) => {
       return (
-        differenceInDays(parseISO(eachPeriodicExpense.dueDate), new Date()) <
-          0 
+        differenceInDays(parseISO(eachPeriodicExpense.dueDate), new Date()) < 0
       );
     }
   );
   // useEffect(() => {
-    if(filteredOverdueDateList){
-      for(let overdueList of filteredOverdueDateList){
-        let newdueDate=overdueList.dueDate
-        switch (overdueList.frequency) {
-          case "Monthly":
-            newdueDate=addMonths(parseISO(overdueList.dueDate), 1)
-            break;
-            case "Quaterly":
-              newdueDate=addQuarters(parseISO(overdueList.dueDate), 1)
-            break;
-            case "Half-Yearly":
-              newdueDate=addMonths(parseISO(overdueList.dueDate), 6)
-            break;
-            case "Yearly":
-              newdueDate=addYears(parseISO(overdueList.dueDate), 6)
-            break;
-        
-          default:
-            break;
-        }
+  if (filteredOverdueDateList) {
+    for (let overdueList of filteredOverdueDateList) {
+      let newdueDate = overdueList.dueDate;
+      switch (overdueList.frequency) {
+        case "Monthly":
+          newdueDate = addMonths(parseISO(overdueList.dueDate), 1);
+          break;
+        case "Quaterly":
+          newdueDate = addQuarters(parseISO(overdueList.dueDate), 1);
+          break;
+        case "Half-Yearly":
+          newdueDate = addMonths(parseISO(overdueList.dueDate), 6);
+          break;
+        case "Yearly":
+          newdueDate = addYears(parseISO(overdueList.dueDate), 6);
+          break;
 
-updatePeriodicExpenseDueDate({_id:overdueList._id,dueDate:formatISO(newdueDate, { representation: 'date' })})
+        default:
+          break;
       }
+
+      updatePeriodicExpenseDueDate({
+        _id: overdueList._id,
+        dueDate: formatISO(newdueDate, { representation: "date" }),
+      });
     }
-   
+  }
+
   // }, [filteredOverdueDateList]);
   // console.log(filteredOverdueDateList);
-
-
-
-  
 
   const onchecked = (value) => {
     // console.log(JSON.parse(value));
@@ -247,7 +248,7 @@ updatePeriodicExpenseDueDate({_id:overdueList._id,dueDate:formatISO(newdueDate, 
         isPeriodicExpenseModalOpen={isPeriodicExpenseModalOpen}
         handleModalClose={handleModalClose}
       />
-    <ConfirmDelete
+      <ConfirmDelete
         isDeleteModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={ondeletePeriodicExpense}
