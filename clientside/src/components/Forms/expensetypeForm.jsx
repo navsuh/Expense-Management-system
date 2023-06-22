@@ -56,25 +56,24 @@ const ExpenseTypeForm = ({ isExpenseTypeModalOpen, handleModalClose })  => {
     };
   }, [id, setValue, expenseList]);
 
-  const onSubmitHandler = (data) => {
-    reset()
-    if (data._id) {
-      // console.log("here");
-      updateExpenseTypes({ data });
-      
-      
-    } else {
-      reset()
-      createExpenseTypes({ data });
-  
-    }
-  };
-
   const closeAndReset =()=>{
     navigate("/admin/expensetype")
     reset()
     handleModalClose()
   }
+  const onSubmitHandler = (data) => {
+    if (data._id) {
+      // console.log("here");
+      updateExpenseTypes({ data });
+      closeAndReset()
+    } else {
+      createExpenseTypes({ data });
+    }
+    reset()
+    
+  };
+
+ 
   
   
   if(user.role!=="Admin"){

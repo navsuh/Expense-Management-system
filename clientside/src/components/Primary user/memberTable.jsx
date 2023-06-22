@@ -80,7 +80,7 @@ const MemberTable = () => {
             </tr>
           </thead>
           <tbody>
-              {currentMembers.map((eachMember) => (
+            {currentMembers.map((eachMember) => (
               <tr className="border-b bg-gray-50 " key={eachMember._id}>
                 <td className="px-6 py-4">{eachMember.household}</td>
                 <td className="px-6 py-4">{eachMember.firstName}</td>
@@ -89,12 +89,12 @@ const MemberTable = () => {
                     <Link to={`/primaryuser/members/${eachMember._id}`}>
                       <AiOutlineEdit
                         onClick={() => handleEdit()}
-                        className="w-8 h-6 hover:text-blue-500"
+                        className="w-8 h-8 p-1 hover:text-white hover:bg-blue-500 bg-gray-200 rounded-3xl text-blue-500"
                       />
                     </Link>
 
                     <AiOutlineDelete
-                      className="w-8 h-6 ml-1 cursor-pointer hover:text-red-500"
+                      className="w-8 h-8 p-1 ml-2 cursor-pointer text-red-500 bg-gray-200 hover:text-white rounded-3xl hover:bg-red-500 "
                       onClick={() => {
                         setIsDeleteModalOpen(true);
                         setDeleteId(eachMember._id);
@@ -118,7 +118,7 @@ const MemberTable = () => {
 
   return (
     <>
-    <EditMemberForm
+      <EditMemberForm
         isEditModalOpen={isEditModalOpen}
         handleModalClose={handleModalClose}
       />

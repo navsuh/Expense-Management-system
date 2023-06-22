@@ -87,6 +87,14 @@ console.log(lenghtOfPaymentDetails);
     setValue("paidBy", periodicExpense.paidBy[lenghtOfpaidBy-1]);
   }, [id, setValue, periodicExpenseList]);
 
+
+  const closeAndReset = () => {
+    if (user.role === "Primaryuser") navigate("/primaryuser/periodicexpenses");
+    else if (user.role === "member") navigate("/memberuser/periodicexpenses");
+
+    handleModalClose();
+    reset();
+  };
   const onSubmitHandler = (data) => {
     // console.log({ data });
     reset();
@@ -100,8 +108,7 @@ console.log(lenghtOfPaymentDetails);
       const newData = { ...data, paymentDetails, expensetypes: selectExpense };
 
       updatePeriodicExpense({ newData });
-      // handleModalClose()
-      reset();
+      closeAndReset()
     } else {
       // console.log(data);
       reset();
@@ -122,13 +129,7 @@ console.log(lenghtOfPaymentDetails);
     return <Navigate to="/login" replace={true} />;
   }
 
-  const closeAndReset = () => {
-    if (user.role === "Primaryuser") navigate("/primaryuser/periodicexpenses");
-    else if (user.role === "member") navigate("/memberuser/periodicexpenses");
-
-    handleModalClose();
-    reset();
-  };
+ 
 
   if (!isPeriodicExpenseModalOpen) return null;
   if(error_msg){

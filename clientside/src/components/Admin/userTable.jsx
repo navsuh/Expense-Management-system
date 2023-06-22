@@ -99,15 +99,20 @@ const UserTable = (props) => {
                       to={`/admin/users/${eachUser._id}`}
                       onClick={() => setIsEditModalOpen(true)}
                     >
-                      <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
+                     <AiOutlineEdit className="w-8 h-8 p-1 hover:text-white hover:bg-blue-500 bg-gray-200 rounded-3xl text-blue-500" />
+
                     </Link>
                     {eachUser.isActive ? (
                       <AiOutlineDelete
                         onClick={() => onSoftDeleteuser(eachUser._id)}
-                        className=" w-8 h-6 cursor-pointer ml-2 hover:text-red-500"
+                        className="w-8 h-8 p-1 ml-2 cursor-pointer text-red-500 bg-gray-200 hover:text-white rounded-3xl hover:bg-red-500 "
+                    
                       />
                     ) : (
-                      <AiOutlineDelete className="text-gray-300 w-8 h-6 ml-2" />
+                      <AiOutlineDelete
+                      className="w-8 h-8 p-1 ml-2 cursor-pointer text-red-500 bg-gray-200 hover:text-white rounded-3xl hover:bg-red-500 "
+                        
+                       />
                     )}
                     {/* <AiOutlineDelete onClick={()=>onSoftDeleteuser(eachUser._id)} className="text-gray-200 w-8 h-6 cursor-pointer ml-2" /> */}
                   </div>
