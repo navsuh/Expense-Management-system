@@ -3,14 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
-
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useBoundStore } from "../store";
-// import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { toast,ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const customIdErrorMsg = "customIdErrorMsg";
 const customIdRegistrationSuccess = "customIdRegistrationSuccess";
@@ -107,7 +104,7 @@ const Register = () => {
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
                   <div>
-                    <label htmlFor="firstName">First Name</label>
+                    <label htmlFor="firstName">First Name</label> <label htmlFor="" className="text-red-700">*</label>
                     <input
                       {...register("firstName")}
                       className="w-80  px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -117,7 +114,7 @@ const Register = () => {
                     <p className="text-red-500">{errors.firstName?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="lastName">Last Name</label>
+                    <label htmlFor="lastName">Last Name</label> <label htmlFor="" className="text-red-700">*</label>
                     <input
                       {...register("lastName")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -127,7 +124,7 @@ const Register = () => {
                     <p className="text-red-500">{errors.lastName?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">Email</label> <label htmlFor="" className="text-red-700">*</label>
                     <input
                       {...register("email")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -137,7 +134,7 @@ const Register = () => {
                     <p className="text-red-500">{errors.email?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="phone">Phone Number</label>
+                    <label htmlFor="phone">Phone Number</label> <label htmlFor="" className="text-red-700">*</label>
                     <input
                       {...register("phone")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -147,7 +144,7 @@ const Register = () => {
                     <p className="text-red-500">{errors.phone?.message}</p>
                   </div>
                   <div className="mt-5">
-                    <label htmlFor="userName">UserName</label>
+                    <label htmlFor="userName">UserName</label> <label htmlFor="" className="text-red-700">*</label>
                     <input
                       {...register("userName")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -157,7 +154,7 @@ const Register = () => {
                     <p className="text-red-500">{errors.userName?.message}</p>
                   </div>
                   <div className="relative mt-5">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Password</label> <label htmlFor="" className="text-red-700">*</label>
                     <input
                       {...register("password")}
                       className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
