@@ -22,7 +22,7 @@ const schema = yup.object().shape({
   date: yup.string().required(),
   method: yup.string().min(3).max(50).required(),
   // }),
-  description: yup.string().min(5).max(50).required(),
+  description: yup.string().min(5).max(100).required(),
   paidThrough: yup.string().min(3).max(20).required(),
   paidBy: yup.string().min(3).max(20).required(),
 });

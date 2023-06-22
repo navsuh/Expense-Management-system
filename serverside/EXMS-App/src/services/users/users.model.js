@@ -13,10 +13,10 @@ export const userSchema = Joi.object({
 
   export const userSchemaPatch = Joi.object({
     _id:Joi.string(),
-    firstName: Joi.string().min(5).max(50),
-    lastName: Joi.string().min(5).max(50),
+    firstName: Joi.string().min(3).max(50),
+    lastName: Joi.string().min(3).max(50),
     phone: Joi.string().length(10),
-    userName: Joi.string().min(5).max(50),
+    userName: Joi.string().min(6).max(50),
     password: Joi.string().min(8).max(255),
     isActive:Joi.boolean(),
     lastLoggedIn:Joi.string(),
