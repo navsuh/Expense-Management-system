@@ -43,13 +43,13 @@ const DailyExpensesTableMember = (props) => {
     deleteDailyExpense(id);
   };
   const [showchart, SetshowChart] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDailyExpenseModalOpen, setIsDailyExpenseModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   const [showFilter, SetshowFilter] = useState(false);
   const [filterName, setFilterName] = useState("Today");
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsDailyExpenseModalOpen(false);
     setIsDeleteModalOpen(false);
   };
   const onchecked = (value) => {
@@ -121,7 +121,7 @@ const DailyExpensesTableMember = (props) => {
                   <div className="flex flex-between">
                     <Link
                       to={`/memberuser/dailyexpenses/${eachDailyExpense._id}`}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => setIsDailyExpenseModalOpen(true)}
                     >
                       <AiOutlineEdit className="w-8 h-6 hover:text-blue-500" />
                     </Link>
@@ -151,11 +151,11 @@ const DailyExpensesTableMember = (props) => {
   return (
     <>
     <DailyExpenseForm
-        isModalOpen={isModalOpen}
+        isDailyExpenseModalOpen={isDailyExpenseModalOpen}
         handleModalClose={handleModalClose}
       />
      <ConfirmDelete
-        isModalOpen={isDeleteModalOpen}
+        isDeleteModalOpen={isDeleteModalOpen}
         handleModalClose={handleModalClose}
         deleteRecord={ondeleteDailyExpense}
         deleteId={deleteId}
@@ -196,7 +196,7 @@ const DailyExpensesTableMember = (props) => {
               getFilterName={getFilterName}
             />
           </div>
-          <button onClick={() => setIsModalOpen(true)}>
+          <button onClick={() => setIsDailyExpenseModalOpen(true)}>
             <IoAddCircle className="text-blue-800 h-14 w-14 hover:text-blue-600" />
           </button>
         </div>
