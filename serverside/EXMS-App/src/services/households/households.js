@@ -54,7 +54,6 @@ export const households = (app) => {
         schemaHooks.resolveData(householdsDataResolver)
       ],
       patch: [
-    
         schemaHooks.validateData(householdsPatchValidator),
         schemaHooks.resolveData(householdsPatchResolver)
       ],

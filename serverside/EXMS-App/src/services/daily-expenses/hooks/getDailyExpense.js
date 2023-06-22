@@ -22,9 +22,7 @@ export const getAllDailyExpense =()=>{
     return {...eachDailyExpense,selectExpense:expensetypename,household:name}
 
 })
- 
-
-    context.result.data=dailyExpensesData      
+     context.result.data=dailyExpensesData      
     
      return context; 
     }
