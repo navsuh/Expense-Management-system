@@ -71,15 +71,20 @@ const PeriodicExpensesTable = (props) => {
     }
   );
 
-  if (filtereddueDateNotificationList) {
-    for (let eachfiltereddueDateNotification of filtereddueDateNotificationList) {
-      if (
-        !dueDateNotificationIds.includes(eachfiltereddueDateNotification._id)
-      ) {
-        sendDueDateNotification(eachfiltereddueDateNotification);
+  useEffect(() => {
+ 
+  
+    if (filtereddueDateNotificationList) {
+      for (let eachfiltereddueDateNotification of filtereddueDateNotificationList) {
+        if (
+          !dueDateNotificationIds.includes(eachfiltereddueDateNotification._id)
+        ) {
+          sendDueDateNotification(eachfiltereddueDateNotification);
+        }
       }
     }
-  }
+  }, [filtereddueDateNotificationList]);
+  
 
   const onchecked = (value) => {
     // console.log(JSON.parse(value));
