@@ -27,9 +27,18 @@ export const periodicExpensesSchema = {
     expensetypes: ObjectIdSchema(),
     amount: { type: 'number'},
     description: { type: 'string' },
-    paidThrough: { type: 'string' },
-    paidBy: { type: 'string' },
-
+    paidThrough: {
+      type: 'array',
+      items: {
+         type: 'string'
+      }
+    },
+    paidBy: {
+      type: 'array',
+      items: {
+         type: 'string'
+      }
+    },
     paymentDetails: {
       type: 'array',
       items: {
@@ -41,9 +50,6 @@ export const periodicExpensesSchema = {
       }
       }
     }
-    
-      
-    
   }
 }
 export const periodicExpensesValidator = getValidator(periodicExpensesSchema, dataValidator)
