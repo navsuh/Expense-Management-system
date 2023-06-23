@@ -53,6 +53,7 @@ const HouseHoldForm = ({ isHouseholdModalOpen, handleModalClose }) => {
     setValue("zipcode", houseHold.zipcode);
   }, [id, setValue, houseHoldList]);
 
+  
   useEffect(() => {
     navigate("/primaryuser/household");
     handleModalClose();

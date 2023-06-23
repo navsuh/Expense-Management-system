@@ -219,7 +219,7 @@ const DailyExpensesTable = (props) => {
           </button>
         </div>
       </div>
-      <div className="relative shadow-md sm:rounded-lg">
+      <div className="relative shadow-md ">
         {filteredDailyExpenses.length === 0 ? (
           <div className="p-4">No Data Found.</div>
         ) : (

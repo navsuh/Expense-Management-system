@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store.js";
-import OTPFORM from "../OTPForm.jsx";
+// import OTPFORM from "../OTPForm.jsx";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,9 +24,9 @@ const ForgotPasswordForm = ({ isForgotPasswordModalOpen, handleModalClose,setOtp
   const forgetPasswordResponse = useBoundStore(
     (store) => store.forgetPasswordResponse
   );
-  const forgetPasswordReset = useBoundStore(
-    (store) => store.forgetPasswordReset
-  );
+  // const forgetPasswordReset = useBoundStore(
+  //   (store) => store.forgetPasswordReset
+  // );
 
   const {
     register,
