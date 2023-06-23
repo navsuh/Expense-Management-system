@@ -174,7 +174,7 @@ const Login = () => {
 
               <h1 className="text-xl xl:text-3xl font-bold">Log In</h1>
               <span className="mt-5">
-                Don't have an account{"  "}
+                Don't have an account{" "}
                 <Link to={"/register"} className="signupspan">
                   Sign Up
                 </Link>{" "}
@@ -185,7 +185,7 @@ const Login = () => {
                 <div className="w-full flex-1 mt-8">
                   <div className="mx-auto max-w-xs">
                     <div>
-                      <label htmlFor="email">Username</label>  <label htmlFor="" className="text-red-700"> *</label>
+                      <label htmlFor="email">Email</label>  <label htmlFor="" className="text-red-700"> *</label>
                       <input 
                         {...register("email")}
                         className="w-80 px-4 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
