@@ -16,7 +16,7 @@ export const updatehouseholdmember =()=>{
      const household = await householdservice.find( { query: {name:householdName} });
      if(!household) throw new Error("household not found")
 
-     delete context.data.firstNamev
+     delete context.data.firstName
      delete context.data.lastName
      delete context.data.phone
      delete context.data.userName
