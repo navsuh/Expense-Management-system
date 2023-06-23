@@ -4,8 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../../store";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 const customIdErrorMsg = "customIdErrorMsg";
@@ -21,7 +21,9 @@ const schema = yup.object().shape({
 const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
   const changePassword = useBoundStore((store) => store.changePassword);
   const error_msg = useBoundStore((store) => store.error_msg_change_password);
-  const ResetErrorMsg = useBoundStore((store) => store.ResetErrorMsgChangePassword);
+  const ResetErrorMsg = useBoundStore(
+    (store) => store.ResetErrorMsgChangePassword
+  );
   const user = useBoundStore((store) => store.user);
   const navigate = useNavigate();
 
@@ -43,20 +45,15 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-
   const toggleCurrentPasswordVisibility = () => {
     setShowCurrentPassword(!showCurrentPassword);
-
   };
   const toggleNewPasswordVisibility = () => {
     setShowNewPassword(!showNewPassword);
-
   };
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
-
   };
-  
 
   useEffect(() => {
     if (changePasswordResponse.status === 200) {
@@ -71,7 +68,7 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
       sessionStorage.removeItem("token");
       changePasswordReset();
       navigate("/login");
@@ -80,29 +77,27 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
 
   const onSubmitHandler = (data) => {
     // console.log({ data });
-   
-    const {email}=user
-    const newData={...data,email}
-   
+
+    const { email } = user;
+    const newData = { ...data, email };
+
     changePassword({ newData });
   };
 
   if (!isChangePasswordModalOpen) return null;
-   if(error_msg){
-   
-      toast.error(`${error_msg}` , {
-        toastId: customIdErrorMsg,
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-         })
-         ResetErrorMsg()
-     
+  if (error_msg) {
+    toast.error(`${error_msg}`, {
+      toastId: customIdErrorMsg,
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    ResetErrorMsg();
   }
 
   return (
@@ -146,7 +141,7 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
               <label htmlFor="currentPassword" className="w-24">
                 Current Password
               </label>
-            
+
               <div className="flex-grow">
                 <input
                   {...register("currentPassword")}
@@ -155,17 +150,17 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
                   id="currentPassword"
                   className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   placeholder="Current Password"
-                />  
+                />
                 <span
-                        className="absolute top-1/3  transform -translate-y-1/2 cursor-pointer mt-10 -ml-8"
-                        onClick={toggleCurrentPasswordVisibility}
-                      >
-                        {showCurrentPassword ? (
-                          <AiFillEye className="h-6 w-6 " />
-                        ) : (
-                          <AiFillEyeInvisible className="h-6 w-6 " />
-                        )}
-                      </span>
+                  className="absolute   transform -translate-y-1/2 cursor-pointer mt-5 -ml-8"
+                  onClick={toggleCurrentPasswordVisibility}
+                >
+                  {showCurrentPassword ? (
+                    <AiFillEye className="h-6 w-6 " />
+                  ) : (
+                    <AiFillEyeInvisible className="h-6 w-6 " />
+                  )}
+                </span>
                 <p className="text-red-500">
                   {errors.currentPassword?.message}
                 </p>
@@ -175,7 +170,7 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
               <label htmlFor="newPassword" className="w-24">
                 New Password
               </label>
-          
+
               <div className="flex-grow">
                 <input
                   {...register("newPassword")}
@@ -186,15 +181,15 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
                   placeholder="New Password"
                 />
                 <span
-                        className="absolute top-1/2  transform -translate-y-1/2 cursor-pointer  -ml-8"
-                        onClick={toggleNewPasswordVisibility}
-                      >
-                        {showNewPassword ? (
-                          <AiFillEye className="h-6 w-6 " />
-                        ) : (
-                          <AiFillEyeInvisible className="h-6 w-6 " />
-                        )}
-                      </span>
+                  className="absolute top-1/2  transform -translate-y-1/2 cursor-pointer  -ml-8"
+                  onClick={toggleNewPasswordVisibility}
+                >
+                  {showNewPassword ? (
+                    <AiFillEye className="h-6 w-6 " />
+                  ) : (
+                    <AiFillEyeInvisible className="h-6 w-6 " />
+                  )}
+                </span>
                 <p className="text-red-500">{errors.newPassword?.message}</p>
               </div>
             </div>
@@ -202,7 +197,7 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
               <label htmlFor="confirmedPassword" className="w-24">
                 Confirm Password
               </label>
-              
+
               <div className="flex-grow">
                 <input
                   {...register("confirmedPassword")}
@@ -213,15 +208,15 @@ const ChangePassword = ({ isChangePasswordModalOpen, handleModalClose }) => {
                   placeholder="Confirm Password"
                 />
                 <span
-                        className="absolute top-1/2  transform -translate-y-1/2 cursor-pointer mt-16 -ml-8"
-                        onClick={toggleConfirmPasswordVisibility}
-                      >
-                        {showConfirmPassword ? (
-                          <AiFillEye className="h-6 w-6 " />
-                        ) : (
-                          <AiFillEyeInvisible className="h-6 w-6 " />
-                        )}
-                      </span>
+                  className="absolute top-1/2  transform -translate-y-1/2 cursor-pointer mt-16 -ml-8"
+                  onClick={toggleConfirmPasswordVisibility}
+                >
+                  {showConfirmPassword ? (
+                    <AiFillEye className="h-6 w-6 " />
+                  ) : (
+                    <AiFillEyeInvisible className="h-6 w-6 " />
+                  )}
+                </span>
                 <p className="text-red-500">
                   {errors.confirmedPassword?.message}
                 </p>
