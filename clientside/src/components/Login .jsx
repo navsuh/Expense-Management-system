@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ForgotPasswordForm from "./Forms/ForgetPasswordForm";
 import OTPFORM from "./OTPForm";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const customIdErrorMsg = "customIdErrorMsg";
 const customIdInActive = "customIdInActive";

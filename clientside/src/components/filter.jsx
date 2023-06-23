@@ -22,13 +22,13 @@ function Filter({
         onClick={(e) =>
           e.target.id === "filter-modal-body" && handleFilterClose()
         }
-        className="fixed z-10 top-6 right-16 w-screen h-screen flex justify-end items-center cursor-pointer"
+        className="fixed z-10 top-6 right-16 w-screen h-screen flex justify-end items-center "
       >
         <ul className="max-w-sm flex flex-col">
           {filterList.map((eachfilterquery) => (
             <li
               key={eachfilterquery.id}
-              className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg "
+              className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg cursor-pointer "
             >
               <div className="relative flex items-start w-full">
                 <div className="flex items-center h-5">
@@ -37,7 +37,7 @@ function Filter({
                     name="hs-list-group-item-radio"
                     type="radio"
                     value={eachfilterquery.value}
-                    className="border-gray-200 rounded-full "
+                    className="border-gray-200 rounded-full cursor-pointer "
                     onChange={(e) => {
                       handleonchecked(e.target.value);
                       getFilterName(eachfilterquery.name);
