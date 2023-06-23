@@ -56,6 +56,7 @@ const colors = [
 const Chart = ({ data, showchart, handlechartClose }) => {
   if (!showchart) return null;
   if (data.length === 0) return;
+  console.log(data);
   return (
     <>
       <div
@@ -73,7 +74,7 @@ const Chart = ({ data, showchart, handlechartClose }) => {
               endAngle={360}
               innerRadius="40%"
               outerRadius="70%"
-              dataKey="paymentDetails.amount"
+              dataKey={data[0].frequency?"paymentDetails[0].amount":"paymentDetails.amount"}
             >
               {data.map((eachPeriodicExpense, index) => (
                 <Cell
