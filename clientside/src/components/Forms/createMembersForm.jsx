@@ -120,6 +120,8 @@ const CreateMemberForm = ({ isCreateMemberModalOpen, handleModalClose }) => {
                   <label htmlFor="lastName" className="mb-1">
                     Last Name
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
+
                   <input
                     {...register("lastName")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -147,6 +149,8 @@ const CreateMemberForm = ({ isCreateMemberModalOpen, handleModalClose }) => {
                   <label htmlFor="Password" className="mb-1">
                     Password
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
+
                   <input
                     {...register("password")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
@@ -176,6 +180,8 @@ const CreateMemberForm = ({ isCreateMemberModalOpen, handleModalClose }) => {
                   <label htmlFor="userName" className="mb-1">
                     UserName
                   </label>
+                  <label htmlFor="" className="text-red-700">*</label>
+
                   <input
                     {...register("userName")}
                     className="w-full px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-300 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
