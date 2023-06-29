@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useBoundStore } from "../../store.js";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { IoAddCircle } from "react-icons/io5";
@@ -23,7 +23,11 @@ const ExpenseTypeTable = (props) => {
   const dataPerPage = 4;
 
   useEffect(() => {
-    getAllExpenseTypes();
+    const fetchExpenseTypes = async () => {
+      await getAllExpenseTypes();
+    };
+    fetchExpenseTypes();
+
     return () => {
       console.log("cleaned up getAll ExpenseTypes");
     };
@@ -38,10 +42,6 @@ const ExpenseTypeTable = (props) => {
     setIsDeleteModalOpen(false);
     navigate("/admin/expensetype");
   };
-
-  // const handleDeleteModalClose = () => {
-  //   setIsDeleteModalOpen(false);
-  // };
 
   const onPaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -62,13 +62,13 @@ const ExpenseTypeTable = (props) => {
   const displayExpenseTypeTable = () => {
     return (
       <>
-        <table className="w-[65rem] text-sm text-left text-gray-500 ml-6 rounded-lg">
+        <table className="w-full sm:w-[65rem] text-sm text-left text-gray-500 mx-auto sm:ml-6 rounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3 sm:px-6 sm:py-3">
                 Expense Type
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3 sm:px-6 sm:py-3">
                 Action
               </th>
             </tr>
@@ -76,14 +76,15 @@ const ExpenseTypeTable = (props) => {
           <tbody>
             {currentExpenses.map((eachExpense) => (
               <tr className="border-b bg-gray-50" key={eachExpense._id}>
-                <td className="px-6 py-4">{eachExpense.name}</td>
-                <td className="px-6 py-4">
-                  <div className="flex flex-between">
+                <td className="px-4 py-2 sm:px-6 sm:py-4">{eachExpense.name}</td>
+                <td className="px-4 py-2 sm:px-6 sm:py-4">
+                  <div className="flex items-center">
                     <Link
                       to={`/admin/expensetype/${eachExpense._id}`}
                       onClick={() => setIsExpenseTypeModalOpen(true)}
+                      className="mr-2"
                     >
-                      <AiOutlineEdit className="w-8 h-8 p-1 hover:text-white hover:bg-blue-500 bg-gray-200 rounded-3xl text-blue-500" />
+                      <AiOutlineEdit className="w-8 h-8 p-1 hover:text-white hover:bg-blue-500 bg-gray-200 rounded-3xl text-blue-500"/>
                     </Link>
 
                     <AiOutlineDelete
@@ -91,8 +92,7 @@ const ExpenseTypeTable = (props) => {
                         setIsDeleteModalOpen(true);
                         setDeleteId(eachExpense._id);
                       }}
-                      className="w-8 h-8 p-1 ml-2 cursor-pointer text-red-500 bg-gray-200 hover:text-white rounded-3xl hover:bg-red-500 "
-                      
+                      className="w-8 h-8 p-1 ml-2 cursor-pointer text-red-500 bg-gray-200 hover:text-white rounded-3xl hover:bg-red-500"
                     />
                   </div>
                 </td>
@@ -124,8 +124,8 @@ const ExpenseTypeTable = (props) => {
         deleteId={deleteId}
       />
 
-      <div className="flex flex-row justify-between">
-        <div>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+        <div className="mb-4 sm:mb-0 sm:mr-4">
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div>
@@ -135,7 +135,7 @@ const ExpenseTypeTable = (props) => {
         </div>
       </div>
 
-      <div className="relative  shadow-md sm:rounded-lg">
+      <div className="relative shadow-md sm:rounded-lg mt-4">
         {filteredExpenseList.length === 0 ? (
           <div className="p-4">No data found.</div>
         ) : (
