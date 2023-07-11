@@ -51,7 +51,7 @@ const UserTable = (props) => {
   const displayUserTable = () => {
     return (
       <>
-        <table className="w-[66rem] text-sm text-left text-gray-500  m-3 rounded-lg">
+        <table className="w-full sm:w-[65rem] text-sm text-left text-gray-500 mx-auto sm:ml-6 ounded-lg">
           <thead className="text-xs text-white uppercase bg-blue-500 ">
             <tr>
               <th scope="col" className="px-6 py-3">
@@ -93,11 +93,12 @@ const UserTable = (props) => {
                     />
                   )}
                 </td>
-                <td className="px-6 py-4">
-                  <div className="flex flex-between">
+                <td className="px-4 py-2 sm:px-6 sm:py-4">
+                  <div className="flex items-center">
                     <Link
                       to={`/admin/users/${eachUser._id}`}
                       onClick={() => setIsEditModalOpen(true)}
+                      className="mr-2"
                     >
                      <AiOutlineEdit className="w-8 h-8 p-1 hover:text-white hover:bg-blue-500 bg-gray-200 rounded-3xl text-blue-500" />
 
@@ -139,7 +140,7 @@ const UserTable = (props) => {
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
       </div>
-      <div className="relative  shadow-md sm:rounded-lg">
+      <div className="relative  sm:rounded-lg">
         {filterUsers.length === 0 ? (
           <div className="p-4">No data found.</div>
         ) : (

@@ -124,8 +124,8 @@ const ExpenseTypeTable = (props) => {
         deleteId={deleteId}
       />
 
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-        <div className="mb-4 sm:mb-0 sm:mr-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center ">
+        <div className=" sm:mb-0 ">
           <SearchInput onChange={(value) => setSearchQuery(value)} />
         </div>
         <div>
@@ -135,7 +135,7 @@ const ExpenseTypeTable = (props) => {
         </div>
       </div>
 
-      <div className="relative shadow-md sm:rounded-lg mt-4">
+      <div className="relative sm:rounded-lg mt-4">
         {filteredExpenseList.length === 0 ? (
           <div className="p-4">No data found.</div>
         ) : (
